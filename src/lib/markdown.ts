@@ -185,6 +185,7 @@ We usually reply within one working day (Pakistan time, UTC+5).
 ${SITE.phones.map((p) => `- Phone: ${p.display}`).join('\n')}
 ${SITE.whatsapp ? `- WhatsApp: https://wa.me/${SITE.whatsapp}\n` : ''}- Works: ${SITE.workMode} (home base: ${SITE.location})
 - Contact form: ${u('/contact/')}
+- LinkedIn: ${SITE.social.linkedin}
 
 Topics we can help with: ${[...services.map((s) => s.title), 'Kaizen PPM demo'].join(', ')}.
 `;

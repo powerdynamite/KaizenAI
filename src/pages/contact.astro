@@ -61,6 +61,12 @@ const crumbs = [{ name: 'Contact', path: '/contact/' }];
             <a class="big" href={`https://wa.me/${SITE.whatsapp}`} rel="noopener" target="_blank">Message us →</a>
           </div>
         )}
+        {SITE.social.linkedin && (
+          <div class="item">
+            <h2 class="label">LinkedIn</h2>
+            <a class="big" href={SITE.social.linkedin} rel="me noopener" target="_blank">Follow KaizenAI →</a>
+          </div>
+        )}
         <div class="item">
           <h2 class="label">How we work</h2>
           <p>{SITE.workMode}.<br /><span class="muted">Home base: {SITE.location}.</span></p>

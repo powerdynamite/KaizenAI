@@ -22,9 +22,9 @@ export const SITE = {
   // and paste its endpoint, e.g. 'https://formspree.io/f/abcdwxyz'.
   // While empty, the form opens the visitor's email app with the message pre-filled.
   formEndpoint: '',
-  // Company profiles (Organization sameAs). Add the KaizenAI LinkedIn page once it exists.
+  // Company profiles (Organization sameAs).
   social: {
-    linkedin: 'https://www.linkedin.com/company/145394554/',
+    linkedin: 'https://www.linkedin.com/company/kaizenai-systems/',
     github: 'https://github.com/powerdynamite',
   },
   // Founder's public profiles (Person sameAs): they let search engines and AI

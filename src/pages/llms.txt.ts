@@ -17,6 +17,7 @@ Key facts:
 - Email: ${SITE.email}
 - Phone: ${SITE.phones.map((p) => p.display).join(', ')}
 - Website: ${SITE.url}
+- LinkedIn: ${SITE.social.linkedin}
 
 Every page below has a Markdown version (the same URL path ending in \`.md\`). The complete site text is at ${u('/llms-full.txt')}.
 
