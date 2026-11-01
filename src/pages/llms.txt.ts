@@ -28,6 +28,10 @@ ${services.map((s) => `- [${s.title}](${u(`/services/${s.slug}.md`)}): ${s.short
 
 - [${PPM.name}](${u('/products/kaizen-ppm.md')}): ${PPM.definition}
 
+## Open source
+
+- [Open-source tools](${u('/open-source.md')}): configurable form engine, Dataverse audit insights, Power Platform governance hub
+
 ## Company
 
 - [Home](${u('/index.md')}): overview, approach, principles and FAQs

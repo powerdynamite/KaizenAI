@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import CTA from '../components/CTA.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { tools } from '../data/tools';
+import { SITE } from '../config';
+import { breadcrumbs, FOUNDER_ID, ORG_ID } from '../lib/schema';
+
+const crumbs = [{ name: 'Open source', path: '/open-source/' }];
+const code = tools.filter((t) => t.repo).map((t) => ({
+  '@type': 'SoftwareSourceCode',
+  name: t.name,
+  description: t.tagline,
+  codeRepository: t.repo,
+  programmingLanguage: t.stack.join(', '),
+  author: { '@id': FOUNDER_ID },
+  publisher: { '@id': ORG_ID },
+  url: `${SITE.url}/open-source/#${t.slug}`,
+}));
+---
+<Base
+  title="Open-Source Power Platform & Dataverse Tools"
+  description="Free tools for Dynamics 365 and Power Platform teams from KaizenAI: a configuration-driven form engine, Dataverse audit insights and a governance hub."
+  markdown="/open-source.md"
+  schema={[...code, breadcrumbs(crumbs)]}
+>
+  <section class="page-hero">
+    <div class="container hero">
+      <div>
+        <Breadcrumbs items={crumbs} />
+        <h1>Tools we built and give away.</h1>
+        <p class="lead">Accelerators from our own Dynamics 365 and Power Platform work. Use them, fork them, and tell us what to improve.</p>
+      </div>
+      <nav class="toc" aria-label="Tools on this page">
+        <span class="label">On this page</span>
+        <ol>
+          {tools.map((t, i) => (
+            <li><a href={`#${t.slug}`}><span>{String(i + 1).padStart(2, '0')}</span>{t.name}</a></li>
+          ))}
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  {tools.map((t, i) => (
+    <section class="section tool" id={t.slug}>
+      <div class="container split">
+        <div>
+          <span class="big-n">{String(i + 1).padStart(2, '0')}</span>
+          <span class:list={['status', { private: !t.repo }]}>{t.status}</span>
+          <p class="side-sub">Built with</p>
+          <p class="tags">{t.stack.map((s) => <span>{s}</span>)}</p>
+        </div>
+        <div>
+          <h2>{t.name}</h2>
+          <p class="definition">{t.tagline}</p>
+          <p class="lead problem"><strong>The problem.</strong> {t.problem}</p>
+          <ol class="feats">{t.features.map((f) => <li>{f}</li>)}</ol>
+          <div class="actions">
+            {t.repo ? (
+              <a class="btn" href={t.repo} rel="noopener" target="_blank">View on GitHub <span class="arr">→</span></a>
+            ) : (
+              <a class="btn" href={`/contact/?topic=Something%20else`}>Request a walkthrough <span class="arr">→</span></a>
+            )}
+            {t.note && <span class="muted note">{t.note}</span>}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <CTA title="Need it adapted to your tenant?" body="We can install, extend and support any of these tools, or build the version your organisation needs." />
+</Base>
+<style>
+  .hero { display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; align-items: end; }
+  .toc { border-top: 1px solid var(--rule-strong); padding-top: 14px; }
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc li { border-bottom: 1px solid var(--rule); }
+  .toc a { display: flex; gap: 16px; align-items: baseline; padding: 12px 0; text-decoration: none; color: var(--heading); font-family: var(--display); font-weight: 600; }
+  .toc a span { font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+  .toc a:hover { color: var(--accent); }
+  .big-n { display: block; font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 4vw, 3.6rem); line-height: 1; color: var(--vermilion); letter-spacing: -0.04em; margin-bottom: 14px; }
+  .status { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); border: 1px solid currentColor; border-radius: 999px; padding: 3px 10px; }
+  .status.private { color: var(--muted); }
+  .side-sub { margin: 24px 0 6px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--heading); }
+  .tool .tags { max-width: 30ch; }
+  .problem strong { color: var(--heading); font-weight: 600; }
+  .feats { list-style: none; margin: 24px 0 28px; padding: 0; counter-reset: f; border-top: 1px solid var(--rule-strong); }
+  .feats li { counter-increment: f; position: relative; padding: 14px 0 14px 2.4rem; border-bottom: 1px solid var(--rule); }
+  .feats li::before { content: counter(f, decimal-leading-zero); position: absolute; left: 0; top: 17px; font-family: var(--display); font-weight: 700; font-size: 0.78rem; color: var(--accent); }
+  .note { font-size: 0.92rem; }
+  @media (max-width: 960px) { .hero { grid-template-columns: 1fr; } }
+</style>

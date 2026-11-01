@@ -7,6 +7,7 @@ import { services, type Faq, type Service } from '../data/services';
 import { PPM, capabilities, ladder, migrationSources, ppmFaqs } from '../data/ppm';
 import { homeFaqs } from '../data/faq';
 import { steps, principles } from '../data/home';
+import { tools } from '../data/tools';
 
 const u = (path: string) => `${SITE.url}${path}`;
 const faqMd = (faqs: Faq[]) => faqs.map((f) => `### ${f.q}\n\n${f.a}`).join('\n\n');
@@ -141,6 +142,23 @@ Profiles: ${Object.entries(SITE.founderProfiles).map(([k, v]) => `[${k}](${v})`)
 - **AI with a human in charge**: a person stays accountable for decisions.
 
 ${contactLine}
+`;
+
+export const openSourceMd = () => `# Open-source tools from KaizenAI
+
+Accelerators from our Dynamics 365 and Power Platform work. Use them, fork them, and tell us what to improve.
+
+${tools.map((t) => `## ${t.name}
+
+> ${t.tagline}
+
+Status: ${t.status}${t.repo ? ` · Code: ${t.repo}` : ''}
+
+**The problem.** ${t.problem}
+
+${t.features.map((f) => `- ${f}`).join('\n')}
+
+Built with: ${t.stack.join(', ')}.${t.note ? `\n\n${t.note}` : ''}`).join('\n\n')}
 `;
 
 export const contactMd = () => `# Contact KaizenAI
