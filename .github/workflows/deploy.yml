@@ -3,6 +3,9 @@ name: Deploy site to GitHub Pages
 on:
   push:
     branches: [main]
+  # Daily rebuild at 00:07 Pakistan time (19:07 UTC) so scheduled blog posts go live on their date.
+  schedule:
+    - cron: '7 19 * * *'
   workflow_dispatch:
 
 permissions:

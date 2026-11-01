@@ -155,8 +155,17 @@ ${SITE.whatsapp ? `- WhatsApp: https://wa.me/${SITE.whatsapp}\n` : ''}- Location
 Topics we can help with: ${[...services.map((s) => s.title), 'Kaizen PPM demo'].join(', ')}.
 `;
 
+/**
+ * Scheduled publishing: a post goes live at 00:00 Pakistan time (UTC+5) on its `date`,
+ * unless it is a draft. The deploy workflow rebuilds the site daily so scheduled posts appear.
+ */
+const PKT_OFFSET_MS = 5 * 60 * 60 * 1000;
+export function isPublished(data: { draft: boolean; date: Date }) {
+  return !data.draft && data.date.getTime() - PKT_OFFSET_MS <= Date.now();
+}
+
 export async function publishedPosts() {
-  return (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return (await getCollection('blog', ({ data }) => isPublished(data))).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
 export const blogIndexMd = async () => {

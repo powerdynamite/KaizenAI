@@ -2,12 +2,13 @@
 import Base from '../../layouts/Base.astro';
 import CTA from '../../components/CTA.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
+import { publishedPosts } from '../../lib/markdown';
 import { SITE } from '../../config';
 import { ORG_ID, FOUNDER_ID, breadcrumbs } from '../../lib/schema';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const posts = await publishedPosts();
   return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
 const { post } = Astro.props;

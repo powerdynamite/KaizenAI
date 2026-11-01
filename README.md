@@ -45,7 +45,9 @@ draft: false
 Your content…
 ```
 
-The filename becomes the URL (`/blog/<filename>/`). Posts appear on the blog, the home page, the RSS feed and the sitemap automatically.
+The filename becomes the URL (`/blog/<filename>/`).
+
+**Scheduling:** a post with a future `date` stays hidden from the blog, sitemap, RSS and `llms.txt` until 00:00 Pakistan time on that date. The deploy workflow rebuilds the site every day at 00:07 PKT, so scheduled posts publish themselves. Set `draft: true` to hold a post back regardless of its date. Posts appear on the blog, the home page, the RSS feed and the sitemap automatically.
 
 ## SEO & AI discoverability
 See **[SEO.md](SEO.md)** for what's built in and the post-launch checklist.
