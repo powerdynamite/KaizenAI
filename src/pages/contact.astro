@@ -1,0 +1,121 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../config';
+import { services } from '../data/services';
+const topics = [...services.map((s) => s.title), 'Kaizen PPM demo', 'Something else'];
+---
+<Base title="Contact" description="Talk to KaizenAI about Dynamics 365, Power Platform, Copilot, AI agents, infrastructure or Kaizen PPM.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Contact</span>
+      <h1>Let’s talk about what you want to improve</h1>
+      <p class="lead">Tell us a little about your situation. We usually reply within one working day (Pakistan time, UTC+5).</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container layout">
+      <form id="contact-form" class="card form" data-endpoint={SITE.formEndpoint} data-email={SITE.email} novalidate>
+        <div class="row2">
+          <label>Name<input name="name" required autocomplete="name" /></label>
+          <label>Work email<input name="email" type="email" required autocomplete="email" /></label>
+        </div>
+        <div class="row2">
+          <label>Company<input name="company" autocomplete="organization" /></label>
+          <label>Phone / WhatsApp<input name="phone" type="tel" autocomplete="tel" /></label>
+        </div>
+        <label>What can we help with?
+          <select name="topic" id="topic">
+            {topics.map((t) => <option value={t}>{t}</option>)}
+          </select>
+        </label>
+        <label>Message<textarea name="message" rows="6" required placeholder="What are you trying to achieve, and by when?"></textarea></label>
+        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <button class="btn btn--primary" type="submit">Send message <Icon name="arrow" size={18} /></button>
+        <p class="status" role="status" aria-live="polite"></p>
+      </form>
+
+      <aside class="side">
+        <div class="item"><span class="icon-tile"><Icon name="mail" /></span><div><h3>Email</h3><a href={`mailto:${SITE.email}`}>{SITE.email}</a></div></div>
+        <div class="item"><span class="icon-tile"><Icon name="phone" /></span><div><h3>Phone</h3>{SITE.phones.map((p) => <a href={`tel:${p.tel}`}>{p.display}</a>)}</div></div>
+        {SITE.whatsapp && (
+          <div class="item"><span class="icon-tile"><Icon name="chat" /></span><div><h3>WhatsApp</h3><a href={`https://wa.me/${SITE.whatsapp}`} rel="noopener" target="_blank">Message us on WhatsApp</a></div></div>
+        )}
+        <div class="item"><span class="icon-tile"><Icon name="pin" /></span><div><h3>Location</h3><span>{SITE.location}</span><span class="muted">Working with clients remotely, worldwide.</span></div></div>
+      </aside>
+    </div>
+  </section>
+</Base>
+<style>
+  .layout { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; align-items: start; }
+  .form { display: grid; gap: 18px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  label { display: grid; gap: 6px; font-weight: 500; font-size: 0.95rem; color: var(--heading); }
+  input, select, textarea {
+    font: inherit; font-weight: 400; color: var(--text); background: var(--bg);
+    border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 11px 13px; width: 100%;
+  }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--vermilion); outline-offset: 0; border-color: transparent; }
+  .hp { position: absolute; left: -9999px; }
+  .form .btn { justify-self: start; }
+  .status { margin: 0; min-height: 1.5em; font-weight: 500; }
+  .status.ok { color: var(--teal); }
+  .status.err { color: var(--vermilion); }
+  .side { display: grid; gap: 22px; }
+  .item { display: flex; gap: 16px; align-items: start; }
+  .item .icon-tile { flex-shrink: 0; margin: 0; }
+  .item h3 { margin: 0 0 4px; font-size: 1rem; }
+  .item a, .item span { display: block; overflow-wrap: anywhere; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } }
+</style>
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const params = new URLSearchParams(location.search);
+  const topic = params.get('topic');
+  const select = document.getElementById('topic') as HTMLSelectElement | null;
+  if (topic && select) {
+    const match = [...select.options].find((o) => o.value === topic);
+    if (match) select.value = topic;
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = form.querySelector('.status') as HTMLElement;
+    status.className = 'status';
+    if (!form.checkValidity()) {
+      status.textContent = 'Please fill in your name, a valid email and a message.';
+      status.classList.add('err');
+      form.reportValidity();
+      return;
+    }
+    const data = new FormData(form);
+    if (data.get('_gotcha')) return; // bot
+    const endpoint = form.dataset.endpoint;
+
+    if (!endpoint) {
+      // No form service configured yet, so fall back to the visitor's email app.
+      const body = `Name: ${data.get('name')}\nEmail: ${data.get('email')}\nCompany: ${data.get('company')}\nPhone: ${data.get('phone')}\n\n${data.get('message')}`;
+      location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(`[KaizenAI] ${data.get('topic')}`)}&body=${encodeURIComponent(body)}`;
+      status.textContent = 'Opening your email app…';
+      return;
+    }
+
+    const btn = form.querySelector('button') as HTMLButtonElement;
+    btn.disabled = true;
+    status.textContent = 'Sending…';
+    try {
+      const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      status.textContent = 'Thanks! Your message is on its way. We will reply soon.';
+      status.classList.add('ok');
+    } catch {
+      status.textContent = `Sorry, that did not send. Please email us at ${form.dataset.email}.`;
+      status.classList.add('err');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>

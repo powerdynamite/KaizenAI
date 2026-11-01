@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import CTA from '../../components/CTA.astro';
+---
+<Base title="Products" description="Products from KaizenAI built natively on Microsoft Power Platform and Dataverse.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Products</span>
+      <h1>Products built on Power Platform</h1>
+      <p class="lead">Lessons from client work, packaged as products you install into your own Dataverse environment.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container grid grid--2">
+      <a class="card" href="/products/kaizen-ppm/">
+        <div class="icon-tile"><Icon name="gantt" /></div>
+        <span class="badge">Flagship</span>
+        <h2 style="margin-top:12px">Kaizen PPM</h2>
+        <p class="muted">Project and portfolio management on Dataverse, from idea to closure, with Gantt, Kanban, financials, resources and risk.</p>
+        <span class="more">Explore →</span>
+      </a>
+      <div class="card soon">
+        <div class="icon-tile"><Icon name="agent" /></div>
+        <span class="badge badge--teal">Coming later</span>
+        <h2 style="margin-top:12px">More on the way</h2>
+        <p class="muted">We are packaging agent templates and Power Platform accelerators from our delivery work. <a href="/blog/">Follow the blog</a> for updates.</p>
+      </div>
+    </div>
+  </section>
+  <CTA />
+</Base>
+<style>.soon { border-style: dashed; box-shadow: none; }</style>

@@ -1,0 +1,20 @@
+---
+// KaizenAI mark: three ascending steps (continuous improvement), the last one vermilion.
+interface Props { size?: number; invert?: boolean }
+const { size = 32, invert = false } = Astro.props;
+---
+<span class="logo">
+  <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
+    <rect width="64" height="64" rx="14" fill={invert ? '#F7F5F0' : '#0E1726'} />
+    <rect x="13" y="38" width="10" height="13" rx="2.5" fill={invert ? '#0E1726' : '#F7F5F0'} />
+    <rect x="27" y="28" width="10" height="23" rx="2.5" fill={invert ? '#0E1726' : '#F7F5F0'} />
+    <rect x="41" y="13" width="10" height="38" rx="2.5" fill="#E2492F" />
+  </svg>
+  <span class="word" class:list={{ invert }}>Kaizen<span class="ai">AI</span></span>
+</span>
+<style>
+  .logo { display: inline-flex; align-items: center; gap: 10px; }
+  .word { font-family: var(--font-head); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em; color: var(--heading); }
+  .word.invert { color: #f7f5f0; }
+  .ai { color: var(--vermilion); }
+</style>

@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import CTA from '../components/CTA.astro';
+import { SITE } from '../config';
+
+const values = [
+  { title: 'Kaizen: change for the better', body: 'We believe in small, steady improvements that compound, not big-bang projects that never land.' },
+  { title: 'Honest advice', body: 'If a standard feature, a spreadsheet or doing nothing is the right answer, we will say so.' },
+  { title: 'Built to hand over', body: 'You own everything we build: source, documentation and your data, in your own tenant.' },
+  { title: 'AI with a human in charge', body: 'We use AI heavily ourselves, and we design it so a person stays accountable for decisions.' },
+];
+---
+<Base title="About" description={`KaizenAI is a Microsoft-ecosystem IT services and product company founded by ${SITE.founder} in ${SITE.location}.`}>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">About KaizenAI</span>
+      <h1>A small studio with an AI-powered bench</h1>
+      <p class="lead">
+        KaizenAI is a Microsoft-ecosystem services and product company based in {SITE.location}. We combine hands-on
+        Dynamics 365 and Power Platform engineering with AI agents that handle the repetitive work. You get senior
+        attention on every engagement at a sensible cost.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">The name</span>
+        <h2>Why “Kaizen”?</h2>
+        <p>
+          <em>Kaizen</em> (改善) is the Japanese idea of continuous improvement. It means making things a little better
+          every day, involving the people who do the work, and treating each improvement as the starting point for the next.
+        </p>
+        <p>
+          That is how we approach technology. We ship something useful early, measure it, and keep improving it. The
+          “AI” is how we do more of that, faster.
+        </p>
+      </div>
+      <div class="card founder">
+        <div class="avatar" aria-hidden="true"><Icon name="user" size={30} /></div>
+        <h3>{SITE.founder}</h3>
+        <p class="muted role">Founder & Principal Consultant</p>
+        <p>
+          Abdul works with Dynamics 365, Power Platform and Dataverse, and is the architect behind Kaizen PPM. He
+          founded KaizenAI to bring enterprise-grade Microsoft solutions and practical AI agents to organisations of any size.
+        </p>
+        <a href="/contact/" class="more">Get in touch →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">What we value</span><h2>How we work with you</h2></div>
+      <div class="grid grid--2">
+        {values.map((v) => <div class="card"><h3>{v.title}</h3><p class="muted">{v.body}</p></div>)}
+      </div>
+    </div>
+  </section>
+  <CTA />
+</Base>
+<style>
+  .split { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: start; }
+  .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent-soft); color: var(--vermilion); display: grid; place-items: center; margin-bottom: 16px; }
+  .role { margin-top: -6px; }
+  .founder .more { color: var(--vermilion); font-weight: 600; text-decoration: none; }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+</style>

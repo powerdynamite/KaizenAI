@@ -1,0 +1,53 @@
+---
+import Logo from './Logo.astro';
+import { SITE } from '../config';
+import { services } from '../data/services';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container cols">
+    <div class="about">
+      <Logo invert />
+      <p>{SITE.tagline} Microsoft-ecosystem services and products from {SITE.location}.</p>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>{services.map((s) => <li><a href={`/services/${s.slug}/`}>{s.title}</a></li>)}</ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/products/kaizen-ppm/">Kaizen PPM</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/privacy/">Privacy</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Get in touch</h4>
+      <ul>
+        <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+        {SITE.phones.map((p) => <li><a href={`tel:${p.tel}`}>{p.display}</a></li>)}
+        <li class="loc">{SITE.location}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container legal">
+    <span>© {year} {SITE.name}. All rights reserved.</span>
+    <span>Microsoft, Dynamics 365, Power Platform and Copilot are trademarks of the Microsoft group of companies.</span>
+  </div>
+</footer>
+<style>
+  .site-footer { background: var(--ink); color: #9aa5b8; padding: 64px 0 28px; font-size: 0.95rem; }
+  .cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 36px; }
+  .about p { margin-top: 16px; max-width: 34ch; }
+  h4 { color: #f7f5f0; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { margin-bottom: 8px; overflow-wrap: anywhere; }
+  a { color: #c9d1de; text-decoration: none; }
+  a:hover { color: #fff; }
+  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; border-top: 1px solid #253148; margin-top: 44px; padding-top: 22px; font-size: 0.82rem; }
+  @media (max-width: 860px) { .cols { grid-template-columns: 1fr 1fr; } .about { grid-column: 1 / -1; } }
+  @media (max-width: 480px) { .cols { grid-template-columns: 1fr; } }
+</style>
