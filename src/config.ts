@@ -24,7 +24,7 @@ export const SITE = {
   formEndpoint: '',
   // Company profiles (Organization sameAs). Add the KaizenAI LinkedIn page once it exists.
   social: {
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/company/145394554/',
     github: 'https://github.com/powerdynamite',
   },
   // Founder's public profiles (Person sameAs): they let search engines and AI

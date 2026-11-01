@@ -31,6 +31,7 @@ const year = new Date().getFullYear();
         <ul>
           <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
           {SITE.phones.map((p) => <li><a href={`tel:${p.tel}`}>{p.display}</a></li>)}
+          {SITE.social.linkedin && <li><a href={SITE.social.linkedin} rel="me noopener" target="_blank">LinkedIn</a></li>}
         </ul>
       </div>
       <div>
