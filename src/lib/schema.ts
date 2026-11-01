@@ -78,7 +78,6 @@ export const founder = () => ({
   worksFor: { '@id': ORG_ID },
   url: abs('/about/'),
   knowsAbout: ['Microsoft Dynamics 365', 'Microsoft Power Platform', 'Microsoft Dataverse', 'Copilot Studio', 'Agentic AI', 'Azure OpenAI', 'Project portfolio management'],
-  alumniOf: { '@type': 'CollegeOrUniversity', name: 'COMSATS University Islamabad' },
   sameAs: Object.values(SITE.founderProfiles),
 });
 

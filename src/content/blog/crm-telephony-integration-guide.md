@@ -83,6 +83,8 @@ Check first whether your phone vendor already offers a Dynamics 365 connector. S
 
 That's the kaizen approach to integration: a small, reliable first step, then steady improvement.
 
+**Next:** [Screen pop and call logging in Dynamics 365](/blog/screen-pop-and-call-logging-dynamics-365/): the options, and how to build them.
+
 ---
 
 *Want your CRM and phone system working together? See our [Systems Integration service](/services/systems-integration/) or [describe your setup](/contact/?topic=Systems%20Integration).*
