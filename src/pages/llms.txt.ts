@@ -9,11 +9,11 @@ export async function GET() {
   const posts = await publishedPosts();
   const body = `# ${SITE.name}
 
-> ${SITE.name} is an AI-first IT services and product company in the Microsoft ecosystem, based in ${SITE.location}. It builds AI agents, rolls out Microsoft 365 Copilot, Copilot Studio and Cowork, implements Dynamics 365 CRM and the Power Platform, provides Azure infrastructure and DevSecOps, and makes ${PPM.name}, a project portfolio management product on Dataverse.
+> ${SITE.name} is a remote-first, AI-first IT services and product company in the Microsoft ecosystem, working with clients worldwide. It builds AI agents, rolls out Microsoft 365 Copilot, Copilot Studio and Cowork, implements Dynamics 365 CRM and the Power Platform, provides Azure infrastructure and DevSecOps, and makes ${PPM.name}, a project portfolio management product on Dataverse.
 
 Key facts:
 - Founder: ${SITE.founder}
-- Location: ${SITE.location}; works remotely with clients worldwide
+- Works: ${SITE.workMode} (home base: ${SITE.location})
 - Email: ${SITE.email}
 - Phone: ${SITE.phones.map((p) => p.display).join(', ')}
 - Website: ${SITE.url}

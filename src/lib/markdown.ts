@@ -20,7 +20,7 @@ export const homeMd = () => `# ${SITE.name}: AI agents and Copilot on the Micros
 KaizenAI builds AI agents, rolls out Copilot and Cowork, and implements Dynamics 365 and the Power Platform, all on secure Azure foundations.
 
 - Founder: ${SITE.founder}
-- Location: ${SITE.location} (working remotely, worldwide)
+- Works: ${SITE.workMode} (home base: ${SITE.location})
 - ${contactLine}
 
 ## Services
@@ -79,7 +79,7 @@ ${faqMd(s.faqs)}
 
 ---
 
-Provider: ${SITE.name}, ${SITE.location}. ${contactLine}
+Provider: ${SITE.name}, ${SITE.workMode.toLowerCase()}. ${contactLine}
 Page: ${u(`/services/${s.slug}/`)}
 `;
 
@@ -122,7 +122,7 @@ Request a demo: ${u('/contact/?topic=Kaizen%20PPM%20demo')}
 
 export const aboutMd = () => `# About KaizenAI
 
-KaizenAI is an AI-first Microsoft-ecosystem services and product company based in ${SITE.location}. We combine hands-on Dynamics 365 and Power Platform engineering with AI agents that handle the repetitive work.
+KaizenAI is a remote-first, AI-first Microsoft-ecosystem services and product company, working with clients worldwide (home base: ${SITE.location}). We combine hands-on Dynamics 365 and Power Platform engineering with AI agents that handle the repetitive work.
 
 ## Why "Kaizen"?
 
@@ -183,7 +183,7 @@ We usually reply within one working day (Pakistan time, UTC+5).
 
 - Email: ${SITE.email}
 ${SITE.phones.map((p) => `- Phone: ${p.display}`).join('\n')}
-${SITE.whatsapp ? `- WhatsApp: https://wa.me/${SITE.whatsapp}\n` : ''}- Location: ${SITE.location} (working with clients remotely, worldwide)
+${SITE.whatsapp ? `- WhatsApp: https://wa.me/${SITE.whatsapp}\n` : ''}- Works: ${SITE.workMode} (home base: ${SITE.location})
 - Contact form: ${u('/contact/')}
 
 Topics we can help with: ${[...services.map((s) => s.title), 'Kaizen PPM demo'].join(', ')}.

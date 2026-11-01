@@ -23,8 +23,8 @@ const profiles = [
 ];
 ---
 <Base
-  title="About KaizenAI: AI-First Microsoft Consultancy in Lahore"
-  description={`KaizenAI is an AI-first Microsoft-ecosystem IT services and product company founded by ${SITE.founder} in ${SITE.location}.`}
+  title="About KaizenAI: Remote-First, AI-First Microsoft Consultancy"
+  description={`KaizenAI is a remote-first, AI-first Microsoft-ecosystem services and product company founded by ${SITE.founder}, working with clients worldwide.`}
   markdown="/about.md"
   schema={[aboutPage, founder(), breadcrumbs(crumbs)]}
 >
@@ -33,7 +33,7 @@ const profiles = [
       <Breadcrumbs items={crumbs} />
       <h1>A small studio with an AI-powered bench.</h1>
       <p class="lead">
-        KaizenAI is a Microsoft-ecosystem services and product company in {SITE.location}. We pair hands-on Dynamics 365
+        KaizenAI is a remote-first Microsoft-ecosystem services and product company, working with clients worldwide. We pair hands-on Dynamics 365
         and Power Platform engineering with AI agents that take on the repetitive work. You get senior attention on every
         engagement at a sensible cost.
       </p>
@@ -70,6 +70,7 @@ const profiles = [
           and Claude Code skills.
         </p>
         <dl class="dl">
+          <dt>Home base</dt><dd>{SITE.location}</dd>
           <dt>Education</dt><dd>BSc Computer Engineering, COMSATS University Islamabad</dd>
           <dt>Elsewhere</dt>
           <dd class="profiles">{profiles.map(([n, u]) => <a href={u} rel="me noopener" target="_blank">{n}</a>)}</dd>
