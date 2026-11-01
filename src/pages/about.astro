@@ -1,91 +1,100 @@
 ---
 import Base from '../layouts/Base.astro';
-import Icon from '../components/Icon.astro';
 import CTA from '../components/CTA.astro';
+import Kanji from '../components/Kanji.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { SITE } from '../config';
 import { founder, breadcrumbs, ORG_ID } from '../lib/schema';
 const aboutPage = { '@type': 'AboutPage', url: `${SITE.url}/about/`, name: 'About KaizenAI', about: { '@id': ORG_ID } };
+const crumbs = [{ name: 'About', path: '/about/' }];
 
 const values = [
-  { title: 'Kaizen: change for the better', body: 'We believe in small, steady improvements that compound, not big-bang projects that never land.' },
+  { title: 'Change for the better', body: 'Small, steady improvements that compound, not big-bang projects that never land.' },
   { title: 'Honest advice', body: 'If a standard feature, a spreadsheet or doing nothing is the right answer, we will say so.' },
   { title: 'Built to hand over', body: 'You own everything we build: source, documentation and your data, in your own tenant.' },
-  { title: 'AI with a human in charge', body: 'We use AI heavily ourselves, and we design it so a person stays accountable for decisions.' },
+  { title: 'A human in charge', body: 'We use AI heavily ourselves, and we design it so a person stays accountable for decisions.' },
+];
+const profiles = [
+  ['LinkedIn', SITE.founderProfiles.linkedin],
+  ['GitHub', SITE.founderProfiles.github],
+  ['YouTube', SITE.founderProfiles.youtube],
+  ['Medium', SITE.founderProfiles.medium],
+  ['Personal site', SITE.founderProfiles.website],
 ];
 ---
 <Base
   title="About KaizenAI: AI-First Microsoft Consultancy in Lahore"
   description={`KaizenAI is an AI-first Microsoft-ecosystem IT services and product company founded by ${SITE.founder} in ${SITE.location}.`}
   markdown="/about.md"
-  schema={[aboutPage, founder(), breadcrumbs([{ name: 'About', path: '/about/' }])]}
+  schema={[aboutPage, founder(), breadcrumbs(crumbs)]}
 >
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow">About KaizenAI</span>
-      <h1>A small studio with an AI-powered bench</h1>
+      <Breadcrumbs items={crumbs} />
+      <h1>A small studio with an AI-powered bench.</h1>
       <p class="lead">
-        KaizenAI is a Microsoft-ecosystem services and product company based in {SITE.location}. We combine hands-on
-        Dynamics 365 and Power Platform engineering with AI agents that handle the repetitive work. You get senior
-        attention on every engagement at a sensible cost.
+        KaizenAI is a Microsoft-ecosystem services and product company in {SITE.location}. We pair hands-on Dynamics 365
+        and Power Platform engineering with AI agents that take on the repetitive work. You get senior attention on every
+        engagement at a sensible cost.
       </p>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--tint">
     <div class="container split">
-      <div>
-        <span class="eyebrow">The name</span>
-        <h2>Why “Kaizen”?</h2>
-        <p>
-          <em>Kaizen</em> (改善) is the Japanese idea of continuous improvement. It means making things a little better
-          every day, involving the people who do the work, and treating each improvement as the starting point for the next.
-        </p>
-        <p>
-          That is how we approach technology. We ship something useful early, measure it, and keep improving it. The
-          “AI” is how we do more of that, faster.
-        </p>
+      <div><span class="label"><b>01</b>The name</span></div>
+      <div class="name">
+        <Kanji height={120} vertical class="about-kanji" />
+        <div>
+          <p class="pull"><em>Kaizen</em> (改善): to change something for the better, a little every day.</p>
+          <p class="lead measure">
+            It is the Japanese practice of continuous improvement: involve the people who do the work, and treat each
+            improvement as the starting point for the next. That is how we approach technology. We ship something useful
+            early, measure it, and keep improving it. The “AI” is how we do more of that, faster.
+          </p>
+        </div>
       </div>
-      <div class="card founder" id="founder">
-        <div class="avatar" aria-hidden="true"><Icon name="user" size={30} /></div>
-        <h3>{SITE.founder}</h3>
-        <p class="muted role">Founder & Principal Consultant</p>
-        <p>
+    </div>
+  </section>
+
+  <section class="section" id="founder">
+    <div class="container split">
+      <div><span class="label"><b>02</b>Founder</span></div>
+      <div class="founder">
+        <h2>{SITE.founder}</h2>
+        <p class="role">Founder &amp; Principal Consultant</p>
+        <p class="lead measure">
           Abdul is a Power Platform and AI solutions architect with more than six years of remote delivery for Microsoft
           partners across Europe, Australia and the Middle East. He works across Dynamics 365 CE, Dataverse, Copilot Studio
           and agentic AI, and is the architect behind Kaizen PPM. He also publishes open-source Power Platform accelerators
           and Claude Code skills.
         </p>
-        <p class="muted small">BSc Computer Engineering, COMSATS University Islamabad.</p>
-        <ul class="profiles">
-          <li><a href={SITE.founderProfiles.linkedin} rel="me noopener" target="_blank">LinkedIn</a></li>
-          <li><a href={SITE.founderProfiles.github} rel="me noopener" target="_blank">GitHub</a></li>
-          <li><a href={SITE.founderProfiles.youtube} rel="me noopener" target="_blank">YouTube</a></li>
-          <li><a href={SITE.founderProfiles.medium} rel="me noopener" target="_blank">Medium</a></li>
-          <li><a href={SITE.founderProfiles.website} rel="me noopener" target="_blank">Personal site</a></li>
-        </ul>
-        <a href="/contact/" class="more">Get in touch →</a>
+        <dl class="dl">
+          <dt>Education</dt><dd>BSc Computer Engineering, COMSATS University Islamabad</dd>
+          <dt>Elsewhere</dt>
+          <dd class="profiles">{profiles.map(([n, u]) => <a href={u} rel="me noopener" target="_blank">{n}</a>)}</dd>
+        </dl>
       </div>
     </div>
   </section>
 
-  <section class="section section--alt">
-    <div class="container">
-      <div class="section-head"><span class="eyebrow">What we value</span><h2>How we work with you</h2></div>
-      <div class="grid grid--2">
-        {values.map((v) => <div class="card"><h3>{v.title}</h3><p class="muted">{v.body}</p></div>)}
+  <section class="section">
+    <div class="container split">
+      <div><span class="label"><b>03</b>Values</span></div>
+      <div class="cols two">
+        {values.map((v, i) => <div class="col"><span class="n">{['i.', 'ii.', 'iii.', 'iv.'][i]}</span><h3>{v.title}</h3><p>{v.body}</p></div>)}
       </div>
     </div>
   </section>
   <CTA />
 </Base>
 <style>
-  .split { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: start; }
-  .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: 16px; }
-  .role { margin-top: -6px; }
-  .small { font-size: 0.9rem; }
-  .profiles { list-style: none; padding: 0; margin: 0 0 18px; display: flex; flex-wrap: wrap; gap: 8px; }
-  .profiles a { display: inline-block; font-size: 0.85rem; padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; color: var(--heading); }
-  .profiles a:hover { border-color: var(--accent); color: var(--accent); }
-  .founder .more { color: var(--accent); font-weight: 600; text-decoration: none; }
-  @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+  .name { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: start; }
+  .name .pull { margin-bottom: 0.8em; }
+  .role { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: -0.4em; }
+  .founder .lead { margin-bottom: 32px; }
+  .founder .dl { border-top: 1px solid var(--rule); padding-top: 18px; }
+  .profiles { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  :global(.about-kanji) { color: var(--vermilion); }
+  @media (max-width: 700px) { .name { grid-template-columns: 1fr; } :global(.about-kanji) { height: 80px; width: 40px; } }
 </style>

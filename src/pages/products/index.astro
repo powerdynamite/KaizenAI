@@ -1,34 +1,39 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Icon from '../../components/Icon.astro';
 import CTA from '../../components/CTA.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { PPM } from '../../data/ppm';
 import { breadcrumbs } from '../../lib/schema';
+const crumbs = [{ name: 'Products', path: '/products/' }];
 ---
-<Base title="Power Platform Products" description="Products from KaizenAI built natively on Microsoft Power Platform and Dataverse, including Kaizen PPM for project and portfolio management." schema={[breadcrumbs([{ name: 'Products', path: '/products/' }])]}>
+<Base title="Power Platform Products" description="Products from KaizenAI built natively on Microsoft Power Platform and Dataverse, including Kaizen PPM for project and portfolio management." schema={[breadcrumbs(crumbs)]}>
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow">Products</span>
-      <h1>Products built on Power Platform</h1>
+      <Breadcrumbs items={crumbs} />
+      <h1>Products built on Power Platform.</h1>
       <p class="lead">Lessons from client work, packaged as products you install into your own Dataverse environment.</p>
     </div>
   </section>
   <section class="section">
-    <div class="container grid grid--2">
-      <a class="card" href="/products/kaizen-ppm/">
-        <div class="icon-tile"><Icon name="gantt" /></div>
-        <span class="badge">Flagship</span>
-        <h2 style="margin-top:12px">Kaizen PPM</h2>
-        <p class="muted">Project and portfolio management on Dataverse, from idea to closure, with Gantt, Kanban, financials, resources and risk.</p>
-        <span class="more">Explore →</span>
-      </a>
-      <div class="card soon">
-        <div class="icon-tile"><Icon name="agent" /></div>
-        <span class="badge badge--teal">Coming later</span>
-        <h2 style="margin-top:12px">More on the way</h2>
-        <p class="muted">We are packaging agent templates and Power Platform accelerators from our delivery work. <a href="/blog/">Follow the blog</a> for updates.</p>
-      </div>
+    <div class="container split">
+      <div><span class="label"><b>01</b>Available</span></div>
+      <ol class="rows">
+        <li>
+          <a class="row-link" href={PPM.path}>
+            <span class="num">01</span>
+            <span class="title">Kaizen PPM</span>
+            <span class="desc">{PPM.definition}</span>
+            <span class="go" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container split">
+      <div><span class="label"><b>02</b>In the workshop</span></div>
+      <p class="lead">Agent templates and Power Platform accelerators from our delivery work are being packaged next. <a href="/blog/">Follow the journal</a> for updates.</p>
     </div>
   </section>
   <CTA />
 </Base>
-<style>.soon { border-style: dashed; box-shadow: none; }</style>

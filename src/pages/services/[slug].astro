@@ -1,6 +1,5 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Icon from '../../components/Icon.astro';
 import CTA from '../../components/CTA.astro';
 import Faqs from '../../components/Faqs.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
@@ -11,9 +10,11 @@ export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
 }
 const { service: s } = Astro.props as { service: Service };
+const idx = services.findIndex((o) => o.slug === s.slug);
 const others = services.filter((o) => o.slug !== s.slug);
 const path = `/services/${s.slug}/`;
 const crumbs = [{ name: 'Services', path: '/services/' }, { name: s.title, path }];
+const roman = ['i.', 'ii.', 'iii.', 'iv.', 'v.', 'vi.'];
 ---
 <Base
   title={s.seoTitle}
@@ -22,81 +23,95 @@ const crumbs = [{ name: 'Services', path: '/services/' }, { name: s.title, path 
   schema={[serviceNode(s), faqPage(s.faqs, path), breadcrumbs(crumbs)]}
 >
   <section class="page-hero">
-    <div class="container hero">
-      <div>
-        <Breadcrumbs items={crumbs} />
-        <h1>{s.title}</h1>
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <span class="label"><b>{String(idx + 1).padStart(2, '0')}</b>{s.serviceType}</span>
+      <h1>{s.title}</h1>
+      <div class="intro">
         <p class="definition">{s.definition}</p>
-        <p class="lead">{s.summary}</p>
-        <div class="btn-row">
-          <a href={`/contact/?topic=${encodeURIComponent(s.title)}`} class="btn btn--primary">Discuss your project</a>
+        <div>
+          <p class="lead">{s.summary}</p>
+          <div class="actions">
+            <a href={`/contact/?topic=${encodeURIComponent(s.title)}`} class="btn">Discuss your project <span class="arr">→</span></a>
+          </div>
         </div>
       </div>
-      <div class="card outcomes">
-        <div class="icon-tile"><Icon name={s.icon} /></div>
-        <h2 class="h3">What you get</h2>
-        <ul class="checklist">{s.outcomes.map((o) => <li>{o}</li>)}</ul>
-      </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-head"><span class="eyebrow">Offerings</span><h2>How we help</h2></div>
-      <div class="grid grid--2">
-        {s.offerings.map((o) => (
-          <div class="card"><h3>{o.title}</h3><p class="muted">{o.body}</p></div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--alt">
+  <section class="section section--tint">
     <div class="container split">
-      <div>
-        <span class="eyebrow">Example use cases</span>
-        <h2>Where this pays off</h2>
-        <p class="muted">Typical scenarios. Every engagement starts from your own process.</p>
-      </div>
-      <div class="grid">
-        {s.useCases.map((u) => (
-          <div class="usecase"><h3>{u.title}</h3><p class="muted">{u.body}</p></div>
+      <div><h2 class="label"><b>A</b>Outcomes</h2></div>
+      <ol class="outcomes">
+        {s.outcomes.map((o) => <li>{o}</li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div><h2 class="label"><b>B</b>How we help</h2></div>
+      <div class="cols two">
+        {s.offerings.map((o, i) => (
+          <div class="col"><span class="n">{roman[i]}</span><h3>{o.title}</h3><p>{o.body}</p></div>
         ))}
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
-      <span class="eyebrow">Technology</span>
-      <h2>Tools we use</h2>
-      <ul class="chips" style="margin-top:20px">{s.stack.map((t) => <li>{t}</li>)}</ul>
+    <div class="container split">
+      <div><h2 class="label"><b>C</b>Where it pays off</h2></div>
+      <div>
+        <ul class="cases">
+          {s.useCases.map((u) => (
+            <li><h3>{u.title}</h3><p>{u.body}</p></li>
+          ))}
+        </ul>
+        <p class="muted note">Typical scenarios. Every engagement starts from your own process.</p>
+        <p class="label stack-label">Tools we use</p>
+        <p class="tags">{s.stack.map((t) => <span>{t}</span>)}</p>
+      </div>
     </div>
   </section>
 
   <Faqs faqs={s.faqs} title={`${s.title}: common questions`} />
 
-  <section class="section section--alt">
-    <div class="container">
-      <div class="section-head"><span class="eyebrow">Related</span><h2>Other services</h2></div>
-      <div class="grid grid--2">
+  <section class="section">
+    <div class="container split">
+      <div><h2 class="label"><b>→</b>Other services</h2></div>
+      <ol class="rows">
         {others.map((o) => (
-          <a class="card mini" href={`/services/${o.slug}/`}>
-            <div class="icon-tile"><Icon name={o.icon} /></div>
-            <div><h3>{o.title}</h3><p class="muted">{o.short}</p></div>
-          </a>
+          <li>
+            <a class="row-link" href={`/services/${o.slug}/`}>
+              <span class="num">{String(services.indexOf(o) + 1).padStart(2, '0')}</span>
+              <span class="title">{o.title}</span>
+              <span class="desc">{o.short}</span>
+              <span class="go" aria-hidden="true">→</span>
+            </a>
+          </li>
         ))}
-      </div>
+      </ol>
     </div>
   </section>
   <CTA />
 </Base>
 <style>
-  .hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
-  .definition { font-size: 1.12rem; color: var(--heading); max-width: 62ch; border-left: 3px solid var(--vermilion); padding-left: 16px; }
-  .split { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; }
-  .usecase { border-left: 3px solid var(--vermilion); padding: 4px 0 4px 20px; }
-  .mini { display: flex !important; gap: 18px; align-items: start; }
-  .mini .icon-tile { flex-shrink: 0; margin: 0; }
-  @media (max-width: 860px) { .hero, .split { grid-template-columns: 1fr; } }
+  .intro { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; border-top: 1px solid var(--rule-strong); padding-top: 32px; margin-top: 12px; }
+  .intro .lead { margin-bottom: 28px; }
+  .outcomes { list-style: none; margin: 0; padding: 0; counter-reset: o; }
+  .outcomes li {
+    counter-increment: o; font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; font-size: clamp(1.3rem, 2.6vw, 2rem); line-height: 1.25;
+    color: var(--heading); padding: 18px 0 18px 3rem; border-top: 1px solid var(--rule); position: relative;
+  }
+  .outcomes li:first-child { border-top-color: var(--rule-strong); }
+  .outcomes li::before { content: counter(o, decimal-leading-zero); position: absolute; left: 0; top: 28px; font-family: var(--display); font-weight: 700; font-size: 0.8rem; color: var(--accent); }
+  .cases { list-style: none; margin: 0; padding: 0; }
+  .cases li { display: grid; grid-template-columns: 1fr 1.4fr; gap: 12px 40px; padding: 24px 0; border-top: 1px solid var(--rule); }
+  .cases li:first-child { border-top-color: var(--rule-strong); }
+  .cases h3 { margin: 0; }
+  .cases p { margin: 0; color: var(--muted); }
+  .note { font-size: 0.9rem; margin: 16px 0 48px; }
+  .stack-label { margin-bottom: 6px; }
+  @media (max-width: 860px) { .intro, .cases li { grid-template-columns: 1fr; } }
 </style>

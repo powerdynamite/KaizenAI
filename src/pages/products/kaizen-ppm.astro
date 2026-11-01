@@ -15,7 +15,7 @@ import { ppmSoftware, faqPage, breadcrumbs } from '../../lib/schema';
 const shots = [
   { src: dashboard, alt: 'Kaizen PPM executive dashboard with portfolio health, cost roll-up and timeline', caption: 'Executive dashboard' },
   { src: kanban, alt: 'Kaizen PPM Kanban board with task cards grouped in buckets', caption: 'Kanban board' },
-  { src: finance, alt: 'Kaizen PPM financial grid showing budget, forecast and actuals by period', caption: 'Budget, forecast & actuals' },
+  { src: finance, alt: 'Kaizen PPM financial grid showing budget, forecast and actuals by period', caption: 'Budget, forecast and actuals' },
   { src: resources, alt: 'Kaizen PPM resource management capacity view', caption: 'Resource management' },
 ];
 const shotUrls = await Promise.all([gantt, ...shots.map((s) => s.src)].map(async (img) => (await getImage({ src: img, format: 'png' })).src));
@@ -28,57 +28,59 @@ const crumbs = [{ name: 'Products', path: '/products/' }, { name: 'Kaizen PPM', 
   schema={[ppmSoftware(PPM.definition, shotUrls), faqPage(ppmFaqs, PPM.path), breadcrumbs(crumbs)]}
 >
   <section class="page-hero">
-    <div class="container hero">
-      <div>
-        <Breadcrumbs items={crumbs} />
-        <h1>Project & portfolio management that lives in your Dataverse</h1>
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <span class="label"><b>Product</b>Kaizen PPM</span>
+      <h1>Kaizen PPM</h1>
+      <div class="intro">
         <p class="definition">{PPM.definition}</p>
-        <p class="lead">{PPM.intro}</p>
-        <div class="btn-row">
-          <a href="/contact/?topic=Kaizen%20PPM%20demo" class="btn btn--primary">Request a demo</a>
-          <a href="#capabilities" class="btn btn--ghost">See capabilities</a>
+        <div>
+          <p class="lead">{PPM.intro}</p>
+          <div class="actions">
+            <a href="/contact/?topic=Kaizen%20PPM%20demo" class="btn">Request a demo <span class="arr">→</span></a>
+            <a href="#capabilities" class="link-arrow">What’s included</a>
+          </div>
         </div>
       </div>
-      <ul class="facts">
-        <li><strong>100%</strong><span>inside your own Microsoft 365 tenant</span></li>
-        <li><strong>10</strong><span>capability areas, idea to close</span></li>
-        <li><strong>Native</strong><span>Dataverse security, Power BI and Teams</span></li>
-      </ul>
+      <dl class="facts">
+        <div><dt>Data</dt><dd>Stays in your own Microsoft 365 tenant</dd></div>
+        <div><dt>Scope</dt><dd>10 capability areas, idea to close</dd></div>
+        <div><dt>Platform</dt><dd>Dataverse security, Power BI, Teams</dd></div>
+      </dl>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--tint">
     <div class="container">
-      <figure class="shot big">
-        <Image src={gantt} alt="Kaizen PPM Gantt chart with WBS grid, dependencies and milestones" widths={[800, 1280, 1918]} sizes="(max-width: 1160px) 100vw, 1120px" loading="eager" />
-        <figcaption>The interactive Gantt: WBS, dependencies, baselines, drag-to-reschedule and MS Project export.</figcaption>
+      <figure class="figure">
+        <Image src={gantt} alt="Kaizen PPM Gantt chart with WBS grid, dependencies and milestones" widths={[800, 1280, 1918]} sizes="(max-width: 1240px) 100vw, 1144px" loading="eager" />
+        <figcaption>Fig. 1. Schedule view: WBS, dependencies, baselines, drag to reschedule, MS Project export.</figcaption>
       </figure>
     </div>
   </section>
 
-  <section class="section section--alt" id="capabilities">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Capabilities</span>
-        <h2>What does Kaizen PPM include?</h2>
-        <p class="lead">Everything a PMO runs on, in one Dataverse data model.</p>
+  <section class="section" id="capabilities">
+    <div class="container split">
+      <div>
+        <span class="label"><b>01</b>Capabilities</span>
+        <h2 class="side-h">What does Kaizen PPM include?</h2>
       </div>
-      <div class="grid grid--3">
+      <ol class="caps">
         {capabilities.map((c) => (
-          <div class="cap"><h3>{c.title}</h3><p class="muted">{c.body}</p></div>
+          <li><h3>{c.title}</h3><p>{c.body}</p></li>
         ))}
-      </div>
+      </ol>
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
-      <div class="section-head"><span class="eyebrow">A closer look</span><h2>Built for real delivery work</h2></div>
-      <div class="grid shots">
-        {shots.map((s) => (
-          <figure class="shot">
-            <Image src={s.src} alt={s.alt} widths={[480, 800, 1200]} sizes="(max-width: 700px) 100vw, 560px" />
-            <figcaption>{s.caption}</figcaption>
+    <div class="container split">
+      <div><span class="label"><b>02</b>A closer look</span></div>
+      <div class="shots">
+        {shots.map((s, i) => (
+          <figure class="figure">
+            <Image src={s.src} alt={s.alt} widths={[480, 800, 1200]} sizes="(max-width: 860px) 100vw, 440px" />
+            <figcaption>Fig. {i + 2}. {s.caption}</figcaption>
           </figure>
         ))}
       </div>
@@ -86,67 +88,66 @@ const crumbs = [{ name: 'Products', path: '/products/' }, { name: 'Kaizen PPM', 
   </section>
 
   <section class="section section--ink">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Copilot & Cowork</span>
-        <h2>How does Kaizen PPM use AI?</h2>
-        <p>
-          Kaizen PPM is being extended with Microsoft Copilot and Cowork. Our rule is simple: AI helps you get data in and
-          answers out, and explains the numbers. It never quietly sets a project’s health or makes the call for you.
-        </p>
+    <div class="container split">
+      <div>
+        <span class="label"><b>03</b>Copilot &amp; Cowork</span>
       </div>
-      <ol class="ladder">
-        {ladder.map((l, i) => (
-          <li>
-            <span class="rung">{i + 1}</span>
-            <div><h3>{l.rung}</h3><span class="who">{l.who}</span><p>{l.body}</p></div>
-          </li>
-        ))}
-      </ol>
-      <p class="note">AI features are rolling out in waves. Each one is security-trimmed to the user, labelled when AI-assisted, and can be switched off per environment. Ask us what is available today.</p>
+      <div>
+        <h2>How does Kaizen PPM use AI?</h2>
+        <p class="lead measure">
+          AI helps you get data in and answers out, and explains the numbers. It never quietly sets a project’s health or
+          makes the call for you. Four rungs, and AI stops before the last one.
+        </p>
+        <div class="cols ladder">
+          {ladder.map((l, i) => (
+            <div class="col">
+              <span class="n">Rung {i + 1}</span>
+              <h3>{l.rung}</h3>
+              <p class="who">{l.who}</p>
+              <p>{l.body}</p>
+            </div>
+          ))}
+        </div>
+        <p class="note">AI features are rolling out in waves. Each is security-trimmed to the user, labelled when AI-assisted, and can be switched off per environment.</p>
+      </div>
     </div>
   </section>
 
   <section class="section">
     <div class="container split">
+      <div><span class="label"><b>04</b>Migration</span></div>
       <div>
-        <span class="eyebrow">Migration</span>
         <h2>Leaving Project Online or Planner?</h2>
-        <p class="lead">Every record in Kaizen PPM can carry its source-system lineage: where it came from, its original ID and when it last synced. Bringing your history across does not mean restructuring later.</p>
+        <p class="lead measure">Every record in Kaizen PPM can carry its source-system lineage: where it came from, its original ID and when it last synced. Bringing your history across does not mean restructuring later.</p>
+        <p class="tags sources">{migrationSources.map((m) => <span>{m}</span>)}</p>
       </div>
-      <ul class="checklist">
-        {migrationSources.map((m) => <li>{m}</li>)}
-      </ul>
     </div>
   </section>
 
   <Faqs faqs={ppmFaqs} title="Kaizen PPM: common questions" />
 
-  <CTA title="See Kaizen PPM on your own projects" body="Book a walkthrough. We can load a sample of your real project data so you see how it fits." />
+  <CTA title="See it on your own projects." body="Book a walkthrough. We can load a sample of your real project data so you see how it fits." />
 </Base>
 <style>
-  .hero { display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: center; }
-  .definition { font-size: 1.12rem; color: var(--heading); max-width: 62ch; border-left: 3px solid var(--vermilion); padding-left: 16px; }
-  .facts { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
-  .facts li { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; }
-  .facts strong { display: block; font-family: var(--font-head); font-size: 1.6rem; color: var(--accent); }
-  .facts span { color: var(--muted); font-size: 0.95rem; }
-  .shot { margin: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--card); box-shadow: var(--shadow); }
-  .shot :global(img) { background: #fff; width: 100%; height: auto; }
-  .shot figcaption { padding: 12px 18px; font-size: 0.9rem; color: var(--muted); border-top: 1px solid var(--line); }
-  .shots { grid-template-columns: 1fr 1fr; }
-  .cap { border-top: 2px solid var(--vermilion); padding-top: 18px; }
-  .ladder { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .ladder li { background: var(--ink-2); border: 1px solid #2a3650; border-radius: var(--radius); padding: 22px; display: grid; gap: 12px; align-content: start; }
-  .ladder li:last-child { border-color: var(--accent); }
-  .rung { width: 34px; height: 34px; border-radius: 50%; background: var(--accent-btn); color: #fff; display: grid; place-items: center; font-family: var(--font-head); font-weight: 700; }
-  .ladder h3 { margin: 0; }
-  .who { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: #f2a493; }
-  .ladder p { margin: 8px 0 0; font-size: 0.95rem; }
-  .note { margin-top: 28px; font-size: 0.92rem; color: #9aa5b8; max-width: 80ch; }
-  .split { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; }
-  @media (max-width: 960px) { .ladder { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 860px) { .hero, .split { grid-template-columns: 1fr; } }
-  @media (max-width: 700px) { .shots { grid-template-columns: 1fr; } }
+  .intro { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; border-top: 1px solid var(--rule-strong); padding-top: 32px; margin-top: 12px; }
+  .intro .lead { margin-bottom: 28px; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 48px 0 0; border-top: 1px solid var(--rule); }
+  .facts div { padding: 16px 20px 0 0; }
+  .facts dt { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .facts dd { margin: 6px 0 0; font-family: var(--display); font-weight: 600; letter-spacing: -0.01em; font-size: 1.05rem; color: var(--heading); }
+  .side-h { font-size: clamp(1.6rem, 2.6vw, 2.2rem); max-width: 12ch; }
+  .caps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; counter-reset: c; border-top: 1px solid var(--rule-strong); }
+  .caps li { counter-increment: c; padding: 20px 0 20px 2.6rem; border-bottom: 1px solid var(--rule); position: relative; }
+  .caps li::before { content: counter(c, decimal-leading-zero); position: absolute; left: 0; top: 24px; font-family: var(--display); font-weight: 700; font-size: 0.78rem; color: var(--accent); }
+  .caps h3 { font-size: 1.1rem; margin: 0 0 4px; }
+  .caps p { margin: 0; color: var(--muted); font-size: 0.97rem; }
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 32px; }
+  .ladder { margin-top: 40px; grid-template-columns: repeat(4, 1fr); }
+  .ladder .col:last-child { border-top-color: var(--vermilion); }
+  .who { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f2a493 !important; margin: 0 0 10px !important; }
+  .note { margin-top: 36px; font-size: 0.92rem; color: #9aa5b8; max-width: 70ch; }
+  .sources { margin-top: 24px; font-size: 0.9rem; }
+  @media (max-width: 1000px) { .ladder { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 860px) { .intro, .caps, .shots { grid-template-columns: 1fr; } .facts { grid-template-columns: 1fr; } }
   @media (max-width: 520px) { .ladder { grid-template-columns: 1fr; } }
 </style>

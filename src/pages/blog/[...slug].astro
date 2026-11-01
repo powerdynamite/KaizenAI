@@ -46,26 +46,28 @@ const article = {
 >
   <article>
     <header class="page-hero">
-      <div class="container narrow">
+      <div class="container">
         <Breadcrumbs items={crumbs} />
-        <span class="badge badge--teal">{d.category}</span>
+        <span class="label"><b>{d.category}</b>{minutes} min read</span>
         <h1 class="title">{d.title}</h1>
-        <p class="muted meta">
-          By <a href="/about/#founder" rel="author">{d.author}</a>, Founder of KaizenAI ·
+        <p class="dek">{d.description}</p>
+        <p class="byline">
+          By <a href="/about/#founder" rel="author">{d.author}</a>, founder of KaizenAI ·
           <time datetime={d.date.toISOString()}>{fmt(d.date)}</time>
-          {d.updated && <> · Updated <time datetime={d.updated.toISOString()}>{fmt(d.updated)}</time></>}
-          · {minutes} min read
+          {d.updated && <> · updated <time datetime={d.updated.toISOString()}>{fmt(d.updated)}</time></>}
         </p>
       </div>
     </header>
     <div class="section">
-      <div class="container narrow prose"><Content /></div>
+      <div class="container"><div class="prose"><Content /></div></div>
     </div>
   </article>
   <CTA />
 </Base>
 <style>
-  .narrow { max-width: 780px; }
-  .title { margin-top: 14px; font-size: clamp(2rem, 4.2vw, 3rem); }
-  .meta a { color: inherit; }
+  .title { max-width: 22ch; font-size: clamp(2.1rem, 4.6vw, 3.6rem); }
+  .dek { font-size: 1.25rem; color: var(--muted); max-width: 48ch; }
+  .byline { font-size: 0.88rem; color: var(--muted); border-top: 1px solid var(--rule-strong); padding-top: 16px; margin-top: 32px; }
+  .byline a { color: var(--heading); }
+  .prose { margin-left: auto; margin-right: auto; }
 </style>

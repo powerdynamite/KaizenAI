@@ -3,9 +3,9 @@ import Base from '../layouts/Base.astro';
 import { SITE } from '../config';
 ---
 <Base title="Privacy Notice" description="How KaizenAI handles information you share through this website.">
-  <section class="page-hero"><div class="container"><span class="eyebrow">Legal</span><h1>Privacy notice</h1><p class="muted">Last updated: November 2026</p></div></section>
+  <section class="page-hero"><div class="container"><span class="label">Legal</span><h1>Privacy notice</h1><p class="muted">Last updated: November 2026</p></div></section>
   <section class="section">
-    <div class="container prose">
+    <div class="container"><div class="prose">
       <p>This website is a static site. It does not use advertising trackers or set cookies of its own.</p>
       <h2>What we collect</h2>
       <p>If you contact us using the form, email, phone or WhatsApp, we receive the details you choose to share, such as your name, email, company and message. We use them only to reply to you and to discuss a possible engagement.</p>
@@ -13,6 +13,6 @@ import { SITE } from '../config';
       <p>The site is hosted on GitHub Pages; fonts are served from this site itself. Contact form submissions may be processed by a form-handling provider on our behalf. Each of these providers may log basic technical data such as your IP address.</p>
       <h2>Your choices</h2>
       <p>You can ask us to show, correct or delete what we hold about you at any time by emailing <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
-    </div>
+    </div></div>
   </section>
 </Base>

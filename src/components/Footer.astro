@@ -1,53 +1,66 @@
 ---
 import Logo from './Logo.astro';
+import Kanji from './Kanji.astro';
 import { SITE } from '../config';
 import { services } from '../data/services';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
-  <div class="container cols">
-    <div class="about">
-      <Logo invert />
-      <p>{SITE.tagline} Microsoft-ecosystem services and products from {SITE.location}.</p>
+  <div class="container">
+    <div class="top">
+      <div class="sign"><Logo size={44} inverse /><p>{SITE.tagline}</p></div>
+      <p class="motto"><Kanji height={22} class="kanji" /> <span>continuous improvement · {SITE.location.split(',')[0]}, working worldwide</span></p>
     </div>
-    <div>
-      <h2 class="fh">Services</h2>
-      <ul>{services.map((s) => <li><a href={`/services/${s.slug}/`}>{s.title}</a></li>)}</ul>
+    <div class="grid">
+      <div>
+        <h2 class="fh">Services</h2>
+        <ul>{services.map((s) => <li><a href={`/services/${s.slug}/`}>{s.title}</a></li>)}</ul>
+      </div>
+      <div>
+        <h2 class="fh">Studio</h2>
+        <ul>
+          <li><a href="/products/kaizen-ppm/">Kaizen PPM</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="fh">Write or call</h2>
+        <ul>
+          <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+          {SITE.phones.map((p) => <li><a href={`tel:${p.tel}`}>{p.display}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h2 class="fh">For machines</h2>
+        <ul>
+          <li><a href="/llms.txt">llms.txt</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+          <li><a href="/sitemap-index.xml">Sitemap</a></li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <h2 class="fh">Company</h2>
-      <ul>
-        <li><a href="/products/kaizen-ppm/">Kaizen PPM</a></li>
-        <li><a href="/about/">About</a></li>
-        <li><a href="/blog/">Blog</a></li>
-        <li><a href="/contact/">Contact</a></li>
-        <li><a href="/privacy/">Privacy</a></li>
-      </ul>
+    <div class="legal">
+      <span>© {year} {SITE.name} · <a href="/privacy/">Privacy</a></span>
+      <span>Set in Sora &amp; Inter. Built with Astro.</span>
+      <span>Microsoft, Dynamics 365, Power Platform and Copilot are trademarks of the Microsoft group of companies.</span>
     </div>
-    <div>
-      <h2 class="fh">Get in touch</h2>
-      <ul>
-        <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
-        {SITE.phones.map((p) => <li><a href={`tel:${p.tel}`}>{p.display}</a></li>)}
-        <li class="loc">{SITE.location}</li>
-      </ul>
-    </div>
-  </div>
-  <div class="container legal">
-    <span>© {year} {SITE.name}. All rights reserved.</span>
-    <span>Microsoft, Dynamics 365, Power Platform and Copilot are trademarks of the Microsoft group of companies.</span>
   </div>
 </footer>
 <style>
-  .site-footer { background: var(--ink); color: #9aa5b8; padding: 64px 0 28px; font-size: 0.95rem; }
-  .cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 36px; }
-  .about p { margin-top: 16px; max-width: 34ch; }
-  .fh { color: #f7f5f0; font-size: 0.85rem; font-family: var(--font-head); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
-  ul { list-style: none; padding: 0; margin: 0; }
+  .site-footer { background: var(--ink); color: #9aa5b8; padding: 64px 0 32px; font-size: 0.95rem; --rule: #253148; }
+  .top { display: flex; justify-content: space-between; align-items: end; gap: 32px; flex-wrap: wrap; padding-bottom: 40px; border-bottom: 1px solid var(--rule); }
+  .sign p { margin: 14px 0 0; color: #c9d1de; }
+  .motto { margin: 0; display: flex; align-items: center; gap: 12px; color: #9aa5b8; font-size: 0.9rem; }
+  .motto :global(.kanji) { color: #e2492f; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; padding: 40px 0; }
+  .fh { font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #f7f5f0; margin: 0 0 14px; }
+  ul { list-style: none; margin: 0; padding: 0; }
   li { margin-bottom: 8px; overflow-wrap: anywhere; }
   a { color: #c9d1de; text-decoration: none; }
-  a:hover { color: #fff; }
-  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; border-top: 1px solid #253148; margin-top: 44px; padding-top: 22px; font-size: 0.82rem; }
-  @media (max-width: 860px) { .cols { grid-template-columns: 1fr 1fr; } .about { grid-column: 1 / -1; } }
-  @media (max-width: 480px) { .cols { grid-template-columns: 1fr; } }
+  a:hover { color: #fff; text-decoration: underline; }
+  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; padding-top: 22px; font-size: 0.8rem; }
+  .legal a { color: #9aa5b8; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr 1fr; } }
 </style>

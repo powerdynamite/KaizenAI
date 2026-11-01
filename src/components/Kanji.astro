@@ -1,0 +1,13 @@
+---
+// 改善 (kaizen) as outlines from Noto Serif JP Bold (SIL OFL 1.1): renders the same everywhere, no CJK font needed.
+import { KAI, ZEN } from './seal-paths';
+interface Props { height?: number; vertical?: boolean; color?: string; class?: string }
+const { height = 40, vertical = false, color = 'currentColor', class: cls } = Astro.props;
+const w = vertical ? height / 2 : height * 2;
+---
+<svg class={cls} width={w} height={height} viewBox={vertical ? '0 0 1000 2000' : '0 0 2000 1000'} role="img" aria-label="改善 (kaizen)">
+  <g fill={color}>
+    <path d={KAI} />
+    <path transform={vertical ? 'translate(0 1000)' : 'translate(1000 0)'} d={ZEN} />
+  </g>
+</svg>

@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Icon from '../../components/Icon.astro';
 import CTA from '../../components/CTA.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { services } from '../../data/services';
 import { breadcrumbs } from '../../lib/schema';
 import { SITE } from '../../config';
@@ -10,41 +10,41 @@ const list = {
   name: 'KaizenAI services',
   itemListElement: services.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.url}/services/${s.slug}/`, name: s.title })),
 };
+const crumbs = [{ name: 'Services', path: '/services/' }];
 ---
 <Base
   title="AI, Copilot, Dynamics 365 & Power Platform Services"
   description="AI agent development, Microsoft 365 Copilot and Cowork, Dynamics 365 CRM, Power Platform, and Azure infrastructure and DevSecOps services from KaizenAI."
   markdown="/services.md"
-  schema={[list, breadcrumbs([{ name: 'Services', path: '/services/' }])]}
+  schema={[list, breadcrumbs(crumbs)]}
 >
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow">Services</span>
-      <h1>AI and Microsoft services, end to end</h1>
+      <Breadcrumbs items={crumbs} />
+      <h1>AI and Microsoft services, end to end.</h1>
       <p class="lead">Use one practice or combine several. They share the same Dataverse and Azure foundations, so each piece makes the next one easier.</p>
     </div>
   </section>
-  <section class="section">
-    <div class="container list">
-      {services.map((s) => (
-        <a class="card row" href={`/services/${s.slug}/`}>
-          <div class="icon-tile"><Icon name={s.icon} /></div>
-          <div>
-            <h2 class="h">{s.title}</h2>
-            <p class="muted">{s.summary}</p>
-            <ul class="chips">{s.stack.slice(0, 5).map((t) => <li>{t}</li>)}</ul>
-          </div>
-          <span class="more">View →</span>
-        </a>
-      ))}
-    </div>
-  </section>
+
+  {services.map((s, i) => (
+    <section class="section svc">
+      <div class="container split">
+        <div>
+          <span class="label"><b>{String(i + 1).padStart(2, '0')}</b>{s.serviceType}</span>
+        </div>
+        <div class="body">
+          <h2><a href={`/services/${s.slug}/`}>{s.title}</a></h2>
+          <p class="lead">{s.summary}</p>
+          <p class="tags">{s.stack.map((t) => <span>{t}</span>)}</p>
+          <a class="link-arrow" href={`/services/${s.slug}/`}>Read about {s.title} →</a>
+        </div>
+      </div>
+    </section>
+  ))}
   <CTA />
 </Base>
 <style>
-  .list { display: grid; gap: 18px; }
-  .row { display: grid !important; grid-template-columns: auto 1fr auto; gap: 24px; align-items: start; }
-  .h { font-size: 1.4rem; }
-  .more { align-self: center; white-space: nowrap; }
-  @media (max-width: 700px) { .row { grid-template-columns: 1fr; } .more { align-self: start; } }
+  .svc h2 a { color: var(--heading); text-decoration: none; }
+  .svc h2 a:hover { color: var(--accent); }
+  .body .tags { margin: 0 0 22px; }
 </style>

@@ -1,25 +1,28 @@
 ---
+import { SITE } from '../config';
 interface Props { title?: string; body?: string }
 const {
-  title = 'Let’s make your business a little better every day.',
-  body = 'Tell us what you are trying to fix. You get an honest answer on whether, and how, Microsoft and AI can help. No obligation.',
+  title = 'Have a process that should run itself?',
+  body = 'Tell us what you are trying to fix. You get an honest answer on whether, and how, Microsoft and AI can help, usually within a working day.',
 } = Astro.props;
 ---
-<section class="section section--ink">
-  <div class="container cta">
+<section class="section section--tint cta">
+  <div class="container split">
+    <span class="label"><b>→</b>Next step</span>
     <div>
       <h2>{title}</h2>
-      <p>{body}</p>
-    </div>
-    <div class="btn-row">
-      <a href="/contact/" class="btn btn--primary">Start a conversation</a>
-      <a href="/services/" class="btn btn--ghost">Explore services</a>
+      <p class="lead">{body}</p>
+      <p class="mail"><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+      <div class="actions">
+        <a href="/contact/" class="btn">Book a free consultation <span class="arr">→</span></a>
+        {SITE.whatsapp && <a href={`https://wa.me/${SITE.whatsapp}`} class="link-arrow" rel="noopener" target="_blank">Or message on WhatsApp</a>}
+      </div>
     </div>
   </div>
 </section>
 <style>
-  .cta { display: grid; grid-template-columns: 1.6fr 1fr; gap: 32px; align-items: center; }
-  .cta p { max-width: 56ch; margin: 0; }
-  .btn-row { justify-content: flex-end; }
-  @media (max-width: 860px) { .cta { grid-template-columns: 1fr; } .btn-row { justify-content: flex-start; } }
+  .cta h2 { max-width: 18ch; }
+  .mail { font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; font-size: clamp(1.3rem, 3vw, 2.1rem); margin: 0.4em 0 1.2em; overflow-wrap: anywhere; }
+  .mail a { color: var(--heading); text-decoration-color: var(--vermilion); text-decoration-thickness: 2px; text-underline-offset: 8px; }
+  .mail a:hover { color: var(--accent); }
 </style>

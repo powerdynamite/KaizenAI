@@ -4,7 +4,6 @@ export interface Service {
   slug: string;
   title: string;
   short: string;
-  icon: string; // key into components/Icon.astro
   /** <title> for the page (kept under ~60 characters with the brand suffix). */
   seoTitle: string;
   /** Meta description (kept under ~160 characters). */
@@ -27,7 +26,6 @@ export const services: Service[] = [
     slug: 'ai-agents',
     title: 'Agentic AI',
     short: 'Custom AI agents that act in your systems, with guardrails and humans in the loop.',
-    icon: 'agent',
     seoTitle: 'AI Agent Development & Agentic AI Services',
     metaDescription:
       'KaizenAI designs and builds AI agents that work inside Dynamics 365, Dataverse, Teams and your APIs, with MCP, RAG, guardrails and human approval built in.',
@@ -63,7 +61,6 @@ export const services: Service[] = [
     slug: 'copilot-cowork',
     title: 'Copilot & Cowork',
     short: 'Make Microsoft 365 Copilot, Copilot Studio and Cowork useful with your own data.',
-    icon: 'copilot',
     seoTitle: 'Microsoft 365 Copilot, Copilot Studio & Cowork Services',
     metaDescription:
       'Copilot readiness, Copilot Studio agents and Copilot Cowork enablement: KaizenAI prepares your data and permissions and builds agents grounded in your business.',
@@ -98,7 +95,6 @@ export const services: Service[] = [
     slug: 'dynamics-365',
     title: 'Dynamics 365 CRM',
     short: 'Sales, Customer Service and Field Service, built around the way your team works.',
-    icon: 'crm',
     seoTitle: 'Dynamics 365 CRM Consulting & Implementation',
     metaDescription:
       'Dynamics 365 Sales, Customer Service and Field Service implementation, customisation, migration and health checks by KaizenAI, with Copilot built in.',
@@ -133,7 +129,6 @@ export const services: Service[] = [
     slug: 'power-platform',
     title: 'Power Platform',
     short: 'Apps, automation and portals on Dataverse, governed and built to last.',
-    icon: 'platform',
     seoTitle: 'Power Platform Development: Power Apps & Automate',
     metaDescription:
       'Power Apps, Power Automate, Power Pages and Power BI on Dataverse, plus governance, ALM and a Center of Excellence, from KaizenAI.',
@@ -168,7 +163,6 @@ export const services: Service[] = [
     slug: 'infra-devsecops',
     title: 'Infra & DevSecOps',
     short: 'Secure Azure foundations and pipelines that ship safely, every time.',
-    icon: 'shield',
     seoTitle: 'Azure Infrastructure & DevSecOps Services',
     metaDescription:
       'Azure landing zones, Entra ID security, Bicep/Terraform and GitHub Actions or Azure DevOps pipelines, including Power Platform ALM, from KaizenAI.',

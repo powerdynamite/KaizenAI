@@ -1,172 +1,164 @@
 ---
 import Base from '../layouts/Base.astro';
-import Icon from '../components/Icon.astro';
 import CTA from '../components/CTA.astro';
-import { services } from '../data/services';
 import Faqs from '../components/Faqs.astro';
+import Logo from '../components/Logo.astro';
+import Kanji from '../components/Kanji.astro';
 import { Image } from 'astro:assets';
 import gantt from '../assets/ppm/the-interactive-gantt.png';
-import { getCollection } from 'astro:content';
+import { services } from '../data/services';
+import { PPM, capabilities } from '../data/ppm';
 import { homeFaqs } from '../data/faq';
 import { steps, principles } from '../data/home';
 import { faqPage } from '../lib/schema';
+import { publishedPosts } from '../lib/markdown';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
-
+const posts = (await publishedPosts()).slice(0, 3);
+const roman = ['i.', 'ii.', 'iii.'];
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 ---
 <Base markdown="/index.md" schema={[faqPage(homeFaqs, '/')]}>
   <section class="hero">
-    <div class="container hero-grid">
-      <div>
-        <span class="eyebrow">AI-first Microsoft consultancy</span>
-        <h1>AI agents and Copilot, built on the <span class="hl">Microsoft</span> stack you already run.</h1>
-        <p class="lead">
-          KaizenAI builds AI agents, rolls out Copilot and Cowork, and implements Dynamics 365 and the Power Platform,
-          all on secure Azure foundations. Your business gets a little better every day.
-        </p>
-        <div class="btn-row">
-          <a href="/contact/" class="btn btn--primary">Book a free consultation <Icon name="arrow" size={18} /></a>
-          <a href="/products/kaizen-ppm/" class="btn btn--ghost">See Kaizen PPM</a>
+    <div class="container">
+      <span class="label">A Microsoft &amp; AI practice · Lahore, working worldwide</span>
+      <div class="hero-top">
+        <h1>AI agents and Copilot, built on the Microsoft stack <em>you already run.</em></h1>
+        <div class="hero-mark" aria-hidden="true">
+          <Logo variant="open" size={132} wordmark={false} />
+          <Kanji height={26} class="hero-kanji" />
+          <span class="label">Continuous improvement</span>
         </div>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <svg viewBox="0 0 420 360" role="presentation">
-          <defs>
-            <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#E2492F" />
-              <stop offset="1" stop-color="#C23A22" />
-            </linearGradient>
-          </defs>
-          <g class="grid-lines" stroke="currentColor" stroke-opacity="0.12">
-            <line x1="20" y1="320" x2="400" y2="320" />
-            <line x1="20" y1="240" x2="400" y2="240" stroke-dasharray="4 6" />
-            <line x1="20" y1="160" x2="400" y2="160" stroke-dasharray="4 6" />
-            <line x1="20" y1="80" x2="400" y2="80" stroke-dasharray="4 6" />
-          </g>
-          <rect class="bar b1" x="40" y="250" width="56" height="70" rx="10" />
-          <rect class="bar b2" x="120" y="205" width="56" height="115" rx="10" />
-          <rect class="bar b3" x="200" y="160" width="56" height="160" rx="10" />
-          <rect class="bar b4" x="280" y="90" width="56" height="230" rx="10" fill="url(#g1)" />
-          <path d="M68 235 L148 190 L228 145 L308 70" fill="none" stroke="#E2492F" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 8" />
-          <circle cx="308" cy="70" r="7" fill="#E2492F" />
-          <circle cx="308" cy="70" r="16" fill="#E2492F" fill-opacity="0.18" />
-        </svg>
-        <div class="float f1"><Icon name="crm" size={18} /> Dynamics 365</div>
-        <div class="float f2"><Icon name="copilot" size={18} /> Copilot & Cowork</div>
-        <div class="float f3"><Icon name="agent" size={18} /> AI agents</div>
+      <div class="hero-foot">
+        <div>
+          <p class="lead">
+            KaizenAI builds AI agents, rolls out Copilot and Cowork, and implements Dynamics 365 and the
+            Power Platform on secure Azure foundations. We start small and improve a little every week.
+          </p>
+          <div class="actions">
+            <a href="/contact/" class="btn">Book a free consultation <span class="arr">→</span></a>
+            <a href="/products/kaizen-ppm/" class="link-arrow">See Kaizen PPM</a>
+          </div>
+        </div>
+        <dl class="dl index">
+          <dt>Practice</dt><dd>{services.map((s) => s.title).join(' · ')}</dd>
+          <dt>Product</dt><dd><a href={PPM.path}>Kaizen PPM</a>, portfolio management on Dataverse</dd>
+          <dt>Based</dt><dd>Lahore, Pakistan, working remotely</dd>
+          <dt>Replies</dt><dd>Within one working day</dd>
+        </dl>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">What we do</span>
-        <h2>AI-led services on one Microsoft foundation</h2>
-        <p class="lead">We lead with AI agents and Copilot, backed by the CRM, low-code and cloud expertise needed to make AI work in practice.</p>
+    <div class="container split">
+      <div>
+        <span class="label"><b>01</b>Services</span>
+        <h2 class="side-h">What we do</h2>
+        <p class="muted side-p">AI first, on Microsoft foundations that make it work in practice.</p>
       </div>
-      <div class="grid grid--3">
-        {services.map((s) => (
-          <a class="card" href={`/services/${s.slug}/`}>
-            <div class="icon-tile"><Icon name={s.icon} /></div>
-            <h3>{s.title}</h3>
-            <p class="muted">{s.short}</p>
-            <span class="more">Learn more →</span>
-          </a>
+      <ol class="rows">
+        {services.map((s, i) => (
+          <li>
+            <a class="row-link" href={`/services/${s.slug}/`}>
+              <span class="num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="title">{s.title}</span>
+              <span class="desc">{s.short}</span>
+              <span class="go" aria-hidden="true">→</span>
+            </a>
+          </li>
         ))}
-        <a class="card card--product" href="/products/kaizen-ppm/">
-          <div class="icon-tile"><Icon name="gantt" /></div>
-          <span class="badge">Our product</span>
-          <h3 style="margin-top:10px">Kaizen PPM</h3>
-          <p class="muted">Project & portfolio management that lives inside your own Dataverse.</p>
-          <span class="more">Explore the product →</span>
-        </a>
-      </div>
+      </ol>
     </div>
   </section>
 
-  <section class="section section--alt">
-    <div class="container product">
-      <div>
-        <span class="eyebrow">Product · Kaizen PPM</span>
-        <h2>Run every project and portfolio in Power Platform</h2>
-        <p class="lead">
-          Kaizen PPM covers ideas, proposals, projects and programs. It includes an interactive Gantt, Kanban boards,
-          financials, resource planning and risk management, built natively on Dataverse.
-        </p>
-        <ul class="checklist">
-          <li>A natural home for teams leaving Microsoft Project Online</li>
-          <li>Data stays in your own Microsoft 365 tenant</li>
-          <li>Copilot and Cowork ready, with AI that explains and never decides for you</li>
-        </ul>
-        <div class="btn-row" style="margin-top:24px">
-          <a class="btn btn--primary" href="/products/kaizen-ppm/">Explore Kaizen PPM</a>
-          <a class="btn btn--ghost" href="/contact/?topic=Kaizen%20PPM%20demo">Request a demo</a>
+  <section class="section section--tint">
+    <div class="container">
+      <div class="split">
+        <div>
+          <span class="label"><b>02</b>Product</span>
+        </div>
+        <div>
+          <h2>Kaizen PPM</h2>
+          <p class="definition">Project and portfolio management that lives inside your own Dataverse, from first idea to closed project.</p>
+          <ol class="feature-list">
+            {capabilities.slice(0, 6).map((c) => (
+              <li><strong>{c.title}.</strong> <span class="muted">{c.body}</span></li>
+            ))}
+          </ol>
+          <div class="actions">
+            <a class="btn" href={PPM.path}>Explore Kaizen PPM <span class="arr">→</span></a>
+            <a class="link-arrow" href="/contact/?topic=Kaizen%20PPM%20demo">Request a demo</a>
+          </div>
         </div>
       </div>
-      <figure class="shot">
-        <Image src={gantt} alt="Kaizen PPM interactive Gantt chart with WBS grid, dependencies and milestones" widths={[640, 960, 1280]} sizes="(max-width: 900px) 100vw, 600px" />
+      <figure class="figure product-shot">
+        <Image src={gantt} alt="Kaizen PPM interactive Gantt chart with WBS grid, dependencies and milestones" widths={[800, 1280, 1918]} sizes="(max-width: 1240px) 100vw, 1144px" />
+        <figcaption>Fig. 1. The Kaizen PPM schedule view: WBS, dependencies, baselines, drag to reschedule.</figcaption>
       </figure>
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">How we work</span>
-        <h2>The Kaizen way: small steps, compounding results</h2>
+    <div class="container split">
+      <div>
+        <span class="label"><b>03</b>Method</span>
       </div>
-      <div class="grid grid--3">
-        {steps.map((s) => (
-          <div class="step">
-            <span class="num">{s.n}</span>
-            <h3>{s.title}</h3>
-            <p class="muted">{s.body}</p>
-          </div>
-        ))}
+      <div>
+        <h2>Small steps that compound.</h2>
+        <p class="lead measure">
+          <em>Kaizen</em> (改善) is the Japanese practice of continuous improvement. We apply it to software: ship something
+          useful early, measure it, then make it better each cycle.
+        </p>
+        <div class="cols method">
+          {steps.map((s, i) => (
+            <div class="col">
+              <span class="n">{roman[i]}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section section--alt">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Principles</span>
-        <h2>What you can count on</h2>
+  <section class="section section--ink">
+    <div class="container split">
+      <div>
+        <span class="label"><b>04</b>Commitments</span>
       </div>
-      <div class="grid grid--3">
+      <ul class="commit">
         {principles.map((p) => (
-          <div class="card">
-            <div class="icon-tile"><Icon name={p.icon} /></div>
+          <li>
             <h3>{p.title}</h3>
-            <p class="muted">{p.body}</p>
-          </div>
+            <p>{p.body}</p>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   </section>
 
   {posts.length > 0 && (
     <section class="section">
-      <div class="container">
-        <div class="section-head row-head">
-          <div>
-            <span class="eyebrow">From the blog</span>
-            <h2>Notes on Microsoft and AI</h2>
-          </div>
-          <a href="/blog/" class="btn btn--ghost">All articles</a>
+      <div class="container split">
+        <div>
+          <span class="label"><b>05</b>Journal</span>
+          <h2 class="side-h">Notes on AI and Microsoft</h2>
+          <a href="/blog/" class="link-arrow">All articles</a>
         </div>
-        <div class="grid grid--3">
+        <ol class="rows">
           {posts.map((p) => (
-            <a class="card" href={`/blog/${p.id}/`}>
-              <span class="badge badge--teal">{p.data.category}</span>
-              <h3 style="margin-top:12px">{p.data.title}</h3>
-              <p class="muted">{p.data.description}</p>
-            </a>
+            <li>
+              <a class="row-link post" href={`/blog/${p.id}/`}>
+                <span class="num">{fmt(p.data.date)}</span>
+                <span class="title">{p.data.title}</span>
+                <span class="desc">{p.data.category}</span>
+                <span class="go" aria-hidden="true">→</span>
+              </a>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   )}
@@ -177,40 +169,49 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 </Base>
 
 <style>
-  .hero { padding: clamp(48px, 8vw, 104px) 0 clamp(48px, 7vw, 88px); overflow: hidden; }
-  .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; }
-  .hero .lead { margin-bottom: 30px; }
-  .hl { color: var(--accent); }
-  .hero-art { position: relative; color: var(--heading); }
-  .hero-art svg { width: 100%; height: auto; }
-  .bar { fill: var(--ink-2); }
-  @media (prefers-color-scheme: dark) { .bar { fill: #2a3650; } }
-  .bar.b4 { fill: url(#g1); }
-  .float {
-    position: absolute; display: flex; align-items: center; gap: 8px;
-    background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow);
-    padding: 8px 14px; border-radius: 999px; font-size: 0.85rem; font-weight: 600;
-    font-family: var(--font-head); color: var(--heading); white-space: nowrap;
-  }
-  .float :global(svg) { color: var(--accent); }
-  .shot :global(img) { width: 100%; height: auto; }
-  .f1 { top: 6%; left: 0; }
-  .f2 { top: 42%; right: -2%; }
-  .f3 { bottom: 4%; left: 14%; }
+  .hero { padding: clamp(56px, 9vw, 112px) 0 clamp(56px, 8vw, 96px); position: relative; overflow: hidden; }
+  .hero .container { position: relative; }
+  .hero-top { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: start; }
+  .hero h1 { max-width: 16ch; margin: 0.15em 0 0.6em; font-size: clamp(2.5rem, 5.8vw, 4.8rem); }
+  .hero h1 em { color: var(--vermilion); }
+  .hero-mark { display: grid; justify-items: center; gap: 16px; padding: 18px 8px 0 0; }
+  .hero-mark :global(.hero-kanji) { color: var(--heading); }
+  .hero-mark .label { margin: 0; }
+  .hero-foot { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: end; border-top: 1px solid var(--rule-strong); padding-top: 32px; }
+  .hero-foot .lead { margin-bottom: 28px; }
+  .index { align-self: start; }
 
-  .card--product { border-color: var(--accent); }
+  .side-h { font-size: clamp(1.6rem, 2.6vw, 2.2rem); max-width: 10ch; }
+  .side-p { max-width: 26ch; font-size: 0.95rem; }
 
-  .product { display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: center; }
-  .shot { margin: 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: #fff; }
+  .feature-list { list-style: none; padding: 0; margin: 28px 0 36px; columns: 2; column-gap: 40px; counter-reset: f; }
+  .feature-list li { break-inside: avoid; padding: 14px 0 14px 2.4rem; border-top: 1px solid var(--rule); position: relative; counter-increment: f; }
+  .feature-list li::before { content: counter(f, decimal-leading-zero); position: absolute; left: 0; top: 16px; font-family: var(--display); font-weight: 700; font-size: 0.78rem; color: var(--accent); }
+  .feature-list strong { font-weight: 500; color: var(--heading); }
+  .product-shot { margin-top: clamp(48px, 7vw, 88px); }
 
-  .step { border-top: 2px solid var(--line); padding-top: 22px; }
-  .num { font-family: var(--font-head); font-weight: 700; color: var(--accent); font-size: 0.95rem; display: block; margin-bottom: 10px; }
+  .method { margin-top: 48px; grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 760px) { .method { grid-template-columns: 1fr; } }
 
-  .row-head { max-width: none; display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; }
+  .commit { list-style: none; margin: 0; padding: 0; }
+  .commit li { display: grid; grid-template-columns: 1fr 1.3fr; gap: 12px 40px; padding: 28px 0; border-top: 1px solid var(--rule); }
+  .commit li:first-child { border-top-color: var(--rule-strong); }
+  .commit h3 { margin: 0; font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
+  .commit p { margin: 0; color: #c9d1de; }
 
-  @media (max-width: 900px) {
-    .hero-grid, .product { grid-template-columns: 1fr; }
-    .hero-art { max-width: 460px; }
-    .f2 { right: 0; }
+  .post .num { white-space: nowrap; }
+  .post { grid-template-columns: 7.5rem 1.6fr 0.8fr 2rem; }
+
+  @media (max-width: 1100px) { .hero-mark { display: none; } .hero-top { grid-template-columns: 1fr; } }
+  @media (max-width: 960px) { .hero-foot { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) {
+    .hero-mark { display: none; }
+    .feature-list { columns: 1; }
+    .commit li { grid-template-columns: 1fr; }
+    .post { grid-template-columns: 1fr 1.2rem; }
+    .post .num { grid-column: 1; }
+    .post .title { grid-column: 1; }
+    .post .desc { display: none; }
+    .post .go { grid-row: 1 / 3; grid-column: 2; align-self: center; }
   }
 </style>

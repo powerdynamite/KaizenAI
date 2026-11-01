@@ -1,10 +1,11 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { SITE } from '../../config';
 import { ORG_ID, breadcrumbs } from '../../lib/schema';
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 const blog = {
   '@type': 'Blog',
   '@id': `${SITE.url}/blog/#blog`,
@@ -22,27 +23,34 @@ const blog = {
 >
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow">Blog</span>
-      <h1>Notes on AI and Microsoft</h1>
-      <p class="lead">Practical, no-hype write-ups from our delivery work. <a href="/rss.xml">Subscribe via RSS</a>.</p>
+      <Breadcrumbs items={[{ name: 'Blog', path: '/blog/' }]} />
+      <h1>Journal</h1>
+      <p class="lead">Practical, no-hype notes on AI and Microsoft from our delivery work. <a href="/rss.xml">Subscribe via RSS</a>.</p>
     </div>
   </section>
   <section class="section">
-    <div class="container grid grid--3">
-      {posts.map((p) => (
-        <a class="card post" href={`/blog/${p.id}/`}>
-          <div class="meta"><span class="badge badge--teal">{p.data.category}</span><time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time></div>
-          <h2 class="h">{p.data.title}</h2>
-          <p class="muted">{p.data.description}</p>
-          <span class="more">Read →</span>
-        </a>
-      ))}
+    <div class="container">
+      <ol class="rows">
+        {posts.map((p) => (
+          <li>
+            <a class="row-link post" href={`/blog/${p.id}/`}>
+              <span class="num"><time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time></span>
+              <span class="title">{p.data.title}</span>
+              <span class="desc">{p.data.description}</span>
+              <span class="go" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 </Base>
 <style>
-  .post { display: flex !important; flex-direction: column; }
-  .post .more { margin-top: auto; }
-  .meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--muted); margin-bottom: 14px; }
-  .h { font-size: 1.25rem; }
+  .post { grid-template-columns: 8rem 1.3fr 1.2fr 2rem; }
+  .post .num { white-space: nowrap; }
+  @media (max-width: 760px) {
+    .post { grid-template-columns: 1fr 1.2rem; }
+    .post .num, .post .title, .post .desc { grid-column: 1; }
+    .post .go { grid-row: 1 / 4; grid-column: 2; align-self: center; }
+  }
 </style>

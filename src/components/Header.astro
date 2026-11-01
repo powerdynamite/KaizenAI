@@ -7,48 +7,39 @@ const isActive = (href: string) => path === href || path.startsWith(href);
 <header class="site-header">
   <div class="container bar">
     <a href="/" class="brand" aria-label="KaizenAI home"><Logo /></a>
-    <button class="menu-btn" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav id="site-nav" class="nav" aria-label="Main">
       {NAV.map((n) => (
         <a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
       ))}
-      <a href="/contact/" class="btn btn--primary nav-cta">Book a call</a>
+      <a href="/contact/" class="btn nav-cta">Contact us</a>
     </nav>
   </div>
 </header>
 <style>
-  .site-header {
-    position: sticky; top: 0; z-index: 50;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: saturate(1.4) blur(10px);
-    border-bottom: 1px solid var(--line);
-  }
-  .bar { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .site-header { background: var(--bg); border-bottom: 1px solid var(--rule); position: relative; z-index: 50; }
+  .bar { display: flex; align-items: center; justify-content: space-between; height: 72px; }
   .brand { text-decoration: none; }
-  .nav { display: flex; align-items: center; gap: 28px; }
-  .nav a:not(.btn) {
-    color: var(--text); text-decoration: none; font-weight: 500; font-size: 0.97rem;
-  }
-  .nav a:not(.btn):hover, .nav a[aria-current='page'] { color: var(--accent); }
+  .nav { display: flex; align-items: center; gap: 30px; }
+  .nav a:not(.btn) { color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 500; padding: 4px 0; border-bottom: 2px solid transparent; }
+  .nav a:not(.btn):hover { color: var(--accent); }
+  .nav a[aria-current='page'] { border-bottom-color: var(--vermilion); }
   .nav-cta { padding: 10px 18px; }
-  .menu-btn { display: none; background: none; border: 0; padding: 10px; cursor: pointer; }
-  .menu-btn span { display: block; width: 22px; height: 2px; background: var(--heading); margin: 5px 0; border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+  .menu-btn {
+    display: none; background: none; border: 1px solid var(--rule-strong); color: var(--heading); border-radius: var(--radius);
+    font: 600 0.85rem var(--display); padding: 8px 14px; cursor: pointer;
+  }
   @media (max-width: 860px) {
     .menu-btn { display: block; }
     .nav {
-      position: absolute; top: 68px; left: 0; right: 0;
+      position: absolute; top: 72px; left: 0; right: 0; display: none;
       flex-direction: column; align-items: stretch; gap: 0;
-      background: var(--bg); border-bottom: 1px solid var(--line);
-      padding: 8px 20px 20px; display: none;
+      background: var(--bg); border-bottom: 1px solid var(--rule-strong); padding: 0 var(--gutter) 20px;
     }
     .nav.open { display: flex; }
-    .nav a:not(.btn) { padding: 14px 0; border-bottom: 1px solid var(--line); }
-    .nav-cta { margin-top: 16px; justify-content: center; }
-    .menu-btn[aria-expanded='true'] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .menu-btn[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
-    .menu-btn[aria-expanded='true'] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav a:not(.btn) { padding: 16px 0; border-bottom: 1px solid var(--rule); font-family: var(--display); font-weight: 600; font-size: 1.25rem; }
+    .nav a[aria-current='page'] { border-bottom-color: var(--rule); color: var(--accent); }
+    .nav-cta { margin-top: 18px; justify-content: center; }
   }
 </style>
 <script>
@@ -57,6 +48,7 @@ const isActive = (href: string) => path === href || path.startsWith(href);
   btn?.addEventListener('click', () => {
     const open = btn.getAttribute('aria-expanded') === 'true';
     btn.setAttribute('aria-expanded', String(!open));
+    btn.textContent = open ? 'Menu' : 'Close';
     nav?.classList.toggle('open', !open);
   });
 </script>

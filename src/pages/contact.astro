@@ -1,88 +1,99 @@
 ---
 import Base from '../layouts/Base.astro';
-import Icon from '../components/Icon.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { SITE } from '../config';
 import { services } from '../data/services';
 import { breadcrumbs, ORG_ID } from '../lib/schema';
 const contactPage = { '@type': 'ContactPage', url: `${SITE.url}/contact/`, name: 'Contact KaizenAI', about: { '@id': ORG_ID } };
 const topics = [...services.map((s) => s.title), 'Kaizen PPM demo', 'Something else'];
+const crumbs = [{ name: 'Contact', path: '/contact/' }];
 ---
 <Base
   title="Contact KaizenAI: Book a Free Consultation"
   description="Talk to KaizenAI about AI agents, Copilot and Cowork, Dynamics 365, Power Platform, Azure DevSecOps or a Kaizen PPM demo. Based in Lahore, working worldwide."
   markdown="/contact.md"
-  schema={[contactPage, breadcrumbs([{ name: 'Contact', path: '/contact/' }])]}
+  schema={[contactPage, breadcrumbs(crumbs)]}
 >
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow">Contact</span>
-      <h1>Let’s talk about what you want to improve</h1>
-      <p class="lead">Tell us a little about your situation. We usually reply within one working day (Pakistan time, UTC+5).</p>
+      <Breadcrumbs items={crumbs} />
+      <h1>Tell us what you want to improve.</h1>
+      <p class="lead">A few lines are enough. We usually reply within one working day (Pakistan time, UTC+5).</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container layout">
-      <form
-        id="contact-form"
-        class="card form"
-        aria-label="Contact KaizenAI"
-        data-endpoint={SITE.formEndpoint}
-        data-email={SITE.email}
-        novalidate
-      >
+      <form id="contact-form" class="form" aria-label="Contact KaizenAI" data-endpoint={SITE.formEndpoint} data-email={SITE.email} novalidate>
         <div class="row2">
           <label>Name<input name="name" required autocomplete="name" /></label>
           <label>Work email<input name="email" type="email" required autocomplete="email" /></label>
         </div>
         <div class="row2">
-          <label>Company<input name="company" autocomplete="organization" /></label>
-          <label>Phone / WhatsApp<input name="phone" type="tel" autocomplete="tel" /></label>
+          <label>Company <span class="opt">optional</span><input name="company" autocomplete="organization" /></label>
+          <label>Phone / WhatsApp <span class="opt">optional</span><input name="phone" type="tel" autocomplete="tel" /></label>
         </div>
-        <label>What can we help with?
+        <label>Topic
           <select name="topic" id="topic">
             {topics.map((t) => <option value={t}>{t}</option>)}
           </select>
         </label>
-        <label>Message<textarea name="message" rows="6" required placeholder="What are you trying to achieve, and by when?"></textarea></label>
+        <label>Message<textarea name="message" rows="7" required placeholder="What are you trying to achieve, and by when?"></textarea></label>
         <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
-        <button class="btn btn--primary" type="submit">Send message <Icon name="arrow" size={18} /></button>
-        <p class="status" role="status" aria-live="polite"></p>
+        <div class="actions">
+          <button class="btn" type="submit">Send message <span class="arr">→</span></button>
+          <p class="status" role="status" aria-live="polite"></p>
+        </div>
       </form>
 
-      <aside class="side">
-        <div class="item"><span class="icon-tile"><Icon name="mail" /></span><div><h2 class="h3">Email</h2><a href={`mailto:${SITE.email}`}>{SITE.email}</a></div></div>
-        <div class="item"><span class="icon-tile"><Icon name="phone" /></span><div><h2 class="h3">Phone</h2>{SITE.phones.map((p) => <a href={`tel:${p.tel}`}>{p.display}</a>)}</div></div>
+      <aside class="side" aria-label="Other ways to reach us">
+        <div class="item">
+          <h2 class="label">Email</h2>
+          <a class="big" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </div>
+        <div class="item">
+          <h2 class="label">Phone</h2>
+          {SITE.phones.map((p) => <a class="big" href={`tel:${p.tel}`}>{p.display}</a>)}
+        </div>
         {SITE.whatsapp && (
-          <div class="item"><span class="icon-tile"><Icon name="chat" /></span><div><h2 class="h3">WhatsApp</h2><a href={`https://wa.me/${SITE.whatsapp}`} rel="noopener" target="_blank">Message us on WhatsApp</a></div></div>
+          <div class="item">
+            <h2 class="label">WhatsApp</h2>
+            <a class="big" href={`https://wa.me/${SITE.whatsapp}`} rel="noopener" target="_blank">Message us →</a>
+          </div>
         )}
-        <div class="item"><span class="icon-tile"><Icon name="pin" /></span><div><h2 class="h3">Location</h2><span>{SITE.location}</span><span class="muted">Working with clients remotely, worldwide.</span></div></div>
+        <div class="item">
+          <h2 class="label">Studio</h2>
+          <p>{SITE.location}<br /><span class="muted">Working with clients remotely, worldwide.</span></p>
+        </div>
       </aside>
     </div>
   </section>
 </Base>
 <style>
-  .layout { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; align-items: start; }
-  .form { display: grid; gap: 18px; }
-  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  label { display: grid; gap: 6px; font-weight: 500; font-size: 0.95rem; color: var(--heading); }
+  .layout { display: grid; grid-template-columns: 1.6fr 1fr; gap: 64px; align-items: start; }
+  .form { display: grid; gap: 26px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  label { display: grid; gap: 8px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .opt { font-weight: 400; letter-spacing: 0.04em; text-transform: none; }
   input, select, textarea {
-    font: inherit; font-weight: 400; color: var(--text); background: var(--bg);
-    border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 11px 13px; width: 100%;
+    font: 400 1.05rem var(--sans); letter-spacing: normal; text-transform: none; color: var(--heading); background: transparent;
+    border: 0; border-bottom: 1px solid var(--rule-strong); border-radius: 0; padding: 8px 0 10px; width: 100%;
   }
-  input:focus, select:focus, textarea:focus { outline: 2px solid var(--vermilion); outline-offset: 0; border-color: transparent; }
+  select { appearance: none; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23625e56' stroke-width='1.5'/%3E%3C/svg%3E") right 4px center no-repeat; }
+  textarea { border: 1px solid var(--rule-strong); border-radius: var(--radius); padding: 12px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--vermilion); box-shadow: 0 1px 0 0 var(--vermilion); }
+  textarea:focus { box-shadow: none; outline: 1px solid var(--vermilion); }
   .hp { position: absolute; left: -9999px; }
-  .form .btn { justify-self: start; }
-  .status { margin: 0; min-height: 1.5em; font-weight: 500; }
+  .status { margin: 0; font-size: 0.95rem; }
   .status.ok { color: var(--teal); }
   .status.err { color: var(--accent); }
-  .side { display: grid; gap: 22px; }
-  .item { display: flex; gap: 16px; align-items: start; }
-  .item .icon-tile { flex-shrink: 0; margin: 0; }
-  .item h2 { margin: 0 0 4px; font-size: 1rem; }
-  .item a, .item span { display: block; overflow-wrap: anywhere; }
-  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
-  @media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } }
+  .side { display: grid; gap: 30px; border-top: 1px solid var(--rule-strong); padding-top: 24px; }
+  .item .label { margin-bottom: 6px; }
+  .big { display: block; font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; font-size: 1.25rem; color: var(--heading); text-decoration: none; overflow-wrap: anywhere; line-height: 1.35; }
+  .big:hover { color: var(--accent); text-decoration: underline; }
+  .item p { margin: 0; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .row2 { grid-template-columns: 1fr; } }
 </style>
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
