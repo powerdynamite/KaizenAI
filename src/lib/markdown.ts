@@ -7,7 +7,7 @@ import { services, type Faq, type Service } from '../data/services';
 import { PPM, capabilities, ladder, migrationSources, ppmFaqs } from '../data/ppm';
 import { homeFaqs } from '../data/faq';
 import { steps, principles } from '../data/home';
-import { tools } from '../data/tools';
+import { kits, kitSteps, kitFaqs } from '../data/tools';
 
 const u = (path: string) => `${SITE.url}${path}`;
 const faqMd = (faqs: Faq[]) => faqs.map((f) => `### ${f.q}\n\n${f.a}`).join('\n\n');
@@ -130,7 +130,7 @@ Kaizen (改善) is the Japanese idea of continuous improvement. It means making 
 
 ## Founder
 
-**${SITE.founder}**, Founder & Principal Consultant. Abdul is a Power Platform and AI solutions architect with more than six years of remote delivery for Microsoft partners across Europe, Australia and the Middle East. He works across Dynamics 365 CE, Dataverse, Copilot Studio and agentic AI, and is the architect behind Kaizen PPM. He also publishes open-source Power Platform accelerators and Claude Code skills. BSc Computer Engineering, COMSATS University Islamabad.
+**${SITE.founder}**, Founder & Principal Consultant. Abdul is a Power Platform and AI solutions architect with more than six years of remote delivery for Microsoft partners across Europe, Australia and the Middle East. He works across Dynamics 365 CE, Dataverse, Copilot Studio and agentic AI, and is the architect behind Kaizen PPM. He also builds AI-ready Power Platform starter kits (${u('/starter-kits/')}) and Claude Code skills. BSc Computer Engineering, COMSATS University Islamabad.
 
 Profiles: ${Object.entries(SITE.founderProfiles).map(([k, v]) => `[${k}](${v})`).join(' · ')}
 
@@ -144,21 +144,37 @@ Profiles: ${Object.entries(SITE.founderProfiles).map(([k, v]) => `[${k}](${v})`)
 ${contactLine}
 `;
 
-export const openSourceMd = () => `# Open-source tools from KaizenAI
+export const starterKitsMd = () => `# AI-ready starter kits from KaizenAI
 
-Accelerators from our Dynamics 365 and Power Platform work. Use them, fork them, and tell us what to improve.
+Starter kits, not finished products: working foundations from our Dynamics 365 and Power Platform delivery. Each one shows the approach and saves weeks of set-up. We then plan each organisation's specific requirements with them and adapt the kit to fit.
 
-${tools.map((t) => `## ${t.name}
+## How it works
 
-> ${t.tagline}
+${kitSteps.map((s, i) => `${i + 1}. **${s.title}**: ${s.body}`).join('\n')}
 
-Status: ${t.status}${t.repo ? ` · Code: ${t.repo}` : ''}
+${kits.map((k) => `## ${k.name}
 
-**The problem.** ${t.problem}
+> ${k.tagline}
 
-${t.features.map((f) => `- ${f}`).join('\n')}
+Maturity: ${k.maturity}${k.repo ? ` · Code: ${k.repo}` : ''}
 
-Built with: ${t.stack.join(', ')}.${t.note ? `\n\n${t.note}` : ''}`).join('\n\n')}
+**The problem.** ${k.problem}
+
+What you start with:
+${k.startWith.map((f) => `- ${f}`).join('\n')}
+
+What we tailor for you:
+${k.customise.map((f) => `- ${f}`).join('\n')}
+
+AI-ready: ${k.ai}
+
+Built with: ${k.stack.join(', ')}.`).join('\n\n')}
+
+## Frequently asked questions
+
+${faqMd(kitFaqs)}
+
+Plan your version: ${u('/contact/')}
 `;
 
 export const contactMd = () => `# Contact KaizenAI

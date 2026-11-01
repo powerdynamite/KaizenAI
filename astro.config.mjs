@@ -8,7 +8,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       // Keep thin/legal pages out of the sitemap; give key pages a priority hint.
-      filter: (page) => !page.endsWith('/privacy/'),
+      filter: (page) => !page.endsWith('/privacy/') && !page.endsWith('/open-source/'),
       serialize(item) {
         if (item.url === 'https://kaizenai.systems/') item.priority = 1.0;
         else if (/\/(services|products)\//.test(item.url)) item.priority = 0.9;

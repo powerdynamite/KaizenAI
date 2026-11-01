@@ -160,6 +160,41 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: 'systems-integration',
+    title: 'Systems Integration',
+    short: 'Connect CRM, telephony, ERP and line-of-business systems so data flows without re-keying.',
+    seoTitle: 'CRM, Telephony & Systems Integration Services',
+    metaDescription:
+      'KaizenAI integrates Dynamics 365, Dataverse and other CRMs with telephone systems, ERP and business apps using Azure Functions, Logic Apps, Power Automate and APIs.',
+    serviceType: 'Systems integration',
+    definition:
+      'Systems integration means connecting the applications a business already uses, such as CRM, telephone systems, ERP and finance, so information is entered once and flows reliably wherever it is needed.',
+    summary:
+      'We connect CRMs, telephone systems, ERP and line-of-business applications through their APIs: scheduled and event-driven syncs, with duplicate prevention, error handling and monitoring built in. Integrations run in your own Azure tenant and are documented so your team can own them.',
+    outcomes: [
+      'Customer data entered once, available everywhere',
+      'Calls identified by customer name, from up-to-date CRM contacts',
+      'Integrations you can monitor, rerun and trust',
+    ],
+    offerings: [
+      { title: 'CRM and telephony integration', body: 'Keep your phone system’s contacts in step with your CRM, so incoming calls show who is calling. Call activity can flow back to the CRM where the phone platform’s API supports it.' },
+      { title: 'API and data sync', body: 'Scheduled and event-driven syncs between CRM, ERP and business apps, with field mapping, ID mapping to prevent duplicates, and safe re-runs.' },
+      { title: 'Dataverse and Dynamics 365 integration', body: 'Custom APIs, plugins, virtual tables and Power Automate flows that connect Dataverse to the systems around it.' },
+      { title: 'Monitoring and resilience', body: 'Health-check endpoints, retries, alerting and telemetry in Azure Monitor, so failures are spotted and fixed before users notice.' },
+    ],
+    stack: ['Azure Functions (.NET)', 'Logic Apps', 'Power Automate', 'REST & OData APIs', 'OAuth 2.0', 'Dataverse', 'Azure Monitor / OpenTelemetry'],
+    useCases: [
+      { title: 'CRM-to-phone-system contact sync', body: 'For a sales and service business, a .NET Azure Function keeps thousands of CRM customer contacts synchronised into a cloud VoIP telephone system twice a day, with a manual trigger for urgent updates. An ID-mapping store prevents duplicates and connection-test endpoints simplify support. Staff see the customer’s name as the phone rings.' },
+      { title: 'Order and invoice hand-off', body: 'Won opportunities in CRM create orders in ERP, and invoice status flows back, so sales and finance work from the same facts.' },
+    ],
+    faqs: [
+      { q: 'Can you integrate our CRM with our telephone system?', a: 'Yes, if both systems offer an API. We typically sync contacts from the CRM into the phone system so incoming calls are identified by name, and, where the phone platform supports it, write call activity back to the CRM.' },
+      { q: 'Where do the integrations run?', a: 'Usually as Azure Functions, Logic Apps or Power Automate flows in your own Azure or Power Platform tenant. Credentials stay in your environment, and you own the code and configuration.' },
+      { q: 'How do you prevent duplicates and handle failures?', a: 'We keep an ID mapping between systems so each record is created once and updated afterwards. Every integration has retries, logging and alerting, and can be safely re-run.' },
+      { q: 'Do you only integrate Microsoft systems?', a: 'No. Dynamics 365 and Dataverse are our core, but we integrate any system with a documented REST or OData API, including third-party CRMs, telephony platforms and ERPs.' },
+    ],
+  },
+  {
     slug: 'infra-devsecops',
     title: 'Infra & DevSecOps',
     short: 'Secure Azure foundations and pipelines that ship safely, every time.',

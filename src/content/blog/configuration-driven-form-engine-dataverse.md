@@ -10,7 +10,7 @@ draft: false
 
 Most Dynamics 365 implementations accumulate form scripts. One for the account form, another for opportunities, a third for a custom table, each with its own version of "hide this section when status is X" and "make that field required when type is Y". Five years in, nobody knows which rule lives where.
 
-There is a simpler pattern: **one generic script, driven by configuration records in Dataverse.** We built an open-source implementation, the [Configurable Form Engine](https://github.com/powerdynamite/configurable-form-engine), and this post explains the idea.
+There is a simpler pattern: **one generic script, driven by configuration records in Dataverse.** We built a [starter kit](/starter-kits/#configurable-form-engine) for it, the [Configurable Form Engine](https://github.com/powerdynamite/configurable-form-engine), and this post explains the idea.
 
 ## The problem with per-form scripts
 
@@ -60,4 +60,4 @@ Once rules are data, an agent can work with them. We added a Copilot Studio laye
 
 Complex calculations, multi-step integrations and heavy server-side validation still belong in plugins or Power Automate. A form engine handles form behaviour. It is not a replacement for business logic on the server, which runs regardless of how the record is changed.
 
-The code is on [GitHub](https://github.com/powerdynamite/configurable-form-engine). Feedback and pull requests are welcome.
+The kit is on [GitHub](https://github.com/powerdynamite/configurable-form-engine). It is a foundation to adapt, not a finished product: if you want it tailored to your forms and rules, [talk to us](/contact/).

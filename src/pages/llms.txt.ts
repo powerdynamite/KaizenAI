@@ -28,9 +28,9 @@ ${services.map((s) => `- [${s.title}](${u(`/services/${s.slug}.md`)}): ${s.short
 
 - [${PPM.name}](${u('/products/kaizen-ppm.md')}): ${PPM.definition}
 
-## Open source
+## Starter kits
 
-- [Open-source tools](${u('/open-source.md')}): configurable form engine, Dataverse audit insights, Power Platform governance hub
+- [AI-ready starter kits](${u('/starter-kits.md')}): foundations (not finished products) that KaizenAI adapts to each organisation: configurable form engine, Dataverse audit insights, Power Platform governance hub
 
 ## Company
 
