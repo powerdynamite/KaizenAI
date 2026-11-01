@@ -19,22 +19,41 @@ const crumbs = [{ name: 'Services', path: '/services/' }];
   schema={[list, breadcrumbs(crumbs)]}
 >
   <section class="page-hero">
-    <div class="container">
-      <Breadcrumbs items={crumbs} />
-      <h1>AI and Microsoft services, end to end.</h1>
-      <p class="lead">Use one practice or combine several. They share the same Dataverse and Azure foundations, so each piece makes the next one easier.</p>
+    <div class="container hero">
+      <div>
+        <Breadcrumbs items={crumbs} />
+        <h1>AI and Microsoft services, end to end.</h1>
+        <p class="lead">Use one practice or combine several. They share the same Dataverse and Azure foundations, so each piece makes the next one easier.</p>
+        <div class="actions"><a href="/contact/" class="btn">Book a free consultation <span class="arr">→</span></a></div>
+      </div>
+      <nav class="toc" aria-label="Services on this page">
+        <span class="label">On this page</span>
+        <ol>
+          {services.map((s, i) => (
+            <li><a href={`#${s.slug}`}><span>{String(i + 1).padStart(2, '0')}</span>{s.title}</a></li>
+          ))}
+        </ol>
+      </nav>
     </div>
   </section>
 
   {services.map((s, i) => (
-    <section class="section svc">
+    <section class="section svc" id={s.slug}>
       <div class="container split">
         <div>
-          <span class="label"><b>{String(i + 1).padStart(2, '0')}</b>{s.serviceType}</span>
+          <span class="big-n">{String(i + 1).padStart(2, '0')}</span>
+          <span class="label">{s.serviceType}</span>
+          <p class="side-sub">What you get</p>
+          <ul class="ticks">{s.outcomes.map((o) => <li>{o}</li>)}</ul>
         </div>
         <div class="body">
           <h2><a href={`/services/${s.slug}/`}>{s.title}</a></h2>
           <p class="lead">{s.summary}</p>
+          <ol class="offers">
+            {s.offerings.map((o) => (
+              <li><h3>{o.title}</h3><p>{o.body}</p></li>
+            ))}
+          </ol>
           <p class="tags">{s.stack.map((t) => <span>{t}</span>)}</p>
           <a class="link-arrow" href={`/services/${s.slug}/`}>Read about {s.title} →</a>
         </div>
@@ -44,7 +63,27 @@ const crumbs = [{ name: 'Services', path: '/services/' }];
   <CTA />
 </Base>
 <style>
+  .hero { display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; align-items: end; }
+  .hero .lead { margin-bottom: 28px; }
+  .toc { border-top: 1px solid var(--rule-strong); padding-top: 14px; }
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc li { border-bottom: 1px solid var(--rule); }
+  .toc a { display: flex; gap: 16px; align-items: baseline; padding: 12px 0; text-decoration: none; color: var(--heading); font-family: var(--display); font-weight: 600; letter-spacing: -0.01em; }
+  .toc a span { font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+  .toc a:hover { color: var(--accent); }
+  .big-n { display: block; font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 4vw, 3.6rem); line-height: 1; color: var(--vermilion); letter-spacing: -0.04em; margin-bottom: 12px; }
+  .side-sub { margin: 26px 0 8px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--heading); }
+  .ticks { list-style: none; margin: 0; padding: 0; max-width: 30ch; }
+  .ticks li { position: relative; padding: 8px 0 8px 22px; border-top: 1px solid var(--rule); font-size: 0.93rem; color: var(--muted); }
+  .ticks li::before { content: ''; position: absolute; left: 2px; top: 16px; width: 9px; height: 5px; border-left: 2px solid var(--vermilion); border-bottom: 2px solid var(--vermilion); transform: rotate(-45deg); }
   .svc h2 a { color: var(--heading); text-decoration: none; }
   .svc h2 a:hover { color: var(--accent); }
+  .offers { list-style: none; margin: 28px 0 24px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; counter-reset: of; }
+  .offers li { counter-increment: of; position: relative; padding: 16px 0 16px 2.4rem; border-top: 1px solid var(--rule); }
+  .offers li::before { content: counter(of, decimal-leading-zero); position: absolute; left: 0; top: 19px; font-family: var(--display); font-weight: 700; font-size: 0.78rem; color: var(--accent); }
+  .offers h3 { font-size: 1.05rem; margin: 0 0 4px; }
+  .offers p { margin: 0; color: var(--muted); font-size: 0.95rem; }
   .body .tags { margin: 0 0 22px; }
+  @media (max-width: 960px) { .hero { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) { .offers { grid-template-columns: 1fr; } }
 </style>

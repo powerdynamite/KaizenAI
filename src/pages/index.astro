@@ -55,7 +55,8 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 
       <div>
         <span class="label"><b>01</b>Services</span>
         <h2 class="side-h">What we do</h2>
-        <p class="muted side-p">AI first, on Microsoft foundations that make it work in practice.</p>
+        <p class="side-p">AI first, on Microsoft foundations that make it work in practice.</p>
+        <p class="side-note"><strong>Not sure which you need?</strong>Most projects combine two or three of these. Tell us the problem and we will map it. <br /><a href="/contact/">Book a free consultation →</a></p>
       </div>
       <ol class="rows">
         {services.map((s, i) => (
@@ -77,6 +78,12 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 
       <div class="split">
         <div>
           <span class="label"><b>02</b>Product</span>
+          <dl class="side-facts">
+            <div><dt>Runs on</dt><dd>Power Platform &amp; Dataverse</dd></div>
+            <div><dt>Your data</dt><dd>Stays in your Microsoft 365 tenant</dd></div>
+            <div><dt>Migrates from</dt><dd>Project Online, Planner, MS Project</dd></div>
+            <div><dt>AI</dt><dd>Copilot &amp; Cowork, human in the loop</dd></div>
+          </dl>
         </div>
         <div>
           <h2>Kaizen PPM</h2>
@@ -103,6 +110,8 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 
     <div class="container split">
       <div>
         <span class="label"><b>03</b>Method</span>
+        <Kanji height={150} vertical class="method-kanji" />
+        <p class="side-p">改善: kaizen, “change for the better”.</p>
       </div>
       <div>
         <h2>Small steps that compound.</h2>
@@ -127,6 +136,8 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 
     <div class="container split">
       <div>
         <span class="label"><b>04</b>Commitments</span>
+        <h2 class="side-h">What you can hold us to</h2>
+        <p class="side-p">The principles behind every engagement.</p>
       </div>
       <ul class="commit">
         {principles.map((p) => (
@@ -181,8 +192,6 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 
   .hero-foot .lead { margin-bottom: 28px; }
   .index { align-self: start; }
 
-  .side-h { font-size: clamp(1.6rem, 2.6vw, 2.2rem); max-width: 10ch; }
-  .side-p { max-width: 26ch; font-size: 0.95rem; }
 
   .feature-list { list-style: none; padding: 0; margin: 28px 0 36px; columns: 2; column-gap: 40px; counter-reset: f; }
   .feature-list li { break-inside: avoid; padding: 14px 0 14px 2.4rem; border-top: 1px solid var(--rule); position: relative; counter-increment: f; }
@@ -190,6 +199,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 
   .feature-list strong { font-weight: 500; color: var(--heading); }
   .product-shot { margin-top: clamp(48px, 7vw, 88px); }
 
+  :global(.method-kanji) { color: var(--vermilion); display: block; margin: 8px 0 18px; }
   .method { margin-top: 48px; grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 760px) { .method { grid-template-columns: 1fr; } }
 

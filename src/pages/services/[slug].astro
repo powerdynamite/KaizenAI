@@ -41,7 +41,7 @@ const roman = ['i.', 'ii.', 'iii.', 'iv.', 'v.', 'vi.'];
 
   <section class="section section--tint">
     <div class="container split">
-      <div><h2 class="label"><b>A</b>Outcomes</h2></div>
+      <div><span class="label"><b>A</b>Outcomes</span><h2 class="side-h">What you get</h2><p class="side-p">The results this work is designed to deliver.</p></div>
       <ol class="outcomes">
         {s.outcomes.map((o) => <li>{o}</li>)}
       </ol>
@@ -50,7 +50,7 @@ const roman = ['i.', 'ii.', 'iii.', 'iv.', 'v.', 'vi.'];
 
   <section class="section">
     <div class="container split">
-      <div><h2 class="label"><b>B</b>How we help</h2></div>
+      <div><span class="label"><b>B</b>Offerings</span><h2 class="side-h">How we help</h2><p class="side-p">Pick one, or combine them. Most work starts small and grows.</p><p class="side-note"><strong>Have a specific need?</strong><a href={`/contact/?topic=${encodeURIComponent(s.title)}`}>Describe it in a few lines →</a></p></div>
       <div class="cols two">
         {s.offerings.map((o, i) => (
           <div class="col"><span class="n">{roman[i]}</span><h3>{o.title}</h3><p>{o.body}</p></div>
@@ -61,7 +61,7 @@ const roman = ['i.', 'ii.', 'iii.', 'iv.', 'v.', 'vi.'];
 
   <section class="section">
     <div class="container split">
-      <div><h2 class="label"><b>C</b>Where it pays off</h2></div>
+      <div><span class="label"><b>C</b>Use cases</span><h2 class="side-h">Where it pays off</h2></div>
       <div>
         <ul class="cases">
           {s.useCases.map((u) => (
@@ -79,7 +79,7 @@ const roman = ['i.', 'ii.', 'iii.', 'iv.', 'v.', 'vi.'];
 
   <section class="section">
     <div class="container split">
-      <div><h2 class="label"><b>→</b>Other services</h2></div>
+      <div><span class="label"><b>→</b>Related</span><h2 class="side-h">Other services</h2></div>
       <ol class="rows">
         {others.map((o) => (
           <li>

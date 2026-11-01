@@ -75,7 +75,7 @@ const crumbs = [{ name: 'Products', path: '/products/' }, { name: 'Kaizen PPM', 
 
   <section class="section">
     <div class="container split">
-      <div><span class="label"><b>02</b>A closer look</span></div>
+      <div><span class="label"><b>02</b>Screens</span><h2 class="side-h">A closer look</h2><p class="side-p">Real screens from the product: dashboards, boards, financials and resourcing.</p><p class="side-note"><strong>Want the full tour?</strong><a href="/contact/?topic=Kaizen%20PPM%20demo">Request a demo →</a></p></div>
       <div class="shots">
         {shots.map((s, i) => (
           <figure class="figure">
@@ -115,7 +115,7 @@ const crumbs = [{ name: 'Products', path: '/products/' }, { name: 'Kaizen PPM', 
 
   <section class="section">
     <div class="container split">
-      <div><span class="label"><b>04</b>Migration</span></div>
+      <div><span class="label"><b>04</b>Migration</span><p class="side-p">Bring your history with you, without restructuring later.</p></div>
       <div>
         <h2>Leaving Project Online or Planner?</h2>
         <p class="lead measure">Every record in Kaizen PPM can carry its source-system lineage: where it came from, its original ID and when it last synced. Bringing your history across does not mean restructuring later.</p>
@@ -135,7 +135,6 @@ const crumbs = [{ name: 'Products', path: '/products/' }, { name: 'Kaizen PPM', 
   .facts div { padding: 16px 20px 0 0; }
   .facts dt { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
   .facts dd { margin: 6px 0 0; font-family: var(--display); font-weight: 600; letter-spacing: -0.01em; font-size: 1.05rem; color: var(--heading); }
-  .side-h { font-size: clamp(1.6rem, 2.6vw, 2.2rem); max-width: 12ch; }
   .caps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; counter-reset: c; border-top: 1px solid var(--rule-strong); }
   .caps li { counter-increment: c; padding: 20px 0 20px 2.6rem; border-bottom: 1px solid var(--rule); position: relative; }
   .caps li::before { content: counter(c, decimal-leading-zero); position: absolute; left: 0; top: 24px; font-family: var(--display); font-weight: 700; font-size: 0.78rem; color: var(--accent); }
