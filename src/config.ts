@@ -11,7 +11,7 @@ export const SITE = {
   // Home base: shown only on detail pages (About, Contact) and in structured data.
   location: 'Lahore, Punjab, Pakistan',
   workMode: 'Remote-first, working with clients worldwide',
-  email: 'mrabdulbasit1999@gmail.com',
+  email: 'writeus@kaizenai.systems',
   phones: [
     { display: '+92 311 4095179', tel: '+923114095179' },
     { display: '+92 340 4949027', tel: '+923404949027' },
