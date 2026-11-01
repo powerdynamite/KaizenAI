@@ -3,9 +3,16 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { SITE } from '../config';
 import { services } from '../data/services';
+import { breadcrumbs, ORG_ID } from '../lib/schema';
+const contactPage = { '@type': 'ContactPage', url: `${SITE.url}/contact/`, name: 'Contact KaizenAI', about: { '@id': ORG_ID } };
 const topics = [...services.map((s) => s.title), 'Kaizen PPM demo', 'Something else'];
 ---
-<Base title="Contact" description="Talk to KaizenAI about Dynamics 365, Power Platform, Copilot, AI agents, infrastructure or Kaizen PPM.">
+<Base
+  title="Contact KaizenAI: Book a Free Consultation"
+  description="Talk to KaizenAI about AI agents, Copilot and Cowork, Dynamics 365, Power Platform, Azure DevSecOps or a Kaizen PPM demo. Based in Lahore, working worldwide."
+  markdown="/contact.md"
+  schema={[contactPage, breadcrumbs([{ name: 'Contact', path: '/contact/' }])]}
+>
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">Contact</span>
@@ -16,7 +23,14 @@ const topics = [...services.map((s) => s.title), 'Kaizen PPM demo', 'Something e
 
   <section class="section">
     <div class="container layout">
-      <form id="contact-form" class="card form" data-endpoint={SITE.formEndpoint} data-email={SITE.email} novalidate>
+      <form
+        id="contact-form"
+        class="card form"
+        aria-label="Contact KaizenAI"
+        data-endpoint={SITE.formEndpoint}
+        data-email={SITE.email}
+        novalidate
+      >
         <div class="row2">
           <label>Name<input name="name" required autocomplete="name" /></label>
           <label>Work email<input name="email" type="email" required autocomplete="email" /></label>
@@ -31,18 +45,18 @@ const topics = [...services.map((s) => s.title), 'Kaizen PPM demo', 'Something e
           </select>
         </label>
         <label>Message<textarea name="message" rows="6" required placeholder="What are you trying to achieve, and by when?"></textarea></label>
-        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
         <button class="btn btn--primary" type="submit">Send message <Icon name="arrow" size={18} /></button>
         <p class="status" role="status" aria-live="polite"></p>
       </form>
 
       <aside class="side">
-        <div class="item"><span class="icon-tile"><Icon name="mail" /></span><div><h3>Email</h3><a href={`mailto:${SITE.email}`}>{SITE.email}</a></div></div>
-        <div class="item"><span class="icon-tile"><Icon name="phone" /></span><div><h3>Phone</h3>{SITE.phones.map((p) => <a href={`tel:${p.tel}`}>{p.display}</a>)}</div></div>
+        <div class="item"><span class="icon-tile"><Icon name="mail" /></span><div><h2 class="h3">Email</h2><a href={`mailto:${SITE.email}`}>{SITE.email}</a></div></div>
+        <div class="item"><span class="icon-tile"><Icon name="phone" /></span><div><h2 class="h3">Phone</h2>{SITE.phones.map((p) => <a href={`tel:${p.tel}`}>{p.display}</a>)}</div></div>
         {SITE.whatsapp && (
-          <div class="item"><span class="icon-tile"><Icon name="chat" /></span><div><h3>WhatsApp</h3><a href={`https://wa.me/${SITE.whatsapp}`} rel="noopener" target="_blank">Message us on WhatsApp</a></div></div>
+          <div class="item"><span class="icon-tile"><Icon name="chat" /></span><div><h2 class="h3">WhatsApp</h2><a href={`https://wa.me/${SITE.whatsapp}`} rel="noopener" target="_blank">Message us on WhatsApp</a></div></div>
         )}
-        <div class="item"><span class="icon-tile"><Icon name="pin" /></span><div><h3>Location</h3><span>{SITE.location}</span><span class="muted">Working with clients remotely, worldwide.</span></div></div>
+        <div class="item"><span class="icon-tile"><Icon name="pin" /></span><div><h2 class="h3">Location</h2><span>{SITE.location}</span><span class="muted">Working with clients remotely, worldwide.</span></div></div>
       </aside>
     </div>
   </section>
@@ -61,11 +75,11 @@ const topics = [...services.map((s) => s.title), 'Kaizen PPM demo', 'Something e
   .form .btn { justify-self: start; }
   .status { margin: 0; min-height: 1.5em; font-weight: 500; }
   .status.ok { color: var(--teal); }
-  .status.err { color: var(--vermilion); }
+  .status.err { color: var(--accent); }
   .side { display: grid; gap: 22px; }
   .item { display: flex; gap: 16px; align-items: start; }
   .item .icon-tile { flex-shrink: 0; margin: 0; }
-  .item h3 { margin: 0 0 4px; font-size: 1rem; }
+  .item h2 { margin: 0 0 4px; font-size: 1rem; }
   .item a, .item span { display: block; overflow-wrap: anywhere; }
   @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
   @media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } }
@@ -78,6 +92,42 @@ const topics = [...services.map((s) => s.title), 'Kaizen PPM demo', 'Something e
   if (topic && select) {
     const match = [...select.options].find((o) => o.value === topic);
     if (match) select.value = topic;
+  }
+
+  // WebMCP (W3C CG draft): lets an in-browser AI agent fill this form for its user.
+  // The tool only fills the fields. A person still reviews and presses Send.
+  const mc = (document as any).modelContext ?? (navigator as any).modelContext;
+  if (form && mc?.registerTool) {
+    const topics = select ? [...select.options].map((o) => o.value) : [];
+    try {
+      mc.registerTool({
+        name: 'fill_kaizenai_contact_form',
+        title: 'Fill in the KaizenAI contact form',
+        description:
+          'Fills in the KaizenAI contact form for the user. It does not send anything: the user reviews the form and presses Send themselves.',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            name: { type: 'string', description: 'Full name' },
+            email: { type: 'string', description: 'Reply email address' },
+            company: { type: 'string', description: 'Company name (optional)' },
+            phone: { type: 'string', description: 'Phone or WhatsApp number (optional)' },
+            topic: { type: 'string', enum: topics, description: 'Enquiry topic' },
+            message: { type: 'string', description: 'What the user wants to achieve' },
+          },
+          required: ['name', 'email', 'message'],
+        },
+        async execute(input: Record<string, string>) {
+          for (const key of ['name', 'email', 'company', 'phone', 'topic', 'message']) {
+            const el = form.elements.namedItem(key) as HTMLInputElement | null;
+            if (el && typeof input[key] === 'string') el.value = input[key];
+          }
+          form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          (form.querySelector('button[type="submit"]') as HTMLButtonElement | null)?.focus();
+          return { content: [{ type: 'text', text: 'The contact form is filled in. Ask the user to review it and press "Send message".' }] };
+        },
+      });
+    } catch { /* unsupported */ }
   }
 
   form?.addEventListener('submit', async (e) => {

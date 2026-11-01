@@ -3,6 +3,7 @@ title: 'Leaving Project Online: a practical migration checklist'
 description: 'What to inventory, what to clean up and what to move first when you take your project portfolio off Project Online and onto Power Platform.'
 date: 2026-10-28
 category: Project Management
+tags: [Project Online, migration, PPM, Dataverse]
 ---
 
 Microsoft has announced the retirement of **Project Online**, and many PMOs are now asking the same question: *where does our portfolio go next, and how do we move it without losing years of history?*

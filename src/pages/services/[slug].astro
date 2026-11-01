@@ -2,20 +2,31 @@
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import CTA from '../../components/CTA.astro';
+import Faqs from '../../components/Faqs.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { services, type Service } from '../../data/services';
+import { serviceNode, faqPage, breadcrumbs } from '../../lib/schema';
 
 export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
 }
 const { service: s } = Astro.props as { service: Service };
 const others = services.filter((o) => o.slug !== s.slug);
+const path = `/services/${s.slug}/`;
+const crumbs = [{ name: 'Services', path: '/services/' }, { name: s.title, path }];
 ---
-<Base title={s.title} description={s.summary}>
+<Base
+  title={s.seoTitle}
+  description={s.metaDescription}
+  markdown={`/services/${s.slug}.md`}
+  schema={[serviceNode(s), faqPage(s.faqs, path), breadcrumbs(crumbs)]}
+>
   <section class="page-hero">
     <div class="container hero">
       <div>
-        <a href="/services/" class="back">← All services</a>
+        <Breadcrumbs items={crumbs} />
         <h1>{s.title}</h1>
+        <p class="definition">{s.definition}</p>
         <p class="lead">{s.summary}</p>
         <div class="btn-row">
           <a href={`/contact/?topic=${encodeURIComponent(s.title)}`} class="btn btn--primary">Discuss your project</a>
@@ -23,7 +34,7 @@ const others = services.filter((o) => o.slug !== s.slug);
       </div>
       <div class="card outcomes">
         <div class="icon-tile"><Icon name={s.icon} /></div>
-        <h3>What you get</h3>
+        <h2 class="h3">What you get</h2>
         <ul class="checklist">{s.outcomes.map((o) => <li>{o}</li>)}</ul>
       </div>
     </div>
@@ -63,6 +74,8 @@ const others = services.filter((o) => o.slug !== s.slug);
     </div>
   </section>
 
+  <Faqs faqs={s.faqs} title={`${s.title}: common questions`} />
+
   <section class="section section--alt">
     <div class="container">
       <div class="section-head"><span class="eyebrow">Related</span><h2>Other services</h2></div>
@@ -80,7 +93,7 @@ const others = services.filter((o) => o.slug !== s.slug);
 </Base>
 <style>
   .hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
-  .back { display: inline-block; margin-bottom: 18px; text-decoration: none; font-weight: 500; }
+  .definition { font-size: 1.12rem; color: var(--heading); max-width: 62ch; border-left: 3px solid var(--vermilion); padding-left: 16px; }
   .split { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; }
   .usecase { border-left: 3px solid var(--vermilion); padding: 4px 0 4px 20px; }
   .mini { display: flex !important; gap: 18px; align-items: start; }

@@ -1,45 +1,39 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Icon from '../../components/Icon.astro';
 import CTA from '../../components/CTA.astro';
-
-const capabilities = [
-  { title: 'Portfolios & programs', body: 'Group related projects and roll up health, cost and risk for oversight.' },
-  { title: 'Demand & idea intake', body: 'Capture ideas, cost them as proposals and approve the right work before it starts.' },
-  { title: 'Interactive scheduling', body: 'A Gantt chart with WBS, dependencies, baselines and drag-to-reschedule, plus a Kanban board.' },
-  { title: 'Financial management', body: 'Budget, forecast and actuals by period, including labour cost from resource rates.' },
-  { title: 'Resource management', body: 'Resource requests, capacity heatmaps, bookings and weekly timesheets.' },
-  { title: 'Risk & issues', body: 'Drag-and-drop 5×5 risk matrix, issue tracking and mitigation to closure.' },
-  { title: 'Governance registers', body: 'Change requests, decisions, deliverables, stakeholders and lessons learned.' },
-  { title: 'Status reporting', body: 'Periodic RAG health reports per project, rolled up to an executive dashboard.' },
-  { title: 'Agile delivery', body: 'Buckets, sprints and labels for teams that work iteratively.' },
-  { title: 'Data migration', body: 'Built to receive data from Project Online, MS Project, Project for the Web and Planner.' },
-];
+import Faqs from '../../components/Faqs.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { Image, getImage } from 'astro:assets';
+import gantt from '../../assets/ppm/the-interactive-gantt.png';
+import dashboard from '../../assets/ppm/executive-dashboard.png';
+import kanban from '../../assets/ppm/the-kanban-board.png';
+import finance from '../../assets/ppm/budget-forecast-actual.png';
+import resources from '../../assets/ppm/resource-management-standalone.png';
+import { PPM, capabilities, ladder, migrationSources, ppmFaqs } from '../../data/ppm';
+import { ppmSoftware, faqPage, breadcrumbs } from '../../lib/schema';
 
 const shots = [
-  { src: '/images/ppm/executive-dashboard.png', alt: 'Executive dashboard with portfolio health, cost roll-up and timeline', caption: 'Executive dashboard' },
-  { src: '/images/ppm/the-kanban-board.png', alt: 'Kanban board with task cards in buckets', caption: 'Kanban board' },
-  { src: '/images/ppm/budget-forecast-actual.png', alt: 'Financial grid showing budget, forecast and actual by period', caption: 'Budget, forecast & actuals' },
-  { src: '/images/ppm/resource-management-standalone.png', alt: 'Resource management capacity view', caption: 'Resource management' },
+  { src: dashboard, alt: 'Kaizen PPM executive dashboard with portfolio health, cost roll-up and timeline', caption: 'Executive dashboard' },
+  { src: kanban, alt: 'Kaizen PPM Kanban board with task cards grouped in buckets', caption: 'Kanban board' },
+  { src: finance, alt: 'Kaizen PPM financial grid showing budget, forecast and actuals by period', caption: 'Budget, forecast & actuals' },
+  { src: resources, alt: 'Kaizen PPM resource management capacity view', caption: 'Resource management' },
 ];
-
-const ladder = [
-  { rung: 'Capture', who: 'You, assisted by AI', body: 'Create tasks, risks and status updates from plain language, so there is less typing.' },
-  { rung: 'Surface', who: 'You ask, AI retrieves', body: '“Which of my projects are over budget?” is answered in plain English, security-trimmed to you.' },
-  { rung: 'Interpret', who: 'AI explains, never sets', body: 'Health and slippage are calculated by rules. AI explains them and cites the records behind them.' },
-  { rung: 'Decide', who: 'Always a human', body: 'AI can propose and rank options. A person approves before anything is committed.' },
-];
+const shotUrls = await Promise.all([gantt, ...shots.map((s) => s.src)].map(async (img) => (await getImage({ src: img, format: 'png' })).src));
+const crumbs = [{ name: 'Products', path: '/products/' }, { name: 'Kaizen PPM', path: PPM.path }];
 ---
-<Base title="Kaizen PPM: Project & Portfolio Management on Power Platform" description="Kaizen PPM is project and portfolio management built natively on Microsoft Dataverse, with Gantt, Kanban, financials, resources, risk and Copilot/Cowork-ready AI.">
+<Base
+  title={PPM.seoTitle}
+  description={PPM.metaDescription}
+  markdown="/products/kaizen-ppm.md"
+  schema={[ppmSoftware(PPM.definition, shotUrls), faqPage(ppmFaqs, PPM.path), breadcrumbs(crumbs)]}
+>
   <section class="page-hero">
     <div class="container hero">
       <div>
-        <span class="eyebrow">Kaizen PPM</span>
+        <Breadcrumbs items={crumbs} />
         <h1>Project & portfolio management that lives in your Dataverse</h1>
-        <p class="lead">
-          Take work from idea to proposal, project and portfolio in one Power Platform app. It includes the interactive views
-          PMs expect, the governance PMOs need, and AI that explains instead of guessing.
-        </p>
+        <p class="definition">{PPM.definition}</p>
+        <p class="lead">{PPM.intro}</p>
         <div class="btn-row">
           <a href="/contact/?topic=Kaizen%20PPM%20demo" class="btn btn--primary">Request a demo</a>
           <a href="#capabilities" class="btn btn--ghost">See capabilities</a>
@@ -56,7 +50,7 @@ const ladder = [
   <section class="section">
     <div class="container">
       <figure class="shot big">
-        <img src="/images/ppm/the-interactive-gantt.png" alt="Kaizen PPM Gantt chart with WBS grid, dependencies and milestones" width="1918" height="670" />
+        <Image src={gantt} alt="Kaizen PPM Gantt chart with WBS grid, dependencies and milestones" widths={[800, 1280, 1918]} sizes="(max-width: 1160px) 100vw, 1120px" loading="eager" />
         <figcaption>The interactive Gantt: WBS, dependencies, baselines, drag-to-reschedule and MS Project export.</figcaption>
       </figure>
     </div>
@@ -66,7 +60,8 @@ const ladder = [
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Capabilities</span>
-        <h2>Everything a PMO runs on, in one model</h2>
+        <h2>What does Kaizen PPM include?</h2>
+        <p class="lead">Everything a PMO runs on, in one Dataverse data model.</p>
       </div>
       <div class="grid grid--3">
         {capabilities.map((c) => (
@@ -82,7 +77,7 @@ const ladder = [
       <div class="grid shots">
         {shots.map((s) => (
           <figure class="shot">
-            <img src={s.src} alt={s.alt} loading="lazy" />
+            <Image src={s.src} alt={s.alt} widths={[480, 800, 1200]} sizes="(max-width: 700px) 100vw, 560px" />
             <figcaption>{s.caption}</figcaption>
           </figure>
         ))}
@@ -94,7 +89,7 @@ const ladder = [
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Copilot & Cowork</span>
-        <h2>AI that explains rather than invents</h2>
+        <h2>How does Kaizen PPM use AI?</h2>
         <p>
           Kaizen PPM is being extended with Microsoft Copilot and Cowork. Our rule is simple: AI helps you get data in and
           answers out, and explains the numbers. It never quietly sets a project’s health or makes the call for you.
@@ -120,33 +115,31 @@ const ladder = [
         <p class="lead">Every record in Kaizen PPM can carry its source-system lineage: where it came from, its original ID and when it last synced. Bringing your history across does not mean restructuring later.</p>
       </div>
       <ul class="checklist">
-        <li>Microsoft Project Online</li>
-        <li>Project for the Web & Planner Premium</li>
-        <li>Microsoft Planner</li>
-        <li>Desktop MS Project (XML import & export)</li>
-        <li>Spreadsheets and CSV</li>
+        {migrationSources.map((m) => <li>{m}</li>)}
       </ul>
     </div>
   </section>
+
+  <Faqs faqs={ppmFaqs} title="Kaizen PPM: common questions" />
 
   <CTA title="See Kaizen PPM on your own projects" body="Book a walkthrough. We can load a sample of your real project data so you see how it fits." />
 </Base>
 <style>
   .hero { display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: center; }
+  .definition { font-size: 1.12rem; color: var(--heading); max-width: 62ch; border-left: 3px solid var(--vermilion); padding-left: 16px; }
   .facts { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
   .facts li { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; }
-  .facts strong { display: block; font-family: var(--font-head); font-size: 1.6rem; color: var(--vermilion); }
+  .facts strong { display: block; font-family: var(--font-head); font-size: 1.6rem; color: var(--accent); }
   .facts span { color: var(--muted); font-size: 0.95rem; }
   .shot { margin: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--card); box-shadow: var(--shadow); }
-  .shot img { background: #fff; width: 100%; }
+  .shot :global(img) { background: #fff; width: 100%; height: auto; }
   .shot figcaption { padding: 12px 18px; font-size: 0.9rem; color: var(--muted); border-top: 1px solid var(--line); }
   .shots { grid-template-columns: 1fr 1fr; }
-  @media (max-width: 700px) { .shots { grid-template-columns: 1fr; } }
   .cap { border-top: 2px solid var(--vermilion); padding-top: 18px; }
   .ladder { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .ladder li { background: var(--ink-2); border: 1px solid #2a3650; border-radius: var(--radius); padding: 22px; display: grid; gap: 12px; align-content: start; }
-  .ladder li:last-child { border-color: var(--vermilion); }
-  .rung { width: 34px; height: 34px; border-radius: 50%; background: var(--vermilion); color: #fff; display: grid; place-items: center; font-family: var(--font-head); font-weight: 700; }
+  .ladder li:last-child { border-color: var(--accent); }
+  .rung { width: 34px; height: 34px; border-radius: 50%; background: var(--accent-btn); color: #fff; display: grid; place-items: center; font-family: var(--font-head); font-weight: 700; }
   .ladder h3 { margin: 0; }
   .who { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: #f2a493; }
   .ladder p { margin: 8px 0 0; font-size: 0.95rem; }
@@ -154,5 +147,6 @@ const ladder = [
   .split { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; }
   @media (max-width: 960px) { .ladder { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 860px) { .hero, .split { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) { .shots { grid-template-columns: 1fr; } }
   @media (max-width: 520px) { .ladder { grid-template-columns: 1fr; } }
 </style>

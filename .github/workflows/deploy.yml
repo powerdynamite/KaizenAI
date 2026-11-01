@@ -38,3 +38,21 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Tell Bing / IndexNow-enabled engines (which also feed Copilot and other AI search) about updated URLs.
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit sitemap URLs to IndexNow
+        continue-on-error: true  # e.g. before the custom domain DNS is live
+        env:
+          KEY: 331c1a76e801bbf842f27c7ab8b46845
+          HOST: kaizenai.systems
+        run: |
+          sleep 30
+          URLS=$(curl -fsSL "https://$HOST/sitemap-0.xml" | grep -o '<loc>[^<]*</loc>' | sed 's/<\/\?loc>//g' | jq -R . | jq -s .)
+          jq -n --arg host "$HOST" --arg key "$KEY" --argjson urls "$URLS" \
+            '{host: $host, key: $key, keyLocation: ("https://" + $host + "/" + $key + ".txt"), urlList: $urls}' > body.json
+          curl -sS -o /dev/null -w "IndexNow HTTP %{http_code}\n" -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' --data @body.json || true

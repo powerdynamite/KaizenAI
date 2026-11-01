@@ -3,6 +3,7 @@ title: 'Copilot readiness starts with permissions, not prompts'
 description: 'Microsoft 365 Copilot can see whatever each user can see. Fix oversharing before rollout, or Copilot will surface it for you.'
 date: 2026-10-20
 category: Copilot
+tags: [Microsoft 365 Copilot, Copilot Studio, Cowork, SharePoint, Purview]
 ---
 
 The most common surprise in a Microsoft 365 Copilot rollout has nothing to do with AI. It is **permissions**.

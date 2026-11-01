@@ -1,0 +1,36 @@
+---
+import type { Faq } from '../data/services';
+interface Props { faqs: Faq[]; title?: string; eyebrow?: string }
+const { faqs, title = 'Frequently asked questions', eyebrow = 'FAQ' } = Astro.props;
+---
+<section class="section faq-section" id="faq" aria-labelledby="faq-title">
+  <div class="container faq-wrap">
+    <div>
+      <span class="eyebrow">{eyebrow}</span>
+      <h2 id="faq-title">{title}</h2>
+    </div>
+    <div class="faqs">
+      {faqs.map((f) => (
+        <details>
+          <summary><h3>{f.q}</h3></summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .faq-wrap { display: grid; grid-template-columns: 1fr 1.8fr; gap: 40px; align-items: start; }
+  .faqs { border-top: 1px solid var(--line); }
+  details { border-bottom: 1px solid var(--line); }
+  summary { cursor: pointer; list-style: none; padding: 20px 40px 20px 0; position: relative; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: '+'; position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    font-family: var(--font-head); font-size: 1.5rem; color: var(--accent); line-height: 1;
+  }
+  details[open] summary::after { content: '−'; }
+  summary h3 { margin: 0; font-size: 1.08rem; display: inline; }
+  details p { margin: 0 0 20px; color: var(--muted); max-width: 70ch; }
+  @media (max-width: 860px) { .faq-wrap { grid-template-columns: 1fr; } }
+</style>

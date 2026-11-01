@@ -1,14 +1,29 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { SITE } from '../../config';
+import { ORG_ID, breadcrumbs } from '../../lib/schema';
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const blog = {
+  '@type': 'Blog',
+  '@id': `${SITE.url}/blog/#blog`,
+  name: 'KaizenAI Blog',
+  url: `${SITE.url}/blog/`,
+  publisher: { '@id': ORG_ID },
+  blogPost: posts.map((p) => ({ '@type': 'BlogPosting', headline: p.data.title, url: `${SITE.url}/blog/${p.id}/`, datePublished: p.data.date.toISOString() })),
+};
 ---
-<Base title="Blog" description="Practical notes on Dynamics 365, Power Platform, Copilot, AI agents and DevSecOps from KaizenAI.">
+<Base
+  title="Blog: AI Agents, Copilot, Dynamics 365 & Power Platform"
+  description="Practical, no-hype notes on AI agents, Microsoft 365 Copilot and Cowork, Dynamics 365, Power Platform and DevSecOps from KaizenAI."
+  markdown="/blog.md"
+  schema={[blog, breadcrumbs([{ name: 'Blog', path: '/blog/' }])]}
+>
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">Blog</span>
-      <h1>Notes on Microsoft and AI</h1>
+      <h1>Notes on AI and Microsoft</h1>
       <p class="lead">Practical, no-hype write-ups from our delivery work. <a href="/rss.xml">Subscribe via RSS</a>.</p>
     </div>
   </section>

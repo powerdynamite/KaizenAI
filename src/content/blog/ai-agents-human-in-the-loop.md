@@ -3,6 +3,7 @@ title: 'Useful AI agents keep a human in the loop'
 description: 'A simple four-rung ladder for deciding what an AI agent should be allowed to do on its own, and what it must leave to a person.'
 date: 2026-10-12
 category: Agentic AI
+tags: [AI agents, human in the loop, governance, MCP]
 ---
 
 "Agentic AI" is everywhere, and so are demos of agents doing everything on their own. In real businesses, the agents that last are the ones people **trust**. Trust comes from being clear about what the agent may and may not do.

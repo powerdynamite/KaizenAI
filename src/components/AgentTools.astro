@@ -1,0 +1,41 @@
+---
+// WebMCP (W3C Community Group draft, checked 2026-11): registers a read-only tool
+// that in-browser AI agents can call instead of scraping the page. Browsers
+// without WebMCP ignore this completely; it is a progressive enhancement.
+import { SITE } from '../config';
+import { services } from '../data/services';
+import { PPM } from '../data/ppm';
+
+const overview = {
+  company: SITE.name,
+  description: SITE.description,
+  location: SITE.location,
+  contact: { email: SITE.email, phones: SITE.phones.map((p) => p.display), contactPage: `${SITE.url}/contact/` },
+  services: services.map((s) => ({ name: s.title, summary: s.short, url: `${SITE.url}/services/${s.slug}/`, markdown: `${SITE.url}/services/${s.slug}.md` })),
+  products: [{ name: PPM.name, summary: PPM.definition, url: `${SITE.url}${PPM.path}`, markdown: `${SITE.url}/products/kaizen-ppm.md` }],
+  llmsTxt: `${SITE.url}/llms.txt`,
+};
+---
+<script type="application/json" id="kaizen-agent-overview" set:html={JSON.stringify(overview)} />
+<script>
+  type ToolResult = { content: { type: 'text'; text: string }[] };
+  const mc = (document as any).modelContext ?? (navigator as any).modelContext;
+  if (mc?.registerTool) {
+    const data = document.getElementById('kaizen-agent-overview')?.textContent ?? '{}';
+    try {
+      mc.registerTool({
+        name: 'get_kaizenai_overview',
+        title: 'KaizenAI overview',
+        description:
+          'Returns KaizenAI company facts as JSON: services (with page and Markdown URLs), the Kaizen PPM product, location and contact details.',
+        inputSchema: { type: 'object', properties: {} },
+        annotations: { readOnlyHint: true },
+        async execute(): Promise<ToolResult> {
+          return { content: [{ type: 'text', text: data }] };
+        },
+      });
+    } catch {
+      /* already registered or unsupported: ignore */
+    }
+  }
+</script>

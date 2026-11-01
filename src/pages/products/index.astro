@@ -2,8 +2,9 @@
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import CTA from '../../components/CTA.astro';
+import { breadcrumbs } from '../../lib/schema';
 ---
-<Base title="Products" description="Products from KaizenAI built natively on Microsoft Power Platform and Dataverse.">
+<Base title="Power Platform Products" description="Products from KaizenAI built natively on Microsoft Power Platform and Dataverse, including Kaizen PPM for project and portfolio management." schema={[breadcrumbs([{ name: 'Products', path: '/products/' }])]}>
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">Products</span>

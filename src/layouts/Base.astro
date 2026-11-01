@@ -1,31 +1,44 @@
 ---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/sora';
+import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import soraLatin from '@fontsource-variable/sora/files/sora-latin-wght-normal.woff2?url';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import AgentTools from '../components/AgentTools.astro';
 import { SITE } from '../config';
+import { graph } from '../lib/schema';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
   type?: 'website' | 'article';
+  /** Path of the Markdown version of this page, e.g. '/services/ai-agents.md'. */
+  markdown?: string;
+  /** Extra JSON-LD nodes; Organization and WebSite are always included. */
+  schema?: object[];
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  noindex?: boolean;
 }
-const { title, description = SITE.description, image = '/og-image.png', type = 'website' } = Astro.props;
-const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name}: Microsoft Dynamics 365, Power Platform & Agentic AI`;
+const {
+  title,
+  description = SITE.description,
+  image = '/og-image.png',
+  type = 'website',
+  markdown,
+  schema = [],
+  publishedTime,
+  modifiedTime,
+  noindex = false,
+} = Astro.props;
+
+const fullTitle = title ? (title.includes(SITE.name) ? title : `${title} | ${SITE.name}`) : `${SITE.name}: AI Agents, Copilot & Dynamics 365 Experts`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
-
-const orgLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: SITE.name,
-  url: SITE.url,
-  logo: `${SITE.url}/favicon.svg`,
-  email: SITE.email,
-  telephone: SITE.phones[0].tel,
-  founder: { '@type': 'Person', name: SITE.founder },
-  address: { '@type': 'PostalAddress', addressLocality: 'Lahore', addressRegion: 'Punjab', addressCountry: 'PK' },
-};
+const ld = graph(...schema);
 ---
 <!doctype html>
 <html lang="en">
@@ -34,25 +47,38 @@ const orgLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+    <meta name="author" content={SITE.founder} />
     <link rel="canonical" href={canonical} />
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={soraLatin} as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="application/rss+xml" title="KaizenAI Blog" href="/rss.xml" />
+    {markdown && <link rel="alternate" type="text/markdown" href={markdown} title="Markdown version of this page" />}
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="theme-color" content="#0E1726" />
 
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${SITE.name}: ${SITE.tagline}`} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
-
-    <script type="application/ld+json" set:html={JSON.stringify(orgLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -61,5 +87,6 @@ const orgLd = {
       <slot />
     </main>
     <Footer />
+    <AgentTools />
   </body>
 </html>

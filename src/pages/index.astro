@@ -3,33 +3,28 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import CTA from '../components/CTA.astro';
 import { services } from '../data/services';
+import Faqs from '../components/Faqs.astro';
+import { Image } from 'astro:assets';
+import gantt from '../assets/ppm/the-interactive-gantt.png';
 import { getCollection } from 'astro:content';
+import { homeFaqs } from '../data/faq';
+import { steps, principles } from '../data/home';
+import { faqPage } from '../lib/schema';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
-const steps = [
-  { n: '01', title: 'Discover', body: 'We start from the business problem rather than the licence. We map the process, the data and what "better" would look like in numbers.' },
-  { n: '02', title: 'Build small', body: 'We ship a working slice in weeks so people can use it, and their feedback shapes the next slice.' },
-  { n: '03', title: 'Improve continuously', body: 'Kaizen means change for the better. After go-live we measure, tune and automate a little more each cycle.' },
-];
-
-const principles = [
-  { icon: 'lock', title: 'Your data stays yours', body: 'Solutions live in your own Microsoft 365 and Azure tenant. Nothing is locked into our systems.' },
-  { icon: 'user', title: 'Humans stay in charge', body: 'Our AI agents draft, flag and propose. A person approves anything that matters.' },
-  { icon: 'loop', title: 'Built to be maintained', body: 'Source-controlled solutions, documented decisions and deployment pipelines, not one-off clicks.' },
-];
 ---
-<Base>
+<Base markdown="/index.md" schema={[faqPage(homeFaqs, '/')]}>
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <span class="eyebrow">Microsoft ecosystem · Agentic AI</span>
-        <h1>Better every day, with <span class="hl">Microsoft</span> and <span class="hl">AI</span>.</h1>
+        <span class="eyebrow">AI-first Microsoft consultancy</span>
+        <h1>AI agents and Copilot, built on the <span class="hl">Microsoft</span> stack you already run.</h1>
         <p class="lead">
-          KaizenAI helps organisations run on Dynamics 365 and the Power Platform, put Copilot and AI agents to work,
-          and keep it all on secure, automated cloud foundations.
+          KaizenAI builds AI agents, rolls out Copilot and Cowork, and implements Dynamics 365 and the Power Platform,
+          all on secure Azure foundations. Your business gets a little better every day.
         </p>
         <div class="btn-row">
           <a href="/contact/" class="btn btn--primary">Book a free consultation <Icon name="arrow" size={18} /></a>
@@ -69,8 +64,8 @@ const principles = [
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">What we do</span>
-        <h2>Five practices on one Microsoft foundation</h2>
-        <p class="lead">From CRM to cloud security, every service is built on the same Microsoft stack, so the pieces work together.</p>
+        <h2>AI-led services on one Microsoft foundation</h2>
+        <p class="lead">We lead with AI agents and Copilot, backed by the CRM, low-code and cloud expertise needed to make AI work in practice.</p>
       </div>
       <div class="grid grid--3">
         {services.map((s) => (
@@ -112,7 +107,7 @@ const principles = [
         </div>
       </div>
       <figure class="shot">
-        <img src="/images/ppm/the-interactive-gantt.png" alt="Kaizen PPM interactive Gantt chart with WBS grid, dependencies and milestones" width="1918" height="670" loading="lazy" />
+        <Image src={gantt} alt="Kaizen PPM interactive Gantt chart with WBS grid, dependencies and milestones" widths={[640, 960, 1280]} sizes="(max-width: 900px) 100vw, 600px" />
       </figure>
     </div>
   </section>
@@ -176,6 +171,8 @@ const principles = [
     </section>
   )}
 
+  <Faqs faqs={homeFaqs} title="Questions people ask us" />
+
   <CTA />
 </Base>
 
@@ -183,7 +180,7 @@ const principles = [
   .hero { padding: clamp(48px, 8vw, 104px) 0 clamp(48px, 7vw, 88px); overflow: hidden; }
   .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; }
   .hero .lead { margin-bottom: 30px; }
-  .hl { color: var(--vermilion); }
+  .hl { color: var(--accent); }
   .hero-art { position: relative; color: var(--heading); }
   .hero-art svg { width: 100%; height: auto; }
   .bar { fill: var(--ink-2); }
@@ -195,18 +192,19 @@ const principles = [
     padding: 8px 14px; border-radius: 999px; font-size: 0.85rem; font-weight: 600;
     font-family: var(--font-head); color: var(--heading); white-space: nowrap;
   }
-  .float :global(svg) { color: var(--vermilion); }
+  .float :global(svg) { color: var(--accent); }
+  .shot :global(img) { width: 100%; height: auto; }
   .f1 { top: 6%; left: 0; }
   .f2 { top: 42%; right: -2%; }
   .f3 { bottom: 4%; left: 14%; }
 
-  .card--product { border-color: var(--vermilion); }
+  .card--product { border-color: var(--accent); }
 
   .product { display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: center; }
   .shot { margin: 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: #fff; }
 
   .step { border-top: 2px solid var(--line); padding-top: 22px; }
-  .num { font-family: var(--font-head); font-weight: 700; color: var(--vermilion); font-size: 0.95rem; display: block; margin-bottom: 10px; }
+  .num { font-family: var(--font-head); font-weight: 700; color: var(--accent); font-size: 0.95rem; display: block; margin-bottom: 10px; }
 
   .row-head { max-width: none; display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; }
 

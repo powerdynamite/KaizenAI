@@ -1,7 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import CTA from '../../components/CTA.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection, render } from 'astro:content';
+import { SITE } from '../../config';
+import { ORG_ID, FOUNDER_ID, breadcrumbs } from '../../lib/schema';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -9,16 +12,50 @@ export async function getStaticPaths() {
 }
 const { post } = Astro.props;
 const { Content } = await render(post);
-const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const d = post.data;
+const path = `/blog/${post.id}/`;
+const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
+const minutes = Math.max(1, Math.round(words / 220));
+const fmt = (date: Date) => date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const crumbs = [{ name: 'Blog', path: '/blog/' }, { name: d.title, path }];
+const article = {
+  '@type': 'BlogPosting',
+  '@id': `${SITE.url}${path}#article`,
+  headline: d.title,
+  description: d.description,
+  datePublished: d.date.toISOString(),
+  dateModified: (d.updated ?? d.date).toISOString(),
+  author: { '@id': FOUNDER_ID, '@type': 'Person', name: d.author, url: `${SITE.url}/about/` },
+  publisher: { '@id': ORG_ID },
+  mainEntityOfPage: `${SITE.url}${path}`,
+  image: `${SITE.url}/og-image.png`,
+  articleSection: d.category,
+  keywords: d.tags.join(', ') || undefined,
+  wordCount: words,
+  inLanguage: 'en',
+};
 ---
-<Base title={post.data.title} description={post.data.description} type="article">
+<Base
+  title={d.title}
+  description={d.description}
+  type="article"
+  markdown={`/blog/${post.id}.md`}
+  publishedTime={d.date}
+  modifiedTime={d.updated ?? d.date}
+  schema={[article, breadcrumbs(crumbs)]}
+>
   <article>
     <header class="page-hero">
       <div class="container narrow">
-        <a href="/blog/" class="back">← All articles</a>
-        <span class="badge badge--teal">{post.data.category}</span>
-        <h1 class="title">{post.data.title}</h1>
-        <p class="muted">By {post.data.author} · <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time></p>
+        <Breadcrumbs items={crumbs} />
+        <span class="badge badge--teal">{d.category}</span>
+        <h1 class="title">{d.title}</h1>
+        <p class="muted meta">
+          By <a href="/about/#founder" rel="author">{d.author}</a>, Founder of KaizenAI ·
+          <time datetime={d.date.toISOString()}>{fmt(d.date)}</time>
+          {d.updated && <> · Updated <time datetime={d.updated.toISOString()}>{fmt(d.updated)}</time></>}
+          · {minutes} min read
+        </p>
       </div>
     </header>
     <div class="section">
@@ -29,6 +66,6 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
 </Base>
 <style>
   .narrow { max-width: 780px; }
-  .back { display: block; margin-bottom: 18px; text-decoration: none; font-weight: 500; }
   .title { margin-top: 14px; font-size: clamp(2rem, 4.2vw, 3rem); }
+  .meta a { color: inherit; }
 </style>

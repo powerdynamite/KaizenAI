@@ -3,12 +3,24 @@ import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import CTA from '../../components/CTA.astro';
 import { services } from '../../data/services';
+import { breadcrumbs } from '../../lib/schema';
+import { SITE } from '../../config';
+const list = {
+  '@type': 'ItemList',
+  name: 'KaizenAI services',
+  itemListElement: services.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.url}/services/${s.slug}/`, name: s.title })),
+};
 ---
-<Base title="Services" description="Dynamics 365 CRM, Power Platform, Copilot & Cowork, agentic AI, and Azure infrastructure & DevSecOps services from KaizenAI.">
+<Base
+  title="AI, Copilot, Dynamics 365 & Power Platform Services"
+  description="AI agent development, Microsoft 365 Copilot and Cowork, Dynamics 365 CRM, Power Platform, and Azure infrastructure and DevSecOps services from KaizenAI."
+  markdown="/services.md"
+  schema={[list, breadcrumbs([{ name: 'Services', path: '/services/' }])]}
+>
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">Services</span>
-      <h1>Microsoft and AI services, end to end</h1>
+      <h1>AI and Microsoft services, end to end</h1>
       <p class="lead">Use one practice or combine several. They share the same Dataverse and Azure foundations, so each piece makes the next one easier.</p>
     </div>
   </section>

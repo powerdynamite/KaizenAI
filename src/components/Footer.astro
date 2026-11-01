@@ -11,11 +11,11 @@ const year = new Date().getFullYear();
       <p>{SITE.tagline} Microsoft-ecosystem services and products from {SITE.location}.</p>
     </div>
     <div>
-      <h4>Services</h4>
+      <h2 class="fh">Services</h2>
       <ul>{services.map((s) => <li><a href={`/services/${s.slug}/`}>{s.title}</a></li>)}</ul>
     </div>
     <div>
-      <h4>Company</h4>
+      <h2 class="fh">Company</h2>
       <ul>
         <li><a href="/products/kaizen-ppm/">Kaizen PPM</a></li>
         <li><a href="/about/">About</a></li>
@@ -25,7 +25,7 @@ const year = new Date().getFullYear();
       </ul>
     </div>
     <div>
-      <h4>Get in touch</h4>
+      <h2 class="fh">Get in touch</h2>
       <ul>
         <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
         {SITE.phones.map((p) => <li><a href={`tel:${p.tel}`}>{p.display}</a></li>)}
@@ -42,7 +42,7 @@ const year = new Date().getFullYear();
   .site-footer { background: var(--ink); color: #9aa5b8; padding: 64px 0 28px; font-size: 0.95rem; }
   .cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 36px; }
   .about p { margin-top: 16px; max-width: 34ch; }
-  h4 { color: #f7f5f0; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
+  .fh { color: #f7f5f0; font-size: 0.85rem; font-family: var(--font-head); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
   ul { list-style: none; padding: 0; margin: 0; }
   li { margin-bottom: 8px; overflow-wrap: anywhere; }
   a { color: #c9d1de; text-decoration: none; }

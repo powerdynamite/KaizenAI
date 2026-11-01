@@ -17,18 +17,19 @@ Three ascending steps in a rounded square. Each step is an improvement, and the 
 |---|---|---|
 | Ink | `#0E1726` | Headings, dark sections, logo tile |
 | Vermilion | `#E2492F` | Primary accent, CTAs, the "AI" in the wordmark (torii-gate red) |
-| Vermilion deep | `#C23A22` | Hover states |
+| Accent (text) | `#C23A22` | Links, small red text and button backgrounds: passes WCAG AA 4.5:1 (dark mode: `#F2735C`) |
+| Vermilion deep | `#A8301B` | Hover states |
 | Paper | `#F7F5F0` | Page background (warm off-white, like washi paper) |
 | Muted | `#5B6475` | Body secondary text |
 | Line | `#E4E0D6` | Borders and dividers |
 | Teal | `#1F7A72` | Secondary tags and success states, used sparingly |
 
-Use Vermilion for accents only, never for large blocks of text. It should take up roughly 5–10% of any layout.
+Use Vermilion for shapes and large headlines only. For small text and buttons use the Accent (text) shade, which meets accessibility contrast. It should take up roughly 5–10% of any layout.
 
 ## Typography
 - **Headings:** Sora (600/700), tight letter-spacing (-0.02em)
 - **Body:** Inter (400/500/600)
-- Both are free on Google Fonts.
+- Both are free (SIL OFL) and self-hosted via Fontsource, so there are no third-party requests.
 
 ## Voice
 - Plain English. Short sentences. Concrete outcomes over buzzwords.

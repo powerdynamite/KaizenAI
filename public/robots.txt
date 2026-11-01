@@ -1,4 +1,35 @@
+# robots.txt for kaizenai.systems
+# Policy: KaizenAI wants to be found and cited by search engines and AI assistants.
+# Search, AI answers (grounding/RAG) and model training are all allowed.
+# To opt out of model training later, change the "Model training" group to Disallow: /
+# (AI search and answer engines are separate groups and are unaffected).
+
 User-agent: *
+Allow: /
+
+# AI search and answer engines (decide whether answers can cite this site)
+User-agent: OAI-SearchBot
+User-agent: Claude-SearchBot
+User-agent: PerplexityBot
+User-agent: Applebot
+User-agent: Bingbot
+User-agent: Googlebot
+Allow: /
+
+# User-triggered AI agents (fetch pages when a person asks an assistant)
+User-agent: ChatGPT-User
+User-agent: Claude-User
+User-agent: Perplexity-User
+Allow: /
+
+# Model training crawlers and controls
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Meta-ExternalAgent
+User-agent: cohere-ai
 Allow: /
 
 Sitemap: https://kaizenai.systems/sitemap-index.xml

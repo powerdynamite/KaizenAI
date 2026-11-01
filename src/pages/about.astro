@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import CTA from '../components/CTA.astro';
 import { SITE } from '../config';
+import { founder, breadcrumbs, ORG_ID } from '../lib/schema';
+const aboutPage = { '@type': 'AboutPage', url: `${SITE.url}/about/`, name: 'About KaizenAI', about: { '@id': ORG_ID } };
 
 const values = [
   { title: 'Kaizen: change for the better', body: 'We believe in small, steady improvements that compound, not big-bang projects that never land.' },
@@ -11,7 +13,12 @@ const values = [
   { title: 'AI with a human in charge', body: 'We use AI heavily ourselves, and we design it so a person stays accountable for decisions.' },
 ];
 ---
-<Base title="About" description={`KaizenAI is a Microsoft-ecosystem IT services and product company founded by ${SITE.founder} in ${SITE.location}.`}>
+<Base
+  title="About KaizenAI: AI-First Microsoft Consultancy in Lahore"
+  description={`KaizenAI is an AI-first Microsoft-ecosystem IT services and product company founded by ${SITE.founder} in ${SITE.location}.`}
+  markdown="/about.md"
+  schema={[aboutPage, founder(), breadcrumbs([{ name: 'About', path: '/about/' }])]}
+>
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">About KaizenAI</span>
@@ -38,14 +45,24 @@ const values = [
           “AI” is how we do more of that, faster.
         </p>
       </div>
-      <div class="card founder">
+      <div class="card founder" id="founder">
         <div class="avatar" aria-hidden="true"><Icon name="user" size={30} /></div>
         <h3>{SITE.founder}</h3>
         <p class="muted role">Founder & Principal Consultant</p>
         <p>
-          Abdul works with Dynamics 365, Power Platform and Dataverse, and is the architect behind Kaizen PPM. He
-          founded KaizenAI to bring enterprise-grade Microsoft solutions and practical AI agents to organisations of any size.
+          Abdul is a Power Platform and AI solutions architect with more than six years of remote delivery for Microsoft
+          partners across Europe, Australia and the Middle East. He works across Dynamics 365 CE, Dataverse, Copilot Studio
+          and agentic AI, and is the architect behind Kaizen PPM. He also publishes open-source Power Platform accelerators
+          and Claude Code skills.
         </p>
+        <p class="muted small">BSc Computer Engineering, COMSATS University Islamabad.</p>
+        <ul class="profiles">
+          <li><a href={SITE.founderProfiles.linkedin} rel="me noopener" target="_blank">LinkedIn</a></li>
+          <li><a href={SITE.founderProfiles.github} rel="me noopener" target="_blank">GitHub</a></li>
+          <li><a href={SITE.founderProfiles.youtube} rel="me noopener" target="_blank">YouTube</a></li>
+          <li><a href={SITE.founderProfiles.medium} rel="me noopener" target="_blank">Medium</a></li>
+          <li><a href={SITE.founderProfiles.website} rel="me noopener" target="_blank">Personal site</a></li>
+        </ul>
         <a href="/contact/" class="more">Get in touch →</a>
       </div>
     </div>
@@ -63,8 +80,12 @@ const values = [
 </Base>
 <style>
   .split { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: start; }
-  .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent-soft); color: var(--vermilion); display: grid; place-items: center; margin-bottom: 16px; }
+  .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: 16px; }
   .role { margin-top: -6px; }
-  .founder .more { color: var(--vermilion); font-weight: 600; text-decoration: none; }
+  .small { font-size: 0.9rem; }
+  .profiles { list-style: none; padding: 0; margin: 0 0 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .profiles a { display: inline-block; font-size: 0.85rem; padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; color: var(--heading); }
+  .profiles a:hover { border-color: var(--accent); color: var(--accent); }
+  .founder .more { color: var(--accent); font-weight: 600; text-decoration: none; }
   @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
 </style>

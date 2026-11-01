@@ -22,7 +22,11 @@ npm run build      # outputs to dist/
 | Kaizen PPM page | `src/pages/products/kaizen-ppm.astro` |
 | Blog posts | `src/content/blog/*.md` |
 | Brand colours & fonts | `src/styles/global.css` and `BRAND.md` |
-| Product screenshots | `public/images/ppm/` |
+| Product screenshots | `src/assets/ppm/` (optimised to WebP at build) |
+| Home page content & FAQs | `src/data/home.ts`, `src/data/faq.ts` |
+| Kaizen PPM content & FAQs | `src/data/ppm.ts` |
+| Structured data (JSON-LD) | `src/lib/schema.ts` |
+| Markdown versions & llms.txt | `src/lib/markdown.ts`, `src/pages/*.md.ts`, `src/pages/llms*.txt.ts` |
 
 ### Writing a blog post
 Add a Markdown file to `src/content/blog/`:
@@ -30,9 +34,11 @@ Add a Markdown file to `src/content/blog/`:
 ```md
 ---
 title: 'Your title'
-description: 'One or two sentences for cards and search results.'
+description: 'One or two sentences for cards and search results (under 160 characters).'
 date: 2026-11-15
+updated: 2026-11-20      # optional: set when you revise a post
 category: Power Platform
+tags: [Power Apps, Dataverse]
 draft: false
 ---
 
@@ -40,6 +46,9 @@ Your content…
 ```
 
 The filename becomes the URL (`/blog/<filename>/`). Posts appear on the blog, the home page, the RSS feed and the sitemap automatically.
+
+## SEO & AI discoverability
+See **[SEO.md](SEO.md)** for what's built in and the post-launch checklist.
 
 ## Contact form
 The site is static, so form submissions go to a form service. Until one is configured, the form opens the visitor's email
