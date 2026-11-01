@@ -23,8 +23,13 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - id: pages
+        uses: actions/configure-pages@v5
       - run: npm ci
       - run: npm run build
+      # Before the custom domain is live, Pages serves the site from /<repo>/; rewrite root-relative URLs for that.
+      - name: Adjust links for the Pages base path
+        run: node scripts/rebase-for-subpath.mjs "${{ steps.pages.outputs.base_path }}"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
