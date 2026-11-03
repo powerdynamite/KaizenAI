@@ -44,7 +44,7 @@ const bookTitle = { en: 'Book a free 30-minute call', de: 'Kostenloses 30-Minute
             <span class="label">{bookKicker}</span>
             <p class="book-title">{bookTitle}</p>
             <p class="book-note">{bookNote}</p>
-            <a class="btn" href={SITE.bookingUrl} target="_blank" rel="noopener" data-calendly={SITE.bookingUrl}>{bookLabel} <span class="arr">→</span></a>
+            <a class="btn" href={SITE.bookingUrl} target="_blank" rel="noopener" data-booking={SITE.bookingUrl}>{bookLabel} <span class="arr">→</span></a>
           </div>
         )}
         <div class="item"><h2 class="label">{s.email}</h2><a class="big" dir="ltr" href={`mailto:${SITE.email}`}>{SITE.email}</a></div>
