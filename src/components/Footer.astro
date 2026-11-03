@@ -3,40 +3,46 @@ import Logo from './Logo.astro';
 import Kanji from './Kanji.astro';
 import { SITE } from '../config';
 import { services } from '../data/services';
+import { t, langInfo, type Lang } from '../i18n/strings';
+interface Props { lang?: Lang }
+const { lang = 'en' } = Astro.props;
+const f = t(lang).footer;
+const nav = t(lang).nav;
+const topics = t(lang).form.topics;
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
   <div class="container">
     <div class="top">
       <div class="sign"><Logo size={44} inverse /><p>{SITE.tagline}</p></div>
-      <p class="motto"><Kanji height={22} class="kanji" /> <span>continuous improvement · remote-first, working worldwide</span></p>
+      <p class="motto"><Kanji height={22} class="kanji" /> <span>{f.motto}</span></p>
     </div>
     <div class="grid">
       <div>
-        <h2 class="fh">Services</h2>
-        <ul>{services.map((s) => <li><a href={`/services/${s.slug}/`}>{s.title}</a></li>)}</ul>
+        <h2 class="fh">{f.services}</h2>
+        <ul>{services.map((s, i) => <li><a href={`/services/${s.slug}/`}>{lang === 'en' ? s.title : topics[i]}</a></li>)}</ul>
       </div>
       <div>
-        <h2 class="fh">Studio</h2>
+        <h2 class="fh">{f.studio}</h2>
         <ul>
           <li><a href="/products/kaizen-ppm/">Kaizen PPM</a></li>
-          <li><a href="/experience/">Experience</a></li>
-          <li><a href="/starter-kits/">Starter kits</a></li>
-          <li><a href="/about/">About</a></li>
-          <li><a href="/blog/">Blog</a></li>
-          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/experience/">{nav.experience}</a></li>
+          <li><a href="/starter-kits/">{nav.kits}</a></li>
+          <li><a href="/about/">{nav.about}</a></li>
+          <li><a href="/blog/">{nav.blog}</a></li>
+          <li><a href={langInfo(lang).contact}>{nav.contact}</a></li>
         </ul>
       </div>
       <div>
-        <h2 class="fh">Write or call</h2>
+        <h2 class="fh">{f.write}</h2>
         <ul>
-          <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
-          {SITE.phones.map((p) => <li><a href={`tel:${p.tel}`}>{p.display}</a></li>)}
+          <li><a dir="ltr" href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+          {SITE.phones.map((p) => <li><a dir="ltr" href={`tel:${p.tel}`}>{p.display}</a></li>)}
           {SITE.social.linkedin && <li><a href={SITE.social.linkedin} rel="me noopener" target="_blank">LinkedIn</a></li>}
         </ul>
       </div>
       <div>
-        <h2 class="fh">For AI agents</h2>
+        <h2 class="fh">{f.agents}</h2>
         <ul>
           <li><a href="/llms.txt">llms.txt</a></li>
           <li><a href="/llms-full.txt">llms-full.txt</a></li>
@@ -46,9 +52,9 @@ const year = new Date().getFullYear();
       </div>
     </div>
     <div class="legal">
-      <span>© {year} {SITE.name} · <a href="/privacy/">Privacy</a></span>
-      <span>Set in Sora &amp; Inter. Built with Astro.</span>
-      <span>Microsoft, Dynamics 365, Power Platform and Copilot are trademarks of the Microsoft group of companies.</span>
+      <span>© {year} {SITE.name} · <a href="/privacy/">{f.privacy}</a></span>
+      <span>{f.built}</span>
+      <span>{f.trademark}</span>
     </div>
   </div>
 </footer>

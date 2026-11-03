@@ -1,21 +1,22 @@
 ---
 import { SITE } from '../config';
-interface Props { title?: string; body?: string }
-const {
-  title = 'Have a process that should run itself?',
-  body = 'Tell us what you are trying to fix. You get an honest answer on whether, and how, Microsoft and AI can help, usually within a working day.',
-} = Astro.props;
+import { t, langInfo, type Lang } from '../i18n/strings';
+interface Props { title?: string; body?: string; lang?: Lang }
+const { lang = 'en' } = Astro.props;
+const s = t(lang).cta;
+const { title = s.title, body = s.body } = Astro.props;
+const bookHref = SITE.bookingUrl || langInfo(lang).contact;
 ---
 <section class="section section--tint cta">
   <div class="container split">
-    <span class="label"><b>→</b>Next step</span>
+    <span class="label"><b>→</b>{s.next}</span>
     <div>
       <h2>{title}</h2>
       <p class="lead">{body}</p>
-      <p class="mail"><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+      <p class="mail"><a dir="ltr" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
       <div class="actions">
-        <a href="/contact/" class="btn">Book a free consultation <span class="arr">→</span></a>
-        {SITE.whatsapp && <a href={`https://wa.me/${SITE.whatsapp}`} class="link-arrow" rel="noopener" target="_blank">Or message on WhatsApp</a>}
+        <a href={bookHref} class="btn" target={SITE.bookingUrl ? '_blank' : undefined} rel={SITE.bookingUrl ? 'noopener' : undefined}>{s.button} <span class="arr">→</span></a>
+        {SITE.whatsapp && <a href={`https://wa.me/${SITE.whatsapp}`} class="link-arrow" rel="noopener" target="_blank">{s.whatsapp}</a>}
       </div>
     </div>
   </div>

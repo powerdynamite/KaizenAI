@@ -1,0 +1,148 @@
+---
+// Contact form used by the English, German and Arabic contact pages.
+import { SITE } from '../config';
+import { t, type Lang } from '../i18n/strings';
+interface Props { lang?: Lang }
+const { lang = 'en' } = Astro.props;
+const s = t(lang).form;
+---
+<form
+  id="contact-form"
+  class="form"
+  aria-label="Contact KaizenAI"
+  data-endpoint={SITE.formEndpoint}
+  data-email={SITE.email}
+  data-msg-invalid={s.invalid}
+  data-msg-opening={s.opening}
+  data-msg-sending={s.sending}
+  data-msg-thanks={s.thanks}
+  data-msg-failed={s.failed}
+  data-msg-about={s.aboutPrefix}
+  novalidate
+>
+  <input type="hidden" name="language" value={lang} />
+  <div class="row2">
+    <label>{s.name}<input name="name" required autocomplete="name" /></label>
+    <label>{s.email}<input name="email" type="email" required autocomplete="email" dir="ltr" /></label>
+  </div>
+  <div class="row2">
+    <label>{s.company} <span class="opt">{s.optional}</span><input name="company" autocomplete="organization" /></label>
+    <label>{s.phone} <span class="opt">{s.optional}</span><input name="phone" type="tel" autocomplete="tel" dir="ltr" /></label>
+  </div>
+  <label>{s.topic}
+    <select name="topic" id="topic">
+      {s.topics.map((tp) => <option value={tp}>{tp}</option>)}
+    </select>
+  </label>
+  <label>{s.message}<textarea name="message" rows="7" required placeholder={s.placeholder}></textarea></label>
+  <div class="hp" aria-hidden="true"><label>{s.honeypot}<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
+  <div class="actions">
+    <button class="btn" type="submit">{s.send} <span class="arr">→</span></button>
+    <p class="status" role="status" aria-live="polite"></p>
+  </div>
+</form>
+<style>
+  .form { display: grid; gap: 26px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  label { display: grid; gap: 8px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .opt { font-weight: 400; letter-spacing: 0.04em; text-transform: none; }
+  input, select, textarea {
+    font: 400 1.05rem var(--sans); letter-spacing: normal; text-transform: none; color: var(--heading); background: transparent;
+    border: 0; border-bottom: 1px solid var(--rule-strong); border-radius: 0; padding: 8px 0 10px; width: 100%;
+  }
+  select { appearance: none; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23625e56' stroke-width='1.5'/%3E%3C/svg%3E") right 4px center no-repeat; }
+  :global([dir='rtl']) select { background-position: left 4px center; }
+  textarea { border: 1px solid var(--rule-strong); border-radius: var(--radius); padding: 12px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--vermilion); box-shadow: 0 1px 0 0 var(--vermilion); }
+  textarea:focus { box-shadow: none; outline: 1px solid var(--vermilion); }
+  .hp { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .status { margin: 0; font-size: 0.95rem; }
+  .status.ok { color: var(--teal); }
+  .status.err { color: var(--accent); }
+  @media (max-width: 560px) { .row2 { grid-template-columns: 1fr; } }
+</style>
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  if (form) {
+    const m = form.dataset;
+    const params = new URLSearchParams(location.search);
+    const select = document.getElementById('topic') as HTMLSelectElement | null;
+    const topic = params.get('topic');
+    if (topic && select && [...select.options].some((o) => o.value === topic)) select.value = topic;
+    const about = params.get('about');
+    const msg = form.querySelector<HTMLTextAreaElement>('textarea[name="message"]');
+    if (about && msg && !msg.value) msg.value = `${m.msgAbout} "${about.slice(0, 120)}". `;
+
+    // WebMCP (W3C CG draft): lets an in-browser AI agent fill this form for its user.
+    // The tool only fills the fields. A person still reviews and presses Send.
+    const mc = (document as any).modelContext ?? (navigator as any).modelContext;
+    if (mc?.registerTool) {
+      const topics = select ? [...select.options].map((o) => o.value) : [];
+      try {
+        mc.registerTool({
+          name: 'fill_kaizenai_contact_form',
+          title: 'Fill in the KaizenAI contact form',
+          description: 'Fills in the KaizenAI contact form for the user. It does not send anything: the user reviews the form and presses Send themselves.',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              name: { type: 'string', description: 'Full name' },
+              email: { type: 'string', description: 'Reply email address' },
+              company: { type: 'string', description: 'Company name (optional)' },
+              phone: { type: 'string', description: 'Phone or WhatsApp number (optional)' },
+              topic: { type: 'string', enum: topics, description: 'Enquiry topic' },
+              message: { type: 'string', description: 'What the user wants to achieve' },
+            },
+            required: ['name', 'email', 'message'],
+          },
+          async execute(input: Record<string, string>) {
+            for (const key of ['name', 'email', 'company', 'phone', 'topic', 'message']) {
+              const el = form.elements.namedItem(key) as HTMLInputElement | null;
+              if (el && typeof input[key] === 'string') el.value = input[key];
+            }
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            (form.querySelector('button[type="submit"]') as HTMLButtonElement | null)?.focus();
+            return { content: [{ type: 'text', text: 'The contact form is filled in. Ask the user to review it and press the send button.' }] };
+          },
+        });
+      } catch { /* unsupported */ }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = form.querySelector('.status') as HTMLElement;
+      status.className = 'status';
+      if (!form.checkValidity()) {
+        status.textContent = m.msgInvalid || '';
+        status.classList.add('err');
+        form.reportValidity();
+        return;
+      }
+      const data = new FormData(form);
+      if (data.get('_gotcha')) return; // bot
+      const endpoint = m.endpoint;
+      if (!endpoint) {
+        // No form service configured yet, so fall back to the visitor's email app.
+        const body = `Name: ${data.get('name')}\nEmail: ${data.get('email')}\nCompany: ${data.get('company')}\nPhone: ${data.get('phone')}\nLanguage: ${data.get('language')}\n\n${data.get('message')}`;
+        location.href = `mailto:${m.email}?subject=${encodeURIComponent(`[KaizenAI] ${data.get('topic')}`)}&body=${encodeURIComponent(body)}`;
+        status.textContent = m.msgOpening || '';
+        return;
+      }
+      const btn = form.querySelector('button') as HTMLButtonElement;
+      btn.disabled = true;
+      status.textContent = m.msgSending || '';
+      try {
+        const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        status.textContent = m.msgThanks || '';
+        status.classList.add('ok');
+      } catch {
+        status.textContent = `${m.msgFailed} ${m.email}.`;
+        status.classList.add('err');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+</script>

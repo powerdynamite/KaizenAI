@@ -83,9 +83,9 @@ export const founder = () => ({
   sameAs: Object.values(SITE.founderProfiles),
 });
 
-export const breadcrumbs = (items: { name: string; path: string }[]) => ({
+export const breadcrumbs = (items: { name: string; path: string }[], home = '/') => ({
   '@type': 'BreadcrumbList',
-  itemListElement: [{ name: 'Home', path: '/' }, ...items].map((it, i) => ({
+  itemListElement: [{ name: 'Home', path: home }, ...items].map((it, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     name: it.name,

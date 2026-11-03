@@ -1,7 +1,9 @@
 ---
-interface Props { items: { name: string; path: string }[] }
-const { items } = Astro.props;
-const all = [{ name: 'Home', path: '/' }, ...items];
+import { langInfo, type Lang } from '../i18n/strings';
+interface Props { items: { name: string; path: string }[]; lang?: Lang }
+const { items, lang = 'en' } = Astro.props;
+const homeName = { en: 'Home', de: 'Startseite', ar: 'الرئيسية' }[lang];
+const all = [{ name: homeName, path: langInfo(lang).home }, ...items];
 ---
 <nav aria-label="Breadcrumb" class="crumbs">
   <ol>

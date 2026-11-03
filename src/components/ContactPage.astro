@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import ContactForm from './ContactForm.astro';
+import { SITE } from '../config';
+import { breadcrumbs, ORG_ID } from '../lib/schema';
+import { t, langInfo, type Lang } from '../i18n/strings';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang).contact;
+const path = langInfo(lang).contact;
+const home = langInfo(lang).home;
+const contactPage = { '@type': 'ContactPage', url: `${SITE.url}${path}`, name: s.title, inLanguage: lang, about: { '@id': ORG_ID } };
+const crumbs = [{ name: s.crumb, path }];
+const bookLabel = { en: 'Book a time', de: 'Termin buchen', ar: 'احجزوا موعدًا' }[lang];
+const bookNote = { en: 'Pick a 30-minute slot that suits you.', de: 'Wählen Sie einen passenden 30-Minuten-Termin.', ar: 'اختاروا موعدًا مناسبًا مدته 30 دقيقة.' }[lang];
+const formLabel = { en: 'Or send a message', de: 'Oder schreiben Sie uns', ar: 'أو أرسلوا رسالة' }[lang];
+---
+<Base
+  title={s.title}
+  description={s.description}
+  lang={lang}
+  markdown={lang === 'en' ? '/contact.md' : undefined}
+  schema={[contactPage, breadcrumbs(crumbs, home)]}
+  alternates="contact"
+>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} lang={lang} />
+      <h1>{s.h1}</h1>
+      <p class="lead">{s.lead}</p>
+    </div>
+  </section>
+
+  {SITE.bookingUrl && (
+    <section class="section" id="book">
+      <div class="container split">
+        <div><span class="label"><b>01</b>{bookLabel}</span><p class="side-p">{bookNote}</p></div>
+        <div class="booking">
+          <iframe src={SITE.bookingUrl} title={bookLabel} loading="lazy"></iframe>
+          <p class="muted"><a href={SITE.bookingUrl} target="_blank" rel="noopener">{bookLabel} ↗</a></p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section" id="message">
+    <div class="container layout">
+      <div>
+        {SITE.bookingUrl && <span class="label"><b>02</b>{formLabel}</span>}
+        <ContactForm lang={lang} />
+      </div>
+      <aside class="side" aria-label={s.other}>
+        <div class="item"><h2 class="label">{s.email}</h2><a class="big" dir="ltr" href={`mailto:${SITE.email}`}>{SITE.email}</a></div>
+        <div class="item"><h2 class="label">{s.phone}</h2>{SITE.phones.map((p) => <a class="big" dir="ltr" href={`tel:${p.tel}`}>{p.display}</a>)}</div>
+        {SITE.whatsapp && <div class="item"><h2 class="label">{s.whatsapp}</h2><a class="big" href={`https://wa.me/${SITE.whatsapp}`} rel="noopener" target="_blank">{s.whatsappLink}</a></div>}
+        {SITE.social.linkedin && <div class="item"><h2 class="label">{s.linkedin}</h2><a class="big" href={SITE.social.linkedin} rel="me noopener" target="_blank">{s.linkedinLink}</a></div>}
+        <div class="item"><h2 class="label">{s.how}</h2><p>{s.workMode}<br /><span class="muted">{s.homeBase}: {SITE.location}.</span></p></div>
+      </aside>
+    </div>
+  </section>
+</Base>
+<style>
+  .layout { display: grid; grid-template-columns: 1.6fr 1fr; gap: 64px; align-items: start; }
+  .side { display: grid; gap: 30px; border-top: 1px solid var(--rule-strong); padding-top: 24px; }
+  .item .label { margin-bottom: 6px; }
+  .big { display: block; font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; font-size: 1.25rem; color: var(--heading); text-decoration: none; overflow-wrap: anywhere; line-height: 1.35; }
+  .big:hover { color: var(--accent); text-decoration: underline; }
+  .item p { margin: 0; }
+  .booking iframe { width: 100%; height: 700px; border: 1px solid var(--rule); border-radius: var(--radius); background: #fff; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+</style>

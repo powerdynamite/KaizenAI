@@ -19,7 +19,7 @@ const posts = (await publishedPosts()).slice(0, 3);
 const roman = ['i.', 'ii.', 'iii.'];
 const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 ---
-<Base markdown="/index.md" schema={[faqPage(homeFaqs, '/')]}>
+<Base markdown="/index.md" alternates="home" schema={[faqPage(homeFaqs, '/')]}>
   <section class="hero">
     <div class="container">
       <span class="label">A Microsoft &amp; AI practice · Remote-first, working worldwide</span>

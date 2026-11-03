@@ -9,6 +9,8 @@ import Footer from '../components/Footer.astro';
 import AgentTools from '../components/AgentTools.astro';
 import { SITE } from '../config';
 import { graph } from '../lib/schema';
+import ArabicFont from '../components/ArabicFont.astro';
+import { LANGS, langInfo, t, type Lang } from '../i18n/strings';
 
 interface Props {
   title?: string;
@@ -22,6 +24,9 @@ interface Props {
   publishedTime?: Date;
   modifiedTime?: Date;
   noindex?: boolean;
+  lang?: Lang;
+  /** Hand-translated page family: 'home' or 'contact'. Adds hreflang links. */
+  alternates?: 'home' | 'contact';
 }
 const {
   title,
@@ -33,16 +38,20 @@ const {
   publishedTime,
   modifiedTime,
   noindex = false,
+  lang = 'en',
+  alternates,
 } = Astro.props;
+const L = langInfo(lang);
+const tx = t(lang);
 
 const fullTitle = title ? (title.includes(SITE.name) ? title : `${title} | ${SITE.name}`) : `${SITE.name}: AI Agents, Copilot & Dynamics 365 Experts`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 const ld = graph(...schema);
-const isContact = Astro.url.pathname.startsWith('/contact');
+const isContact = /\/(contact|kontakt)\//.test(Astro.url.pathname);
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang} dir={L.dir}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,12 +69,14 @@ const isContact = Astro.url.pathname.startsWith('/contact');
     <link rel="alternate" type="application/rss+xml" title="KaizenAI Blog" href="/rss.xml" />
     {markdown && <link rel="alternate" type="text/markdown" href={markdown} title="Markdown version of this page" />}
     <link rel="sitemap" href="/sitemap-index.xml" />
+    {alternates && LANGS.map((x) => <link rel="alternate" hreflang={x.code} href={new URL(alternates === 'home' ? x.home : x.contact, Astro.site)} />)}
+    {alternates && <link rel="alternate" hreflang="x-default" href={new URL(alternates === 'home' ? '/' : '/contact/', Astro.site)} />}
     <meta name="theme-color" content="#0E1726" />
     <script is:inline>try{var t=localStorage.getItem('kz-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content={SITE.name} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={{ en: 'en_US', de: 'de_DE', ar: 'ar_AE' }[lang]} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -83,18 +94,22 @@ const isContact = Astro.url.pathname.startsWith('/contact');
     <script type="application/ld+json" set:html={JSON.stringify(ld)} />
   </head>
   <body class:list={{ 'has-cta-bar': !isContact }}>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <Header />
+    {lang === 'ar' && <ArabicFont />}
+    <a class="skip-link" href="#main">{{ en: 'Skip to content', de: 'Zum Inhalt springen', ar: 'انتقل إلى المحتوى' }[lang]}</a>
+    <Header lang={lang} alternates={alternates} />
     <main id="main">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
     {!isContact && (
       <div class="cta-bar" role="complementary" aria-label="Contact KaizenAI">
-        <a href="/contact/" class="btn">Free consultation <span class="arr">→</span></a>
+        <a href={SITE.bookingUrl || L.contact} class="btn" target={SITE.bookingUrl ? '_blank' : undefined} rel={SITE.bookingUrl ? 'noopener' : undefined}>{tx.ctaBar} <span class="arr">→</span></a>
         {SITE.whatsapp && <a class="wa" href={`https://wa.me/${SITE.whatsapp}`} rel="noopener" target="_blank" aria-label="Message KaizenAI on WhatsApp">WhatsApp</a>}
       </div>
     )}
     <AgentTools />
+    {SITE.cloudflareAnalyticsToken && (
+      <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: SITE.cloudflareAnalyticsToken })}></script>
+    )}
   </body>
 </html>

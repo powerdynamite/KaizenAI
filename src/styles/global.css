@@ -230,8 +230,8 @@ img { max-width: 100%; height: auto; display: block; }
 .prose th, .prose td { border-bottom: 1px solid var(--rule); padding: 10px 14px 10px 0; text-align: left; vertical-align: top; }
 .prose th { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom-color: var(--rule-strong); }
 
-.skip-link { position: absolute; left: -9999px; }
-.skip-link:focus { left: 16px; top: 16px; z-index: 100; background: var(--bg); padding: 8px 14px; }
+.skip-link { position: absolute; left: 16px; top: -100px; }
+.skip-link:focus { top: 16px; z-index: 100; background: var(--bg); padding: 8px 14px; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
@@ -249,3 +249,13 @@ img { max-width: 100%; height: auto; display: block; }
   .cta-bar .wa { flex: none; display: inline-flex; align-items: center; padding: 0 16px; border: 1px solid var(--rule-strong); border-radius: var(--radius); color: var(--heading); text-decoration: none; font: 600 0.9rem var(--display); }
   body.has-cta-bar { padding-bottom: 72px; }
 }
+
+/* Arabic (right-to-left) */
+[dir='rtl'] {
+  --display: 'IBM Plex Sans Arabic', 'Sora Variable', system-ui, sans-serif;
+  --sans: 'IBM Plex Sans Arabic', 'Inter Variable', system-ui, sans-serif;
+}
+[dir='rtl'] body { line-height: 1.8; }
+[dir='rtl'] h1, [dir='rtl'] h2, [dir='rtl'] h3 { letter-spacing: 0; line-height: 1.35; }
+[dir='rtl'] .label, [dir='rtl'] label { letter-spacing: 0; }
+[dir='rtl'] .arr, [dir='rtl'] .go { display: inline-block; transform: scaleX(-1); }

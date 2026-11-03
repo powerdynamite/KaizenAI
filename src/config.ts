@@ -22,6 +22,13 @@ export const SITE = {
   // and paste its endpoint, e.g. 'https://formspree.io/f/abcdwxyz'.
   // While empty, the form opens the visitor's email app with the message pre-filled.
   formEndpoint: '',
+  // Online booking page (Cal.com, Calendly, HubSpot Meetings, Google Calendar
+  // appointment schedule…). When set, "Book a free consultation" opens it and the
+  // contact page embeds it. While empty, those buttons go to the contact form.
+  bookingUrl: '',
+  // Cloudflare Web Analytics token (free, no cookies, no consent banner needed).
+  // Create a site at https://dash.cloudflare.com → Analytics & Logs → Web Analytics.
+  cloudflareAnalyticsToken: '',
   // Company profiles (Organization sameAs).
   social: {
     linkedin: 'https://www.linkedin.com/company/kaizenai-systems/',

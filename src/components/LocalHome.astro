@@ -1,0 +1,158 @@
+---
+// German and Arabic home pages. Same editorial layout as the English home,
+// with hand-written copy from src/i18n/home.ts.
+import Base from '../layouts/Base.astro';
+import CTA from './CTA.astro';
+import Faqs from './Faqs.astro';
+import Logo from './Logo.astro';
+import Kanji from './Kanji.astro';
+import { Image } from 'astro:assets';
+import gantt from '../assets/ppm/the-interactive-gantt.png';
+import { HOME } from '../i18n/home';
+import { langInfo } from '../i18n/strings';
+import { faqPage } from '../lib/schema';
+interface Props { lang: 'de' | 'ar' }
+const { lang } = Astro.props;
+const h = HOME[lang];
+const L = langInfo(lang);
+const roman = ['i.', 'ii.', 'iii.'];
+const go = '→'; // mirrored by CSS in right-to-left
+---
+<Base title={h.title} description={h.description} lang={lang} alternates="home" schema={[faqPage(h.faqs, L.home)]}>
+  <section class="hero">
+    <div class="container">
+      <span class="label">{h.eyebrow}</span>
+      <div class="hero-top">
+        <h1>{h.h1[0]}<em>{h.h1[1]}</em></h1>
+        <div class="hero-mark" aria-hidden="true">
+          <Logo variant="open" size={132} wordmark={false} />
+          <Kanji height={26} class="hero-kanji" />
+        </div>
+      </div>
+      <div class="hero-foot">
+        <div>
+          <p class="lead">{h.lead}</p>
+          <div class="actions">
+            <a href={L.contact} class="btn">{h.primary} <span class="arr">{go}</span></a>
+            <a href="#ppm" class="link-arrow">{h.secondary}</a>
+          </div>
+        </div>
+        <dl class="dl index">
+          {h.facts.map(([k, v]) => (<><dt>{k}</dt><dd>{v}</dd></>))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="container split">
+      <div>
+        <span class="label"><b>01</b>{h.servicesLabel}</span>
+        <h2 class="side-h">{h.servicesTitle}</h2>
+        <p class="side-p">{h.servicesNote}</p>
+      </div>
+      <ol class="rows">
+        {h.services.map((s, i) => (
+          <li>
+            <a class="row-link" href={`/services/${s.slug}/`} hreflang="en">
+              <span class="num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="title">{s.title}</span>
+              <span class="desc">{s.short}</span>
+              <span class="go" aria-hidden="true">{go}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--tint" id="ppm">
+    <div class="container">
+      <div class="split">
+        <div>
+          <span class="label"><b>02</b>{h.ppmLabel}</span>
+          <h2 class="side-h" dir="ltr">{h.ppmTitle}</h2>
+        </div>
+        <div>
+          <p class="definition">{h.ppmText}</p>
+          <ul class="points">{h.ppmPoints.map((p) => <li>{p}</li>)}</ul>
+          <div class="actions">
+            <a class="btn" href="/products/kaizen-ppm/" hreflang="en">{h.ppmLink} <span class="arr">{go}</span></a>
+          </div>
+        </div>
+      </div>
+      <figure class="figure product-shot">
+        <Image src={gantt} alt="Kaizen PPM Gantt" widths={[800, 1280, 1918]} sizes="(max-width: 1240px) 100vw, 1144px" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="container split">
+      <div>
+        <span class="label"><b>03</b>{h.workLabel}</span>
+        <h2 class="side-h">{h.workTitle}</h2>
+        <p class="side-note"><a href="/experience/" hreflang="en">{h.workLink} {go}</a></p>
+      </div>
+      <ol class="rows">
+        {h.work.map((u, i) => (
+          <li>
+            <a class="row-link" href={`/experience/#${u.slug}`} hreflang="en">
+              <span class="num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="title">{u.title}</span>
+              <span class="desc">{u.text}</span>
+              <span class="go" aria-hidden="true">{go}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="method">
+    <div class="container split">
+      <div>
+        <span class="label"><b>04</b>{h.methodLabel}</span>
+        <Kanji height={150} vertical class="method-kanji" />
+      </div>
+      <div>
+        <h2>{h.methodTitle}</h2>
+        <div class="cols method">
+          {h.method.map((s, i) => (
+            <div class="col">
+              <span class="n">{roman[i]}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))}
+        </div>
+        <p class="muted note">{h.englishNote}</p>
+      </div>
+    </div>
+  </section>
+
+  <Faqs faqs={h.faqs} title={h.faqTitle} label={lang === 'ar' ? 'أسئلة' : 'FAQ'} />
+
+  <CTA lang={lang} />
+</Base>
+
+<style>
+  .hero { padding: clamp(56px, 9vw, 112px) 0 clamp(56px, 8vw, 96px); position: relative; overflow: hidden; }
+  .hero-top { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: start; }
+  .hero h1 { max-width: 18ch; margin: 0.15em 0 0.6em; font-size: clamp(2.2rem, 5vw, 4.2rem); }
+  :global([dir='rtl']) .hero h1 { line-height: 1.3; }
+  .hero h1 em { color: var(--vermilion); }
+  .hero-mark { display: grid; justify-items: center; gap: 16px; padding-top: 18px; }
+  .hero-mark :global(.hero-kanji) { color: var(--heading); }
+  .hero-foot { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: end; border-top: 1px solid var(--rule-strong); padding-top: 32px; }
+  .hero-foot .lead { margin-bottom: 28px; }
+  .index { align-self: start; }
+  .points { margin: 24px 0 32px; padding-inline-start: 1.2rem; display: grid; gap: 10px; }
+  .product-shot { margin-top: clamp(48px, 7vw, 88px); }
+  :global(.method-kanji) { color: var(--vermilion); display: block; margin: 8px 0 18px; }
+  .method { margin-top: 40px; grid-template-columns: repeat(3, 1fr); }
+  .note { margin-top: 40px; font-size: 0.95rem; }
+  @media (max-width: 1100px) { .hero-mark { display: none; } .hero-top { grid-template-columns: 1fr; } }
+  @media (max-width: 960px) { .hero-foot { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) { .method { grid-template-columns: 1fr; } }
+</style>
