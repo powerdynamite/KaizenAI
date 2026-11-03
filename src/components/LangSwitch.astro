@@ -30,9 +30,9 @@ const items = LANGS.map((x) => {
 </details>
 <style>
   .lang { position: relative; }
-  summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 6px; height: 38px; padding: 0 10px; border: 1px solid var(--rule); border-radius: var(--radius); color: var(--heading); font: 600 0.8rem var(--display); }
+  summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 8px; border: 0; border-radius: var(--radius); color: var(--muted); font: 600 0.8rem var(--display); }
   summary::-webkit-details-marker { display: none; }
-  summary:hover { border-color: var(--rule-strong); }
+  summary:hover, .lang[open] summary { color: var(--heading); background: var(--rule); }
   ul { position: absolute; top: calc(100% + 6px); inset-inline-end: 0; z-index: 70; list-style: none; margin: 0; padding: 6px; min-width: 230px; background: var(--bg); border: 1px solid var(--rule-strong); border-radius: var(--radius); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
   a { display: block; padding: 9px 10px; border-radius: 6px; color: var(--text); text-decoration: none; font-size: 0.93rem; }
   a:hover { background: var(--bg-2); color: var(--accent); }

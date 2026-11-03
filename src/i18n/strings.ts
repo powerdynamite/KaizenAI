@@ -13,7 +13,7 @@ export const LANGS: { code: Lang; name: string; dir: 'ltr' | 'rtl'; home: string
 export const langInfo = (l: Lang) => LANGS.find((x) => x.code === l)!;
 
 const en = {
-  nav: { services: 'Services', ppm: 'Kaizen PPM', experience: 'Experience', kits: 'Starter kits', blog: 'Blog', about: 'About', contact: 'Contact us' },
+  nav: { services: 'Services', ppm: 'Kaizen PPM', experience: 'Our work', kits: 'Starter kits', blog: 'Blog', about: 'About', contact: 'Contact us' },
   menu: 'Menu', close: 'Close',
   toLight: 'Switch to light mode', toDark: 'Switch to dark mode',
   language: 'Language', machine: 'machine translation',

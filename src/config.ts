@@ -48,8 +48,6 @@ export const SITE = {
 export const NAV = [
   { href: '/services/', label: 'Services' },
   { href: '/products/kaizen-ppm/', label: 'Kaizen PPM' },
-  { href: '/experience/', label: 'Experience' },
-  { href: '/starter-kits/', label: 'Starter kits' },
-  { href: '/blog/', label: 'Blog' },
+  { href: '/experience/', label: 'Our work' },
   { href: '/about/', label: 'About' },
 ];
