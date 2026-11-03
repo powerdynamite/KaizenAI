@@ -5,6 +5,7 @@ date: 2026-11-17
 category: "Power Platform"
 tags: ["Dataverse", "ALM", "Solutions", "Dynamics 365"]
 author: "Abdul Basit"
+image: /blog/og/dataverse-solution-import-failures.png
 draft: false
 ---
 

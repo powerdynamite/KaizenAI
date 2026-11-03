@@ -20,6 +20,7 @@ const roman = ['i.', 'ii.', 'iii.', 'iv.', 'v.', 'vi.'];
   title={s.seoTitle}
   description={s.metaDescription}
   markdown={`/services/${s.slug}.md`}
+  image={`/og/services/${s.slug}.png`}
   schema={[serviceNode(s), faqPage(s.faqs, path), breadcrumbs(crumbs)]}
 >
   <section class="page-hero">

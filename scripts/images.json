@@ -1,0 +1,283 @@
+[
+  {
+    "id": "power-automate-expression-mistakes",
+    "kind": "og",
+    "out": "public/blog/og/power-automate-expression-mistakes.png",
+    "eyebrow": "Blog · Power Platform",
+    "title": "Ten Power Automate expression <em>mistakes</em>, and how to fix them",
+    "items": [
+      "Writing Power Fx in a flow",
+      "Double quotes for strings",
+      "body() vs outputs() vs result()",
+      "Not guarding against nulls",
+      "Forgetting time zones in dates"
+    ],
+    "foot": "kaizenai.systems/blog"
+  },
+  {
+    "id": "power-automate-expression-mistakes-linkedin",
+    "kind": "linkedin",
+    "out": "docs/brand/linkedin/posts/2026-11-10-power-automate-expression-mistakes.png",
+    "eyebrow": "Power Automate tips",
+    "title": "Ten expression mistakes that <em>break flows</em>.",
+    "items": [
+      "Writing Power Fx in a flow",
+      "Double quotes for strings",
+      "body() vs outputs() vs result()",
+      "Not guarding against nulls",
+      "Forgetting time zones in dates"
+    ]
+  },
+  {
+    "id": "dataverse-solution-import-failures",
+    "kind": "og",
+    "out": "public/blog/og/dataverse-solution-import-failures.png",
+    "eyebrow": "Blog · Power Platform",
+    "title": "Why managed solution <em>imports fail</em>, and how to unblock them",
+    "items": [
+      "Read the import log, not the banner",
+      "Missing dependencies",
+      "GUIDs that point nowhere",
+      "Publisher prefix mismatches",
+      "Unmanaged layers in the target"
+    ],
+    "foot": "kaizenai.systems/blog"
+  },
+  {
+    "id": "dataverse-solution-import-failures-linkedin",
+    "kind": "linkedin",
+    "out": "docs/brand/linkedin/posts/2026-11-17-dataverse-solution-import-failures.png",
+    "eyebrow": "Power Platform ALM",
+    "title": "Solution import failed? <em>Read the log</em> first.",
+    "items": [
+      "Read the import log, not the banner",
+      "Missing dependencies",
+      "GUIDs that point nowhere",
+      "Publisher prefix mismatches",
+      "Unmanaged layers in the target"
+    ]
+  },
+  {
+    "id": "configuration-driven-form-engine-dataverse",
+    "kind": "og",
+    "out": "public/blog/og/configuration-driven-form-engine-dataverse.png",
+    "eyebrow": "Blog · Dynamics 365",
+    "title": "<em>One script</em> instead of fifty: a configuration-driven form engine",
+    "items": [
+      "Form rules stored as data, not code",
+      "One engine on every form",
+      "Rules cached once per form load",
+      "A small action vocabulary",
+      "Rules move between environments as data"
+    ],
+    "foot": "kaizenai.systems/blog"
+  },
+  {
+    "id": "configuration-driven-form-engine-dataverse-linkedin",
+    "kind": "linkedin",
+    "out": "docs/brand/linkedin/posts/2026-11-24-configuration-driven-form-engine-dataverse.png",
+    "eyebrow": "Dynamics 365 · Dataverse",
+    "title": "<em>One script</em> instead of fifty.",
+    "items": [
+      "Form rules stored as data, not code",
+      "One engine on every form",
+      "Rules cached once per form load",
+      "A small action vocabulary",
+      "Rules move between environments as data"
+    ]
+  },
+  {
+    "id": "power-platform-pipelines-platform-vs-custom-host",
+    "kind": "og",
+    "out": "public/blog/og/power-platform-pipelines-platform-vs-custom-host.png",
+    "eyebrow": "Blog · Infra & DevSecOps",
+    "title": "Power Platform Pipelines: <em>platform host</em> or custom host?",
+    "items": [
+      "The two options, side by side",
+      "How we decide",
+      "Managed Environments",
+      "Setup checklist for a custom host",
+      "When you still want Azure DevOps or GitHub"
+    ],
+    "foot": "kaizenai.systems/blog"
+  },
+  {
+    "id": "power-platform-pipelines-platform-vs-custom-host-linkedin",
+    "kind": "linkedin",
+    "out": "docs/brand/linkedin/posts/2026-12-01-power-platform-pipelines-platform-vs-custom-host.png",
+    "eyebrow": "Power Platform ALM",
+    "title": "Pipelines: <em>platform host</em> or custom host?",
+    "items": [
+      "The two options, side by side",
+      "How we decide",
+      "Managed Environments",
+      "Setup checklist for a custom host",
+      "When you still want Azure DevOps or GitHub"
+    ]
+  },
+  {
+    "id": "debugging-dataverse-security",
+    "kind": "og",
+    "out": "public/blog/og/debugging-dataverse-security.png",
+    "eyebrow": "Blog · Dynamics 365",
+    "title": "Debugging Dataverse security: a <em>systematic</em> routine",
+    "items": [
+      "Read the error properly",
+      "Check the effective roles",
+      "Access level vs business unit",
+      "Record-level access paths",
+      "Field-level security"
+    ],
+    "foot": "kaizenai.systems/blog"
+  },
+  {
+    "id": "debugging-dataverse-security-linkedin",
+    "kind": "linkedin",
+    "out": "docs/brand/linkedin/posts/2026-12-08-debugging-dataverse-security.png",
+    "eyebrow": "Dataverse security",
+    "title": "Access denied? Debug it <em>systematically</em>.",
+    "items": [
+      "Read the error properly",
+      "Check the effective roles",
+      "Access level vs business unit",
+      "Record-level access paths",
+      "Field-level security"
+    ]
+  },
+  {
+    "id": "power-bi-or-microsoft-fabric",
+    "kind": "og",
+    "out": "public/blog/og/power-bi-or-microsoft-fabric.png",
+    "eyebrow": "Blog · Data & Analytics",
+    "title": "Power BI or <em>Microsoft Fabric</em>: which do you actually need?",
+    "items": [
+      "Power BI: reports and semantic models",
+      "Fabric: the data platform underneath",
+      "Fix the semantic model first",
+      "Start Fabric where the pain is",
+      "Then add Copilot on top"
+    ],
+    "foot": "kaizenai.systems/blog"
+  },
+  {
+    "id": "power-bi-or-microsoft-fabric-linkedin",
+    "kind": "linkedin",
+    "out": "docs/brand/linkedin/posts/2026-11-12-power-bi-or-microsoft-fabric.png",
+    "eyebrow": "Data & Analytics",
+    "title": "Fabric is not a newer <em>Power BI</em>.",
+    "items": [
+      "Power BI turns data into reports",
+      "Fabric is the data platform underneath",
+      "Few sources? A good model is often enough",
+      "Many sources or lost history? Fabric",
+      "Fix the model before you add AI"
+    ],
+    "tagline": "Power BI · Microsoft Fabric · Dataverse"
+  },
+  {
+    "id": "service-ai-agents",
+    "kind": "og",
+    "out": "public/og/services/ai-agents.png",
+    "eyebrow": "Service 01",
+    "title": "<em>Agentic AI</em>",
+    "items": [
+      "Agent discovery",
+      "Agent engineering",
+      "Integration",
+      "Evaluation & guardrails"
+    ],
+    "foot": "kaizenai.systems/services",
+    "sub": "Custom AI agents that act in your systems, with guardrails and humans in the loop."
+  },
+  {
+    "id": "service-copilot-cowork",
+    "kind": "og",
+    "out": "public/og/services/copilot-cowork.png",
+    "eyebrow": "Service 02",
+    "title": "<em>Copilot & Cowork</em>",
+    "items": [
+      "Copilot readiness",
+      "Copilot Studio agents",
+      "Cowork enablement",
+      "Copilot in Dynamics 365"
+    ],
+    "foot": "kaizenai.systems/services",
+    "sub": "Make Microsoft 365 Copilot, Copilot Studio and Cowork useful with your own data."
+  },
+  {
+    "id": "service-dynamics-365",
+    "kind": "og",
+    "out": "public/og/services/dynamics-365.png",
+    "eyebrow": "Service 03",
+    "title": "<em>Dynamics 365 CRM</em>",
+    "items": [
+      "Implementation",
+      "Customisation & extension",
+      "Migration",
+      "Health check & rescue"
+    ],
+    "foot": "kaizenai.systems/services",
+    "sub": "Sales, Customer Service and Field Service, built around the way your team works."
+  },
+  {
+    "id": "service-power-platform",
+    "kind": "og",
+    "out": "public/og/services/power-platform.png",
+    "eyebrow": "Service 04",
+    "title": "<em>Power Platform</em>",
+    "items": [
+      "Model-driven & canvas apps",
+      "Power Automate",
+      "Power Pages",
+      "Governance & ALM"
+    ],
+    "foot": "kaizenai.systems/services",
+    "sub": "Apps, automation and portals on Dataverse, governed and built to last."
+  },
+  {
+    "id": "service-data-analytics",
+    "kind": "og",
+    "out": "public/og/services/data-analytics.png",
+    "eyebrow": "Service 05",
+    "title": "<em>Data & Analytics</em>",
+    "items": [
+      "Power BI reports & dashboards",
+      "Semantic models",
+      "Microsoft Fabric",
+      "Dataverse & Dynamics 365 analytics",
+      "AI-ready data"
+    ],
+    "foot": "kaizenai.systems/services",
+    "sub": "Power BI and Microsoft Fabric reporting people trust, ready for Copilot and AI agents."
+  },
+  {
+    "id": "service-systems-integration",
+    "kind": "og",
+    "out": "public/og/services/systems-integration.png",
+    "eyebrow": "Service 06",
+    "title": "<em>Systems Integration</em>",
+    "items": [
+      "CRM and telephony integration",
+      "API and data sync",
+      "Dataverse and Dynamics 365 integration",
+      "Monitoring and resilience"
+    ],
+    "foot": "kaizenai.systems/services",
+    "sub": "Connect CRM, telephony, ERP and line-of-business systems so data flows without re-keying."
+  },
+  {
+    "id": "service-infra-devsecops",
+    "kind": "og",
+    "out": "public/og/services/infra-devsecops.png",
+    "eyebrow": "Service 07",
+    "title": "<em>Infra & DevSecOps</em>",
+    "items": [
+      "Azure landing zones",
+      "Identity & security",
+      "CI/CD & ALM",
+      "DevSecOps"
+    ],
+    "foot": "kaizenai.systems/services",
+    "sub": "Secure Azure foundations and pipelines that ship safely, every time."
+  }
+]

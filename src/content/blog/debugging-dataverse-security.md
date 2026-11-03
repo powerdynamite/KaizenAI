@@ -5,6 +5,7 @@ date: 2026-12-08
 category: "Dynamics 365"
 tags: ["Dataverse", "Security", "Dynamics 365", "Security roles"]
 author: "Abdul Basit"
+image: /blog/og/debugging-dataverse-security.png
 draft: false
 ---
 

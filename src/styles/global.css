@@ -252,8 +252,10 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* Arabic (right-to-left) */
 [dir='rtl'] {
-  --display: 'IBM Plex Sans Arabic', 'Sora Variable', system-ui, sans-serif;
-  --sans: 'IBM Plex Sans Arabic', 'Inter Variable', system-ui, sans-serif;
+  /* Latin glyphs come from Sora/Inter and Arabic glyphs fall through to Plex,
+     so the Latin subset of Plex is never downloaded. */
+  --display: 'Sora Variable', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --sans: 'Inter Variable', 'IBM Plex Sans Arabic', system-ui, sans-serif;
 }
 [dir='rtl'] body { line-height: 1.8; }
 [dir='rtl'] h1, [dir='rtl'] h2, [dir='rtl'] h3 { letter-spacing: 0; line-height: 1.35; }

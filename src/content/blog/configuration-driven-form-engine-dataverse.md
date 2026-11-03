@@ -5,6 +5,7 @@ date: 2026-11-24
 category: "Dynamics 365"
 tags: ["Dataverse", "JavaScript", "Model-driven apps", "Dynamics 365", "Copilot Studio"]
 author: "Abdul Basit"
+image: /blog/og/configuration-driven-form-engine-dataverse.png
 draft: false
 ---
 

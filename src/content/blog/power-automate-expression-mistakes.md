@@ -5,6 +5,7 @@ date: 2026-11-10
 category: "Power Platform"
 tags: ["Power Automate", "Expressions", "Cloud flows", "Dataverse"]
 author: "Abdul Basit"
+image: /blog/og/power-automate-expression-mistakes.png
 draft: false
 ---
 

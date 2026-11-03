@@ -5,6 +5,7 @@ date: 2026-12-01
 category: "Infra & DevSecOps"
 tags: ["Power Platform", "ALM", "Pipelines", "Managed Environments", "DevOps"]
 author: "Abdul Basit"
+image: /blog/og/power-platform-pipelines-platform-vs-custom-host.png
 draft: false
 ---
 

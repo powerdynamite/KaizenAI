@@ -11,6 +11,9 @@ import { SITE } from '../config';
 import { graph } from '../lib/schema';
 import ArabicFont from '../components/ArabicFont.astro';
 import CalendlyPopup from '../components/CalendlyPopup.astro';
+import ar400 from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-400-normal.woff2?url';
+import ar600 from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-600-normal.woff2?url';
+import ar700 from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-700-normal.woff2?url';
 import { LANGS, langInfo, t, type Lang } from '../i18n/strings';
 
 interface Props {
@@ -63,6 +66,7 @@ const isContact = /\/(contact|kontakt)\//.test(Astro.url.pathname);
     <link rel="canonical" href={canonical} />
     <link rel="preload" href={displayLatin} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={sansLatin} as="font" type="font/woff2" crossorigin />
+    {lang === 'ar' && [ar400, ar600, ar700].map((f) => <link rel="preload" href={f} as="font" type="font/woff2" crossorigin />)}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
