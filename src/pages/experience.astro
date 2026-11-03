@@ -69,6 +69,7 @@ const list = {
           </dl>
           <Flow steps={u.flow} title={u.title} />
           <p class="tags">{u.tech.map((t) => <span>{t}</span>)}</p>
+          <a class="link-arrow" href={`/contact/?topic=${encodeURIComponent('Something else')}&about=${encodeURIComponent(u.title)}`}>Want something like this? Talk to us →</a>
         </div>
       </div>
     </section>

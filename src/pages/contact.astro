@@ -110,6 +110,9 @@ const crumbs = [{ name: 'Contact', path: '/contact/' }];
     const match = [...select.options].find((o) => o.value === topic);
     if (match) select.value = topic;
   }
+  const about = params.get('about');
+  const msg = form?.querySelector<HTMLTextAreaElement>('textarea[name="message"]');
+  if (about && msg && !msg.value) msg.value = `I'm interested in something like "${about.slice(0, 120)}". `;
 
   // WebMCP (W3C CG draft): lets an in-browser AI agent fill this form for its user.
   // The tool only fills the fields. A person still reviews and presses Send.
