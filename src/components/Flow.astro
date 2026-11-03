@@ -1,0 +1,34 @@
+---
+// A small left-to-right "how it works" diagram. Stacks vertically on phones.
+interface Props { steps: { label: string; sub?: string; ai?: boolean }[]; title: string }
+const { steps, title } = Astro.props;
+---
+<figure class="flow" aria-label={`How it works: ${title}`}>
+  <ol>
+    {steps.map((s, i) => (
+      <li class:list={{ ai: s.ai }}>
+        <span class="step-n">{i + 1}</span>
+        <strong>{s.label}</strong>
+        {s.sub && <span class="sub">{s.sub}</span>}
+      </li>
+    ))}
+  </ol>
+  <figcaption>How it works</figcaption>
+</figure>
+<style>
+  .flow { margin: 22px 0; }
+  ol { list-style: none; margin: 0; padding: 18px; display: flex; align-items: stretch; gap: 30px; background: var(--bg-2); border: 1px solid var(--rule); border-radius: var(--radius); }
+  li { position: relative; flex: 1 1 0; min-width: 0; padding: 12px 14px; border-radius: 8px; background: var(--bg); border: 1px solid var(--rule); display: grid; gap: 2px; align-content: start; }
+  li + li::before { content: ''; position: absolute; left: -24px; top: 50%; width: 18px; height: 2px; background: var(--muted); }
+  li + li::after { content: ''; position: absolute; left: -10px; top: calc(50% - 4px); border: 5px solid transparent; border-left: 6px solid var(--muted); }
+  li.ai { border-color: var(--vermilion); box-shadow: inset 0 0 0 1px var(--vermilion); }
+  .step-n { font: 700 0.7rem var(--display); color: var(--accent); }
+  strong { font-family: var(--display); font-weight: 600; font-size: 0.95rem; color: var(--heading); line-height: 1.25; overflow-wrap: anywhere; }
+  .sub { font-size: 0.8rem; color: var(--muted); line-height: 1.35; }
+  figcaption { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+  @media (max-width: 760px) {
+    ol { flex-direction: column; gap: 22px; }
+    li + li::before { left: 50%; top: -18px; width: 2px; height: 12px; }
+    li + li::after { left: calc(50% - 4px); top: -8px; border: 5px solid transparent; border-top: 6px solid var(--muted); border-left-color: transparent; }
+  }
+</style>

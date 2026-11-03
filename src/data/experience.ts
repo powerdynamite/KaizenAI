@@ -7,6 +7,8 @@ export interface UseCase {
   problem: string;
   solution: string;
   tech: string[];
+  /** How it works, left to right. `ai` marks the AI step, shown in the accent colour. */
+  flow: { label: string; sub?: string; ai?: boolean }[];
 }
 
 export const experienceIntro =
@@ -21,6 +23,7 @@ export const useCases: UseCase[] = [
     solution:
       'An AI agent in Microsoft Teams checks timesheet status for the current period, sends each person a personalised reminder as an Adaptive Card, reminds approvers about pending approvals, and posts a summary to the team channel. Admins change its schedule, tone and target channel through configuration, without a redeploy.',
     tech: ['Azure OpenAI (tool calling, ReAct loop)', 'Bot Framework', 'Microsoft Graph', 'Dataverse Web API', 'Azure App Service', 'Power Platform environment variables'],
+    flow: [{ label: 'Dataverse', sub: 'Timesheets & approvals' }, { label: 'AI agent', sub: 'Azure OpenAI on App Service', ai: true }, { label: 'Microsoft Teams', sub: 'Adaptive Card reminders' }, { label: 'Team channel', sub: 'Summary post' }],
   },
   {
     slug: 'portfolio-in-plain-language',
@@ -30,6 +33,7 @@ export const useCases: UseCase[] = [
     solution:
       'A Microsoft 365 Copilot Cowork plugin answers questions about project status, portfolio health and resource allocation directly from the PPM data. It shipped as a read-only edition and a read-write trial, and is packaged so it can be rebuilt for a new tenant from parameters.',
     tech: ['Copilot Cowork agent skills', 'Dataverse MCP server', 'OAuth plugin vault', 'Microsoft 365 app packages'],
+    flow: [{ label: 'Question in Cowork', sub: 'Plain language' }, { label: 'Cowork plugin', sub: 'Agent skills', ai: true }, { label: 'Dataverse MCP', sub: 'Server' }, { label: 'PPM data', sub: 'Projects & resources' }],
   },
   {
     slug: 'service-desk-ticket-handling',
@@ -39,6 +43,7 @@ export const useCases: UseCase[] = [
     solution:
       'A custom MCP connector gives Claude and Microsoft 365 Copilot secure, per-user access to Jira Service Management and Jira projects, with a ticket-handling skill for triage, comments and transitions. One server runs locally for desktop use or hosted for Copilot.',
     tech: ['Python MCP server (stdio and Streamable HTTP)', 'Atlassian REST APIs', 'Docker', 'Azure Container Apps', 'Windows Credential Manager'],
+    flow: [{ label: 'Claude or Copilot', sub: 'Agent' , ai: true }, { label: 'Ticket skill', sub: 'Triage & transitions' }, { label: 'MCP connector', sub: 'Local or Container Apps' }, { label: 'Jira Service Mgmt', sub: 'Per-user access' }],
   },
   {
     slug: 'tempo-worklog-export',
@@ -48,6 +53,7 @@ export const useCases: UseCase[] = [
     solution:
       'A Copilot Cowork plugin connects to Tempo’s MCP server with per-user OAuth. Its skill produces worklog reports and exports in the format the ERP import expects.',
     tech: ['Tempo MCP', 'OAuth 2.0', 'Teams Developer Portal', 'Python build tooling'],
+    flow: [{ label: 'Copilot Cowork', sub: 'Request', ai: true }, { label: 'Worklog skill', sub: 'Report & format' }, { label: 'Tempo MCP', sub: 'Per-user OAuth' }, { label: 'ERP import file', sub: 'Ready to load' }],
   },
   {
     slug: 'rovo-to-copilot',
@@ -57,6 +63,7 @@ export const useCases: UseCase[] = [
     solution:
       'A reproducible app package and a published technical investigation of Dynamic Client Registration show the configuration that works and record a test matrix.',
     tech: ['Microsoft 365 Agents Toolkit', 'Dynamic Client Registration (DCR)', 'Enterprise Token Store', 'Docusaurus'],
+    flow: [{ label: 'Atlassian Rovo', sub: 'MCP server' }, { label: 'Dynamic Client Registration', sub: 'OAuth' }, { label: 'Enterprise Token Store', sub: 'Plugin vault' }, { label: 'Copilot Cowork', sub: 'Working connection', ai: true }],
   },
   {
     slug: 'connector-marketplace',
@@ -66,6 +73,7 @@ export const useCases: UseCase[] = [
     solution:
       'An organisation plugin marketplace distributes versioned MCP connectors and skills to every user automatically. A release needs only a version change and is validated before rollout.',
     tech: ['Claude plugins and marketplace', 'GitHub', 'Python validation scripts'],
+    flow: [{ label: 'GitHub', sub: 'Versioned connectors' }, { label: 'Validation', sub: 'Python checks' }, { label: 'Plugin marketplace', sub: 'Organisation-wide' }, { label: 'Every user’s Claude', sub: 'Auto-updated', ai: true }],
   },
   {
     slug: 'entra-id-resource-sync',
@@ -75,6 +83,7 @@ export const useCases: UseCase[] = [
     solution:
       'Automated synchronisation of users and Entra ID group members into bookable resources, delivered as Power Platform solutions, with variants built on standard connectors and on the HTTP connector, plus a forced-sync option.',
     tech: ['Power Automate', 'Microsoft Graph', 'Microsoft Entra ID', 'Dataverse', 'Managed solutions'],
+    flow: [{ label: 'Entra ID groups', sub: 'Users & members' }, { label: 'Microsoft Graph', sub: 'API' }, { label: 'Power Automate', sub: 'Sync flows' }, { label: 'Bookable resources', sub: 'Dataverse' }],
   },
   {
     slug: 'platform-discovery',
@@ -84,6 +93,7 @@ export const useCases: UseCase[] = [
     solution:
       'An automated discovery script inventories tables, fields and relationships and produces a machine-readable baseline for agent and connector design.',
     tech: ['Python', 'Dataverse Web API'],
+    flow: [{ label: 'Dataverse app', sub: 'Existing config' }, { label: 'Discovery script', sub: 'Python + Web API' }, { label: 'Baseline', sub: 'Machine-readable' }, { label: 'Agent design', sub: 'Connectors & skills', ai: true }],
   },
   {
     slug: 'documentation-as-code',
@@ -93,6 +103,7 @@ export const useCases: UseCase[] = [
     solution:
       'Generators build branded Word guides from code for each delivery: client requirements, client setup, admin, deployment and rebuild guides.',
     tech: ['Node.js document generation', 'Python'],
+    flow: [{ label: 'Solution source', sub: 'Code & config' }, { label: 'Generators', sub: 'Node.js & Python' }, { label: 'Branded Word guides', sub: 'Admin, setup, deploy' }],
   },
 ];
 
