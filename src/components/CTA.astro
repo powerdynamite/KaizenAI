@@ -15,7 +15,7 @@ const bookHref = SITE.bookingUrl || langInfo(lang).contact;
       <p class="lead">{body}</p>
       <p class="mail"><a dir="ltr" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
       <div class="actions">
-        <a href={bookHref} class="btn" target={SITE.bookingUrl ? '_blank' : undefined} rel={SITE.bookingUrl ? 'noopener' : undefined}>{s.button} <span class="arr">→</span></a>
+        <a href={bookHref} class="btn" {...(SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-calendly': SITE.bookingUrl } : {})}>{s.button} <span class="arr">→</span></a>
         {SITE.whatsapp && <a href={`https://wa.me/${SITE.whatsapp}`} class="link-arrow" rel="noopener" target="_blank">{s.whatsapp}</a>}
       </div>
     </div>

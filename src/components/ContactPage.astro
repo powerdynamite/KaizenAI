@@ -69,26 +69,3 @@ const bookTitle = { en: 'Book a free 30-minute call', de: 'Kostenloses 30-Minute
   .book-note { margin: 0 0 18px; color: var(--muted); font-size: 0.95rem; }
   @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
 </style>
-<script>
-  // Opens Calendly as a pop-up on the page. Its script loads only on first click.
-  const link = document.querySelector<HTMLAnchorElement>('[data-calendly]');
-  let loading: Promise<void> | null = null;
-  const load = () => loading ??= new Promise<void>((resolve, reject) => {
-    const css = document.createElement('link');
-    css.rel = 'stylesheet'; css.href = 'https://assets.calendly.com/assets/external/widget.css';
-    document.head.appendChild(css);
-    const js = document.createElement('script');
-    js.src = 'https://assets.calendly.com/assets/external/widget.js';
-    js.onload = () => resolve(); js.onerror = () => reject();
-    document.head.appendChild(js);
-  });
-  link?.addEventListener('click', async (e) => {
-    e.preventDefault();
-    try {
-      await load();
-      (window as any).Calendly.initPopupWidget({ url: `${link.dataset.calendly}?hide_gdpr_banner=1` });
-    } catch {
-      window.open(link.href, '_blank', 'noopener');
-    }
-  });
-</script>

@@ -21,7 +21,7 @@ export const SITE = {
   // Contact form endpoint. Create a free form at https://formspree.io (or similar)
   // and paste its endpoint, e.g. 'https://formspree.io/f/abcdwxyz'.
   // While empty, the form opens the visitor's email app with the message pre-filled.
-  formEndpoint: '',
+  formEndpoint: 'https://formspree.io/f/xdeeynkk',
   // Online booking page (Cal.com, Calendly, HubSpot Meetings, Google Calendar
   // appointment schedule…). When set, "Book a free consultation" opens it and the
   // contact page embeds it. While empty, those buttons go to the contact form.

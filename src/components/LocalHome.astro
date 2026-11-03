@@ -11,6 +11,7 @@ import gantt from '../assets/ppm/the-interactive-gantt.png';
 import { HOME } from '../i18n/home';
 import { langInfo } from '../i18n/strings';
 import { faqPage } from '../lib/schema';
+import { SITE } from '../config';
 interface Props { lang: 'de' | 'ar' }
 const { lang } = Astro.props;
 const h = HOME[lang];
@@ -33,7 +34,7 @@ const go = '→'; // mirrored by CSS in right-to-left
         <div>
           <p class="lead">{h.lead}</p>
           <div class="actions">
-            <a href={L.contact} class="btn">{h.primary} <span class="arr">{go}</span></a>
+            <a href={L.contact} class="btn" {...(SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-calendly': SITE.bookingUrl } : {})}>{h.primary} <span class="arr">{go}</span></a>
             <a href="#ppm" class="link-arrow">{h.secondary}</a>
           </div>
         </div>

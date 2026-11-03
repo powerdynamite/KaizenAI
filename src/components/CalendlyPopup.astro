@@ -1,0 +1,28 @@
+---
+// Any link with data-calendly opens the Calendly booking pop-up on the page.
+// Calendly's script loads only on the first click. Without JavaScript, or if
+// the script fails, the link still opens the booking page in a new tab.
+---
+<script>
+  let loading: Promise<void> | null = null;
+  const load = () => loading ??= new Promise<void>((resolve, reject) => {
+    const css = document.createElement('link');
+    css.rel = 'stylesheet'; css.href = 'https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild(css);
+    const js = document.createElement('script');
+    js.src = 'https://assets.calendly.com/assets/external/widget.js';
+    js.onload = () => resolve(); js.onerror = () => { loading = null; reject(); };
+    document.head.appendChild(js);
+  });
+  document.addEventListener('click', async (e) => {
+    const link = (e.target as Element | null)?.closest<HTMLAnchorElement>('a[data-calendly]');
+    if (!link || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    e.preventDefault();
+    try {
+      await load();
+      (window as any).Calendly.initPopupWidget({ url: `${link.dataset.calendly}?hide_gdpr_banner=1` });
+    } catch {
+      window.open(link.href, '_blank', 'noopener');
+    }
+  });
+</script>

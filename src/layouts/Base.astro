@@ -10,6 +10,7 @@ import AgentTools from '../components/AgentTools.astro';
 import { SITE } from '../config';
 import { graph } from '../lib/schema';
 import ArabicFont from '../components/ArabicFont.astro';
+import CalendlyPopup from '../components/CalendlyPopup.astro';
 import { LANGS, langInfo, t, type Lang } from '../i18n/strings';
 
 interface Props {
@@ -103,11 +104,12 @@ const isContact = /\/(contact|kontakt)\//.test(Astro.url.pathname);
     <Footer lang={lang} />
     {!isContact && (
       <div class="cta-bar" role="complementary" aria-label="Contact KaizenAI">
-        <a href={SITE.bookingUrl || L.contact} class="btn" target={SITE.bookingUrl ? '_blank' : undefined} rel={SITE.bookingUrl ? 'noopener' : undefined}>{tx.ctaBar} <span class="arr">→</span></a>
+        <a href={L.contact} class="btn" {...(SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-calendly': SITE.bookingUrl } : {})}>{tx.ctaBar} <span class="arr">→</span></a>
         {SITE.whatsapp && <a class="wa" href={`https://wa.me/${SITE.whatsapp}`} rel="noopener" target="_blank" aria-label="Message KaizenAI on WhatsApp">WhatsApp</a>}
       </div>
     )}
     <AgentTools />
+    {SITE.bookingUrl && <CalendlyPopup />}
     {SITE.cloudflareAnalyticsToken && (
       <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: SITE.cloudflareAnalyticsToken })}></script>
     )}
