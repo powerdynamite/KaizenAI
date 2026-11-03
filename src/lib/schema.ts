@@ -36,7 +36,7 @@ export const organization = () => ({
     'Agentic AI', 'AI agents', 'Model Context Protocol', 'Retrieval-augmented generation',
     'Microsoft 365 Copilot', 'Copilot Studio', 'Copilot Cowork',
     'Microsoft Dynamics 365', 'Dynamics 365 Sales', 'Dynamics 365 Customer Service', 'Dynamics 365 Field Service',
-    'Microsoft Power Platform', 'Power Apps', 'Power Automate', 'Power Pages', 'Power BI', 'Microsoft Dataverse',
+    'Microsoft Power Platform', 'Power Apps', 'Power Automate', 'Power Pages', 'Power BI', 'Microsoft Fabric', 'Data analytics', 'Business intelligence', 'Microsoft Dataverse',
     'Microsoft Azure', 'Microsoft Entra ID', 'DevSecOps', 'Infrastructure as code',
     'Project portfolio management', 'Microsoft Project Online migration',
     'MCP servers', 'Microsoft Teams bots', 'Adaptive Cards', 'Microsoft Graph', 'Azure OpenAI',

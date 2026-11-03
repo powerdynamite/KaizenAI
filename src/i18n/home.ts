@@ -42,7 +42,7 @@ export const HOME: Record<'de' | 'ar', LocalHome> = {
     primary: 'Kostenlose Beratung buchen',
     secondary: 'Kaizen PPM ansehen',
     facts: [
-      ['Leistungen', 'KI-Agenten · Copilot & Cowork · Dynamics 365 CRM · Power Platform · Integration · Azure DevSecOps'],
+      ['Leistungen', 'KI-Agenten · Copilot & Cowork · Dynamics 365 CRM · Power Platform · Power BI & Fabric · Integration · Azure DevSecOps'],
       ['Produkt', 'Kaizen PPM, Projekt- und Portfoliomanagement auf Dataverse'],
       ['Arbeitsweise', 'Remote-first, mit Kunden weltweit'],
       ['Antwort', 'Meist innerhalb eines Werktags'],
@@ -55,6 +55,7 @@ export const HOME: Record<'de' | 'ar', LocalHome> = {
       { slug: 'copilot-cowork', title: 'Copilot & Cowork', short: 'Microsoft 365 Copilot, Copilot Studio und Cowork, die mit Ihren eigenen Daten wirklich nützlich werden.' },
       { slug: 'dynamics-365', title: 'Dynamics 365 CRM', short: 'Sales, Customer Service und Field Service, passend zu der Art, wie Ihr Team arbeitet.' },
       { slug: 'power-platform', title: 'Power Platform', short: 'Apps, Automatisierung und Portale auf Dataverse, gut gesteuert und langlebig gebaut.' },
+      { slug: 'data-analytics', title: 'Daten & Analytics', short: 'Power BI und Microsoft Fabric: Berichte, denen man vertraut, bereit für Copilot und KI-Agenten.' },
       { slug: 'systems-integration', title: 'Systemintegration', short: 'CRM, Telefonie, ERP und Fachanwendungen verbunden, damit Daten nur einmal erfasst werden.' },
       { slug: 'infra-devsecops', title: 'Infrastruktur & DevSecOps', short: 'Sichere Azure-Grundlagen und Pipelines, die zuverlässig ausliefern.' },
     ],
@@ -102,7 +103,7 @@ export const HOME: Record<'de' | 'ar', LocalHome> = {
     primary: 'احجزوا استشارة مجانية',
     secondary: 'تعرّفوا على Kaizen PPM',
     facts: [
-      ['الخدمات', 'وكلاء الذكاء الاصطناعي · Copilot وCowork · Dynamics 365 CRM · Power Platform · تكامل الأنظمة · Azure DevSecOps'],
+      ['الخدمات', 'وكلاء الذكاء الاصطناعي · Copilot وCowork · Dynamics 365 CRM · Power Platform · Power BI وFabric · تكامل الأنظمة · Azure DevSecOps'],
       ['المنتج', 'Kaizen PPM لإدارة المشاريع والمحافظ على Dataverse'],
       ['طريقة العمل', 'عن بُعد مع عملاء حول العالم'],
       ['الرد', 'عادةً خلال يوم عمل واحد'],
@@ -115,6 +116,7 @@ export const HOME: Record<'de' | 'ar', LocalHome> = {
       { slug: 'copilot-cowork', title: 'Copilot وCowork', short: 'نجعل Microsoft 365 Copilot وCopilot Studio وCowork مفيدة فعلًا مع بياناتكم الخاصة.' },
       { slug: 'dynamics-365', title: 'Dynamics 365 CRM', short: 'المبيعات وخدمة العملاء والخدمة الميدانية، مصمّمة حول طريقة عمل فريقكم.' },
       { slug: 'power-platform', title: 'Power Platform', short: 'تطبيقات وأتمتة وبوابات على Dataverse، بحوكمة سليمة وبناء يدوم.' },
+      { slug: 'data-analytics', title: 'البيانات والتحليلات', short: 'تقارير موثوقة على Power BI وMicrosoft Fabric، جاهزة لـ Copilot ووكلاء الذكاء الاصطناعي.' },
       { slug: 'systems-integration', title: 'تكامل الأنظمة', short: 'ربط أنظمة CRM والهاتف وERP والتطبيقات التشغيلية لإدخال البيانات مرة واحدة فقط.' },
       { slug: 'infra-devsecops', title: 'البنية التحتية وDevSecOps', short: 'أسس Azure آمنة وخطوط نشر موثوقة في كل إصدار.' },
     ],
@@ -145,7 +147,7 @@ export const HOME: Record<'de' | 'ar', LocalHome> = {
     ],
     faqTitle: 'أسئلة شائعة',
     faqs: [
-      { q: 'ما الذي تقدّمه KaizenAI؟', a: 'KaizenAI شركة استشارات تركّز على الذكاء الاصطناعي ضمن منظومة Microsoft. نبني وكلاء الذكاء الاصطناعي، ونطلق Microsoft 365 Copilot وCopilot Studio وCowork، وننفّذ Dynamics 365 CRM وPower Platform، ونبني بنية Azure آمنة. كما نطوّر منتج Kaizen PPM.' },
+      { q: 'ما الذي تقدّمه KaizenAI؟', a: 'KaizenAI شركة استشارات تركّز على الذكاء الاصطناعي ضمن منظومة Microsoft. نبني وكلاء الذكاء الاصطناعي، ونطلق Microsoft 365 Copilot وCopilot Studio وCowork، وننفّذ Dynamics 365 CRM وPower Platform وPower BI وMicrosoft Fabric، ونبني بنية Azure آمنة. كما نطوّر منتج Kaizen PPM.' },
       { q: 'هل تعملون مع عملاء في الإمارات والسعودية ودول الخليج؟', a: 'نعم. نعمل عن بُعد مع عملاء حول العالم، وسبق أن عملنا مع شركاء Microsoft في الشرق الأوسط. التواصل باللغة الإنجليزية، ونرحّب بالاستفسارات بالعربية.' },
       { q: 'كيف تستخدمون الذكاء الاصطناعي بأمان؟', a: 'كل وكيل يعمل على بياناتكم الخاصة، ولا يرى إلا ما يحق للمستخدم رؤيته، ويذكر مصادره، ويسجّل إجراءاته، ويطلب موافقة شخص قبل أي خطوة مهمة.' },
       { q: 'هل تبقى بياناتنا داخل بيئتنا؟', a: 'نعم. تعمل حلولنا داخل Microsoft 365 وAzure الخاصين بكم، وتملكون الشيفرة المصدرية والتوثيق.' },

@@ -4,7 +4,7 @@
 import { getCollection } from 'astro:content';
 import { SITE } from '../config';
 import { services, type Faq, type Service } from '../data/services';
-import { PPM, capabilities, ladder, migrationSources, ppmFaqs } from '../data/ppm';
+import { PPM, capabilities, ladder, aiWaves, aiNever, migrationSources, ppmFaqs } from '../data/ppm';
 import { homeFaqs } from '../data/faq';
 import { steps, principles } from '../data/home';
 import { kits, kitSteps, kitFaqs } from '../data/tools';
@@ -105,6 +105,16 @@ Kaizen PPM is being extended with Microsoft Copilot and Cowork. AI helps you get
 ${ladder.map((l, i) => `${i + 1}. **${l.rung}** (${l.who}): ${l.body}`).join('\n')}
 
 AI features are rolling out in waves. Each one is security-trimmed to the user, labelled when AI-assisted, and can be switched off per environment.
+
+## AI roadmap
+
+A direction, not a dated commitment. Wave 0 depends on Microsoft's own release schedule.
+
+${aiWaves.map((w) => `### ${w.wave}: ${w.name} (${w.posture})\n\n${w.items.map((i) => `- ${i}`).join('\n')}`).join('\n\n')}
+
+### What we deliberately will not do
+
+${aiNever.map((n) => `- ${n}`).join('\n')}
 
 ## Leaving Project Online or Planner?
 

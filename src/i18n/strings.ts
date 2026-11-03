@@ -35,11 +35,11 @@ const en = {
     send: 'Send message', invalid: 'Please fill in your name, a valid email and a message.', opening: 'Opening your email app…',
     sending: 'Sending…', thanks: 'Thanks! Your message is on its way. We will reply soon.',
     failed: 'Sorry, that did not send. Please email us at', aboutPrefix: 'I’m interested in something like',
-    topics: ['Agentic AI', 'Copilot & Cowork', 'Dynamics 365 CRM', 'Power Platform', 'Systems Integration', 'Infra & DevSecOps', 'Kaizen PPM demo', 'Something else'],
+    topics: ['Agentic AI', 'Copilot & Cowork', 'Dynamics 365 CRM', 'Power Platform', 'Data & Analytics', 'Systems Integration', 'Infra & DevSecOps', 'Kaizen PPM demo', 'Something else'],
   },
   contact: {
     title: 'Contact KaizenAI: Book a Free Consultation',
-    description: 'Talk to KaizenAI about AI agents, Copilot and Cowork, Dynamics 365, Power Platform, Azure DevSecOps or a Kaizen PPM demo. Remote-first, working with clients worldwide.',
+    description: 'Talk to KaizenAI about AI agents, Copilot and Cowork, Dynamics 365, Power Platform, Power BI and Fabric, Azure DevSecOps or a Kaizen PPM demo. Remote-first, working with clients worldwide.',
     crumb: 'Contact', h1: 'Tell us what you want to improve.',
     lead: 'A few lines are enough. We usually reply within one working day (Pakistan time, UTC+5).',
     email: 'Email', phone: 'Phone', whatsapp: 'WhatsApp', whatsappLink: 'Message us →', linkedin: 'LinkedIn', linkedinLink: 'Follow KaizenAI →',
@@ -72,7 +72,7 @@ const de: Strings = {
     send: 'Nachricht senden', invalid: 'Bitte geben Sie Ihren Namen, eine gültige E-Mail-Adresse und eine Nachricht ein.', opening: 'Ihr E-Mail-Programm wird geöffnet …',
     sending: 'Wird gesendet …', thanks: 'Vielen Dank! Ihre Nachricht ist unterwegs. Wir melden uns bald.',
     failed: 'Leider hat das Senden nicht geklappt. Bitte schreiben Sie uns an', aboutPrefix: 'Ich interessiere mich für etwas wie',
-    topics: ['Agentische KI', 'Copilot & Cowork', 'Dynamics 365 CRM', 'Power Platform', 'Systemintegration', 'Infrastruktur & DevSecOps', 'Kaizen PPM Demo', 'Etwas anderes'],
+    topics: ['Agentische KI', 'Copilot & Cowork', 'Dynamics 365 CRM', 'Power Platform', 'Daten & Analytics', 'Systemintegration', 'Infrastruktur & DevSecOps', 'Kaizen PPM Demo', 'Etwas anderes'],
   },
   contact: {
     title: 'Kontakt zu KaizenAI: Kostenlose Beratung',
@@ -107,7 +107,7 @@ const ar: Strings = {
     send: 'إرسال الرسالة', invalid: 'يرجى إدخال الاسم وبريد إلكتروني صحيح ورسالة.', opening: 'جارٍ فتح تطبيق البريد الإلكتروني…',
     sending: 'جارٍ الإرسال…', thanks: 'شكرًا لكم! تم إرسال رسالتكم وسنرد قريبًا.',
     failed: 'عذرًا، لم يتم الإرسال. يرجى مراسلتنا على', aboutPrefix: 'أنا مهتم بشيء مثل',
-    topics: ['وكلاء الذكاء الاصطناعي', 'Copilot وCowork', 'Dynamics 365 CRM', 'Power Platform', 'تكامل الأنظمة', 'البنية التحتية وDevSecOps', 'عرض Kaizen PPM', 'موضوع آخر'],
+    topics: ['وكلاء الذكاء الاصطناعي', 'Copilot وCowork', 'Dynamics 365 CRM', 'Power Platform', 'البيانات والتحليلات', 'تكامل الأنظمة', 'البنية التحتية وDevSecOps', 'عرض Kaizen PPM', 'موضوع آخر'],
   },
   contact: {
     title: 'تواصل مع KaizenAI: احجز استشارة مجانية',

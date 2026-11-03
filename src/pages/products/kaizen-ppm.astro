@@ -9,7 +9,7 @@ import dashboard from '../../assets/ppm/executive-dashboard.png';
 import kanban from '../../assets/ppm/the-kanban-board.png';
 import finance from '../../assets/ppm/budget-forecast-actual.png';
 import resources from '../../assets/ppm/resource-management-standalone.png';
-import { PPM, capabilities, ladder, migrationSources, ppmFaqs } from '../../data/ppm';
+import { PPM, capabilities, ladder, aiWaves, aiNever, migrationSources, ppmFaqs } from '../../data/ppm';
 import { ppmSoftware, faqPage, breadcrumbs } from '../../lib/schema';
 
 const shots = [
@@ -113,6 +113,35 @@ const crumbs = [{ name: 'Products', path: '/products/' }, { name: 'Kaizen PPM', 
     </div>
   </section>
 
+  <section class="section" id="ai-roadmap">
+    <div class="container split">
+      <div>
+        <span class="label"><b>03b</b>AI roadmap</span>
+        <h2 class="side-h">Where the AI is heading</h2>
+        <p class="side-p">Microsoft’s built-in features first, then what we build, then more autonomy only once it has earned trust.</p>
+        <p class="side-note"><strong>A direction, not a dated promise.</strong>Wave 0 depends on Microsoft’s own release schedule. Want to try it early? <br /><a href="/contact/?topic=Kaizen%20PPM%20demo">Request a demo →</a></p>
+      </div>
+      <div>
+        <ol class="waves">
+          {aiWaves.map((w) => (
+            <li>
+              <div class="wave-head">
+                <span class="wave-n">{w.wave}</span>
+                <h3>{w.name}</h3>
+                <span class="posture">{w.posture}</span>
+              </div>
+              <ul>{w.items.map((it) => <li>{it}</li>)}</ul>
+            </li>
+          ))}
+        </ol>
+        <div class="never">
+          <h3>What we deliberately will not do</h3>
+          <ul>{aiNever.map((n) => <li>{n}</li>)}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container split">
       <div><span class="label"><b>04</b>Migration</span><p class="side-p">Bring your history with you, without restructuring later.</p></div>
@@ -146,6 +175,18 @@ const crumbs = [{ name: 'Products', path: '/products/' }, { name: 'Kaizen PPM', 
   .who { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f2a493 !important; margin: 0 0 10px !important; }
   .note { margin-top: 36px; font-size: 0.92rem; color: #9aa5b8; max-width: 70ch; }
   .sources { margin-top: 24px; font-size: 0.9rem; }
+  .waves { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
+  .waves > li { display: grid; grid-template-columns: 13rem 1fr; gap: 12px 32px; padding: 26px 0; border-bottom: 1px solid var(--rule); }
+  .wave-head { display: grid; align-content: start; gap: 4px; }
+  .wave-n { font-family: var(--display); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+  .wave-head h3 { margin: 0; font-size: 1.4rem; }
+  .posture { font-size: 0.85rem; color: var(--muted); }
+  .waves ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 10px; }
+  .waves ul li { color: var(--text); }
+  .never { margin-top: 40px; padding: 26px 28px; border: 1px solid var(--rule-strong); border-left: 3px solid var(--vermilion); border-radius: var(--radius); }
+  .never h3 { margin: 0 0 12px; font-size: 1.15rem; }
+  .never ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 8px; color: var(--muted); }
+  @media (max-width: 760px) { .waves > li { grid-template-columns: 1fr; } }
   @media (max-width: 1000px) { .ladder { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 860px) { .intro, .caps, .shots { grid-template-columns: 1fr; } .facts { grid-template-columns: 1fr; } }
   @media (max-width: 520px) { .ladder { grid-template-columns: 1fr; } }

@@ -32,6 +32,49 @@ export const ladder = [
   { rung: 'Decide', who: 'Always a human', body: 'AI can propose and rank options. A person approves before anything is committed.' },
 ];
 
+/** Public summary of the AI capability roadmap (a direction, not a dated commitment). */
+export const aiWaves = [
+  {
+    wave: 'Wave 0', name: 'Turn on', posture: 'Configure what Microsoft already ships',
+    items: [
+      'Form fill assistance: drop a charter or proposal on the form and review suggested values instead of retyping them',
+      'Microsoft 365 Copilot chat inside the app, for plain-language questions about your projects',
+      'Kaizen PPM forms inside Copilot chat, so a sponsor can approve a proposal or a lead can post a status update without opening the app',
+    ],
+  },
+  {
+    wave: 'Wave 1', name: 'Assist', posture: 'AI drafts, a person approves',
+    items: [
+      'Status report drafting: a narrative written from what actually changed since the last report, explaining the health ratings the system already calculated',
+      'Portfolio Q&A: “which projects are over budget and slipping?”, answered from live records and trimmed to what you are allowed to see',
+      'Intake triage: spots near-duplicate ideas, suggests a portfolio and flags what a review board will ask for',
+    ],
+  },
+  {
+    wave: 'Wave 2', name: 'Anticipate', posture: 'Flags and suggestions',
+    items: [
+      'Delivery early warning: a ranked watchlist of projects likely to miss date or budget, naming the signals behind each score',
+      'Skills from delivery history: proposes skill updates from the work people have actually done, confirmed by the person',
+      'Estimate assist: a realistic range from how long similar work really took, with the sample size shown',
+    ],
+  },
+  {
+    wave: 'Wave 3', name: 'Act', posture: 'Options a human authorises',
+    items: [
+      'Scenario and replan: “we lose two engineers for six weeks” turned into ranked recovery options with trade-offs',
+      'Portfolio funding advisor: which proposals to fund within budget, capacity and strategic goals, as a recommendation to the board',
+    ],
+  },
+];
+
+export const aiNever = [
+  'AI never sets project health. Health is calculated from schedule, cost and risk data; AI only explains it.',
+  'No agent writes to governance records unattended.',
+  'No general-purpose chatbot without grounding in your own data.',
+  'Your data is never used to train shared models.',
+  'No automated staffing decisions. People decide; the product shows its reasoning.',
+];
+
 export const migrationSources = [
   'Microsoft Project Online',
   'Project for the Web & Planner Premium',

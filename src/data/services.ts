@@ -163,6 +163,43 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: 'data-analytics',
+    title: 'Data & Analytics',
+    short: 'Power BI and Microsoft Fabric reporting people trust, ready for Copilot and AI agents.',
+    seoTitle: 'Power BI & Microsoft Fabric Data Analytics Services',
+    metaDescription:
+      'Power BI reports and semantic models, Microsoft Fabric lakehouses, Dataverse and Dynamics 365 analytics, and data that is ready for Copilot and AI agents, from KaizenAI.',
+    serviceType: 'Data analytics and business intelligence',
+    definition:
+      'Data analytics turns the records in your business systems into numbers people can act on. On Microsoft, that means Power BI for reports and dashboards, and Microsoft Fabric for bringing data from many systems into one governed place.',
+    summary:
+      'Reporting and data platforms on Power BI and Microsoft Fabric. We model the data once, so every report, dashboard and AI agent works from the same definitions, with security that follows each user.',
+    outcomes: [
+      'One agreed version of each number, used across every report',
+      'Reports that refresh themselves instead of being rebuilt in Excel each month',
+      'Data that Copilot and AI agents can answer from, securely',
+    ],
+    offerings: [
+      { title: 'Power BI reports & dashboards', body: 'Executive dashboards, operational reports and paginated reports, designed around the decisions people make.' },
+      { title: 'Semantic models', body: 'Star-schema models with clear measures, row-level security and version control (PBIP/TMDL), so numbers stay consistent.' },
+      { title: 'Microsoft Fabric', body: 'Lakehouses, pipelines and dataflows that bring CRM, ERP, finance and project data together in OneLake.' },
+      { title: 'Dataverse & Dynamics 365 analytics', body: 'Reporting over Dynamics 365 and Power Platform data, including Fabric Link and Synapse Link for Dataverse.' },
+      { title: 'AI-ready data', body: 'Copilot in Power BI and data agents that answer plain-language questions from your governed models.' },
+    ],
+    stack: ['Power BI', 'Microsoft Fabric', 'OneLake', 'Dataverse', 'Power Query', 'DAX', 'Azure SQL', 'Azure Data Factory'],
+    useCases: [
+      { title: 'Portfolio and PMO reporting', body: 'Project, financial and resource dashboards over Dataverse, with row-level security for each business unit.' },
+      { title: 'Platform usage and compliance', body: 'Who uses which apps, tables and data, as a Power BI report that admins and auditors can rely on.' },
+      { title: 'Sales and service insight', body: 'Pipeline, forecast and case performance from Dynamics 365, without manual exports.' },
+    ],
+    faqs: [
+      { q: 'Power BI or Microsoft Fabric: which do we need?', a: 'Power BI is for reports and dashboards. Fabric adds the data platform underneath: lakehouses, pipelines and storage for data from many systems. If your data mostly lives in one or two systems, Power BI alone is often enough. We start there and add Fabric when the data outgrows it.' },
+      { q: 'Can you report on Dynamics 365 and Dataverse data?', a: 'Yes. We connect Power BI to Dataverse directly for smaller volumes, or use Fabric Link or Synapse Link for Dataverse when you need history, large volumes or data joined with other systems.' },
+      { q: 'How does analytics connect to Copilot and AI agents?', a: 'AI answers are only as good as the data model behind them. A clean semantic model with clear measures and security lets Copilot in Power BI and AI agents answer questions correctly, and only show each person what they are allowed to see.' },
+      { q: 'Can you fix our existing reports?', a: 'Yes. We often start by reviewing existing reports, consolidating duplicate models and agreeing the definitions of key numbers, before building anything new.' },
+    ],
+  },
+  {
     slug: 'systems-integration',
     title: 'Systems Integration',
     short: 'Connect CRM, telephony, ERP and line-of-business systems so data flows without re-keying.',
