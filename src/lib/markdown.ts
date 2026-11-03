@@ -220,7 +220,7 @@ export const postMd = (p: Awaited<ReturnType<typeof publishedPosts>>[number]) =>
 By ${p.data.author} · Published ${p.data.date.toISOString().slice(0, 10)}${p.data.updated ? ` · Updated ${p.data.updated.toISOString().slice(0, 10)}` : ''} · Category: ${p.data.category}
 Source: ${u(`/blog/${p.id}/`)}
 
-${(p.body ?? '').trim().replace(/\]\(\//g, `](${SITE.url}/`)}
+${(p.body ?? '').trim().replace(/!\[([^\]]*)\]\(\.\.\/\.\.\/assets\/[^)]+\)/g, (_m, alt) => (p.data.image ? `![${alt}](${SITE.url}${p.data.image})` : '')).replace(/\]\(\//g, `](${SITE.url}/`)}
 `;
 
 export const markdownResponse = (body: string) =>

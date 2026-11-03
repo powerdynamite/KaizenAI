@@ -9,6 +9,8 @@ const blog = defineCollection({
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
+    /** Optional 1200x630 share image in /public, e.g. /blog/og/<slug>.png */
+    image: z.string().optional(),
     category: z.string().default('Insights'),
     author: z.string().default('Abdul Basit'),
     draft: z.boolean().default(false),

@@ -29,7 +29,7 @@ const article = {
   author: { '@id': FOUNDER_ID, '@type': 'Person', name: d.author, url: `${SITE.url}/about/` },
   publisher: { '@id': ORG_ID },
   mainEntityOfPage: `${SITE.url}${path}`,
-  image: `${SITE.url}/og-image.png`,
+  image: `${SITE.url}${d.image ?? '/og-image.png'}`,
   articleSection: d.category,
   keywords: d.tags.join(', ') || undefined,
   wordCount: words,
@@ -40,6 +40,7 @@ const article = {
   title={d.title}
   description={d.description}
   type="article"
+  image={d.image}
   markdown={`/blog/${post.id}.md`}
   publishedTime={d.date}
   modifiedTime={d.updated ?? d.date}

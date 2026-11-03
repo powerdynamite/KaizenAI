@@ -5,6 +5,7 @@ date: 2026-11-03
 category: "Agentic AI"
 tags: ["Claude", "MCP", "AI-assisted development", "Dataverse", "Power Platform"]
 author: "Abdul Basit"
+image: /blog/og/working-with-claude-and-mcp.png
 draft: false
 ---
 
@@ -13,6 +14,8 @@ Most people use an AI assistant like a clever search box: copy a snippet in, cop
 The **Model Context Protocol (MCP)** fixes the plumbing. It is an open standard, introduced by Anthropic, that lets an AI client such as Claude talk to external systems through small "servers" that expose tools and data. Instead of pasting a table definition into the chat, Claude reads it from Dataverse. Instead of summarising a ticket from memory, it opens the ticket.
 
 This post covers how we set that up and, more importantly, the working rules that turn it from a demo into something that raises the quality of our work.
+
+![The five working rules for Claude and MCP: start from the work item, let AI read the real schema before it writes, read freely but a person approves every write, write team conventions once as skills, and ask for evidence, not confidence.](../../assets/blog/claude-mcp-rules.png)
 
 ## What we connect
 
