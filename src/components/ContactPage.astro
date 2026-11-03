@@ -37,7 +37,7 @@ const formLabel = { en: 'Or send a message', de: 'Oder schreiben Sie uns', ar: '
       <div class="container split">
         <div><span class="label"><b>01</b>{bookLabel}</span><p class="side-p">{bookNote}</p></div>
         <div class="booking">
-          <iframe src={SITE.bookingUrl} title={bookLabel} loading="lazy"></iframe>
+          <iframe src={`${SITE.bookingUrl}?embed_domain=kaizenai.systems&embed_type=Inline&hide_gdpr_banner=1`} title={bookLabel} loading="lazy"></iframe>
           <p class="muted"><a href={SITE.bookingUrl} target="_blank" rel="noopener">{bookLabel} ↗</a></p>
         </div>
       </div>
