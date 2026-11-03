@@ -8,6 +8,7 @@ import { PPM, capabilities, ladder, migrationSources, ppmFaqs } from '../data/pp
 import { homeFaqs } from '../data/faq';
 import { steps, principles } from '../data/home';
 import { kits, kitSteps, kitFaqs } from '../data/tools';
+import { useCases, capabilities as techAreas, experienceIntro } from '../data/experience';
 
 const u = (path: string) => `${SITE.url}${path}`;
 const faqMd = (faqs: Faq[]) => faqs.map((f) => `### ${f.q}\n\n${f.a}`).join('\n\n');
@@ -175,6 +176,25 @@ Built with: ${k.stack.join(', ')}.`).join('\n\n')}
 ${faqMd(kitFaqs)}
 
 Plan your version: ${u('/contact/')}
+`;
+
+export const experienceMd = () => `# KaizenAI: experience and delivered use cases
+
+${experienceIntro}
+
+${useCases.map((x) => `## ${x.title}
+
+*${x.area}*
+
+**Problem:** ${x.problem}
+
+**Solution:** ${x.solution}
+
+**Technologies:** ${x.tech.join(', ')}.`).join('\n\n')}
+
+# Technologies we work with
+
+${techAreas.map((c) => `## ${c.area}\n\n${c.items.map((i) => `- ${i}`).join('\n')}`).join('\n\n')}
 `;
 
 export const contactMd = () => `# Contact KaizenAI

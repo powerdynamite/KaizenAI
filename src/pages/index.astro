@@ -12,6 +12,8 @@ import { homeFaqs } from '../data/faq';
 import { steps, principles } from '../data/home';
 import { faqPage } from '../lib/schema';
 import { publishedPosts } from '../lib/markdown';
+import { useCases } from '../data/experience';
+const featured = ['timesheet-compliance-agent', 'portfolio-in-plain-language', 'service-desk-ticket-handling'].map((k) => useCases.find((u) => u.slug === k)!);
 
 const posts = (await publishedPosts()).slice(0, 3);
 const roman = ['i.', 'ii.', 'iii.'];
@@ -132,10 +134,33 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 
     </div>
   </section>
 
+  <section class="section">
+    <div class="container split">
+      <div>
+        <span class="label"><b>04</b>Selected work</span>
+        <h2 class="side-h">Recently delivered</h2>
+        <p class="side-p">AI agents and connectors running in real Microsoft 365, Dataverse and Atlassian environments.</p>
+        <p class="side-note"><a href="/experience/">See all nine use cases →</a></p>
+      </div>
+      <ol class="rows">
+        {featured.map((u, i) => (
+          <li>
+            <a class="row-link work" href={`/experience/#${u.slug}`}>
+              <span class="num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="title">{u.title}</span>
+              <span class="desc">{u.problem}<br /><span class="area">{u.area}</span></span>
+              <span class="go" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
   <section class="section section--ink">
     <div class="container split">
       <div>
-        <span class="label"><b>04</b>Commitments</span>
+        <span class="label"><b>05</b>Commitments</span>
         <h2 class="side-h">What you can hold us to</h2>
         <p class="side-p">The principles behind every engagement.</p>
       </div>
@@ -154,7 +179,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 
     <section class="section">
       <div class="container split">
         <div>
-          <span class="label"><b>05</b>Journal</span>
+          <span class="label"><b>06</b>Journal</span>
           <h2 class="side-h">Notes on AI and Microsoft</h2>
           <a href="/blog/" class="link-arrow">All articles</a>
         </div>
@@ -209,6 +234,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 
   .commit h3 { margin: 0; font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
   .commit p { margin: 0; color: #c9d1de; }
 
+  .work .area { display: inline-block; margin-top: 6px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
   .post .num { white-space: nowrap; }
   .post { grid-template-columns: 7.5rem 1.6fr 0.8fr 2rem; }
 

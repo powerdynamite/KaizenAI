@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro';
+import CTA from '../components/CTA.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { useCases, capabilities, experienceIntro } from '../data/experience';
+import { SITE } from '../config';
+import { breadcrumbs, ORG_ID } from '../lib/schema';
+
+const path = '/experience/';
+const crumbs = [{ name: 'Experience', path }];
+const list = {
+  '@type': 'ItemList',
+  name: 'KaizenAI delivered use cases',
+  itemListElement: useCases.map((u, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'CreativeWork',
+      name: u.title,
+      description: `${u.problem} ${u.solution}`,
+      url: `${SITE.url}${path}#${u.slug}`,
+      creator: { '@id': ORG_ID },
+      keywords: u.tech.join(', '),
+    },
+  })),
+};
+---
+<Base
+  title="Experience: AI Agents, MCP & Copilot Cowork Use Cases"
+  description="Delivered use cases from KaizenAI: AI agents in Teams, Copilot Cowork plugins, custom MCP connectors for Jira and Tempo, Entra ID sync and Dataverse discovery."
+  markdown="/experience.md"
+  schema={[list, breadcrumbs(crumbs)]}
+>
+  <section class="page-hero">
+    <div class="container hero">
+      <div>
+        <Breadcrumbs items={crumbs} />
+        <h1>Work we’ve delivered.</h1>
+        <p class="lead">{experienceIntro}</p>
+        <div class="actions">
+          <a href="/contact/" class="btn">Discuss a similar project <span class="arr">→</span></a>
+          <a href="#technologies" class="link-arrow">Technologies we use</a>
+        </div>
+      </div>
+      <nav class="toc" aria-label="Use cases on this page">
+        <span class="label">Use cases</span>
+        <ol>
+          {useCases.map((u, i) => (
+            <li><a href={`#${u.slug}`}><span>{String(i + 1).padStart(2, '0')}</span>{u.title}</a></li>
+          ))}
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  {useCases.map((u, i) => (
+    <section class="section case" id={u.slug}>
+      <div class="container split">
+        <div>
+          <span class="big-n">{String(i + 1).padStart(2, '0')}</span>
+          <span class="label">{u.area}</span>
+        </div>
+        <div>
+          <h2>{u.title}</h2>
+          <dl class="ps">
+            <div><dt>Problem</dt><dd>{u.problem}</dd></div>
+            <div><dt>Solution</dt><dd>{u.solution}</dd></div>
+          </dl>
+          <p class="tags">{u.tech.map((t) => <span>{t}</span>)}</p>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section section--tint" id="technologies">
+    <div class="container split">
+      <div>
+        <span class="label"><b>→</b>Technologies</span>
+        <h2 class="side-h">What we work with</h2>
+        <p class="side-p">The platforms and techniques behind the work above.</p>
+      </div>
+      <div class="caps">
+        {capabilities.map((c) => (
+          <div class="cap">
+            <h3>{c.area}</h3>
+            <ul>{c.items.map((it) => <li>{it}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA title="Have something similar in mind?" body="Tell us what you want to automate or connect. We’ll tell you honestly how close these patterns get, and what the rest would take." />
+</Base>
+<style>
+  .hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: end; }
+  .hero .lead { margin-bottom: 28px; }
+  .toc { border-top: 1px solid var(--rule-strong); padding-top: 14px; }
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc li { border-bottom: 1px solid var(--rule); }
+  .toc a { display: flex; gap: 14px; align-items: baseline; padding: 9px 0; text-decoration: none; color: var(--heading); font-family: var(--display); font-weight: 600; font-size: 0.93rem; }
+  .toc a span { font-size: 0.75rem; color: var(--accent); font-weight: 700; }
+  .toc a:hover { color: var(--accent); }
+  .big-n { display: block; font-family: var(--display); font-weight: 700; font-size: clamp(2.4rem, 3.6vw, 3.2rem); line-height: 1; color: var(--vermilion); letter-spacing: -0.04em; margin-bottom: 12px; }
+  .case h2 { font-size: clamp(1.4rem, 2.6vw, 2rem); }
+  .ps { margin: 18px 0 20px; display: grid; gap: 0; border-top: 1px solid var(--rule-strong); }
+  .ps div { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .ps dt { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+  .ps dd { margin: 0; }
+  .caps { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 40px; }
+  .cap { border-top: 1px solid var(--rule-strong); padding-top: 14px; min-width: 0; }
+  .cap h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  .cap ul { margin: 0; padding-left: 1.1em; color: var(--muted); font-size: 0.95rem; }
+  .cap li { margin-bottom: 6px; }
+  .cap li::marker { color: var(--vermilion); }
+  @media (max-width: 960px) { .hero { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) { .caps { grid-template-columns: 1fr; } .ps div { grid-template-columns: 1fr; gap: 4px; } }
+</style>

@@ -20,7 +20,7 @@ const isActive = (href: string) => path === href || path.startsWith(href);
   .site-header { background: var(--bg); border-bottom: 1px solid var(--rule); position: relative; z-index: 50; }
   .bar { display: flex; align-items: center; justify-content: space-between; height: 72px; }
   .brand { text-decoration: none; }
-  .nav { display: flex; align-items: center; gap: 30px; }
+  .nav { display: flex; align-items: center; gap: 26px; }
   .nav a:not(.btn) { color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 500; padding: 4px 0; border-bottom: 2px solid transparent; }
   .nav a:not(.btn):hover { color: var(--accent); }
   .nav a[aria-current='page'] { border-bottom-color: var(--vermilion); }
@@ -29,7 +29,7 @@ const isActive = (href: string) => path === href || path.startsWith(href);
     display: none; background: none; border: 1px solid var(--rule-strong); color: var(--heading); border-radius: var(--radius);
     font: 600 0.85rem var(--display); padding: 8px 14px; cursor: pointer;
   }
-  @media (max-width: 860px) {
+  @media (max-width: 1000px) {
     .menu-btn { display: block; }
     .nav {
       position: absolute; top: 72px; left: 0; right: 0; display: none;

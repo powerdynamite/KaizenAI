@@ -47,6 +47,7 @@ export const services: Service[] = [
     ],
     stack: ['Azure AI Foundry', 'Azure OpenAI', 'Claude', 'Model Context Protocol (MCP)', 'Semantic Kernel', 'Copilot Studio', 'Python', 'TypeScript'],
     useCases: [
+      { title: 'Timesheet compliance agent in Teams', body: 'Delivered: an Azure OpenAI agent checks timesheet status, sends each person a personalised Adaptive Card reminder, nudges approvers and posts a channel summary. Schedule and tone change through configuration.' },
       { title: 'Inbox & document triage', body: 'Read incoming emails and attachments, extract data, create records and route exceptions to a person.' },
       { title: 'Sales research agent', body: 'Research prospects and draft personalised outreach for a human to approve.' },
     ],
@@ -82,6 +83,8 @@ export const services: Service[] = [
     ],
     stack: ['Microsoft 365 Copilot', 'Copilot Studio', 'Copilot Cowork', 'Microsoft Purview', 'SharePoint', 'Microsoft Graph'],
     useCases: [
+      { title: 'Ask your project portfolio in plain language', body: 'Delivered: a Copilot Cowork plugin answers questions about project status, portfolio health and resource allocation straight from Dataverse PPM data, through the Dataverse MCP server.' },
+      { title: 'Worklog export from Tempo', body: 'Delivered: a Cowork plugin connects to Tempo’s MCP server with per-user OAuth and exports worklogs in the format the ERP import expects.' },
       { title: 'HR & policy assistant', body: 'Staff ask questions in Teams and get answers that cite the actual policy document.' },
       { title: 'Account briefings', body: 'Cowork pulls CRM, email and meeting history into a briefing before every client call.' },
     ],
@@ -182,9 +185,11 @@ export const services: Service[] = [
       { title: 'Dataverse and Dynamics 365 integration', body: 'Custom APIs, plugins, virtual tables and Power Automate flows that connect Dataverse to the systems around it.' },
       { title: 'Monitoring and resilience', body: 'Health-check endpoints, retries, alerting and telemetry in Azure Monitor, so failures are spotted and fixed before users notice.' },
     ],
-    stack: ['Azure Functions (.NET)', 'Logic Apps', 'Power Automate', 'REST & OData APIs', 'OAuth 2.0', 'Dataverse', 'Azure Monitor / OpenTelemetry'],
+    stack: ['Azure Functions (.NET, Python)', 'Logic Apps', 'Power Automate', 'REST & OData APIs', 'OAuth 2.0', 'Dataverse', 'Microsoft Graph', 'Jira, JSM & Confluence', 'Tempo', 'Azure Monitor / OpenTelemetry'],
     useCases: [
       { title: 'CRM-to-phone-system contact sync', body: 'For a sales and service business, a .NET Azure Function keeps thousands of CRM customer contacts synchronised into a cloud VoIP telephone system twice a day, with a manual trigger for urgent updates. An ID-mapping store prevents duplicates and connection-test endpoints simplify support. Staff see the customer’s name as the phone rings.' },
+      { title: 'AI-assisted service desk on Jira', body: 'Delivered: a custom MCP connector gives Claude and Microsoft 365 Copilot per-user access to Jira Service Management, with a skill for triage, comments and transitions.' },
+      { title: 'Entra ID to business-app sync', body: 'Delivered: Entra ID users and group members synchronised into bookable resources as Power Platform solutions, with a forced-sync option.' },
       { title: 'Order and invoice hand-off', body: 'Won opportunities in CRM create orders in ERP, and invoice status flows back, so sales and finance work from the same facts.' },
     ],
     faqs: [

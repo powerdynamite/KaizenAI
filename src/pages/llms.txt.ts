@@ -29,6 +29,10 @@ ${services.map((s) => `- [${s.title}](${u(`/services/${s.slug}.md`)}): ${s.short
 
 - [${PPM.name}](${u('/products/kaizen-ppm.md')}): ${PPM.definition}
 
+## Experience
+
+- [Delivered use cases and technologies](${u('/experience.md')}): AI agents in Teams, Copilot Cowork plugins, custom MCP connectors for Jira and Tempo, Entra ID sync, Dataverse discovery
+
 ## Starter kits
 
 - [AI-ready starter kits](${u('/starter-kits.md')}): foundations (not finished products) that KaizenAI adapts to each organisation: configurable form engine, Dataverse audit insights, Power Platform governance hub

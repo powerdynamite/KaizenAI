@@ -39,6 +39,8 @@ export const organization = () => ({
     'Microsoft Power Platform', 'Power Apps', 'Power Automate', 'Power Pages', 'Power BI', 'Microsoft Dataverse',
     'Microsoft Azure', 'Microsoft Entra ID', 'DevSecOps', 'Infrastructure as code',
     'Project portfolio management', 'Microsoft Project Online migration',
+    'MCP servers', 'Microsoft Teams bots', 'Adaptive Cards', 'Microsoft Graph', 'Azure OpenAI',
+    'Atlassian Jira', 'Jira Service Management', 'Confluence', 'Tempo', 'Claude Code', 'Copilot Cowork plugins',
   ],
   contactPoint: [{
     '@type': 'ContactPoint',
