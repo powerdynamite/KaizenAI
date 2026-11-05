@@ -10,7 +10,7 @@ import AgentTools from '../components/AgentTools.astro';
 import { SITE } from '../config';
 import { graph } from '../lib/schema';
 import ArabicFont from '../components/ArabicFont.astro';
-import CalendlyPopup from '../components/CalendlyPopup.astro';
+import BookingPopup from '../components/BookingPopup.astro';
 import ar400 from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-400-normal.woff2?url';
 import ar600 from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-600-normal.woff2?url';
 import ar700 from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-700-normal.woff2?url';
@@ -108,12 +108,12 @@ const isContact = /\/(contact|kontakt)\//.test(Astro.url.pathname);
     <Footer lang={lang} />
     {!isContact && (
       <div class="cta-bar" role="complementary" aria-label="Contact KaizenAI">
-        <a href={L.contact} class="btn" {...(SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-calendly': SITE.bookingUrl } : {})}>{tx.ctaBar} <span class="arr">→</span></a>
+        <a href={L.contact} class="btn" {...(SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-booking': SITE.bookingUrl } : {})}>{tx.ctaBar} <span class="arr">→</span></a>
         {SITE.whatsapp && <a class="wa" href={`https://wa.me/${SITE.whatsapp}`} rel="noopener" target="_blank" aria-label="Message KaizenAI on WhatsApp">WhatsApp</a>}
       </div>
     )}
     <AgentTools />
-    {SITE.bookingUrl && <CalendlyPopup />}
+    {SITE.bookingUrl && <BookingPopup />}
     {SITE.cloudflareAnalyticsToken && (
       <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: SITE.cloudflareAnalyticsToken })}></script>
     )}

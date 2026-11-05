@@ -212,7 +212,7 @@ export const contactMd = () => `# Contact KaizenAI
 We usually reply within one working day (Pakistan time, UTC+5).
 
 - Email: ${SITE.email}
-${SITE.phones.map((p) => `- Phone: ${p.display}`).join('\n')}
+${SITE.emails.sales ? `- Sales & proposals: ${SITE.emails.sales}\n` : ''}${SITE.emails.support ? `- Kaizen PPM support: ${SITE.emails.support}\n` : ''}${SITE.emails.careers ? `- Careers: ${SITE.emails.careers}\n` : ''}${SITE.phones.map((p) => `- Phone: ${p.display}`).join('\n')}
 ${SITE.whatsapp ? `- WhatsApp: https://wa.me/${SITE.whatsapp}\n` : ''}- Works: ${SITE.workMode} (home base: ${SITE.location})
 - Contact form: ${u('/contact/')}
 - LinkedIn: ${SITE.social.linkedin}

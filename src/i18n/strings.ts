@@ -42,7 +42,7 @@ const en = {
     description: 'Talk to KaizenAI about AI agents, Copilot and Cowork, Dynamics 365, Power Platform, Power BI and Fabric, Azure DevSecOps or a Kaizen PPM demo. Remote-first, working with clients worldwide.',
     crumb: 'Contact', h1: 'Tell us what you want to improve.',
     lead: 'A few lines are enough. We usually reply within one working day (Pakistan time, UTC+5).',
-    email: 'Email', phone: 'Phone', whatsapp: 'WhatsApp', whatsappLink: 'Message us →', linkedin: 'LinkedIn', linkedinLink: 'Follow KaizenAI →',
+    email: 'Email', moreEmail: 'Specific inboxes', salesEmail: 'Sales & proposals', supportEmail: 'Kaizen PPM support', careersEmail: 'Careers', phone: 'Phone', whatsapp: 'WhatsApp', whatsappLink: 'Message us →', linkedin: 'LinkedIn', linkedinLink: 'Follow KaizenAI →',
     how: 'How we work', workMode: 'Remote-first, working with clients worldwide.', homeBase: 'Home base', other: 'Other ways to reach us',
   },
 };
@@ -79,7 +79,7 @@ const de: Strings = {
     description: 'Sprechen Sie mit KaizenAI über KI-Agenten, Copilot und Cowork, Dynamics 365, Power Platform, Azure DevSecOps oder eine Kaizen PPM Demo. Remote-first, weltweit tätig.',
     crumb: 'Kontakt', h1: 'Erzählen Sie uns, was Sie verbessern möchten.',
     lead: 'Ein paar Zeilen genügen. Wir antworten meist innerhalb eines Werktags (pakistanische Zeit, UTC+5). Gerne auf Deutsch oder Englisch.',
-    email: 'E-Mail', phone: 'Telefon', whatsapp: 'WhatsApp', whatsappLink: 'Nachricht senden →', linkedin: 'LinkedIn', linkedinLink: 'KaizenAI folgen →',
+    email: 'E-Mail', moreEmail: 'Weitere Postfächer', salesEmail: 'Vertrieb & Angebote', supportEmail: 'Kaizen PPM Support', careersEmail: 'Karriere', phone: 'Telefon', whatsapp: 'WhatsApp', whatsappLink: 'Nachricht senden →', linkedin: 'LinkedIn', linkedinLink: 'KaizenAI folgen →',
     how: 'So arbeiten wir', workMode: 'Remote-first, mit Kunden weltweit.', homeBase: 'Standort', other: 'Weitere Kontaktmöglichkeiten',
   },
 };
@@ -114,7 +114,7 @@ const ar: Strings = {
     description: 'تحدثوا مع KaizenAI عن وكلاء الذكاء الاصطناعي وCopilot وCowork وDynamics 365 وPower Platform وAzure DevSecOps أو عرض Kaizen PPM. نعمل عن بُعد مع عملاء حول العالم.',
     crumb: 'تواصل معنا', h1: 'أخبرونا بما تريدون تحسينه.',
     lead: 'بضعة أسطر تكفي. نرد عادةً خلال يوم عمل واحد (بتوقيت باكستان، UTC+5). يمكنكم الكتابة بالعربية أو الإنجليزية.',
-    email: 'البريد الإلكتروني', phone: 'الهاتف', whatsapp: 'واتساب', whatsappLink: '← راسلونا', linkedin: 'LinkedIn', linkedinLink: '← تابعوا KaizenAI',
+    email: 'البريد الإلكتروني', moreEmail: 'صناديق بريد مخصصة', salesEmail: 'المبيعات والعروض', supportEmail: 'دعم Kaizen PPM', careersEmail: 'الوظائف', phone: 'الهاتف', whatsapp: 'واتساب', whatsappLink: '← راسلونا', linkedin: 'LinkedIn', linkedinLink: '← تابعوا KaizenAI',
     how: 'طريقة عملنا', workMode: 'نعمل عن بُعد مع عملاء حول العالم.', homeBase: 'المقر', other: 'طرق أخرى للتواصل',
   },
 };

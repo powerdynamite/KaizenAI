@@ -12,26 +12,30 @@ export const SITE = {
   location: 'Lahore, Punjab, Pakistan',
   workMode: 'Remote-first, working with clients worldwide',
   email: 'writeus@kaizenai.systems',
+  // Topic inboxes (aliases of the same Microsoft 365 mailbox). Set one to '' to hide it.
+  emails: {
+    sales: 'sales@kaizenai.systems',
+    support: 'support@kaizenai.systems',
+    careers: 'careers@kaizenai.systems',
+    privacy: 'privacy@kaizenai.systems',
+  },
   phones: [
     { display: '+92 311 4095179', tel: '+923114095179' },
     { display: '+92 340 4949027', tel: '+923404949027' },
   ],
   // WhatsApp number (digits only, international format). Set to '' to hide.
   whatsapp: '923114095179',
-  // Contact form endpoint. Create a free form at https://formspree.io (or similar)
-  // and paste its endpoint, e.g. 'https://formspree.io/f/abcdwxyz'.
-  // While empty, the form opens the visitor's email app with the message pre-filled.
-  formEndpoint: 'https://formspree.io/f/xdeeynkk',
-  // HubSpot (free CRM). Each contact-form submission is also sent to this HubSpot
-  // form, so the visitor becomes a contact in HubSpot. It uses HubSpot's form
-  // submission API only: no HubSpot tracking script and no cookies on the site.
-  // formId is the form's ID from HubSpot (Marketing → Forms → the form → its URL).
-  // While formId is empty, nothing is sent to HubSpot.
+  // HubSpot (free CRM). Contact-form submissions go straight to this HubSpot form,
+  // so every enquiry becomes a HubSpot contact and HubSpot emails you a notification.
+  // It uses HubSpot's form submission API only: no HubSpot tracking script and no
+  // cookies on the site. formId is the form's ID (Marketing → Forms → the form → its URL).
+  // While formId is empty, the form opens the visitor's email app with the message pre-filled.
   hubspot: { portalId: '247880968', formId: 'c6de117d-8d27-4998-ba80-9a34f4e372f6' },
-  // Online booking page (Cal.com, Calendly, HubSpot Meetings, Google Calendar
-  // appointment schedule…). When set, "Book a free consultation" opens it and the
-  // contact page embeds it. While empty, those buttons go to the contact form.
-  bookingUrl: 'https://calendly.com/mrabdulbasit1999/new-meeting',
+  // HubSpot Meetings link (Sales → Meetings → your link → Copy link), e.g.
+  // 'https://meetings-na2.hubspot.com/your-name'. When set, every "Book a free
+  // consultation" button opens it in a pop-up and the contact page shows a booking
+  // tile. While empty, those buttons go to the contact form.
+  bookingUrl: '',
   // Cloudflare Web Analytics token (free, no cookies, no consent banner needed).
   // Create a site at https://dash.cloudflare.com → Analytics & Logs → Web Analytics.
   cloudflareAnalyticsToken: '',

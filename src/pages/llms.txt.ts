@@ -15,7 +15,7 @@ Key facts:
 - Founder: ${SITE.founder}
 - Works: ${SITE.workMode} (home base: ${SITE.location})
 - Email: ${SITE.email}
-- Phone: ${SITE.phones.map((p) => p.display).join(', ')}
+${SITE.emails.sales ? `- Sales & proposals: ${SITE.emails.sales}\n` : ''}${SITE.emails.support ? `- Kaizen PPM support: ${SITE.emails.support}\n` : ''}${SITE.emails.careers ? `- Careers: ${SITE.emails.careers}\n` : ''}- Phone: ${SITE.phones.map((p) => p.display).join(', ')}
 - Website: ${SITE.url}
 - LinkedIn: ${SITE.social.linkedin}
 
