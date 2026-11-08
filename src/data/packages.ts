@@ -38,7 +38,7 @@ export const packageGroups: { id: PackageGroup; label: string; title: string; in
     id: 'monthly',
     label: 'Run',
     title: 'Monthly plans',
-    intro: 'Ongoing support after go-live. Month to month: cancel with 30 days’ notice.',
+    intro: 'Ongoing support after go-live, and Kaizen PPM subscriptions. Month to month: cancel with 30 days’ notice.',
   },
 ];
 
@@ -293,6 +293,17 @@ export const packageTerms = [
   { title: 'Faster with AI', body: 'We use AI-assisted engineering, so delivery takes weeks, not months, and part of that saving is in the price.' },
   { title: 'What is not included', body: 'Prices are in US dollars and exclude Microsoft licences and any applicable tax. Microsoft licences are bought from Microsoft or your reseller.' },
 ];
+
+export const packageFaqs = [
+  { q: 'What if the scope changes during the project?', a: 'The fixed price covers the scope we agree in writing. If you want something extra, we price it as a change request and you approve it before we start. Nothing is added to your bill without your agreement.' },
+  { q: 'Who does the work?', a: 'Every engagement is led by our founder, a Power Platform and AI solutions architect with eight years of Microsoft business applications consulting. Specialists join where a package needs them, and we use AI-assisted engineering throughout.' },
+  { q: 'Which time zone do you work in?', a: 'We are based in Pakistan (UTC+5) and work remotely with clients worldwide. Our day overlaps with UK and European mornings and with the Gulf working day. For the Americas and Australia we schedule calls at the start or end of our day.' },
+  { q: 'Do I need Microsoft licences first?', a: 'Usually some, yes, and they are not included in our prices. We tell you exactly which licences a package needs before you commit, and you buy them from Microsoft or your reseller.' },
+  { q: 'How do payments work?', a: 'Entry packages are paid upfront. Projects are normally split: half to start and half at go-live. Monthly plans are billed monthly in advance. Prices are in US dollars; we can quote the equivalent in GBP or EUR.' },
+  { q: 'What if a package is not the right fit?', a: 'Book a free 30-minute call and tell us the problem. We will recommend a package, shape a custom fixed-price quote, or tell you honestly if you do not need us.' },
+];
+
+export const packagesForService = (slug: string) => packages.filter((p) => p.service === slug);
 
 export const formatPrice = (p: Package) => {
   const amount = `$${p.price.toLocaleString('en-US')}`;

@@ -9,7 +9,7 @@ import { homeFaqs } from '../data/faq';
 import { steps, principles } from '../data/home';
 import { kits, kitSteps, kitFaqs } from '../data/tools';
 import { useCases, capabilities as techAreas, experienceIntro } from '../data/experience';
-import { packages, packageGroups, packageTerms, formatPrice, serviceHref } from '../data/packages';
+import { packages, packageGroups, packageTerms, packageFaqs, packagesForService, formatPrice, serviceHref } from '../data/packages';
 
 const u = (path: string) => `${SITE.url}${path}`;
 const faqMd = (faqs: Faq[]) => faqs.map((f) => `### ${f.q}\n\n${f.a}`).join('\n\n');
@@ -71,6 +71,10 @@ ${p.includes.map((x) => `- ${x}`).join('\n')}${serviceHref(p) ? `\n\nRelated: ${
 
 ${packageTerms.map((t) => `- **${t.title}**: ${t.body}`).join('\n')}
 
+## Before you book
+
+${faqMd(packageFaqs)}
+
 To get a quote: ${u('/contact/')} or ${SITE.email}.
 `;
 
@@ -96,7 +100,7 @@ ${s.useCases.map((c) => `- **${c.title}**: ${c.body}`).join('\n')}
 
 ${s.stack.join(', ')}.
 
-## Frequently asked questions
+${packagesForService(s.slug).length ? `## Fixed-price packages\n\n${packagesForService(s.slug).map((p) => `- **${p.name}**: ${formatPrice(p)}, ${p.duration}. ${p.summary} (${u(`/packages/#${p.id}`)})`).join('\n')}\n\n` : ''}## Frequently asked questions
 
 ${faqMd(s.faqs)}
 
