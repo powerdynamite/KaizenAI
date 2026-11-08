@@ -25,6 +25,10 @@ Every page below has a Markdown version (the same URL path ending in \`.md\`). T
 
 ${services.map((s) => `- [${s.title}](${u(`/services/${s.slug}.md`)}): ${s.short}`).join('\n')}
 
+## Fixed-price packages
+
+- [Packages and prices](${u('/packages.md')}): fixed-price entry packages (from $750), projects and monthly support plans for Copilot, Dynamics 365, Power Platform, AI agents, Power BI and Kaizen PPM
+
 ## Products
 
 - [${PPM.name}](${u('/products/kaizen-ppm.md')}): ${PPM.definition}

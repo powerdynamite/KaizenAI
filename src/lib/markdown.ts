@@ -9,6 +9,7 @@ import { homeFaqs } from '../data/faq';
 import { steps, principles } from '../data/home';
 import { kits, kitSteps, kitFaqs } from '../data/tools';
 import { useCases, capabilities as techAreas, experienceIntro } from '../data/experience';
+import { packages, packageGroups, packageTerms, formatPrice, serviceHref } from '../data/packages';
 
 const u = (path: string) => `${SITE.url}${path}`;
 const faqMd = (faqs: Faq[]) => faqs.map((f) => `### ${f.q}\n\n${f.a}`).join('\n\n');
@@ -50,6 +51,27 @@ export const servicesIndexMd = () => `# KaizenAI services
 AI and Microsoft services, end to end. Use one practice or combine several; they share the same Dataverse and Azure foundations.
 
 ${services.map((s) => `## [${s.title}](${u(`/services/${s.slug}/`)})\n\n${s.summary}\n\nTechnology: ${s.stack.join(', ')}.`).join('\n\n')}
+`;
+
+export const packagesMd = () => `# KaizenAI fixed-price packages
+
+Fixed scope. Fixed price. Weeks, not months. The price is agreed before we start, and if we miss the agreed scope, we fix it at no extra cost. Prices are in US dollars and exclude Microsoft licences and tax.
+
+${packageGroups.map((g) => `## ${g.title}
+
+${g.intro}
+
+${packages.filter((p) => p.group === g.id).map((p) => `### ${p.name}: ${formatPrice(p)}
+
+${p.summary}${p.group !== 'monthly' ? ` Typical duration: ${p.duration}.` : ''}
+
+${p.includes.map((x) => `- ${x}`).join('\n')}${serviceHref(p) ? `\n\nRelated: ${u(serviceHref(p)!)}` : ''}`).join('\n\n')}`).join('\n\n')}
+
+## How fixed price works
+
+${packageTerms.map((t) => `- **${t.title}**: ${t.body}`).join('\n')}
+
+To get a quote: ${u('/contact/')} or ${SITE.email}.
 `;
 
 export const serviceMd = (s: Service) => `# ${s.title}

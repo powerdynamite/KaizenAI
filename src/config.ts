@@ -57,6 +57,7 @@ export const SITE = {
 
 export const NAV = [
   { href: '/services/', label: 'Services' },
+  { href: '/packages/', label: 'Packages' },
   { href: '/products/kaizen-ppm/', label: 'Kaizen PPM' },
   { href: '/experience/', label: 'Our work' },
   { href: '/about/', label: 'About' },
