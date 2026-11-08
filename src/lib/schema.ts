@@ -45,11 +45,17 @@ export const organization = () => ({
   contactPoint: [{
     '@type': 'ContactPoint',
     contactType: 'sales',
-    email: SITE.email,
+    email: SITE.emails.sales || SITE.email,
     telephone: SITE.phones[0].tel,
     areaServed: 'Worldwide',
+    availableLanguage: ['English', 'German', 'Arabic'],
+  }, ...(SITE.emails.support ? [{
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    email: SITE.emails.support,
+    areaServed: 'Worldwide',
     availableLanguage: ['English'],
-  }],
+  }] : [])],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'KaizenAI services',

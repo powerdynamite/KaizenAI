@@ -44,10 +44,18 @@ const bookTitle = { en: 'Book a free 30-minute call', de: 'Kostenloses 30-Minute
             <span class="label">{bookKicker}</span>
             <p class="book-title">{bookTitle}</p>
             <p class="book-note">{bookNote}</p>
-            <a class="btn" href={SITE.bookingUrl} target="_blank" rel="noopener" data-calendly={SITE.bookingUrl}>{bookLabel} <span class="arr">→</span></a>
+            <a class="btn" href={SITE.bookingUrl} target="_blank" rel="noopener" data-booking={SITE.bookingUrl}>{bookLabel} <span class="arr">→</span></a>
           </div>
         )}
         <div class="item"><h2 class="label">{s.email}</h2><a class="big" dir="ltr" href={`mailto:${SITE.email}`}>{SITE.email}</a></div>
+        <div class="item">
+          <h2 class="label">{s.moreEmail}</h2>
+          <dl class="inboxes">
+            {([['salesEmail', SITE.emails.sales], ['supportEmail', SITE.emails.support], ['careersEmail', SITE.emails.careers]] as const)
+              .filter(([, addr]) => addr)
+              .map(([key, addr]) => <div><dt>{s[key]}</dt><dd><a dir="ltr" href={`mailto:${addr}`}>{addr}</a></dd></div>)}
+          </dl>
+        </div>
         <div class="item"><h2 class="label">{s.phone}</h2>{SITE.phones.map((p) => <a class="big" dir="ltr" href={`tel:${p.tel}`}>{p.display}</a>)}</div>
         {SITE.whatsapp && <div class="item"><h2 class="label">{s.whatsapp}</h2><a class="big" href={`https://wa.me/${SITE.whatsapp}`} rel="noopener" target="_blank">{s.whatsappLink}</a></div>}
         {SITE.social.linkedin && <div class="item"><h2 class="label">{s.linkedin}</h2><a class="big" href={SITE.social.linkedin} rel="me noopener" target="_blank">{s.linkedinLink}</a></div>}
@@ -63,6 +71,10 @@ const bookTitle = { en: 'Book a free 30-minute call', de: 'Kostenloses 30-Minute
   .big { display: block; font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; font-size: 1.25rem; color: var(--heading); text-decoration: none; overflow-wrap: anywhere; line-height: 1.35; }
   .big:hover { color: var(--accent); text-decoration: underline; }
   .item p { margin: 0; }
+  .inboxes { margin: 0; display: grid; gap: 10px; }
+  .inboxes dt { font-size: 0.85rem; color: var(--muted); }
+  .inboxes dd { margin: 0; overflow-wrap: anywhere; }
+  .inboxes a { color: var(--heading); }
   .book-tile { padding: 22px 24px 24px; border: 1px solid var(--rule-strong); border-top: 3px solid var(--vermilion); border-radius: var(--radius); background: var(--surface, transparent); }
   .book-tile .label { margin: 0 0 6px; }
   .book-title { margin: 0 0 6px; font-family: var(--display); font-weight: 600; font-size: 1.2rem; color: var(--heading); line-height: 1.3; }

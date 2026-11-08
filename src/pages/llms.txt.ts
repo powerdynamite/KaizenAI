@@ -15,7 +15,7 @@ Key facts:
 - Founder: ${SITE.founder}
 - Works: ${SITE.workMode} (home base: ${SITE.location})
 - Email: ${SITE.email}
-- Phone: ${SITE.phones.map((p) => p.display).join(', ')}
+${SITE.emails.sales ? `- Sales & proposals: ${SITE.emails.sales}\n` : ''}${SITE.emails.support ? `- Kaizen PPM support: ${SITE.emails.support}\n` : ''}${SITE.emails.careers ? `- Careers: ${SITE.emails.careers}\n` : ''}- Phone: ${SITE.phones.map((p) => p.display).join(', ')}
 - Website: ${SITE.url}
 - LinkedIn: ${SITE.social.linkedin}
 
@@ -24,6 +24,10 @@ Every page below has a Markdown version (the same URL path ending in \`.md\`). T
 ## Services
 
 ${services.map((s) => `- [${s.title}](${u(`/services/${s.slug}.md`)}): ${s.short}`).join('\n')}
+
+## Fixed-price packages
+
+- [Packages and prices](${u('/packages.md')}): fixed-price entry packages (from $750), projects and monthly support plans for Copilot, Dynamics 365, Power Platform, AI agents, Power BI and Kaizen PPM
 
 ## Products
 

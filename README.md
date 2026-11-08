@@ -52,12 +52,11 @@ The filename becomes the URL (`/blog/<filename>/`).
 ## SEO & AI discoverability
 See **[SEO.md](SEO.md)** for what's built in and the post-launch checklist.
 
-## Contact form
-The site is static, so form submissions go to a form service. Until one is configured, the form opens the visitor's email
-app with the message pre-filled.
+## Contact form and booking (HubSpot)
+The site is static, so it uses HubSpot's free CRM for both:
 
-1. Create a free form at [formspree.io](https://formspree.io), or another service that accepts a plain POST.
-2. Paste its endpoint into `formEndpoint` in `src/config.ts`.
+- **Contact form:** submissions go to a HubSpot form through HubSpot's cookieless form submission API, so each enquiry becomes a HubSpot contact and HubSpot emails a notification. Set `hubspot.formId` in `src/config.ts` (Marketing → Forms → the form → its URL). While it is empty, the form opens the visitor's email app with the message pre-filled. The HubSpot form must contain the fields `email`, `firstname`, `lastname`, `company`, `phone` and `message`.
+- **Booking:** set `bookingUrl` in `src/config.ts` to your HubSpot Meetings link (Sales → Meetings → Copy link). Every "Book a free consultation" button then opens it in a pop-up, and the contact page shows a booking tile. While it is empty, those buttons go to the contact form.
 
 ## Deploying to GitHub Pages (kaizenai.systems)
 1. Merge to `main`. The workflow in `.github/workflows/deploy.yml` builds and deploys automatically.

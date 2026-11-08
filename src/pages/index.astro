@@ -39,7 +39,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 
             Power Platform on secure Azure foundations. We start small and improve a little every week.
           </p>
           <div class="actions">
-            <a href="/contact/" {...(SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-calendly': SITE.bookingUrl } : {})} class="btn">Book a free consultation <span class="arr">→</span></a>
+            <a href="/contact/" {...(SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-booking': SITE.bookingUrl } : {})} class="btn">Book a free consultation <span class="arr">→</span></a>
             <a href="/products/kaizen-ppm/" class="link-arrow">See Kaizen PPM</a>
           </div>
         </div>
@@ -59,7 +59,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 
         <span class="label"><b>01</b>Services</span>
         <h2 class="side-h">What we do</h2>
         <p class="side-p">AI first, on Microsoft foundations that make it work in practice.</p>
-        <p class="side-note"><strong>Not sure which you need?</strong>Most projects combine two or three of these. Tell us the problem and we will map it. <br /><a href="/contact/" {...(SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-calendly': SITE.bookingUrl } : {})}>Book a free consultation →</a></p>
+        <p class="side-note"><strong>Not sure which you need?</strong>Most projects combine two or three of these. Tell us the problem and we will map it. <br /><a href="/contact/" {...(SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-booking': SITE.bookingUrl } : {})}>Book a free consultation →</a></p>
       </div>
       <ol class="rows">
         {services.map((s, i) => (
