@@ -250,7 +250,7 @@ export const packages: Package[] = [
     price: 1650,
     duration: 'Monthly',
     summary: 'Up to 25 hours a month.',
-    includes: ['Everything in Essentials', 'Small enhancements, licence and governance reviews', 'Quarterly roadmap call', 'Response within 8 business hours'],
+    includes: ['Everything in Essentials', 'Small enhancements, licence and governance reviews', 'Quarterly roadmap call', 'Prioritised response within 1 business day'],
     topic: 'Something else',
   },
   {
@@ -260,7 +260,7 @@ export const packages: Package[] = [
     price: 3300,
     duration: 'Monthly',
     summary: 'Up to 50 hours a month.',
-    includes: ['Everything in Growth', 'New features and agents', 'Named lead and monthly roadmap call', 'Response within 4 business hours'],
+    includes: ['Everything in Growth', 'New features and agents', 'Named lead and monthly roadmap call', 'Same-business-day response (UK business hours)'],
     topic: 'Something else',
   },
   {
@@ -281,7 +281,7 @@ export const packages: Package[] = [
     price: 1690,
     duration: 'Monthly',
     summary: 'Unlimited users.',
-    includes: ['Everything in Team', 'AI features and Power BI reports', 'Priority support'],
+    includes: ['Everything in Team', 'Power BI reports', 'AI features as they are released', 'Priority support'],
     service: '/products/kaizen-ppm/',
     topic: 'Kaizen PPM demo',
   },
