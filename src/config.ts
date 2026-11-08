@@ -35,7 +35,7 @@ export const SITE = {
   // 'https://meetings-na2.hubspot.com/your-name'. When set, every "Book a free
   // consultation" button opens it in a pop-up and the contact page shows a booking
   // tile. While empty, those buttons go to the contact form.
-  bookingUrl: '',
+  bookingUrl: 'https://meetings-na2.hubspot.com/mrabdulbasit1999',
   // Cloudflare Web Analytics token (free, no cookies, no consent banner needed).
   // Create a site at https://dash.cloudflare.com → Analytics & Logs → Web Analytics.
   cloudflareAnalyticsToken: '',
