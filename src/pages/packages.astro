@@ -2,8 +2,9 @@
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
-import { packages, packageGroups, packageTerms, formatPrice, serviceHref } from '../data/packages';
-import { breadcrumbs, ORG_ID } from '../lib/schema';
+import Faqs from '../components/Faqs.astro';
+import { packages, packageGroups, packageTerms, packageFaqs, formatPrice, serviceHref } from '../data/packages';
+import { breadcrumbs, faqPage, ORG_ID } from '../lib/schema';
 import { SITE } from '../config';
 
 const crumbs = [{ name: 'Packages', path: '/packages/' }];
@@ -35,7 +36,7 @@ const bookingAttrs = SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank'
   title="Fixed-Price Microsoft 365, Dynamics 365, Power Platform & Copilot Packages"
   description="Fixed-price packages from KaizenAI: Copilot readiness, Dynamics 365 health checks and implementations, Power Platform builds and governance, AI agents, Power BI and managed support."
   markdown="/packages.md"
-  schema={[catalog, breadcrumbs(crumbs)]}
+  schema={[catalog, faqPage(packageFaqs, '/packages/'), breadcrumbs(crumbs)]}
 >
   <section class="page-hero">
     <div class="container hero">
@@ -43,7 +44,7 @@ const bookingAttrs = SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank'
         <Breadcrumbs items={crumbs} />
         <h1>Fixed scope. Fixed price. Weeks, not months.</h1>
         <p class="lead">Pick a package, or tell us the problem and we will match one to it. The price is agreed before we start, and if we miss the agreed scope, we fix it at no extra cost.</p>
-        <div class="actions"><a href="/contact/" {...bookingAttrs} class="btn">Get a fixed-price quote <span class="arr">→</span></a></div>
+        <div class="actions"><a href="/contact/" {...bookingAttrs} class="btn">Get a fixed-price quote <span class="arr">→</span></a><a class="link-arrow" href="/experience/">See what we've delivered →</a></div>
       </div>
       <nav class="toc" aria-label="Packages on this page">
         <span class="label">On this page</span>
@@ -52,6 +53,7 @@ const bookingAttrs = SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank'
             <li><a href={`#${g.id}`}><span>{String(i + 1).padStart(2, '0')}</span>{g.title}</a></li>
           ))}
           <li><a href="#how-it-works"><span>04</span>How fixed price works</a></li>
+          <li><a href="#faq"><span>05</span>Questions</a></li>
         </ol>
       </nav>
     </div>
@@ -100,6 +102,8 @@ const bookingAttrs = SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank'
       </div>
     </div>
   </section>
+
+  <Faqs faqs={packageFaqs} title="Before you book" />
 
   <CTA />
 </Base>

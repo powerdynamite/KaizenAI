@@ -5,6 +5,7 @@ import Faqs from '../../components/Faqs.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { services, type Service } from '../../data/services';
 import { serviceNode, faqPage, breadcrumbs } from '../../lib/schema';
+import { packagesForService, formatPrice } from '../../data/packages';
 
 export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
@@ -14,6 +15,7 @@ const idx = services.findIndex((o) => o.slug === s.slug);
 const others = services.filter((o) => o.slug !== s.slug);
 const path = `/services/${s.slug}/`;
 const crumbs = [{ name: 'Services', path: '/services/' }, { name: s.title, path }];
+const pkgs = packagesForService(s.slug);
 const roman = ['i.', 'ii.', 'iii.', 'iv.', 'v.', 'vi.'];
 ---
 <Base
@@ -75,6 +77,29 @@ const roman = ['i.', 'ii.', 'iii.', 'iv.', 'v.', 'vi.'];
       </div>
     </div>
   </section>
+
+  {pkgs.length > 0 && (
+    <section class="section section--tint" id="packages">
+      <div class="container split">
+        <div><span class="label"><b>$</b>Fixed price</span><h2 class="side-h">Packages</h2></div>
+        <div>
+          <ol class="rows">
+            {pkgs.map((p, i) => (
+              <li>
+                <a class="row-link" href={`/packages/#${p.id}`}>
+                  <span class="num">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="title">{p.name}</span>
+                  <span class="desc">{formatPrice(p)} · {p.duration}. {p.summary}</span>
+                  <span class="go" aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+          <p class="muted note">Fixed price agreed before we start. <a href="/packages/">See all packages →</a></p>
+        </div>
+      </div>
+    </section>
+  )}
 
   <Faqs faqs={s.faqs} title={`${s.title}: common questions`} />
 
