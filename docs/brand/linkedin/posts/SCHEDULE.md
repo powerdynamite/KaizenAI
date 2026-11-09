@@ -6,6 +6,7 @@ Each post goes up on the KaizenAI page on the day its blog article publishes (th
 |---|---|---|---|
 | Tue 3 Nov | Working with Claude and MCP | `2026-11-03-claude-mcp.png` | (posted) |
 | Thu 5 Nov | How Kaizen PPM uses AI | `2026-11-05-kaizen-ppm-ai.png` | `2026-11-05-kaizen-ppm-ai.md` |
+| Mon 9 Nov | Results as a Service | `2026-11-09-results-as-a-service.png` | `2026-11-09-results-as-a-service.md` |
 | Tue 10 Nov | Ten Power Automate expression mistakes | `2026-11-10-power-automate-expression-mistakes.png` | `2026-11-10-power-automate-expression-mistakes.md` |
 | Thu 12 Nov | Power BI or Microsoft Fabric? | `2026-11-12-power-bi-or-microsoft-fabric.png` | `2026-11-12-power-bi-or-microsoft-fabric.md` |
 | Tue 17 Nov | Why managed solution imports fail | `2026-11-17-dataverse-solution-import-failures.png` | `2026-11-17-dataverse-solution-import-failures.md` |

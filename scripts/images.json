@@ -279,5 +279,35 @@
     ],
     "foot": "kaizenai.systems/services",
     "sub": "Secure Azure foundations and pipelines that ship safely, every time."
+  },
+  {
+    "id": "results-as-a-service",
+    "kind": "og",
+    "out": "public/blog/og/results-as-a-service.png",
+    "eyebrow": "Blog · Insights",
+    "title": "<em>Results as a Service</em>: outcomes at a fixed price",
+    "items": [
+      "Agree the result first, in writing",
+      "One fixed price for that result",
+      "Miss it? We fix it at no extra cost",
+      "Then a monthly managed plan",
+      "Changes quoted at a fixed price"
+    ],
+    "foot": "kaizenai.systems/blog"
+  },
+  {
+    "id": "results-as-a-service-linkedin",
+    "kind": "linkedin",
+    "out": "docs/brand/linkedin/posts/2026-11-09-results-as-a-service.png",
+    "eyebrow": "Results as a Service",
+    "title": "Pay for <em>results</em>, not hours or seats.",
+    "items": [
+      "Agree the result first, in writing",
+      "One fixed price for that result",
+      "Miss it? We fix it at no extra cost",
+      "Then a monthly managed plan",
+      "Changes quoted at a fixed price"
+    ],
+    "tagline": "Fixed price · Your tenant · Managed plan"
   }
 ]
