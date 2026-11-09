@@ -1,5 +1,6 @@
 ---
 import { SITE } from '../config';
+import Certifications from '../components/Certifications.astro';
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
 import Faqs from '../components/Faqs.astro';
@@ -54,6 +55,8 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 
       </div>
     </div>
   </section>
+
+  <Certifications />
 
   <section class="section">
     <div class="container split">

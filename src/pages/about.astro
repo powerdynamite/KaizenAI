@@ -21,6 +21,8 @@ const profiles = [
   ['Medium', SITE.founderProfiles.medium],
   ['Personal site', SITE.founderProfiles.website],
 ];
+import Certifications from '../components/Certifications.astro';
+import { certifications } from '../data/certifications';
 ---
 <Base
   title="About KaizenAI: Remote-First, AI-First Microsoft Consultancy"
@@ -72,12 +74,15 @@ const profiles = [
         <dl class="dl">
           <dt>Home base</dt><dd>{SITE.location}</dd>
           <dt>Experience</dt><dd>8 years in Microsoft business applications consulting</dd>
+          <dt>Certified</dt><dd><a href="#certifications">{certifications.map((c) => c.code).join(' · ')}</a></dd>
           <dt>Elsewhere</dt>
           <dd class="profiles">{profiles.map(([n, u]) => <a href={u} rel="me noopener" target="_blank">{n}</a>)}</dd>
         </dl>
       </div>
     </div>
   </section>
+
+  <Certifications variant="full" />
 
   <section class="section">
     <div class="container split">

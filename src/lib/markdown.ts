@@ -2,6 +2,7 @@
 // content-equivalent to its HTML page and is linked from it with
 // <link rel="alternate" type="text/markdown">. They are also combined into /llms-full.txt.
 import { getCollection } from 'astro:content';
+import { certifications } from '../data/certifications';
 import { SITE } from '../config';
 import { services, type Faq, type Service } from '../data/services';
 import { PPM, capabilities, ladder, aiWaves, aiNever, ownership, migrationSources, ppmFaqs } from '../data/ppm';
@@ -176,6 +177,8 @@ Kaizen (改善) is the Japanese idea of continuous improvement. It means making 
 ## Founder
 
 **${SITE.founder}**, Founder & Principal Consultant. Abdul is a Power Platform and AI solutions architect with eight years of consulting experience, delivering remotely for Microsoft partners across Europe, Australia and the Middle East. He works across Dynamics 365 CE, Dataverse, Copilot Studio and agentic AI, and is the architect behind Kaizen PPM. He also builds AI-ready Power Platform starter kits (${u('/starter-kits/')}) and Claude Code skills.
+
+Microsoft certifications: ${certifications.map((c) => `${c.name} (${c.code})`).join(', ')}.
 
 Profiles: ${Object.entries(SITE.founderProfiles).map(([k, v]) => `[${k}](${v})`).join(' · ')}
 

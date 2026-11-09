@@ -1,6 +1,7 @@
 // Schema.org JSON-LD builders. Every page links back to the same @id nodes,
 // so search engines and AI systems resolve a single, consistent entity graph.
 import { SITE } from '../config';
+import { certifications } from '../data/certifications';
 import type { Faq, Service } from '../data/services';
 import { services } from '../data/services';
 
@@ -87,6 +88,13 @@ export const founder = () => ({
   url: abs('/about/'),
   knowsAbout: ['Microsoft Dynamics 365', 'Microsoft Power Platform', 'Microsoft Dataverse', 'Copilot Studio', 'Agentic AI', 'Azure OpenAI', 'Project portfolio management'],
   sameAs: Object.values(SITE.founderProfiles),
+  hasCredential: certifications.map((c) => ({
+    '@type': 'EducationalOccupationalCredential',
+    name: `Microsoft Certified: ${c.name} (${c.code})`,
+    credentialCategory: 'certification',
+    recognizedBy: { '@type': 'Organization', name: 'Microsoft', url: 'https://learn.microsoft.com/credentials/' },
+    ...(c.url ? { url: c.url } : {}),
+  })),
 });
 
 export const breadcrumbs = (items: { name: string; path: string }[], home = '/') => ({

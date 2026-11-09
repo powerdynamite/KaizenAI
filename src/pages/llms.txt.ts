@@ -12,7 +12,7 @@ export async function GET() {
 > ${SITE.name} is a remote-first, AI-first IT services and product company in the Microsoft ecosystem, working with clients worldwide. It builds AI agents, rolls out Microsoft 365 Copilot, Copilot Studio and Cowork, implements Dynamics 365 CRM and the Power Platform, builds Power BI and Microsoft Fabric analytics, provides Azure infrastructure and DevSecOps, and makes ${PPM.name}, a project portfolio management product on Dataverse. Work is sold as Results as a Service: an agreed result at a fixed price, deployed once and then kept running on a monthly managed plan, with no per-user fees.
 
 Key facts:
-- Founder: ${SITE.founder}
+- Founder: ${SITE.founder}, Microsoft Certified Power Platform Solution Architect Expert (PL-600), also PL-400, PL-200, PL-100, PL-900, MB-910 and DP-900
 - Works: ${SITE.workMode} (home base: ${SITE.location})
 - Email: ${SITE.email}
 ${SITE.emails.sales ? `- Sales & proposals: ${SITE.emails.sales}\n` : ''}${SITE.emails.support ? `- Kaizen PPM support: ${SITE.emails.support}\n` : ''}${SITE.emails.careers ? `- Careers: ${SITE.emails.careers}\n` : ''}- Phone: ${SITE.phones.map((p) => p.display).join(', ')}

@@ -1,0 +1,86 @@
+---
+// Microsoft certifications. "strip": a slim band under the home hero.
+// "full": a section on the About page with every certification's full name.
+import { certifications } from '../data/certifications';
+import type { Lang } from '../i18n/strings';
+interface Props { variant?: 'strip' | 'full'; lang?: Lang }
+const { variant = 'strip', lang = 'en' } = Astro.props;
+const T = {
+  en: { label: 'Microsoft certified', note: 'Founder-led delivery, certified across Power Platform, Dynamics 365 and Azure data.', more: 'About the founder', title: 'Microsoft certifications', levels: { Expert: 'Expert', Associate: 'Associate', Fundamentals: 'Fundamentals' } },
+  de: { label: 'Microsoft-zertifiziert', note: 'Vom Gründer geleitete Umsetzung, zertifiziert für Power Platform, Dynamics 365 und Azure-Daten.', more: 'Über den Gründer (Englisch)', title: 'Microsoft-Zertifizierungen', levels: { Expert: 'Expert', Associate: 'Associate', Fundamentals: 'Fundamentals' } },
+  ar: { label: 'معتمد من Microsoft', note: 'تنفيذ يقوده المؤسس، بشهادات في Power Platform وDynamics 365 وبيانات Azure.', more: 'عن المؤسس (بالإنجليزية)', title: 'شهادات Microsoft', levels: { Expert: 'خبير', Associate: 'مشارك', Fundamentals: 'أساسيات' } },
+}[lang];
+const Tag = (c: { url?: string }) => (c.url ? 'a' : 'div');
+---
+{variant === 'strip' ? (
+  <section class="cert-strip" aria-label={T.label}>
+    <div class="container cs-in">
+      <div class="cs-head">
+        <span class="label"><b>✓</b>{T.label}</span>
+        <p>{T.note}{' '}<a href="/about/#certifications" hreflang={lang === 'en' ? undefined : 'en'}>{T.more} <span class="arr">→</span></a></p>
+      </div>
+      <ul class="cs-list">
+        {certifications.map((c) => {
+          const El = Tag(c);
+          return (
+            <li class:list={[{ top: c.level === 'Expert' }]}>
+              <El class="cs-badge" {...(c.url ? { href: c.url, target: '_blank', rel: 'noopener' } : {})} title={`Microsoft Certified: ${c.name}`}>
+                <span class="cs-code" dir="ltr">{c.code}</span>
+                <span class="cs-name" dir="ltr">{c.name}</span>
+              </El>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+) : (
+  <section class="section" id="certifications">
+    <div class="container split">
+      <div><span class="label"><b>✓</b>{T.label}</span><h2 class="side-h">{T.title}</h2></div>
+      <ul class="cf-grid">
+        {certifications.map((c) => {
+          const El = Tag(c);
+          return (
+            <li class:list={[{ top: c.level === 'Expert' }]}>
+              <El class="cf-card" {...(c.url ? { href: c.url, target: '_blank', rel: 'noopener' } : {})}>
+                <span class="cs-code">{c.code}</span>
+                <span class="cf-name">Microsoft Certified: {c.name}</span>
+                <span class="cf-level">{T.levels[c.level]}</span>
+              </El>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+)}
+<style>
+  .cert-strip { border-bottom: 1px solid var(--rule); background: var(--rule); }
+  .cs-in { display: grid; grid-template-columns: 240px 1fr; gap: 28px; align-items: center; padding-block: 26px; }
+  .cs-head .label { margin: 0 0 6px; }
+  .cs-head p { margin: 0; font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+  .cs-head a { font-family: var(--display); font-weight: 600; color: var(--accent); text-decoration: none; white-space: nowrap; }
+  .cs-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .cs-badge {
+    display: grid; gap: 2px; padding: 9px 12px; border-radius: var(--radius); text-decoration: none;
+    background: var(--bg); border: 1px solid var(--rule-strong);
+  }
+  .top .cs-badge, .top .cf-card { border-color: var(--vermilion); box-shadow: inset 0 3px 0 var(--vermilion); }
+  .cs-code { font: 700 1rem var(--display); color: var(--heading); letter-spacing: -0.01em; }
+  .top .cs-code { color: var(--accent); }
+  .cs-name { font-size: 0.72rem; line-height: 1.3; color: var(--muted); max-width: 13rem; }
+  li:not(.top) .cs-name { display: none; }
+  .top .cs-name { white-space: nowrap; max-width: none; }
+  li:not(.top) .cs-badge { min-width: 0; align-content: center; }
+  a.cs-badge:hover, a.cf-card:hover { border-color: var(--accent); }
+
+  .cf-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+  .cf-card { display: grid; gap: 6px; height: 100%; padding: 18px 18px 16px; border: 1px solid var(--rule-strong); border-radius: var(--radius); text-decoration: none; box-sizing: border-box; }
+  .cf-card .cs-code { font-size: 1.35rem; }
+  .cf-name { font-size: 0.9rem; color: var(--heading); line-height: 1.4; }
+  .cf-level { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+  @media (max-width: 960px) { .cs-in { grid-template-columns: 1fr; gap: 16px; } }
+  @media (max-width: 560px) { .cs-name { display: none; } .cs-badge { min-width: 0; } }
+</style>

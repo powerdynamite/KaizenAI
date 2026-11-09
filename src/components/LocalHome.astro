@@ -6,6 +6,7 @@ import CTA from './CTA.astro';
 import Faqs from './Faqs.astro';
 import Logo from './Logo.astro';
 import Kanji from './Kanji.astro';
+import Certifications from './Certifications.astro';
 import { Image } from 'astro:assets';
 import gantt from '../assets/ppm/the-interactive-gantt.png';
 import { HOME } from '../i18n/home';
@@ -44,6 +45,8 @@ const go = '→'; // mirrored by CSS in right-to-left
       </div>
     </div>
   </section>
+
+  <Certifications lang={lang} />
 
   <section class="section" id="services">
     <div class="container split">
