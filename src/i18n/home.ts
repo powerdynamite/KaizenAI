@@ -44,6 +44,7 @@ export const HOME: Record<'de' | 'ar', LocalHome> = {
     facts: [
       ['Leistungen', 'KI-Agenten · Copilot & Cowork · Dynamics 365 CRM · Power Platform · Power BI & Fabric · Integration · Azure DevSecOps'],
       ['Produkt', 'Kaizen PPM, Projekt- und Portfoliomanagement auf Dataverse'],
+      ['Modell', 'Results as a Service: ein vereinbartes Ergebnis zum Festpreis'],
       ['Arbeitsweise', 'Remote-first, mit Kunden weltweit'],
       ['Antwort', 'Meist innerhalb eines Werktags'],
     ],
@@ -105,6 +106,7 @@ export const HOME: Record<'de' | 'ar', LocalHome> = {
     facts: [
       ['الخدمات', 'وكلاء الذكاء الاصطناعي · Copilot وCowork · Dynamics 365 CRM · Power Platform · Power BI وFabric · تكامل الأنظمة · Azure DevSecOps'],
       ['المنتج', 'Kaizen PPM لإدارة المشاريع والمحافظ على Dataverse'],
+      ['النموذج', 'النتائج كخدمة: نتيجة متفق عليها بسعر ثابت'],
       ['طريقة العمل', 'عن بُعد مع عملاء حول العالم'],
       ['الرد', 'عادةً خلال يوم عمل واحد'],
     ],

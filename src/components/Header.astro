@@ -17,9 +17,9 @@ const isActive = (href: string) => path === href || (href.length > 4 && path.sta
 const megaServices = lang === 'en' ? services.map(({ slug, title, short }) => ({ slug, title, short })) : HOME[lang].services;
 const fromPrice = Math.min(...packages.map((p) => p.price)).toLocaleString('en-US');
 const M = {
-  en: { all: 'All services', pkLabel: 'Fixed-price packages', pkTitle: `Start small, from $${fromPrice}`, pkBody: 'Assessments, pilots and builds with a clear scope and price.', pkLink: 'See packages', callTitle: 'Not sure where to start?', callLink: 'Book a free 30-minute call' },
-  de: { all: 'Alle Leistungen', pkLabel: 'Festpreis-Pakete', pkTitle: `Klein starten, ab ${fromPrice} USD`, pkBody: 'Analysen, Pilotprojekte und Umsetzungen mit klarem Umfang und Preis.', pkLink: 'Pakete ansehen', callTitle: 'Unsicher, wo Sie anfangen sollen?', callLink: 'Kostenloses 30-Minuten-Gespräch' },
-  ar: { all: 'جميع الخدمات', pkLabel: 'باقات بسعر ثابت', pkTitle: `ابدأوا بخطوة صغيرة، من ${fromPrice} دولار`, pkBody: 'تقييمات ومشاريع تجريبية وتنفيذ بنطاق وسعر واضحين.', pkLink: 'شاهدوا الباقات', callTitle: 'لستم متأكدين من أين تبدأون؟', callLink: 'احجزوا مكالمة مجانية مدتها 30 دقيقة' },
+  en: { all: 'All services', pkLabel: 'Results as a Service', pkTitle: `Start small, from $${fromPrice}`, pkBody: 'An agreed result at a fixed price: assessments, pilots and builds.', pkLink: 'See packages', callTitle: 'Not sure where to start?', callLink: 'Book a free 30-minute call' },
+  de: { all: 'Alle Leistungen', pkLabel: 'Results as a Service', pkTitle: `Klein starten, ab ${fromPrice} USD`, pkBody: 'Analysen, Pilotprojekte und Umsetzungen mit klarem Umfang und Preis.', pkLink: 'Pakete ansehen', callTitle: 'Unsicher, wo Sie anfangen sollen?', callLink: 'Kostenloses 30-Minuten-Gespräch' },
+  ar: { all: 'جميع الخدمات', pkLabel: 'النتائج كخدمة', pkTitle: `ابدأوا بخطوة صغيرة، من ${fromPrice} دولار`, pkBody: 'تقييمات ومشاريع تجريبية وتنفيذ بنطاق وسعر واضحين.', pkLink: 'شاهدوا الباقات', callTitle: 'لستم متأكدين من أين تبدأون؟', callLink: 'احجزوا مكالمة مجانية مدتها 30 دقيقة' },
 }[lang];
 // Packages panel: every package by group, with its price, in the page's language.
 const PT = packagesPageText[lang];
@@ -30,9 +30,9 @@ const pkPrice = (p: Package) => {
 };
 const pkGroups = packageGroups.map((g) => ({ id: g.id, label: PT.groups[g.id].label, title: PT.groups[g.id].title, items: packages.filter((p) => p.group === g.id) }));
 const P = {
-  en: { steps: ['Plan together', 'Deploy once, fixed price', 'Managed support plan', 'Changes quoted at a fixed price'], all: 'All packages' },
-  de: { steps: ['Gemeinsam planen', 'Einmal bereitstellen, Festpreis', 'Managed-Support-Plan', 'Änderungen zum Festpreis'], all: 'Alle Pakete' },
-  ar: { steps: ['نخطط معًا', 'نشر لمرة واحدة بسعر ثابت', 'خطة دعم مُدار', 'التعديلات بسعر ثابت'], all: 'جميع الباقات' },
+  en: { steps: ['Plan together', 'Deploy once, fixed price', 'Managed support plan', 'Changes quoted at a fixed price'], all: 'All packages', raas: 'Results as a Service' },
+  de: { steps: ['Gemeinsam planen', 'Einmal bereitstellen, Festpreis', 'Managed-Support-Plan', 'Änderungen zum Festpreis'], all: 'Alle Pakete', raas: 'Results as a Service' },
+  ar: { steps: ['نخطط معًا', 'نشر لمرة واحدة بسعر ثابت', 'خطة دعم مُدار', 'التعديلات بسعر ثابت'], all: 'جميع الباقات', raas: 'النتائج كخدمة' },
 }[lang];
 const bookAttrs = SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-booking': SITE.bookingUrl } : { href: L.contact };
 // German and Arabic pages link to sections of their own home page.
@@ -76,6 +76,7 @@ const nav = lang === 'en'
                 ))}
               </div>
               <div class="pk-flow">
+                <span class="pk-raas">{P.raas}</span>
                 <ol>{P.steps.map((st, k) => <li><span class="mn">{String(k + 1).padStart(2, '0')}</span>{st}</li>)}</ol>
                 <div class="pk-actions">
                   <a href={L.packages} class="pk-all">{P.all} <span class="arr">→</span></a>
@@ -189,6 +190,7 @@ const nav = lang === 'en'
   .pk-col a:hover .pk-n { color: var(--accent); }
   .pk-p { flex: none; font: 600 0.8rem var(--display); color: var(--accent); white-space: nowrap; }
   .pk-flow { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 22px 0 26px; padding: 14px 18px; border-radius: var(--radius); background: var(--rule); }
+  .pk-raas { flex: none; font: 700 0.72rem var(--display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
   .pk-flow ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 0.88rem; color: var(--heading); }
   .pk-flow li { display: flex; align-items: baseline; gap: 7px; }
   .pk-actions { display: flex; align-items: center; gap: 18px; flex: none; }

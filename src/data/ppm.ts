@@ -75,6 +75,19 @@ export const aiNever = [
   'No automated staffing decisions. People decide; the product shows its reasoning.',
 ];
 
+/** How Kaizen PPM is sold: deployed once into the customer's tenant, not rented per user. */
+export const ownership = {
+  title: 'Results as a Service, not SaaS',
+  lead: 'Most PPM tools rent you seats: per user, per month, for as long as you use them. With Kaizen PPM you buy a result: a working PPM in your own tenant, delivered at a fixed price.',
+  points: [
+    { title: 'It runs in your tenant', body: 'Kaizen PPM is deployed into your own Microsoft 365 and Dataverse environment. Your data never leaves it, and your existing security applies.' },
+    { title: 'Pay once to deploy', body: 'A one-time fixed price, including migration from Project Online or Planner if you need it. No per-user fee from us, however many people use it.' },
+    { title: 'Then a managed plan', body: 'After go-live you move onto a monthly managed support plan for updates, fixes and help. Month to month, cancel with 30 days’ notice.' },
+    { title: 'Changes at a fixed price', body: 'New features and changes are planned with you and quoted at a fixed price before any work starts. No surprise invoices.' },
+  ],
+  note: 'Your users need Microsoft Power Apps premium or Dynamics 365 licences, bought from Microsoft or your reseller.',
+};
+
 export const migrationSources = [
   'Microsoft Project Online',
   'Project for the Web & Planner Premium',

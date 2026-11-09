@@ -266,14 +266,15 @@ export const packages: Package[] = [
 ];
 
 export const packageTerms = [
-  { title: 'Deploy once, then a managed plan', body: 'Every solution, Kaizen PPM included, is deployed for a one-time fixed price. After go-live you move onto a monthly managed support plan. New features and changes are planned with you and quoted at a fixed price before work starts.' },
+  { title: 'Results as a Service', body: 'You pay for an agreed result with clear acceptance criteria, not for hours or per-user seats. We plan it with you, deliver it for a one-time fixed price, then keep it running on a monthly managed plan. Changes are quoted at a fixed price before work starts.' },
   { title: 'Fixed price, agreed first', body: 'After a short call we confirm the scope and a fixed price in writing. Nothing starts until you agree.' },
-  { title: 'Our guarantee', body: 'If we miss the agreed scope, we fix it at no extra cost.' },
+  { title: 'Our guarantee', body: 'If we miss the agreed result, we fix it at no extra cost.' },
   { title: 'Faster with AI', body: 'We use AI-assisted engineering, so delivery takes weeks, not months, and part of that saving is in the price.' },
   { title: 'What is not included', body: 'Prices are in US dollars and exclude Microsoft licences and any applicable tax. Microsoft licences are bought from Microsoft or your reseller.' },
 ];
 
 export const packageFaqs = [
+  { q: 'What does Results as a Service mean?', a: 'You buy a result, not our time. Before we start we agree in writing what will be delivered and how success is measured, and we give you a fixed price. If we miss the agreed result, we fix it at no extra cost. After go-live, a monthly managed plan keeps it running.' },
   { q: 'Is Kaizen PPM a subscription?', a: 'No. Kaizen PPM is deployed in your own Microsoft tenant for a one-time fixed price, with no per-user fee from us. After go-live, a managed support plan covers updates, fixes and help, and any new features are quoted at a fixed price. Your users need Microsoft Power Apps premium or Dynamics 365 licences, bought from Microsoft.' },
   { q: 'What if the scope changes during the project?', a: 'The fixed price covers the scope we agree in writing. If you want something extra, we price it as a change request and you approve it before we start. Nothing is added to your bill without your agreement.' },
   { q: 'Who does the work?', a: 'Every engagement is led by our founder, a Power Platform and AI solutions architect with eight years of Microsoft business applications consulting. Specialists join where a package needs them, and we use AI-assisted engineering throughout.' },

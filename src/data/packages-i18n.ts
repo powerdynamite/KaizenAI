@@ -184,9 +184,9 @@ export const packagesPageText = {
     title: 'Fixed-Price Copilot, Dynamics 365 & Power Platform Packages',
     description: 'Fixed-price packages: Copilot readiness, Dynamics 365 health checks and implementations, Power Platform, AI agents, Power BI and managed support.',
     crumb: 'Packages',
-    h1: 'Fixed scope. Fixed price. Weeks, not months.',
-    lead: 'Pick a package, or tell us the problem and we will match one to it. The price is agreed before we start, and if we miss the agreed scope, we fix it at no extra cost.',
-    quote: 'Get a fixed-price quote', proof: 'See what we’ve delivered', onPage: 'On this page', how: 'How fixed price works', questions: 'Questions',
+    h1: 'Results as a Service, at a fixed price.',
+    lead: 'You buy an agreed result, not hours and not per-user seats. We plan it with you, deliver it for a fixed price, then keep it running on a managed plan. Pick a package, or tell us the problem and we will match one to it. If we miss the agreed result, we fix it at no extra cost.',
+    quote: 'Get a fixed-price quote', proof: 'See what we’ve delivered', onPage: 'On this page', how: 'How Results as a Service works', questions: 'Questions',
     duration: 'Typical duration', talk: 'Talk to us', about: 'About this service', howLabel: 'How it works',
     note: ['Not sure which package fits?', 'Book a free 30-minute call', 'and we will recommend one, or tell you honestly if you don’t need us.'],
     faqTitle: 'Before you book', from: 'From', perMonth: '/ month',
@@ -200,9 +200,9 @@ export const packagesPageText = {
     title: 'Festpreis-Pakete: Copilot, Dynamics 365 & Power Platform',
     description: 'Festpreis-Pakete: Copilot Readiness, Dynamics-365-Health-Checks und Implementierungen, Power Platform, KI-Agents, Power BI und Managed Support.',
     crumb: 'Festpreis-Pakete',
-    h1: 'Fester Umfang. Fester Preis. Wochen statt Monate.',
-    lead: 'Wählen Sie ein Paket oder beschreiben Sie uns Ihr Problem, und wir schlagen das passende vor. Der Preis wird vor Beginn vereinbart. Erfüllen wir den vereinbarten Umfang nicht, bessern wir ohne Mehrkosten nach.',
-    quote: 'Festpreis-Angebot anfragen', proof: 'Unsere Referenzen ansehen (Englisch)', onPage: 'Auf dieser Seite', how: 'So funktioniert der Festpreis', questions: 'Häufige Fragen',
+    h1: 'Results as a Service, zum Festpreis.',
+    lead: 'Sie kaufen ein vereinbartes Ergebnis, keine Stunden und keine Lizenzen pro Nutzer. Wir planen es mit Ihnen, liefern es zum Festpreis und betreuen es danach in einem Managed-Plan. Wählen Sie ein Paket oder beschreiben Sie uns Ihr Problem, und wir schlagen das passende vor. Erreichen wir das vereinbarte Ergebnis nicht, bessern wir ohne Mehrkosten nach.',
+    quote: 'Festpreis-Angebot anfragen', proof: 'Unsere Referenzen ansehen (Englisch)', onPage: 'Auf dieser Seite', how: 'So funktioniert Results as a Service', questions: 'Häufige Fragen',
     duration: 'Typische Dauer', talk: 'Sprechen Sie mit uns', about: 'Zur Leistung (Englisch)', howLabel: 'So funktioniert es',
     note: ['Unsicher, welches Paket passt?', 'Buchen Sie ein kostenloses 30-Minuten-Gespräch', 'und wir empfehlen Ihnen eines oder sagen Ihnen ehrlich, wenn Sie uns nicht brauchen.'],
     faqTitle: 'Bevor Sie buchen', from: 'Ab', perMonth: '/ Monat',
@@ -216,9 +216,9 @@ export const packagesPageText = {
     title: 'باقات بسعر ثابت: Copilot وDynamics 365 وPower Platform',
     description: 'باقات بسعر ثابت من KaizenAI: الجاهزية لـ Copilot، وفحص وتطبيق Dynamics 365، وبناء وحوكمة Power Platform، ووكلاء الذكاء الاصطناعي، وPower BI، والدعم المُدار.',
     crumb: 'الباقات',
-    h1: 'نطاق ثابت. سعر ثابت. أسابيع لا أشهر.',
-    lead: 'اختاروا باقة، أو أخبرونا بالمشكلة ونقترح عليكم الباقة المناسبة. نتفق على السعر قبل البدء، وإذا لم نلتزم بالنطاق المتفق عليه نصلح ذلك دون أي تكلفة إضافية.',
-    quote: 'اطلبوا عرض سعر ثابت', proof: 'شاهدوا أعمالنا (بالإنجليزية)', onPage: 'في هذه الصفحة', how: 'كيف يعمل السعر الثابت', questions: 'أسئلة شائعة',
+    h1: 'النتائج كخدمة، بسعر ثابت.',
+    lead: 'تشترون نتيجة متفقًا عليها، لا ساعات عمل ولا اشتراكات لكل مستخدم. نخطط لها معكم، ونسلّمها بسعر ثابت، ثم نواصل تشغيلها ضمن خطة مُدارة. اختاروا باقة، أو أخبرونا بالمشكلة ونقترح عليكم الباقة المناسبة. وإذا لم نحقق النتيجة المتفق عليها، نصلح ذلك دون تكلفة إضافية.',
+    quote: 'اطلبوا عرض سعر ثابت', proof: 'شاهدوا أعمالنا (بالإنجليزية)', onPage: 'في هذه الصفحة', how: 'كيف تعمل «النتائج كخدمة»', questions: 'أسئلة شائعة',
     duration: 'المدة المعتادة', talk: 'تحدثوا معنا', about: 'عن هذه الخدمة (بالإنجليزية)', howLabel: 'كيف نعمل',
     note: ['لستم متأكدين من الباقة المناسبة؟', 'احجزوا مكالمة مجانية مدتها 30 دقيقة', 'وسنقترح عليكم باقة، أو نخبركم بصراحة إن لم تكونوا بحاجة إلينا.'],
     faqTitle: 'قبل الحجز', from: 'ابتداءً من', perMonth: 'شهريًا',
@@ -232,14 +232,14 @@ export const packagesPageText = {
 
 export const packageTermsI18n = {
   de: [
-    { title: 'Einmal bereitstellen, dann ein Managed-Plan', body: 'Jede Lösung, auch Kaizen PPM, wird zu einem einmaligen Festpreis bereitgestellt. Nach dem Go-live wechseln Sie in einen monatlichen Managed-Support-Plan. Neue Funktionen und Änderungen planen wir gemeinsam und bieten sie vor Beginn zum Festpreis an.' },
+    { title: 'Results as a Service', body: 'Sie bezahlen ein vereinbartes Ergebnis mit klaren Abnahmekriterien, keine Stunden und keine Lizenzen pro Nutzer. Wir planen es mit Ihnen, liefern es zu einem einmaligen Festpreis und betreuen es danach in einem monatlichen Managed-Plan. Änderungen bieten wir vor Beginn zum Festpreis an.' },
     { title: 'Festpreis, vorab vereinbart', body: 'Nach einem kurzen Gespräch bestätigen wir Umfang und Festpreis schriftlich. Nichts beginnt ohne Ihre Zustimmung.' },
     { title: 'Unsere Garantie', body: 'Erfüllen wir den vereinbarten Umfang nicht, bessern wir ohne Mehrkosten nach.' },
     { title: 'Schneller mit KI', body: 'Wir arbeiten mit KI-gestützter Entwicklung. Die Umsetzung dauert Wochen statt Monate, und ein Teil dieser Ersparnis steckt im Preis.' },
     { title: 'Nicht enthalten', body: 'Die Preise verstehen sich in US-Dollar, ohne Microsoft-Lizenzen und ohne gegebenenfalls anfallende Steuern. Microsoft-Lizenzen beziehen Sie direkt bei Microsoft oder Ihrem Reseller.' },
   ],
   ar: [
-    { title: 'نشر لمرة واحدة، ثم خطة مُدارة', body: 'كل حل، بما في ذلك Kaizen PPM، يُنشر بسعر ثابت لمرة واحدة. بعد الإطلاق تنتقلون إلى خطة دعم مُدار شهرية. الميزات الجديدة والتعديلات نخطط لها معكم ونقدّم لها سعرًا ثابتًا قبل بدء العمل.' },
+    { title: 'النتائج كخدمة', body: 'تدفعون مقابل نتيجة متفق عليها بمعايير قبول واضحة، لا مقابل ساعات عمل أو اشتراكات لكل مستخدم. نخطط لها معكم، ونسلّمها بسعر ثابت لمرة واحدة، ثم نواصل تشغيلها ضمن خطة دعم مُدار شهرية. ونقدّم سعرًا ثابتًا لأي تعديل قبل بدء العمل.' },
     { title: 'سعر ثابت يُتفق عليه أولًا', body: 'بعد مكالمة قصيرة نؤكد النطاق والسعر الثابت كتابيًا. لا يبدأ أي عمل قبل موافقتكم.' },
     { title: 'ضماننا', body: 'إذا لم نلتزم بالنطاق المتفق عليه، نصلح ذلك دون أي تكلفة إضافية.' },
     { title: 'أسرع بالذكاء الاصطناعي', body: 'نعتمد على الهندسة المدعومة بالذكاء الاصطناعي، فيستغرق التنفيذ أسابيع لا أشهرًا، وجزء من هذا التوفير ينعكس على السعر.' },
@@ -249,6 +249,7 @@ export const packageTermsI18n = {
 
 export const packageFaqsI18n = {
   de: [
+    { q: 'Was bedeutet Results as a Service?', a: 'Sie kaufen ein Ergebnis, nicht unsere Zeit. Vor Beginn vereinbaren wir schriftlich, was geliefert wird und woran wir den Erfolg messen, und nennen einen Festpreis. Erreichen wir das vereinbarte Ergebnis nicht, bessern wir ohne Mehrkosten nach. Nach dem Go-live hält ein monatlicher Managed-Plan die Lösung am Laufen.' },
     { q: 'Ist Kaizen PPM ein Abonnement?', a: 'Nein. Kaizen PPM wird zu einem einmaligen Festpreis in Ihrem eigenen Microsoft-Tenant bereitgestellt, ohne Gebühr pro Nutzer an uns. Nach dem Go-live deckt ein Managed-Support-Plan Updates, Fehlerbehebungen und Hilfe ab; neue Funktionen bieten wir zum Festpreis an. Ihre Nutzer benötigen Lizenzen für Power Apps Premium oder Dynamics 365, die Sie bei Microsoft erwerben.' },
     { q: 'Was passiert, wenn sich der Umfang während des Projekts ändert?', a: 'Der Festpreis deckt den schriftlich vereinbarten Umfang ab. Wünschen Sie zusätzliche Leistungen, bepreisen wir sie als Änderungsanfrage, und Sie geben sie frei, bevor wir beginnen. Ohne Ihre Zustimmung kommt nichts auf Ihre Rechnung.' },
     { q: 'Wer erledigt die Arbeit?', a: 'Jedes Projekt wird von unserem Gründer geleitet, einem Power-Platform- und KI-Lösungsarchitekten mit acht Jahren Beratungserfahrung bei Microsoft Business Applications. Wo ein Paket es erfordert, kommen Spezialisten hinzu, und wir arbeiten durchgehend mit KI-gestützter Entwicklung.' },
@@ -258,6 +259,7 @@ export const packageFaqsI18n = {
     { q: 'Was, wenn kein Paket passt?', a: 'Buchen Sie ein kostenloses 30-Minuten-Gespräch und schildern Sie Ihr Problem. Wir empfehlen ein Paket, erstellen ein individuelles Festpreis-Angebot oder sagen Ihnen ehrlich, wenn Sie uns nicht brauchen.' },
   ],
   ar: [
+    { q: 'ماذا تعني «النتائج كخدمة»؟', a: 'تشترون نتيجة، لا وقتنا. قبل البدء نتفق كتابيًا على ما سيتم تسليمه وكيف نقيس النجاح، ونحدد سعرًا ثابتًا. وإذا لم نحقق النتيجة المتفق عليها، نصلح ذلك دون تكلفة إضافية. وبعد الإطلاق تحافظ خطة دعم مُدار شهرية على عمل الحل.' },
     { q: 'هل Kaizen PPM اشتراك؟', a: 'لا. يُنشر Kaizen PPM داخل بيئة Microsoft الخاصة بكم بسعر ثابت لمرة واحدة، دون رسوم لكل مستخدم ندفعها لنا. بعد الإطلاق تغطي خطة الدعم المُدار التحديثات والإصلاحات والمساعدة، والميزات الجديدة نقدّم لها سعرًا ثابتًا. يحتاج مستخدموكم إلى تراخيص Power Apps Premium أو Dynamics 365 من Microsoft.' },
     { q: 'ماذا لو تغيّر النطاق أثناء المشروع؟', a: 'يغطي السعر الثابت النطاق الذي نتفق عليه كتابيًا. إذا رغبتم في شيء إضافي، نسعّره كطلب تغيير وتوافقون عليه قبل أن نبدأ. لا يُضاف شيء إلى فاتورتكم دون موافقتكم.' },
     { q: 'من ينفّذ العمل؟', a: 'يقود كل مشروع مؤسسنا، وهو مهندس حلول Power Platform والذكاء الاصطناعي بخبرة ثماني سنوات في استشارات تطبيقات الأعمال من Microsoft. ينضم إلينا متخصصون حين تتطلب الباقة ذلك، ونعتمد الهندسة المدعومة بالذكاء الاصطناعي في كل مراحل العمل.' },

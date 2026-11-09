@@ -9,7 +9,8 @@ import dashboard from '../../assets/ppm/executive-dashboard.png';
 import kanban from '../../assets/ppm/the-kanban-board.png';
 import finance from '../../assets/ppm/budget-forecast-actual.png';
 import resources from '../../assets/ppm/resource-management-standalone.png';
-import { PPM, capabilities, ladder, aiWaves, aiNever, migrationSources, ppmFaqs } from '../../data/ppm';
+import { PPM, capabilities, ladder, aiWaves, aiNever, ownership, migrationSources, ppmFaqs } from '../../data/ppm';
+import { packages } from '../../data/packages';
 import { ppmSoftware, faqPage, breadcrumbs } from '../../lib/schema';
 
 const shots = [
@@ -19,6 +20,7 @@ const shots = [
   { src: resources, alt: 'Kaizen PPM resource management capacity view', caption: 'Resource management' },
 ];
 const shotUrls = await Promise.all([gantt, ...shots.map((s) => s.src)].map(async (img) => (await getImage({ src: img, format: 'png' })).src));
+const deploy = packages.find((p) => p.id === 'kaizen-ppm-deployment');
 const crumbs = [{ name: 'Products', path: '/products/' }, { name: 'Kaizen PPM', path: PPM.path }];
 ---
 <Base
@@ -56,6 +58,23 @@ const crumbs = [{ name: 'Products', path: '/products/' }, { name: 'Kaizen PPM', 
         <Image src={gantt} alt="Kaizen PPM Gantt chart with WBS grid, dependencies and milestones" widths={[800, 1280, 1918]} sizes="(max-width: 1240px) 100vw, 1144px" loading="eager" />
         <figcaption>Fig. 1. Schedule view: WBS, dependencies, baselines, drag to reschedule, MS Project export.</figcaption>
       </figure>
+    </div>
+  </section>
+
+  <section class="section" id="ownership">
+    <div class="container split">
+      <div>
+        <span class="label"><b>00</b>How you buy it</span>
+        <h2 class="side-h">{ownership.title}</h2>
+        {deploy && <p class="side-note"><strong>From ${deploy.price.toLocaleString('en-US')}, one time</strong>Deployment, migration if needed, training and 30 days of hypercare.<br /><a href={`/packages/#${deploy.id}`}>See the package →</a></p>}
+      </div>
+      <div>
+        <p class="lead measure">{ownership.lead}</p>
+        <ol class="own">
+          {ownership.points.map((o) => <li><h3>{o.title}</h3><p>{o.body}</p></li>)}
+        </ol>
+        <p class="own-note">{ownership.note}</p>
+      </div>
     </div>
   </section>
 
@@ -175,6 +194,13 @@ const crumbs = [{ name: 'Products', path: '/products/' }, { name: 'Kaizen PPM', 
   .who { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #f2a493 !important; margin: 0 0 10px !important; }
   .note { margin-top: 36px; font-size: 0.92rem; color: #9aa5b8; max-width: 70ch; }
   .sources { margin-top: 24px; font-size: 0.9rem; }
+  .own { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; counter-reset: o; border-top: 1px solid var(--rule-strong); }
+  .own li { counter-increment: o; position: relative; padding-block: 22px; padding-inline: 2.6rem 0; border-bottom: 1px solid var(--rule); }
+  .own li::before { content: counter(o, decimal-leading-zero); position: absolute; inset-inline-start: 0; top: 26px; font-family: var(--display); font-weight: 700; font-size: 0.78rem; color: var(--accent); }
+  .own h3 { font-size: 1.15rem; margin: 0 0 6px; }
+  .own p { margin: 0; color: var(--muted); font-size: 0.97rem; }
+  .own-note { margin-top: 20px; font-size: 0.9rem; color: var(--muted); }
+  @media (max-width: 760px) { .own { grid-template-columns: 1fr; } }
   .waves { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
   .waves > li { display: grid; grid-template-columns: 13rem 1fr; gap: 12px 32px; padding: 26px 0; border-bottom: 1px solid var(--rule); }
   .wave-head { display: grid; align-content: start; gap: 4px; }

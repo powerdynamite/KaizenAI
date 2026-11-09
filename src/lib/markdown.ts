@@ -4,7 +4,7 @@
 import { getCollection } from 'astro:content';
 import { SITE } from '../config';
 import { services, type Faq, type Service } from '../data/services';
-import { PPM, capabilities, ladder, aiWaves, aiNever, migrationSources, ppmFaqs } from '../data/ppm';
+import { PPM, capabilities, ladder, aiWaves, aiNever, ownership, migrationSources, ppmFaqs } from '../data/ppm';
 import { homeFaqs } from '../data/faq';
 import { steps, principles } from '../data/home';
 import { kits, kitSteps, kitFaqs } from '../data/tools';
@@ -123,6 +123,14 @@ ${PPM.intro}
 ## What does Kaizen PPM include?
 
 ${capabilities.map((c) => `- **${c.title}**: ${c.body}`).join('\n')}
+
+## ${ownership.title}
+
+${ownership.lead}
+
+${ownership.points.map((o) => `- **${o.title}.** ${o.body}`).join('\n')}
+
+${ownership.note}
 
 ## How does Kaizen PPM use AI?
 
