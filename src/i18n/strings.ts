@@ -13,7 +13,7 @@ export const LANGS: { code: Lang; name: string; dir: 'ltr' | 'rtl'; home: string
 export const langInfo = (l: Lang) => LANGS.find((x) => x.code === l)!;
 
 const en = {
-  nav: { services: 'Services', ppm: 'Kaizen PPM', experience: 'Our work', kits: 'Starter kits', blog: 'Blog', about: 'About', contact: 'Contact us' },
+  nav: { services: 'Services', packages: 'Packages', ppm: 'Kaizen PPM', experience: 'Our work', kits: 'Starter kits', blog: 'Blog', about: 'About', contact: 'Contact us' },
   menu: 'Menu', close: 'Close',
   toLight: 'Switch to light mode', toDark: 'Switch to dark mode',
   language: 'Language', machine: 'machine translation',
@@ -50,7 +50,7 @@ const en = {
 export type Strings = typeof en;
 
 const de: Strings = {
-  nav: { services: 'Leistungen', ppm: 'Kaizen PPM', experience: 'Referenzen', kits: 'Starter-Kits', blog: 'Blog', about: 'Über uns', contact: 'Kontakt' },
+  nav: { services: 'Leistungen', packages: 'Festpreis-Pakete', ppm: 'Kaizen PPM', experience: 'Referenzen', kits: 'Starter-Kits', blog: 'Blog', about: 'Über uns', contact: 'Kontakt' },
   menu: 'Menü', close: 'Schließen',
   toLight: 'Zum hellen Modus wechseln', toDark: 'Zum dunklen Modus wechseln',
   language: 'Sprache', machine: 'maschinelle Übersetzung',
@@ -85,7 +85,7 @@ const de: Strings = {
 };
 
 const ar: Strings = {
-  nav: { services: 'الخدمات', ppm: 'Kaizen PPM', experience: 'أعمالنا', kits: 'الحزم الجاهزة', blog: 'المدونة', about: 'من نحن', contact: 'تواصل معنا' },
+  nav: { services: 'الخدمات', packages: 'الباقات', ppm: 'Kaizen PPM', experience: 'أعمالنا', kits: 'الحزم الجاهزة', blog: 'المدونة', about: 'من نحن', contact: 'تواصل معنا' },
   menu: 'القائمة', close: 'إغلاق',
   toLight: 'التبديل إلى الوضع الفاتح', toDark: 'التبديل إلى الوضع الداكن',
   language: 'اللغة', machine: 'ترجمة آلية',
