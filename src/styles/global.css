@@ -133,7 +133,7 @@ img { max-width: 100%; height: auto; display: block; }
   margin: 0 0 1rem;
   display: block;
 }
-.label b { color: var(--accent); font-weight: 500; margin-right: 0.6em; }
+.label b { color: var(--accent); font-weight: 500; margin-inline-end: 0.6em; }
 
 .lead { font-size: 1.18rem; line-height: 1.6; color: var(--muted); max-width: 60ch; }
 .section--ink .lead { color: #c9d1de; }

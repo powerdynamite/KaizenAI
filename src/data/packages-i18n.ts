@@ -67,10 +67,10 @@ const de: Dict = {
     summary: 'Berichte, denen man vertraut, auf einem sauberen Modell.',
     includes: ['Semantisches Modell im Sternschema', 'Bis zu 5 Berichtsseiten', 'Sicherheit auf Zeilenebene', 'Einrichtung der geplanten Aktualisierung'],
   },
-  'kaizen-ppm-migration': {
-    name: 'Migration von Project Online zu Kaizen PPM', duration: '4–8 Wochen',
-    summary: 'Weg von Project Online, hin zu Kaizen PPM in Ihrem eigenen Tenant.',
-    includes: ['Kaizen PPM in Ihrem Tenant bereitgestellt', 'Project-Online-Daten migriert', 'Konfiguration und rollenbasierte Schulung', '30 Tage Hypercare'],
+  'kaizen-ppm-deployment': {
+    name: 'Kaizen PPM Bereitstellung', duration: '4–8 Wochen',
+    summary: 'Kaizen PPM in Ihrem eigenen Tenant, zum einmaligen Festpreis. Keine Gebühr pro Nutzer.',
+    includes: ['Kaizen PPM in Ihrem Tenant bereitgestellt und konfiguriert', 'Bei Bedarf Migration Ihrer Project-Online- oder Planner-Daten', 'Rollenbasierte Schulung', '30 Tage Hypercare, danach ein Managed-Support-Plan'],
   },
   'power-platform-governance-setup': {
     name: 'Power Platform Governance Setup', duration: '3–5 Wochen',
@@ -88,14 +88,6 @@ const de: Dict = {
   'support-premium': {
     name: 'Managed Support: Premium', duration: 'Monatlich', summary: 'Bis zu 50 Stunden pro Monat.',
     includes: ['Alles aus Growth', 'Neue Funktionen und Agents', 'Feste Ansprechperson und monatliches Roadmap-Gespräch', 'Antwort am selben Werktag (britische Geschäftszeiten)'],
-  },
-  'kaizen-ppm-team': {
-    name: 'Kaizen PPM: Team', duration: 'Monatlich', summary: 'Bis zu 25 Nutzer.',
-    includes: ['Kaizen PPM in Ihrem eigenen Tenant', 'Updates und Support zu Geschäftszeiten', 'Monatlich kündbar'],
-  },
-  'kaizen-ppm-business': {
-    name: 'Kaizen PPM: Business', duration: 'Monatlich', summary: 'Unbegrenzt viele Nutzer.',
-    includes: ['Alles aus Team', 'Power-BI-Berichte', 'KI-Funktionen, sobald sie veröffentlicht sind', 'Priorisierter Support'],
   },
 };
 
@@ -160,10 +152,10 @@ const ar: Dict = {
     summary: 'تقارير موثوقة مبنية على نموذج سليم.',
     includes: ['نموذج دلالي بمخطط النجمة', 'حتى 5 صفحات تقارير', 'أمان على مستوى الصفوف', 'إعداد التحديث المجدول'],
   },
-  'kaizen-ppm-migration': {
-    name: 'الترحيل من Project Online إلى Kaizen PPM', duration: '4–8 أسابيع',
-    summary: 'الانتقال من Project Online إلى Kaizen PPM داخل بيئتكم الخاصة.',
-    includes: ['نشر Kaizen PPM في بيئتكم', 'ترحيل بيانات Project Online', 'الإعداد وتدريب حسب الأدوار', '30 يومًا من الدعم المكثف بعد الإطلاق'],
+  'kaizen-ppm-deployment': {
+    name: 'نشر Kaizen PPM', duration: '4–8 أسابيع',
+    summary: 'إعداد Kaizen PPM داخل بيئتكم الخاصة بسعر ثابت لمرة واحدة، دون رسوم لكل مستخدم.',
+    includes: ['نشر Kaizen PPM وإعداده في بيئتكم', 'ترحيل بيانات Project Online أو Planner عند الحاجة', 'تدريب حسب الأدوار', '30 يومًا من الدعم المكثف، ثم خطة دعم مُدار'],
   },
   'power-platform-governance-setup': {
     name: 'إعداد حوكمة Power Platform', duration: '3–5 أسابيع',
@@ -181,14 +173,6 @@ const ar: Dict = {
   'support-premium': {
     name: 'الدعم المُدار: المتميز', duration: 'شهريًا', summary: 'حتى 50 ساعة شهريًا.',
     includes: ['كل ما في باقة النمو', 'ميزات ووكلاء جدد', 'مسؤول مخصص واجتماع شهري لخارطة الطريق', 'رد في يوم العمل نفسه (ساعات العمل في المملكة المتحدة)'],
-  },
-  'kaizen-ppm-team': {
-    name: 'Kaizen PPM: الفريق', duration: 'شهريًا', summary: 'حتى 25 مستخدمًا.',
-    includes: ['Kaizen PPM داخل بيئتكم الخاصة', 'تحديثات ودعم خلال ساعات العمل', 'اشتراك شهري'],
-  },
-  'kaizen-ppm-business': {
-    name: 'Kaizen PPM: الأعمال', duration: 'شهريًا', summary: 'عدد غير محدود من المستخدمين.',
-    includes: ['كل ما في باقة الفريق', 'تقارير Power BI', 'ميزات الذكاء الاصطناعي فور إصدارها', 'دعم ذو أولوية'],
   },
 };
 
@@ -209,7 +193,7 @@ export const packagesPageText = {
     groups: {
       entry: { label: 'Start here', title: 'Entry packages', intro: 'Small, clearly scoped first steps. Each one ends with findings you can act on and, if you want it, a fixed-price quote for the next stage.' },
       project: { label: 'Build', title: 'Projects', intro: 'Fixed-scope delivery. Prices are typical starting points. After a short call we confirm the scope and a fixed price before any work starts.' },
-      monthly: { label: 'Run', title: 'Monthly plans', intro: 'Ongoing support after go-live, and Kaizen PPM subscriptions. Month to month: cancel with 30 days’ notice.' },
+      monthly: { label: 'Run', title: 'Monthly plans', intro: 'Managed support after go-live for anything we deploy, Kaizen PPM included: fixes, updates, admin help and small changes. Bigger changes are planned with you and quoted at a fixed price. Month to month: cancel with 30 days’ notice.' },
     },
   },
   de: {
@@ -225,7 +209,7 @@ export const packagesPageText = {
     groups: {
       entry: { label: 'Einstieg', title: 'Einstiegspakete', intro: 'Kleine, klar abgegrenzte erste Schritte. Jedes Paket endet mit umsetzbaren Ergebnissen und auf Wunsch mit einem Festpreis-Angebot für die nächste Phase.' },
       project: { label: 'Umsetzen', title: 'Projekte', intro: 'Umsetzung mit festem Umfang. Die Preise sind typische Startwerte. Nach einem kurzen Gespräch bestätigen wir Umfang und Festpreis, bevor die Arbeit beginnt.' },
-      monthly: { label: 'Betreiben', title: 'Monatliche Pläne', intro: 'Laufender Support nach dem Go-live sowie Kaizen-PPM-Abonnements. Monatlich mit 30 Tagen Frist kündbar.' },
+      monthly: { label: 'Betreiben', title: 'Monatliche Pläne', intro: 'Managed Support nach dem Go-live für alles, was wir bereitstellen, auch Kaizen PPM: Fehlerbehebungen, Updates, Admin-Hilfe und kleine Änderungen. Größere Änderungen planen wir gemeinsam und bieten sie zum Festpreis an. Monatlich mit 30 Tagen Frist kündbar.' },
     },
   },
   ar: {
@@ -241,19 +225,21 @@ export const packagesPageText = {
     groups: {
       entry: { label: 'ابدأوا هنا', title: 'باقات البداية', intro: 'خطوات أولى صغيرة وواضحة النطاق. تنتهي كل باقة بنتائج قابلة للتنفيذ، وبعرض سعر ثابت للمرحلة التالية إن رغبتم.' },
       project: { label: 'التنفيذ', title: 'المشاريع', intro: 'تنفيذ بنطاق ثابت. الأسعار نقاط بداية معتادة، وبعد مكالمة قصيرة نؤكد النطاق والسعر الثابت قبل بدء أي عمل.' },
-      monthly: { label: 'التشغيل', title: 'الخطط الشهرية', intro: 'دعم مستمر بعد الإطلاق، واشتراكات Kaizen PPM. اشتراك شهري يمكن إلغاؤه بإشعار قبل 30 يومًا.' },
+      monthly: { label: 'التشغيل', title: 'الخطط الشهرية', intro: 'دعم مُدار بعد الإطلاق لكل ما ننشره، بما في ذلك Kaizen PPM: إصلاحات وتحديثات ومساعدة إدارية وتعديلات صغيرة. التعديلات الأكبر نخطط لها معكم ونقدّمها بسعر ثابت. خطة شهرية يمكن إلغاؤها بإشعار قبل 30 يومًا.' },
     },
   },
 } as const;
 
 export const packageTermsI18n = {
   de: [
+    { title: 'Einmal bereitstellen, dann ein Managed-Plan', body: 'Jede Lösung, auch Kaizen PPM, wird zu einem einmaligen Festpreis bereitgestellt. Nach dem Go-live wechseln Sie in einen monatlichen Managed-Support-Plan. Neue Funktionen und Änderungen planen wir gemeinsam und bieten sie vor Beginn zum Festpreis an.' },
     { title: 'Festpreis, vorab vereinbart', body: 'Nach einem kurzen Gespräch bestätigen wir Umfang und Festpreis schriftlich. Nichts beginnt ohne Ihre Zustimmung.' },
     { title: 'Unsere Garantie', body: 'Erfüllen wir den vereinbarten Umfang nicht, bessern wir ohne Mehrkosten nach.' },
     { title: 'Schneller mit KI', body: 'Wir arbeiten mit KI-gestützter Entwicklung. Die Umsetzung dauert Wochen statt Monate, und ein Teil dieser Ersparnis steckt im Preis.' },
     { title: 'Nicht enthalten', body: 'Die Preise verstehen sich in US-Dollar, ohne Microsoft-Lizenzen und ohne gegebenenfalls anfallende Steuern. Microsoft-Lizenzen beziehen Sie direkt bei Microsoft oder Ihrem Reseller.' },
   ],
   ar: [
+    { title: 'نشر لمرة واحدة، ثم خطة مُدارة', body: 'كل حل، بما في ذلك Kaizen PPM، يُنشر بسعر ثابت لمرة واحدة. بعد الإطلاق تنتقلون إلى خطة دعم مُدار شهرية. الميزات الجديدة والتعديلات نخطط لها معكم ونقدّم لها سعرًا ثابتًا قبل بدء العمل.' },
     { title: 'سعر ثابت يُتفق عليه أولًا', body: 'بعد مكالمة قصيرة نؤكد النطاق والسعر الثابت كتابيًا. لا يبدأ أي عمل قبل موافقتكم.' },
     { title: 'ضماننا', body: 'إذا لم نلتزم بالنطاق المتفق عليه، نصلح ذلك دون أي تكلفة إضافية.' },
     { title: 'أسرع بالذكاء الاصطناعي', body: 'نعتمد على الهندسة المدعومة بالذكاء الاصطناعي، فيستغرق التنفيذ أسابيع لا أشهرًا، وجزء من هذا التوفير ينعكس على السعر.' },
@@ -263,6 +249,7 @@ export const packageTermsI18n = {
 
 export const packageFaqsI18n = {
   de: [
+    { q: 'Ist Kaizen PPM ein Abonnement?', a: 'Nein. Kaizen PPM wird zu einem einmaligen Festpreis in Ihrem eigenen Microsoft-Tenant bereitgestellt, ohne Gebühr pro Nutzer an uns. Nach dem Go-live deckt ein Managed-Support-Plan Updates, Fehlerbehebungen und Hilfe ab; neue Funktionen bieten wir zum Festpreis an. Ihre Nutzer benötigen Lizenzen für Power Apps Premium oder Dynamics 365, die Sie bei Microsoft erwerben.' },
     { q: 'Was passiert, wenn sich der Umfang während des Projekts ändert?', a: 'Der Festpreis deckt den schriftlich vereinbarten Umfang ab. Wünschen Sie zusätzliche Leistungen, bepreisen wir sie als Änderungsanfrage, und Sie geben sie frei, bevor wir beginnen. Ohne Ihre Zustimmung kommt nichts auf Ihre Rechnung.' },
     { q: 'Wer erledigt die Arbeit?', a: 'Jedes Projekt wird von unserem Gründer geleitet, einem Power-Platform- und KI-Lösungsarchitekten mit acht Jahren Beratungserfahrung bei Microsoft Business Applications. Wo ein Paket es erfordert, kommen Spezialisten hinzu, und wir arbeiten durchgehend mit KI-gestützter Entwicklung.' },
     { q: 'In welcher Zeitzone arbeiten Sie?', a: 'Wir sitzen in Pakistan (UTC+5) und arbeiten remote mit Kunden weltweit. Unser Arbeitstag überschneidet sich mit dem Vormittag in Großbritannien und Europa sowie mit dem Arbeitstag am Golf. Termine mit Amerika und Australien legen wir an den Anfang oder das Ende unseres Tages.' },
@@ -271,6 +258,7 @@ export const packageFaqsI18n = {
     { q: 'Was, wenn kein Paket passt?', a: 'Buchen Sie ein kostenloses 30-Minuten-Gespräch und schildern Sie Ihr Problem. Wir empfehlen ein Paket, erstellen ein individuelles Festpreis-Angebot oder sagen Ihnen ehrlich, wenn Sie uns nicht brauchen.' },
   ],
   ar: [
+    { q: 'هل Kaizen PPM اشتراك؟', a: 'لا. يُنشر Kaizen PPM داخل بيئة Microsoft الخاصة بكم بسعر ثابت لمرة واحدة، دون رسوم لكل مستخدم ندفعها لنا. بعد الإطلاق تغطي خطة الدعم المُدار التحديثات والإصلاحات والمساعدة، والميزات الجديدة نقدّم لها سعرًا ثابتًا. يحتاج مستخدموكم إلى تراخيص Power Apps Premium أو Dynamics 365 من Microsoft.' },
     { q: 'ماذا لو تغيّر النطاق أثناء المشروع؟', a: 'يغطي السعر الثابت النطاق الذي نتفق عليه كتابيًا. إذا رغبتم في شيء إضافي، نسعّره كطلب تغيير وتوافقون عليه قبل أن نبدأ. لا يُضاف شيء إلى فاتورتكم دون موافقتكم.' },
     { q: 'من ينفّذ العمل؟', a: 'يقود كل مشروع مؤسسنا، وهو مهندس حلول Power Platform والذكاء الاصطناعي بخبرة ثماني سنوات في استشارات تطبيقات الأعمال من Microsoft. ينضم إلينا متخصصون حين تتطلب الباقة ذلك، ونعتمد الهندسة المدعومة بالذكاء الاصطناعي في كل مراحل العمل.' },
     { q: 'بأي منطقة زمنية تعملون؟', a: 'نحن في باكستان (UTC+5) ونعمل عن بُعد مع عملاء حول العالم. يتداخل يوم عملنا مع صباح المملكة المتحدة وأوروبا ومع يوم العمل في الخليج. أما مع الأمريكيتين وأستراليا فنحدد المكالمات في بداية يومنا أو نهايته.' },

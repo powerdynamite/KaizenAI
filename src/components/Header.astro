@@ -3,7 +3,8 @@ import Logo from './Logo.astro';
 import LangSwitch from './LangSwitch.astro';
 import { NAV, SITE } from '../config';
 import { services } from '../data/services';
-import { packages } from '../data/packages';
+import { packages, packageGroups, type Package } from '../data/packages';
+import { packageText, packagesPageText } from '../data/packages-i18n';
 import { HOME } from '../i18n/home';
 import { t, langInfo, type Lang, type Family } from '../i18n/strings';
 interface Props { lang?: Lang; alternates?: Family }
@@ -19,6 +20,19 @@ const M = {
   en: { all: 'All services', pkLabel: 'Fixed-price packages', pkTitle: `Start small, from $${fromPrice}`, pkBody: 'Assessments, pilots and builds with a clear scope and price.', pkLink: 'See packages', callTitle: 'Not sure where to start?', callLink: 'Book a free 30-minute call' },
   de: { all: 'Alle Leistungen', pkLabel: 'Festpreis-Pakete', pkTitle: `Klein starten, ab ${fromPrice} USD`, pkBody: 'Analysen, Pilotprojekte und Umsetzungen mit klarem Umfang und Preis.', pkLink: 'Pakete ansehen', callTitle: 'Unsicher, wo Sie anfangen sollen?', callLink: 'Kostenloses 30-Minuten-Gespräch' },
   ar: { all: 'جميع الخدمات', pkLabel: 'باقات بسعر ثابت', pkTitle: `ابدأوا بخطوة صغيرة، من ${fromPrice} دولار`, pkBody: 'تقييمات ومشاريع تجريبية وتنفيذ بنطاق وسعر واضحين.', pkLink: 'شاهدوا الباقات', callTitle: 'لستم متأكدين من أين تبدأون؟', callLink: 'احجزوا مكالمة مجانية مدتها 30 دقيقة' },
+}[lang];
+// Packages panel: every package by group, with its price, in the page's language.
+const PT = packagesPageText[lang];
+const pkName = (p: Package) => (lang === 'en' ? p.name : packageText[lang][p.id]?.name ?? p.name);
+const pkPrice = (p: Package) => {
+  const m = `$${p.price.toLocaleString('en-US')}`;
+  return p.group === 'monthly' ? `${m} ${PT.perMonth}` : p.from ? `${PT.from} ${m}` : m;
+};
+const pkGroups = packageGroups.map((g) => ({ id: g.id, label: PT.groups[g.id].label, title: PT.groups[g.id].title, items: packages.filter((p) => p.group === g.id) }));
+const P = {
+  en: { steps: ['Plan together', 'Deploy once, fixed price', 'Managed support plan', 'Changes quoted at a fixed price'], all: 'All packages' },
+  de: { steps: ['Gemeinsam planen', 'Einmal bereitstellen, Festpreis', 'Managed-Support-Plan', 'Änderungen zum Festpreis'], all: 'Alle Pakete' },
+  ar: { steps: ['نخطط معًا', 'نشر لمرة واحدة بسعر ثابت', 'خطة دعم مُدار', 'التعديلات بسعر ثابت'], all: 'جميع الباقات' },
 }[lang];
 const bookAttrs = SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-booking': SITE.bookingUrl } : { href: L.contact };
 // German and Arabic pages link to sections of their own home page.
@@ -44,7 +58,34 @@ const nav = lang === 'en'
       <button class="menu-btn" aria-expanded="false" aria-controls="site-nav" data-open={s.menu} data-close={s.close}>{s.menu}</button>
     </div>
     <nav id="site-nav" class="nav" aria-label="Main">
-      {nav.map((n, i) => i === 0 ? (
+      {nav.map((n, i) => n.href === L.packages ? (
+        <div class="has-mega">
+          <a href={n.href} class="mega-trigger" aria-current={isActive(n.href) ? 'page' : undefined} aria-haspopup="true">{n.label}<svg class="chev" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <div class="mega" role="group" aria-label={n.label}>
+            <div class="container">
+              <div class="pk-cols">
+                {pkGroups.map((g) => (
+                  <div class="pk-col">
+                    <span class="label"><b>{g.label}</b>{g.title}</span>
+                    <ul>
+                      {g.items.map((p) => (
+                        <li><a href={`${L.packages}#${p.id}`}><span class="pk-n">{pkName(p)}</span><span class="pk-p">{pkPrice(p)}</span></a></li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              <div class="pk-flow">
+                <ol>{P.steps.map((st, k) => <li><span class="mn">{String(k + 1).padStart(2, '0')}</span>{st}</li>)}</ol>
+                <div class="pk-actions">
+                  <a href={L.packages} class="pk-all">{P.all} <span class="arr">→</span></a>
+                  <a class="btn" {...bookAttrs}>{M.callLink} <span class="arr">→</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : i === 0 ? (
         <div class="has-mega">
           <a href={n.href} class="mega-trigger" aria-current={isActive(n.href) ? 'page' : undefined} aria-haspopup="true">{n.label}<svg class="chev" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <div class="mega" role="group" aria-label={n.label}>
@@ -138,6 +179,22 @@ const nav = lang === 'en'
   .mc-q { color: var(--muted); }
   .mega-call a { font-family: var(--display); font-weight: 600; color: var(--accent); text-decoration: none; }
   .mega-call a:hover { text-decoration: underline; }
+  /* Packages panel */
+  .pk-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; padding-top: 26px; }
+  .pk-col .label { margin: 0 0 8px; }
+  .pk-col ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
+  .pk-col a { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 8px; margin-inline: -8px; border-radius: var(--radius); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .pk-col a:hover, .pk-col a:focus-visible { background: var(--rule); }
+  .pk-n { font-size: 0.92rem; color: var(--heading); line-height: 1.35; }
+  .pk-col a:hover .pk-n { color: var(--accent); }
+  .pk-p { flex: none; font: 600 0.8rem var(--display); color: var(--accent); white-space: nowrap; }
+  .pk-flow { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 22px 0 26px; padding: 14px 18px; border-radius: var(--radius); background: var(--rule); }
+  .pk-flow ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 0.88rem; color: var(--heading); }
+  .pk-flow li { display: flex; align-items: baseline; gap: 7px; }
+  .pk-actions { display: flex; align-items: center; gap: 18px; flex: none; }
+  .pk-all { font: 600 0.9rem var(--display); color: var(--accent); text-decoration: none; }
+  .pk-actions .btn { padding: 9px 16px; font-size: 0.88rem; }
+  @media (max-width: 1100px) { .pk-flow { flex-direction: column; align-items: flex-start; } }
   @media (prefers-reduced-motion: reduce) { .mega, .bar, .chev, .nav > a::after, .mega-trigger::after { transition: none; } }
   .bar { gap: 16px; }
   .tools { order: 3; display: flex; align-items: center; gap: 2px; }
@@ -186,17 +243,21 @@ const nav = lang === 'en'
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Services panel: on touch screens the first tap opens it; Escape closes it.
-  const mega = document.querySelector<HTMLElement>('.has-mega');
-  const trigger = mega?.querySelector<HTMLAnchorElement>('.mega-trigger');
-  trigger?.addEventListener('click', (e) => {
-    if (window.matchMedia('(hover: none) and (min-width: 861px)').matches && !mega!.classList.contains('open')) {
-      e.preventDefault(); mega!.classList.add('open');
-    }
-  });
-  document.addEventListener('click', (e) => { if (mega && !mega.contains(e.target as Node)) mega.classList.remove('open'); });
+  // Drop-down panels: on touch screens the first tap opens one; Escape or a click outside closes it.
+  const megas = [...document.querySelectorAll<HTMLElement>('.has-mega')];
+  const closeAll = (except?: HTMLElement) => megas.forEach((m) => { if (m !== except) m.classList.toggle('open', false); });
+  for (const mega of megas) {
+    const trigger = mega.querySelector<HTMLAnchorElement>('.mega-trigger');
+    trigger?.addEventListener('click', (e) => {
+      if (window.matchMedia('(hover: none) and (min-width: 861px)').matches && !mega.classList.contains('open')) {
+        e.preventDefault(); closeAll(mega); mega.classList.add('open');
+      }
+    });
+  }
+  document.addEventListener('click', (e) => closeAll(megas.find((m) => m.contains(e.target as Node))));
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mega?.matches(':focus-within, .open')) { mega.classList.remove('open'); trigger?.focus(); (document.activeElement as HTMLElement)?.blur(); }
+    if (e.key !== 'Escape') return;
+    if (megas.some((m) => m.matches(':focus-within, .open'))) { closeAll(); (document.activeElement as HTMLElement)?.blur(); }
   });
 
   // Light / dark switch: remembers the visitor's choice; otherwise follows the device.

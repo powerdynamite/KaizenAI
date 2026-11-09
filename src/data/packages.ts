@@ -38,7 +38,7 @@ export const packageGroups: { id: PackageGroup; label: string; title: string; in
     id: 'monthly',
     label: 'Run',
     title: 'Monthly plans',
-    intro: 'Ongoing support after go-live, and Kaizen PPM subscriptions. Month to month: cancel with 30 days’ notice.',
+    intro: 'Managed support after go-live for anything we deploy, Kaizen PPM included: fixes, updates, admin help and small changes. Bigger changes are planned with you and quoted at a fixed price. Month to month: cancel with 30 days’ notice.',
   },
 ];
 
@@ -209,14 +209,14 @@ export const packages: Package[] = [
     topic: 'Data & Analytics',
   },
   {
-    id: 'kaizen-ppm-migration',
-    name: 'Project Online → Kaizen PPM Migration',
+    id: 'kaizen-ppm-deployment',
+    name: 'Kaizen PPM Deployment',
     group: 'project',
     price: 6300,
     from: true,
     duration: '4–8 weeks',
-    summary: 'Move off Project Online into Kaizen PPM in your own tenant.',
-    includes: ['Kaizen PPM deployed in your tenant', 'Project Online data migrated', 'Configuration and role-based training', '30 days of hypercare'],
+    summary: 'Kaizen PPM set up in your own tenant for a one-time fixed price. No per-user fee from us.',
+    includes: ['Kaizen PPM deployed and configured in your tenant', 'Project Online or Planner data migrated, if you need it', 'Role-based training', '30 days of hypercare, then a managed support plan'],
     service: '/products/kaizen-ppm/',
     topic: 'Kaizen PPM demo',
   },
@@ -263,31 +263,10 @@ export const packages: Package[] = [
     includes: ['Everything in Growth', 'New features and agents', 'Named lead and monthly roadmap call', 'Same-business-day response (UK business hours)'],
     topic: 'Something else',
   },
-  {
-    id: 'kaizen-ppm-team',
-    name: 'Kaizen PPM: Team',
-    group: 'monthly',
-    price: 890,
-    duration: 'Monthly',
-    summary: 'Up to 25 users.',
-    includes: ['Kaizen PPM in your own tenant', 'Updates and business-hours support', 'Month to month'],
-    service: '/products/kaizen-ppm/',
-    topic: 'Kaizen PPM demo',
-  },
-  {
-    id: 'kaizen-ppm-business',
-    name: 'Kaizen PPM: Business',
-    group: 'monthly',
-    price: 1690,
-    duration: 'Monthly',
-    summary: 'Unlimited users.',
-    includes: ['Everything in Team', 'Power BI reports', 'AI features as they are released', 'Priority support'],
-    service: '/products/kaizen-ppm/',
-    topic: 'Kaizen PPM demo',
-  },
 ];
 
 export const packageTerms = [
+  { title: 'Deploy once, then a managed plan', body: 'Every solution, Kaizen PPM included, is deployed for a one-time fixed price. After go-live you move onto a monthly managed support plan. New features and changes are planned with you and quoted at a fixed price before work starts.' },
   { title: 'Fixed price, agreed first', body: 'After a short call we confirm the scope and a fixed price in writing. Nothing starts until you agree.' },
   { title: 'Our guarantee', body: 'If we miss the agreed scope, we fix it at no extra cost.' },
   { title: 'Faster with AI', body: 'We use AI-assisted engineering, so delivery takes weeks, not months, and part of that saving is in the price.' },
@@ -295,6 +274,7 @@ export const packageTerms = [
 ];
 
 export const packageFaqs = [
+  { q: 'Is Kaizen PPM a subscription?', a: 'No. Kaizen PPM is deployed in your own Microsoft tenant for a one-time fixed price, with no per-user fee from us. After go-live, a managed support plan covers updates, fixes and help, and any new features are quoted at a fixed price. Your users need Microsoft Power Apps premium or Dynamics 365 licences, bought from Microsoft.' },
   { q: 'What if the scope changes during the project?', a: 'The fixed price covers the scope we agree in writing. If you want something extra, we price it as a change request and you approve it before we start. Nothing is added to your bill without your agreement.' },
   { q: 'Who does the work?', a: 'Every engagement is led by our founder, a Power Platform and AI solutions architect with eight years of Microsoft business applications consulting. Specialists join where a package needs them, and we use AI-assisted engineering throughout.' },
   { q: 'Which time zone do you work in?', a: 'We are based in Pakistan (UTC+5) and work remotely with clients worldwide. Our day overlaps with UK and European mornings and with the Gulf working day. For the Americas and Australia we schedule calls at the start or end of our day.' },
