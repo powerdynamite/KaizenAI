@@ -1,7 +1,10 @@
 ---
 import Logo from './Logo.astro';
 import LangSwitch from './LangSwitch.astro';
-import { NAV } from '../config';
+import { NAV, SITE } from '../config';
+import { services } from '../data/services';
+import { packages } from '../data/packages';
+import { HOME } from '../i18n/home';
 import { t, langInfo, type Lang, type Family } from '../i18n/strings';
 interface Props { lang?: Lang; alternates?: Family }
 const { lang = 'en', alternates } = Astro.props;
@@ -9,6 +12,15 @@ const s = t(lang);
 const L = langInfo(lang);
 const path = Astro.url.pathname;
 const isActive = (href: string) => path === href || (href.length > 4 && path.startsWith(href));
+// Services panel: English titles on the English site, hand-translated ones elsewhere.
+const megaServices = lang === 'en' ? services.map(({ slug, title, short }) => ({ slug, title, short })) : HOME[lang].services;
+const fromPrice = Math.min(...packages.map((p) => p.price)).toLocaleString('en-US');
+const M = {
+  en: { all: 'All services', pkLabel: 'Fixed-price packages', pkTitle: `Start small, from $${fromPrice}`, pkBody: 'Assessments, pilots and builds with a clear scope and price.', pkLink: 'See packages', callTitle: 'Not sure where to start?', callLink: 'Book a free 30-minute call' },
+  de: { all: 'Alle Leistungen', pkLabel: 'Festpreis-Pakete', pkTitle: `Klein starten, ab ${fromPrice} USD`, pkBody: 'Analysen, Pilotprojekte und Umsetzungen mit klarem Umfang und Preis.', pkLink: 'Pakete ansehen', callTitle: 'Unsicher, wo Sie anfangen sollen?', callLink: 'Kostenloses 30-Minuten-Gespräch' },
+  ar: { all: 'جميع الخدمات', pkLabel: 'باقات بسعر ثابت', pkTitle: `ابدأوا بخطوة صغيرة، من ${fromPrice} دولار`, pkBody: 'تقييمات ومشاريع تجريبية وتنفيذ بنطاق وسعر واضحين.', pkLink: 'شاهدوا الباقات', callTitle: 'لستم متأكدين من أين تبدأون؟', callLink: 'احجزوا مكالمة مجانية مدتها 30 دقيقة' },
+}[lang];
+const bookAttrs = SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-booking': SITE.bookingUrl } : { href: L.contact };
 // German and Arabic pages link to sections of their own home page.
 const nav = lang === 'en'
   ? NAV
@@ -32,22 +44,101 @@ const nav = lang === 'en'
       <button class="menu-btn" aria-expanded="false" aria-controls="site-nav" data-open={s.menu} data-close={s.close}>{s.menu}</button>
     </div>
     <nav id="site-nav" class="nav" aria-label="Main">
-      {nav.map((n) => (
+      {nav.map((n, i) => i === 0 ? (
+        <div class="has-mega">
+          <a href={n.href} class="mega-trigger" aria-current={isActive(n.href) ? 'page' : undefined} aria-haspopup="true">{n.label}<svg class="chev" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <div class="mega" role="group" aria-label={n.label}>
+            <div class="container mega-in">
+              <ol class="mega-list">
+                {megaServices.map((m, j) => (
+                  <li><a href={`/services/${m.slug}/`} hreflang={lang === 'en' ? undefined : 'en'}><span class="mn">{String(j + 1).padStart(2, '0')}</span><span class="mt">{m.title}</span><span class="md">{m.short}</span></a></li>
+                ))}
+                {lang === 'en' && <li class="mega-all"><a href="/services/"><span class="mt">{M.all} <span class="arr">→</span></span></a></li>}
+              </ol>
+              <aside class="mega-side">
+                <a class="mega-card" href={L.packages}>
+                  <span class="label">{M.pkLabel}</span>
+                  <span class="mc-title">{M.pkTitle}</span>
+                  <span class="mc-body">{M.pkBody}</span>
+                  <span class="mc-link">{M.pkLink} <span class="arr">→</span></span>
+                </a>
+                <div class="mega-call">
+                  <span class="mc-q">{M.callTitle}</span>
+                  <a {...bookAttrs}>{M.callLink} <span class="arr">→</span></a>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      ) : (
         <a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
       ))}
-      <a href={L.contact} class="btn nav-cta">{s.nav.contact}</a>
+      <a href={L.contact} class="btn nav-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>{s.nav.contact}</a>
     </nav>
   </div>
 </header>
 <style>
-  .site-header { background: var(--bg); border-bottom: 1px solid var(--rule); position: relative; z-index: 50; }
-  .bar { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    -webkit-backdrop-filter: saturate(1.4) blur(12px); backdrop-filter: saturate(1.4) blur(12px);
+    border-bottom: 1px solid var(--rule); transition: box-shadow 0.2s;
+  }
+  .site-header.scrolled { box-shadow: 0 6px 24px -12px rgba(0, 0, 0, 0.35); }
+  .bar { display: flex; align-items: center; justify-content: space-between; height: 72px; transition: height 0.2s; }
+  .scrolled .bar { height: 60px; }
   .brand { text-decoration: none; }
   .nav { display: flex; align-items: center; gap: 32px; }
-  .nav a:not(.btn) { color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 500; padding: 4px 0; border-bottom: 2px solid transparent; }
-  .nav a:not(.btn):hover { color: var(--accent); }
-  .nav a[aria-current='page'] { border-bottom-color: var(--vermilion); }
-  .nav-cta { padding: 10px 18px; }
+  .nav > a:not(.btn), .mega-trigger {
+    position: relative; display: inline-flex; align-items: center; gap: 5px; color: var(--heading); text-decoration: none;
+    font-family: var(--display); font-size: 0.95rem; font-weight: 500; letter-spacing: -0.01em; padding: 6px 0;
+  }
+  .nav > a:not(.btn)::after, .mega-trigger::after {
+    content: ''; position: absolute; inset-inline: 0; bottom: 0; height: 2px; background: var(--vermilion);
+    transform: scaleX(0); transform-origin: var(--grow-from, left); transition: transform 0.25s ease;
+  }
+  :global([dir='rtl']) .nav { --grow-from: right; }
+  .nav > a:not(.btn):hover::after, .mega-trigger:hover::after, .has-mega:focus-within .mega-trigger::after,
+  .nav a[aria-current='page']::after { transform: scaleX(1); }
+  .chev { color: var(--muted); transition: transform 0.2s; }
+  .has-mega:hover .chev, .has-mega:focus-within .chev { transform: rotate(180deg); color: var(--vermilion); }
+  .nav-cta { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; box-shadow: 0 8px 20px -10px var(--vermilion); }
+
+  /* Services panel */
+  .has-mega { position: static; }
+  .mega {
+    position: absolute; left: 0; right: 0; top: 100%;
+    background: var(--bg); border-bottom: 1px solid var(--rule-strong); box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.35);
+    opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.18s, transform 0.18s, visibility 0s 0.18s;
+  }
+  .has-mega:hover .mega, .has-mega:focus-within .mega, .has-mega.open .mega { opacity: 1; visibility: visible; transform: none; transition: opacity 0.18s, transform 0.18s; }
+  .mega::before { content: ''; position: absolute; left: 0; right: 0; top: -14px; height: 14px; } /* keeps hover alive across the gap */
+  .mega-in { display: grid; grid-template-columns: 1fr 300px; gap: 40px; padding-top: 28px; padding-bottom: 32px; }
+  .mega-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 28px; }
+  .mega-list a { display: grid; grid-template-columns: 2rem 1fr; gap: 2px 10px; padding: 12px 12px 12px 10px; border-radius: var(--radius); text-decoration: none; transition: background 0.15s; }
+  .mega-list a:hover, .mega-list a:focus-visible { background: var(--rule); }
+  .mn { grid-row: 1 / 3; font: 700 0.75rem var(--display); color: var(--accent); padding-top: 4px; }
+  .mt { font-family: var(--display); font-weight: 600; font-size: 1rem; color: var(--heading); }
+  .md { font-size: 0.86rem; line-height: 1.45; color: var(--muted); }
+  .mega-list a:hover .mt { color: var(--accent); }
+  .mega-all a { grid-template-columns: 1fr; }
+  .mega-all .mt { font-size: 0.92rem; color: var(--accent); }
+  .mega-side { display: grid; gap: 14px; align-content: start; }
+  .mega-card {
+    display: grid; gap: 6px; padding: 20px 22px; border-radius: var(--radius); text-decoration: none;
+    background: linear-gradient(140deg, #1d2b45, #0E1726 70%); color: #F7F5F0; border: 1px solid #2a3852; border-top: 3px solid var(--vermilion);
+    transition: transform 0.2s;
+  }
+  .mega-card:hover { transform: translateY(-2px); }
+  .mega-card .label { margin: 0; color: #f2a493; }
+  .mc-title { font: 600 1.2rem/1.25 var(--display); color: #fff; }
+  .mc-body { font-size: 0.88rem; color: #c9d1de; }
+  .mc-link { margin-top: 6px; font: 600 0.9rem var(--display); color: #fff; }
+  .mega-call { padding: 4px 4px 0; display: grid; gap: 2px; font-size: 0.9rem; }
+  .mc-q { color: var(--muted); }
+  .mega-call a { font-family: var(--display); font-weight: 600; color: var(--accent); text-decoration: none; }
+  .mega-call a:hover { text-decoration: underline; }
+  @media (prefers-reduced-motion: reduce) { .mega, .bar, .chev, .nav > a::after, .mega-trigger::after { transition: none; } }
   .bar { gap: 16px; }
   .tools { order: 3; display: flex; align-items: center; gap: 2px; }
   .theme-btn { display: grid; place-items: center; width: 34px; height: 34px; border-radius: var(--radius); border: 0; background: transparent; color: var(--muted); cursor: pointer; }
@@ -67,13 +158,15 @@ const nav = lang === 'en'
   @media (max-width: 860px) {
     .menu-btn { display: block; }
     .nav {
-      position: absolute; top: 72px; left: 0; right: 0; display: none;
+      position: absolute; top: 100%; left: 0; right: 0; display: none; max-height: calc(100vh - 72px); overflow-y: auto;
       flex-direction: column; align-items: stretch; gap: 0;
       background: var(--bg); border-bottom: 1px solid var(--rule-strong); padding: 0 var(--gutter) 20px;
     }
     .nav.open { display: flex; }
-    .nav a:not(.btn) { padding: 16px 0; border-bottom: 1px solid var(--rule); font-family: var(--display); font-weight: 600; font-size: 1.25rem; }
-    .nav a[aria-current='page'] { border-bottom-color: var(--rule); color: var(--accent); }
+    .nav > a:not(.btn), .mega-trigger { padding: 16px 0; border-bottom: 1px solid var(--rule); font-weight: 600; font-size: 1.25rem; width: 100%; }
+    .nav > a:not(.btn)::after, .mega-trigger::after { display: none; }
+    .nav a[aria-current='page'] { color: var(--accent); }
+    .chev, .mega { display: none; }
     .nav-cta { margin-top: 18px; justify-content: center; }
   }
 </style>
@@ -85,6 +178,25 @@ const nav = lang === 'en'
     btn.setAttribute('aria-expanded', String(!open));
     btn.textContent = (open ? btn.dataset.open : btn.dataset.close) || '';
     nav?.classList.toggle('open', !open);
+  });
+
+  // Compact, shadowed header once the page scrolls.
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Services panel: on touch screens the first tap opens it; Escape closes it.
+  const mega = document.querySelector<HTMLElement>('.has-mega');
+  const trigger = mega?.querySelector<HTMLAnchorElement>('.mega-trigger');
+  trigger?.addEventListener('click', (e) => {
+    if (window.matchMedia('(hover: none) and (min-width: 861px)').matches && !mega!.classList.contains('open')) {
+      e.preventDefault(); mega!.classList.add('open');
+    }
+  });
+  document.addEventListener('click', (e) => { if (mega && !mega.contains(e.target as Node)) mega.classList.remove('open'); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mega?.matches(':focus-within, .open')) { mega.classList.remove('open'); trigger?.focus(); (document.activeElement as HTMLElement)?.blur(); }
   });
 
   // Light / dark switch: remembers the visitor's choice; otherwise follows the device.
