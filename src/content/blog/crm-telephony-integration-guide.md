@@ -1,6 +1,6 @@
 ---
 title: 'CRM and telephony integration: a practical guide (and what we learned building one)'
-description: 'Connecting your CRM to your phone system means calls arrive with a name, and conversations end up on the customer record. The patterns, the pitfalls, and how to plan one.'
+description: 'Connect your CRM to your phone system so calls arrive with a name and land on the customer record. The patterns, the pitfalls and how to plan one.'
 date: 2026-11-01
 category: Systems Integration
 tags: [CRM, telephony, CTI, VoIP, Dynamics 365, Azure Functions, integration]

@@ -1,0 +1,167 @@
+---
+// Packages page in English, German or Arabic. Prices and grouping come from
+// data/packages.ts; German and Arabic wording from data/packages-i18n.ts.
+import Base from '../layouts/Base.astro';
+import CTA from './CTA.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import Faqs from './Faqs.astro';
+import { packages, packageGroups, packageTerms, packageFaqs, serviceHref, type Package } from '../data/packages';
+import { packageText, packagesPageText, packageTermsI18n, packageFaqsI18n } from '../data/packages-i18n';
+import { breadcrumbs, faqPage, ORG_ID } from '../lib/schema';
+import { SITE } from '../config';
+import { langInfo, type Lang } from '../i18n/strings';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = langInfo(lang);
+const T = packagesPageText[lang];
+const path = L.packages;
+const text = (p: Package) => (lang === 'en' ? p : { ...p, ...packageText[lang][p.id] });
+const terms = lang === 'en' ? packageTerms : packageTermsI18n[lang];
+const faqs = lang === 'en' ? packageFaqs : packageFaqsI18n[lang];
+const groups = packageGroups.map((g) => ({ ...g, ...T.groups[g.id] }));
+const money = (n: number) => `$${n.toLocaleString('en-US')}`;
+const price = (p: Package) => {
+  if (p.group === 'monthly') return `${money(p.price)} ${T.perMonth}`;
+  return p.from ? `${T.from} ${money(p.price)}` : money(p.price);
+};
+const arrow = '→'; // mirrored by CSS in right-to-left
+const crumbs = [{ name: T.crumb, path }];
+const catalog = {
+  '@type': 'OfferCatalog',
+  '@id': `${SITE.url}${path}#catalog`,
+  name: T.title,
+  url: `${SITE.url}${path}`,
+  inLanguage: lang,
+  provider: { '@id': ORG_ID },
+  itemListElement: packages.map((p) => ({
+    '@type': 'Offer',
+    name: text(p).name,
+    description: text(p).summary,
+    url: `${SITE.url}${path}#${p.id}`,
+    priceSpecification: {
+      '@type': p.group === 'monthly' ? 'UnitPriceSpecification' : 'PriceSpecification',
+      price: p.price,
+      priceCurrency: 'USD',
+      ...(p.from ? { minPrice: p.price } : {}),
+      ...(p.group === 'monthly' ? { unitText: 'MONTH' } : {}),
+    },
+  })),
+};
+const quoteHref = (topic: string, name: string) =>
+  `${L.contact}?topic=${encodeURIComponent(topic)}&about=${encodeURIComponent(name)}`;
+const bookingAttrs = SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-booking': SITE.bookingUrl } : {};
+const faqLabel = { en: 'FAQ', de: 'FAQ', ar: 'أسئلة' }[lang];
+---
+<Base
+  title={T.title}
+  description={T.description}
+  lang={lang}
+  markdown={lang === 'en' ? '/packages.md' : undefined}
+  schema={[catalog, faqPage(faqs, path), breadcrumbs(crumbs, L.home)]}
+  alternates="packages"
+>
+  <section class="page-hero">
+    <div class="container hero">
+      <div>
+        <Breadcrumbs items={crumbs} lang={lang} />
+        <h1>{T.h1}</h1>
+        <p class="lead">{T.lead}</p>
+        <div class="actions"><a href={L.contact} {...bookingAttrs} class="btn">{T.quote} <span class="arr">{arrow}</span></a><a class="link-arrow" href="/experience/" hreflang={lang === 'en' ? undefined : 'en'}>{T.proof} <span class="arr">{arrow}</span></a></div>
+      </div>
+      <nav class="toc" aria-label={T.onPage}>
+        <span class="label">{T.onPage}</span>
+        <ol>
+          {groups.map((g, i) => (
+            <li><a href={`#${g.id}`}><span>{String(i + 1).padStart(2, '0')}</span>{g.title}</a></li>
+          ))}
+          <li><a href="#how-it-works"><span>04</span>{T.how}</a></li>
+          <li><a href="#faq"><span>05</span>{T.questions}</a></li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  {groups.map((g, gi) => (
+    <section class={`section${gi === 1 ? ' section--tint' : ''}`} id={g.id}>
+      <div class="container split">
+        <div>
+          <span class="big-n">{String(gi + 1).padStart(2, '0')}</span>
+          <span class="label">{g.label}</span>
+        </div>
+        <div>
+          <h2>{g.title}</h2>
+          <p class="lead measure">{g.intro}</p>
+          <ol class="pkgs">
+            {packages.filter((p) => p.group === g.id).map((p) => {
+              const x = text(p);
+              return (
+                <li class="pkg" id={p.id}>
+                  <div class="pkg-head">
+                    <h3>{x.name}</h3>
+                    <p class="price">{price(p)}</p>
+                  </div>
+                  <p class="meta">{p.group !== 'monthly' && <span>{T.duration}: {x.duration}</span>}<span>{x.summary}</span></p>
+                  <ul class="ticks">{x.includes.map((i) => <li>{i}</li>)}</ul>
+                  <p class="pkg-actions">
+                    <a class="link-arrow" href={quoteHref(p.topic, p.name)} {...bookingAttrs}>{g.id === 'monthly' ? T.talk : T.quote} <span class="arr">{arrow}</span></a>
+                    {serviceHref(p) && <a class="more" href={serviceHref(p)} hreflang={lang === 'en' ? undefined : 'en'}>{T.about}</a>}
+                  </p>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section" id="how-it-works">
+    <div class="container split">
+      <div><span class="big-n">04</span><span class="label">{T.howLabel}</span></div>
+      <div>
+        <h2>{T.how}</h2>
+        <ol class="terms">
+          {terms.map((t) => <li><h3>{t.title}</h3><p>{t.body}</p></li>)}
+        </ol>
+        <p class="note">{T.note[0]} <a href={L.contact} {...bookingAttrs}>{T.note[1]}</a> {T.note[2]}</p>
+      </div>
+    </div>
+  </section>
+
+  <Faqs faqs={faqs} title={T.faqTitle} label={faqLabel} />
+
+  <CTA lang={lang} />
+</Base>
+<style>
+  .hero { display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; align-items: end; }
+  .hero .lead { margin-bottom: 28px; }
+  .hero h1 { max-width: 18ch; }
+  .toc { border-top: 1px solid var(--rule-strong); padding-top: 14px; }
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc li { border-bottom: 1px solid var(--rule); }
+  .toc a { display: flex; gap: 16px; align-items: baseline; padding: 12px 0; text-decoration: none; color: var(--heading); font-family: var(--display); font-weight: 600; letter-spacing: -0.01em; }
+  .toc a span { font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+  .toc a:hover { color: var(--accent); }
+  .big-n { display: block; font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 4vw, 3.6rem); line-height: 1; color: var(--vermilion); letter-spacing: -0.04em; margin-bottom: 12px; }
+  .pkgs { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  .pkg { padding: 22px 0 24px; border-top: 1px solid var(--rule); scroll-margin-top: 24px; }
+  .pkg-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  .pkg h3 { font-size: 1.12rem; margin: 0; }
+  .price { margin: 0; font-family: var(--display); font-weight: 700; color: var(--accent); white-space: nowrap; font-size: 1.05rem; }
+  .meta { margin: 6px 0 10px; color: var(--muted); font-size: 0.95rem; display: grid; gap: 2px; }
+  .meta span:first-child:not(:only-child) { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--heading); }
+  .ticks { list-style: none; margin: 0 0 14px; padding: 0; }
+  .ticks li { position: relative; padding-block: 6px; padding-inline: 22px 0; border-top: 1px solid var(--rule); font-size: 0.93rem; color: var(--muted); }
+  .ticks li::before { content: ''; position: absolute; inset-inline-start: 2px; top: 14px; width: 9px; height: 5px; border-left: 2px solid var(--vermilion); border-bottom: 2px solid var(--vermilion); transform: rotate(-45deg); }
+  .pkg-actions { margin: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; }
+  .more { font-size: 0.9rem; color: var(--muted); }
+  .terms { list-style: none; margin: 24px 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; counter-reset: t; }
+  .terms li { counter-increment: t; position: relative; padding-block: 16px; padding-inline: 2.4rem 0; border-top: 1px solid var(--rule); }
+  .terms li::before { content: counter(t, decimal-leading-zero); position: absolute; inset-inline-start: 0; top: 19px; font-family: var(--display); font-weight: 700; font-size: 0.78rem; color: var(--accent); }
+  .terms h3 { font-size: 1.05rem; margin: 0 0 4px; }
+  .terms p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+  .note { color: var(--muted); }
+  :global([dir='rtl']) .meta span:first-child:not(:only-child) { letter-spacing: 0; text-transform: none; }
+  @media (max-width: 960px) { .hero { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) { .pkgs, .terms { grid-template-columns: 1fr; } }
+</style>

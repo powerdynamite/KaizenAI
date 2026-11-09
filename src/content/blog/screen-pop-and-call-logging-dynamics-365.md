@@ -1,6 +1,6 @@
 ---
 title: 'Screen pop and call logging in Dynamics 365: your options, and how to build them'
-description: 'Open the right customer record the moment the phone rings, and save every call to the timeline. The built-in options, the Channel Integration Framework, and the details that make it work.'
+description: 'Open the right customer record the moment the phone rings and log every call to the timeline: built-in options, the Channel Integration Framework and the details.'
 date: 2026-11-01
 category: Dynamics 365
 tags: [Dynamics 365, screen pop, call logging, CTI, Channel Integration Framework, telephony]

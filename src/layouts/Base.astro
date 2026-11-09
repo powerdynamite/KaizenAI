@@ -14,7 +14,7 @@ import BookingPopup from '../components/BookingPopup.astro';
 import ar400 from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-400-normal.woff2?url';
 import ar600 from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-600-normal.woff2?url';
 import ar700 from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-700-normal.woff2?url';
-import { LANGS, langInfo, t, type Lang } from '../i18n/strings';
+import { LANGS, langInfo, t, type Lang, type Family } from '../i18n/strings';
 
 interface Props {
   title?: string;
@@ -29,8 +29,8 @@ interface Props {
   modifiedTime?: Date;
   noindex?: boolean;
   lang?: Lang;
-  /** Hand-translated page family: 'home' or 'contact'. Adds hreflang links. */
-  alternates?: 'home' | 'contact';
+  /** Hand-translated page family. Adds hreflang links and language-menu targets. */
+  alternates?: Family;
 }
 const {
   title,
@@ -48,7 +48,10 @@ const {
 const L = langInfo(lang);
 const tx = t(lang);
 
-const fullTitle = title ? (title.includes(SITE.name) ? title : `${title} | ${SITE.name}`) : `${SITE.name}: AI Agents, Copilot & Dynamics 365 Experts`;
+// Add the brand suffix only while the title stays short enough for search results.
+const fullTitle = title
+  ? title.includes(SITE.name) || title.length + SITE.name.length + 3 > 68 ? title : `${title} | ${SITE.name}`
+  : `${SITE.name}: AI Agents, Copilot & Dynamics 365 Experts`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 const ld = graph(...schema);
@@ -63,7 +66,7 @@ const isContact = /\/(contact|kontakt)\//.test(Astro.url.pathname);
     <meta name="description" content={description} />
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
     <meta name="author" content={SITE.founder} />
-    <link rel="canonical" href={canonical} />
+    {!noindex && <link rel="canonical" href={canonical} />}
     <link rel="preload" href={displayLatin} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={sansLatin} as="font" type="font/woff2" crossorigin />
     {lang === 'ar' && [ar400, ar600, ar700].map((f) => <link rel="preload" href={f} as="font" type="font/woff2" crossorigin />)}
@@ -74,8 +77,8 @@ const isContact = /\/(contact|kontakt)\//.test(Astro.url.pathname);
     <link rel="alternate" type="application/rss+xml" title="KaizenAI Blog" href="/rss.xml" />
     {markdown && <link rel="alternate" type="text/markdown" href={markdown} title="Markdown version of this page" />}
     <link rel="sitemap" href="/sitemap-index.xml" />
-    {alternates && LANGS.map((x) => <link rel="alternate" hreflang={x.code} href={new URL(alternates === 'home' ? x.home : x.contact, Astro.site)} />)}
-    {alternates && <link rel="alternate" hreflang="x-default" href={new URL(alternates === 'home' ? '/' : '/contact/', Astro.site)} />}
+    {alternates && !noindex && LANGS.map((x) => <link rel="alternate" hreflang={x.code} href={new URL(x[alternates], Astro.site)} />)}
+    {alternates && !noindex && <link rel="alternate" hreflang="x-default" href={new URL(LANGS[0][alternates], Astro.site)} />}
     <meta name="theme-color" content="#0E1726" />
     <script is:inline>try{var t=localStorage.getItem('kz-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 
@@ -84,7 +87,7 @@ const isContact = /\/(contact|kontakt)\//.test(Astro.url.pathname);
     <meta property="og:locale" content={{ en: 'en_US', de: 'de_DE', ar: 'ar_AE' }[lang]} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {!noindex && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />

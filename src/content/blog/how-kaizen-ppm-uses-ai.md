@@ -1,6 +1,6 @@
 ---
 title: "How Kaizen PPM uses AI: it explains, it never decides"
-description: "Most AI in project tools produces confident fiction. Here is the four-rung value ladder we use in Kaizen PPM, the roadmap it shapes, and the questions to ask any PPM vendor about AI."
+description: "Most AI in project tools produces confident fiction. The four-rung value ladder we use in Kaizen PPM, and the questions to ask any PPM vendor about AI."
 date: 2026-11-05
 category: "Project Management"
 tags: ["Kaizen PPM", "AI", "Copilot", "Dataverse", "PMO", "Project portfolio management"]

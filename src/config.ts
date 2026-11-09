@@ -6,7 +6,7 @@ export const SITE = {
   url: 'https://kaizenai.systems',
   tagline: 'Better every day, with Microsoft and AI.',
   description:
-    'KaizenAI is a remote-first, AI-first Microsoft consultancy working worldwide: AI agents, Copilot & Cowork, Dynamics 365, Power Platform, Power BI & Fabric analytics and Kaizen PPM.',
+    'KaizenAI is a remote-first Microsoft consultancy: AI agents, Copilot & Cowork, Dynamics 365, Power Platform, Power BI & Fabric and Kaizen PPM, at fixed prices.',
   founder: 'Abdul Basit',
   // Home base: shown only on detail pages (About, Contact) and in structured data.
   location: 'Lahore, Punjab, Pakistan',
