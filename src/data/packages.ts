@@ -38,7 +38,7 @@ export const packageGroups: { id: PackageGroup; label: string; title: string; in
     id: 'monthly',
     label: 'Run',
     title: 'Monthly plans',
-    intro: 'Managed support after go-live for anything we deploy, Kaizen PPM included: fixes, updates, admin help and small changes. Bigger changes are planned with you and quoted at a fixed price. Month to month: cancel with 30 days’ notice.',
+    intro: 'Managed support after go-live for anything we deploy, Kaizen PPM included: fixes, updates, admin help and small changes. Bigger changes are planned with you and quoted at a fixed price. Month to month: cancel with 30 days’ notice. Support hours: Monday to Friday, 9:00–18:00 Pakistan time (UTC+5).',
   },
 ];
 
@@ -260,7 +260,7 @@ export const packages: Package[] = [
     price: 3300,
     duration: 'Monthly',
     summary: 'Up to 50 hours a month.',
-    includes: ['Everything in Growth', 'New features and agents', 'Named lead and monthly roadmap call', 'Same-business-day response (UK business hours)'],
+    includes: ['Everything in Growth', 'New features and agents', 'Named lead and monthly roadmap call', 'Same-business-day response'],
     topic: 'Something else',
   },
 ];
@@ -277,7 +277,7 @@ export const packageFaqs = [
   { q: 'Is Kaizen PPM a subscription?', a: 'No. Kaizen PPM is deployed in your own Microsoft tenant for a one-time fixed price, with no per-user fee from us. After go-live, a managed support plan covers updates, fixes and help, and any new features are quoted at a fixed price. Your users need Microsoft Power Apps premium or Dynamics 365 licences, bought from Microsoft.' },
   { q: 'What if the scope changes during the project?', a: 'The fixed price covers the scope we agree in writing. If you want something extra, we price it as a change request and you approve it before we start. Nothing is added to your bill without your agreement.' },
   { q: 'Who does the work?', a: 'Every engagement is led by our founder, a Power Platform and AI solutions architect with eight years of Microsoft business applications consulting. Specialists join where a package needs them, and we use AI-assisted engineering throughout.' },
-  { q: 'Which time zone do you work in?', a: 'We are based in Pakistan (UTC+5) and work remotely with clients worldwide. Our day overlaps with UK and European mornings and with the Gulf working day. For the Americas and Australia we schedule calls at the start or end of our day.' },
+  { q: 'Which time zone do you work in?', a: 'We are based in Pakistan (UTC+5) and work remotely with clients worldwide. Our day overlaps with UK and European mornings and with the Gulf working day. For the Americas and Australia we schedule calls at the start or end of our day. Support hours are Monday to Friday, 9:00–18:00 Pakistan time.' },
   { q: 'Do I need Microsoft licences first?', a: 'Usually some, yes, and they are not included in our prices. We tell you exactly which licences a package needs before you commit, and you buy them from Microsoft or your reseller.' },
   { q: 'How do payments work?', a: 'Entry packages are paid upfront. Projects are normally split: half to start and half at go-live. Monthly plans are billed monthly in advance. Prices are in US dollars; we can quote the equivalent in GBP or EUR.' },
   { q: 'What if a package is not the right fit?', a: 'Book a free 30-minute call and tell us the problem. We will recommend a package, shape a custom fixed-price quote, or tell you honestly if you do not need us.' },
