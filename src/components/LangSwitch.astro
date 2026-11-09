@@ -1,14 +1,14 @@
 ---
 // Language menu. Hand-translated pages link to each other; every other page
 // opens Google's free machine translation of the current page.
-import { LANGS, machineUrl, type Lang } from '../i18n/strings';
-interface Props { lang: Lang; alternates?: 'home' | 'contact' }
+import { LANGS, machineUrl, type Lang, type Family } from '../i18n/strings';
+interface Props { lang: Lang; alternates?: Family }
 const { lang, alternates } = Astro.props;
 const path = Astro.url.pathname;
 const label = { en: 'Language', de: 'Sprache', ar: 'اللغة' }[lang];
 const machine = { en: 'machine translation', de: 'maschinelle Übersetzung', ar: 'ترجمة آلية' };
 const items = LANGS.map((x) => {
-  if (alternates) return { ...x, href: alternates === 'home' ? x.home : x.contact, auto: false };
+  if (alternates) return { ...x, href: x[alternates], auto: false };
   if (x.code === 'en') return { ...x, href: path, auto: false };
   return { ...x, href: machineUrl(path, x.code), auto: true };
 });

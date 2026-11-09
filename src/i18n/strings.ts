@@ -1,14 +1,16 @@
 // Interface text for the three site languages. English is the default; the
-// German and Arabic sites cover the home and contact pages, and every other
+// German and Arabic sites cover the home, contact and packages pages, and every other
 // page is offered as a machine translation from the language switcher.
 
 export type Lang = 'en' | 'de' | 'ar';
 
-export const LANGS: { code: Lang; name: string; dir: 'ltr' | 'rtl'; home: string; contact: string }[] = [
-  { code: 'en', name: 'English', dir: 'ltr', home: '/', contact: '/contact/' },
-  { code: 'de', name: 'Deutsch', dir: 'ltr', home: '/de/', contact: '/de/kontakt/' },
-  { code: 'ar', name: 'العربية', dir: 'rtl', home: '/ar/', contact: '/ar/contact/' },
+export const LANGS: { code: Lang; name: string; dir: 'ltr' | 'rtl'; home: string; contact: string; packages: string }[] = [
+  { code: 'en', name: 'English', dir: 'ltr', home: '/', contact: '/contact/', packages: '/packages/' },
+  { code: 'de', name: 'Deutsch', dir: 'ltr', home: '/de/', contact: '/de/kontakt/', packages: '/de/pakete/' },
+  { code: 'ar', name: 'العربية', dir: 'rtl', home: '/ar/', contact: '/ar/contact/', packages: '/ar/packages/' },
 ];
+/** Page families that exist in every language (used for hreflang and the language menu). */
+export type Family = 'home' | 'contact' | 'packages';
 
 export const langInfo = (l: Lang) => LANGS.find((x) => x.code === l)!;
 
@@ -39,7 +41,7 @@ const en = {
   },
   contact: {
     title: 'Contact KaizenAI: Book a Free Consultation',
-    description: 'Talk to KaizenAI about AI agents, Copilot and Cowork, Dynamics 365, Power Platform, Power BI and Fabric, Azure DevSecOps or a Kaizen PPM demo. Remote-first, working with clients worldwide.',
+    description: 'Talk to KaizenAI about AI agents, Copilot and Cowork, Dynamics 365, Power Platform, Power BI or a Kaizen PPM demo. Remote-first, working worldwide.',
     crumb: 'Contact', h1: 'Tell us what you want to improve.',
     lead: 'A few lines are enough. We usually reply within one working day (Pakistan time, UTC+5).',
     email: 'Email', moreEmail: 'Specific inboxes', salesEmail: 'Sales & proposals', supportEmail: 'Kaizen PPM support', careersEmail: 'Careers', phone: 'Phone', whatsapp: 'WhatsApp', whatsappLink: 'Message us →', linkedin: 'LinkedIn', linkedinLink: 'Follow KaizenAI →',

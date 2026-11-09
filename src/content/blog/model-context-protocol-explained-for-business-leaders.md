@@ -1,6 +1,6 @@
 ---
 title: 'Model Context Protocol (MCP), explained for business leaders'
-description: 'MCP is the standard that lets AI assistants such as Copilot and Claude safely use your business systems. What it is, why it matters, and what to ask before you connect anything.'
+description: 'MCP lets AI assistants such as Copilot and Claude safely use your business systems. What it is, why it matters and what to ask before you connect anything.'
 date: 2026-11-01
 category: Agentic AI
 tags: [MCP, Model Context Protocol, AI agents, integration, security]

@@ -168,7 +168,7 @@ export const services: Service[] = [
     short: 'Power BI and Microsoft Fabric reporting people trust, ready for Copilot and AI agents.',
     seoTitle: 'Power BI & Microsoft Fabric Data Analytics Services',
     metaDescription:
-      'Power BI reports and semantic models, Microsoft Fabric lakehouses, Dataverse and Dynamics 365 analytics, and data that is ready for Copilot and AI agents, from KaizenAI.',
+      'Power BI reports and semantic models, Microsoft Fabric lakehouses, Dynamics 365 analytics, and data that is ready for Copilot and AI agents, from KaizenAI.',
     serviceType: 'Data analytics and business intelligence',
     definition:
       'Data analytics turns the records in your business systems into numbers people can act on. On Microsoft, that means Power BI for reports and dashboards, and Microsoft Fabric for bringing data from many systems into one governed place.',

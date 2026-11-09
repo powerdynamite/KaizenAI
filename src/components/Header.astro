@@ -2,8 +2,8 @@
 import Logo from './Logo.astro';
 import LangSwitch from './LangSwitch.astro';
 import { NAV } from '../config';
-import { t, langInfo, type Lang } from '../i18n/strings';
-interface Props { lang?: Lang; alternates?: 'home' | 'contact' }
+import { t, langInfo, type Lang, type Family } from '../i18n/strings';
+interface Props { lang?: Lang; alternates?: Family }
 const { lang = 'en', alternates } = Astro.props;
 const s = t(lang);
 const L = langInfo(lang);
@@ -14,7 +14,7 @@ const nav = lang === 'en'
   ? NAV
   : [
       { href: `${L.home}#services`, label: s.nav.services },
-      { href: '/packages/', label: s.nav.packages },
+      { href: L.packages, label: s.nav.packages },
       { href: `${L.home}#ppm`, label: s.nav.ppm },
       { href: `${L.home}#work`, label: s.nav.experience },
       { href: `${L.home}#faq`, label: 'FAQ' },
