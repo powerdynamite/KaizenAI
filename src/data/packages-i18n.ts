@@ -7,6 +7,11 @@ export interface PackageText { name: string; duration: string; summary: string; 
 type Dict = Record<string, PackageText>;
 
 const de: Dict = {
+  'outage-fallback-plan': {
+    name: 'Notfallplan für Microsoft-365-Ausfälle', duration: 'Etwa 1 Woche',
+    summary: 'Für Organisationen, die beim Ausfall im November 2026 gemerkt haben, dass ihnen ein Plan B fehlt.',
+    includes: ['Analyse, welche Prozesse während des Ausfalls stillstanden und was das gekostet hat', 'Ein Kommunikationsplan außerhalb von Microsoft 365 für Mitarbeitende und wichtige Kunden', 'Wiederholungsrichtlinien und Fehlerwarnungen für bis zu 10 kritische Power-Automate-Flows', 'Ein einseitiges Ausfall-Runbook: wer was prüft und wie Arbeit danach aufgeholt wird'],
+  },
   'architecture-session': {
     name: 'Architektur- & Roadmap-Session', duration: '1 Woche',
     summary: 'Eine Arbeitssitzung zu Ihrer Idee oder Ihrem aktuellen Setup, danach ein schriftlicher Plan.',
@@ -92,6 +97,11 @@ const de: Dict = {
 };
 
 const ar: Dict = {
+  'outage-fallback-plan': {
+    name: 'خطة بديلة لانقطاع Microsoft 365', duration: 'نحو أسبوع واحد',
+    summary: 'للمؤسسات التي اكتشفت خلال انقطاع نوفمبر 2026 أنها لا تملك خطة بديلة.',
+    includes: ['مراجعة العمليات التي توقفت خلال الانقطاع وتكلفة ذلك', 'خطة تواصل بديلة خارج Microsoft 365 للموظفين وأهم العملاء', 'سياسات إعادة المحاولة وتنبيهات الأعطال لما يصل إلى 10 مسارات حرجة في Power Automate', 'دليل تشغيل من صفحة واحدة للانقطاع: من يتحقق من ماذا وكيف يُستدرك العمل بعده'],
+  },
   'architecture-session': {
     name: 'جلسة البنية والخارطة', duration: 'أسبوع واحد',
     summary: 'جلسة عمل حول فكرتكم أو بيئتكم الحالية، تليها خطة مكتوبة.',
@@ -189,7 +199,7 @@ export const packagesPageText = {
     quote: 'Get a fixed-price quote', proof: 'See what we’ve delivered', onPage: 'On this page', how: 'How Results as a Service works', questions: 'Questions',
     duration: 'Typical duration', talk: 'Talk to us', about: 'About this service', howLabel: 'How it works',
     note: ['Not sure which package fits?', 'Book a free 30-minute call', 'and we will recommend one, or tell you honestly if you don’t need us.'],
-    faqTitle: 'Before you book', from: 'From', perMonth: '/ month',
+    faqTitle: 'Before you book', from: 'From', perMonth: '/ month', priceOnCall: 'Quoted after a call',
     groups: {
       entry: { label: 'Start here', title: 'Entry packages', intro: 'Small, clearly scoped first steps. Each one ends with findings you can act on and, if you want it, a fixed-price quote for the next stage.' },
       project: { label: 'Build', title: 'Projects', intro: 'Fixed-scope delivery. Prices are typical starting points. After a short call we confirm the scope and a fixed price before any work starts.' },
@@ -205,7 +215,7 @@ export const packagesPageText = {
     quote: 'Festpreis-Angebot anfragen', proof: 'Unsere Referenzen ansehen (Englisch)', onPage: 'Auf dieser Seite', how: 'So funktioniert Results as a Service', questions: 'Häufige Fragen',
     duration: 'Typische Dauer', talk: 'Sprechen Sie mit uns', about: 'Zur Leistung (Englisch)', howLabel: 'So funktioniert es',
     note: ['Unsicher, welches Paket passt?', 'Buchen Sie ein kostenloses 30-Minuten-Gespräch', 'und wir empfehlen Ihnen eines oder sagen Ihnen ehrlich, wenn Sie uns nicht brauchen.'],
-    faqTitle: 'Bevor Sie buchen', from: 'Ab', perMonth: '/ Monat',
+    faqTitle: 'Bevor Sie buchen', from: 'Ab', perMonth: '/ Monat', priceOnCall: 'Angebot nach Gespräch',
     groups: {
       entry: { label: 'Einstieg', title: 'Einstiegspakete', intro: 'Kleine, klar abgegrenzte erste Schritte. Jedes Paket endet mit umsetzbaren Ergebnissen und auf Wunsch mit einem Festpreis-Angebot für die nächste Phase.' },
       project: { label: 'Umsetzen', title: 'Projekte', intro: 'Umsetzung mit festem Umfang. Die Preise sind typische Startwerte. Nach einem kurzen Gespräch bestätigen wir Umfang und Festpreis, bevor die Arbeit beginnt.' },
@@ -221,7 +231,7 @@ export const packagesPageText = {
     quote: 'اطلبوا عرض سعر ثابت', proof: 'شاهدوا أعمالنا (بالإنجليزية)', onPage: 'في هذه الصفحة', how: 'كيف تعمل «النتائج كخدمة»', questions: 'أسئلة شائعة',
     duration: 'المدة المعتادة', talk: 'تحدثوا معنا', about: 'عن هذه الخدمة (بالإنجليزية)', howLabel: 'كيف نعمل',
     note: ['لستم متأكدين من الباقة المناسبة؟', 'احجزوا مكالمة مجانية مدتها 30 دقيقة', 'وسنقترح عليكم باقة، أو نخبركم بصراحة إن لم تكونوا بحاجة إلينا.'],
-    faqTitle: 'قبل الحجز', from: 'ابتداءً من', perMonth: 'شهريًا',
+    faqTitle: 'قبل الحجز', from: 'ابتداءً من', perMonth: 'شهريًا', priceOnCall: 'السعر بعد المكالمة',
     groups: {
       entry: { label: 'ابدأوا هنا', title: 'باقات البداية', intro: 'خطوات أولى صغيرة وواضحة النطاق. تنتهي كل باقة بنتائج قابلة للتنفيذ، وبعرض سعر ثابت للمرحلة التالية إن رغبتم.' },
       project: { label: 'التنفيذ', title: 'المشاريع', intro: 'تنفيذ بنطاق ثابت. الأسعار نقاط بداية معتادة، وبعد مكالمة قصيرة نؤكد النطاق والسعر الثابت قبل بدء أي عمل.' },

@@ -12,6 +12,8 @@ export interface Package {
   price: number;
   /** Shows "From" before the price. */
   from?: boolean;
+  /** No list price: a fixed price is quoted after a free call. `price` is then ignored. */
+  quote?: boolean;
   duration: string;
   summary: string;
   includes: string[];
@@ -44,6 +46,23 @@ export const packageGroups: { id: PackageGroup; label: string; title: string; in
 
 export const packages: Package[] = [
   // Entry
+  {
+    id: 'outage-fallback-plan',
+    name: 'Microsoft 365 Outage Fallback Plan',
+    group: 'entry',
+    price: 0,
+    quote: true,
+    duration: 'About 1 week',
+    summary: 'For organisations that found out during the November 2026 outage that they had no plan B.',
+    includes: [
+      'Review of which processes stopped during the outage, and what they cost you',
+      'A backup communication plan outside Microsoft 365 for staff and key customers',
+      'Retry policies and failure alerts on up to 10 critical Power Automate flows',
+      'A one-page outage runbook: who checks what, and how work catches up afterwards',
+    ],
+    service: 'power-platform',
+    topic: 'Power Platform',
+  },
   {
     id: 'architecture-session',
     name: 'Architecture & Roadmap Session',
@@ -287,6 +306,7 @@ export const packageFaqs = [
 export const packagesForService = (slug: string) => packages.filter((p) => p.service === slug);
 
 export const formatPrice = (p: Package) => {
+  if (p.quote) return 'Fixed price, quoted after a free call';
   const amount = `$${p.price.toLocaleString('en-US')}`;
   if (p.group === 'monthly') return `${amount} / month`;
   return p.from ? `From ${amount}` : amount;

@@ -21,6 +21,7 @@ const faqs = lang === 'en' ? packageFaqs : packageFaqsI18n[lang];
 const groups = packageGroups.map((g) => ({ ...g, ...T.groups[g.id] }));
 const money = (n: number) => `$${n.toLocaleString('en-US')}`;
 const price = (p: Package) => {
+  if (p.quote) return T.priceOnCall;
   if (p.group === 'monthly') return `${money(p.price)} ${T.perMonth}`;
   return p.from ? `${T.from} ${money(p.price)}` : money(p.price);
 };
@@ -38,13 +39,15 @@ const catalog = {
     name: text(p).name,
     description: text(p).summary,
     url: `${SITE.url}${path}#${p.id}`,
-    priceSpecification: {
-      '@type': p.group === 'monthly' ? 'UnitPriceSpecification' : 'PriceSpecification',
-      price: p.price,
-      priceCurrency: 'USD',
-      ...(p.from ? { minPrice: p.price } : {}),
-      ...(p.group === 'monthly' ? { unitText: 'MONTH' } : {}),
-    },
+    ...(p.quote ? {} : {
+      priceSpecification: {
+        '@type': p.group === 'monthly' ? 'UnitPriceSpecification' : 'PriceSpecification',
+        price: p.price,
+        priceCurrency: 'USD',
+        ...(p.from ? { minPrice: p.price } : {}),
+        ...(p.group === 'monthly' ? { unitText: 'MONTH' } : {}),
+      },
+    }),
   })),
 };
 const quoteHref = (topic: string, name: string) =>

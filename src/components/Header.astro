@@ -15,7 +15,7 @@ const path = Astro.url.pathname;
 const isActive = (href: string) => path === href || (href.length > 4 && path.startsWith(href));
 // Services panel: English titles on the English site, hand-translated ones elsewhere.
 const megaServices = lang === 'en' ? services.map(({ slug, title, short }) => ({ slug, title, short })) : HOME[lang].services;
-const fromPrice = Math.min(...packages.map((p) => p.price)).toLocaleString('en-US');
+const fromPrice = Math.min(...packages.filter((p) => !p.quote).map((p) => p.price)).toLocaleString('en-US');
 const M = {
   en: { all: 'All services', pkLabel: 'Results as a Service', pkTitle: `Start small, from $${fromPrice}`, pkBody: 'An agreed result at a fixed price: assessments, pilots and builds.', pkLink: 'See packages', callTitle: 'Not sure where to start?', callLink: 'Book a free 30-minute call' },
   de: { all: 'Alle Leistungen', pkLabel: 'Results as a Service', pkTitle: `Klein starten, ab ${fromPrice} USD`, pkBody: 'Analysen, Pilotprojekte und Umsetzungen mit klarem Umfang und Preis.', pkLink: 'Pakete ansehen', callTitle: 'Unsicher, wo Sie anfangen sollen?', callLink: 'Kostenloses 30-Minuten-Gespräch' },
@@ -25,6 +25,7 @@ const M = {
 const PT = packagesPageText[lang];
 const pkName = (p: Package) => (lang === 'en' ? p.name : packageText[lang][p.id]?.name ?? p.name);
 const pkPrice = (p: Package) => {
+  if (p.quote) return PT.priceOnCall;
   const m = `$${p.price.toLocaleString('en-US')}`;
   return p.group === 'monthly' ? `${m} ${PT.perMonth}` : p.from ? `${PT.from} ${m}` : m;
 };

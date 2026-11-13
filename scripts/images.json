@@ -324,6 +324,21 @@
       "List what stopped, and plan a fallback"
     ],
     "tagline": "Microsoft 365 · Power Platform · Resilience",
-    "foot": "kaizenai.systems"
+    "foot": "kaizenai.systems/blog"
+  },
+  {
+    "id": "microsoft-365-outage-fallback-plan",
+    "kind": "og",
+    "out": "public/blog/og/microsoft-365-outage-fallback-plan.png",
+    "eyebrow": "Blog · Microsoft 365",
+    "title": "Microsoft 365 went down. Do you have a <em>fallback plan</em>?",
+    "items": [
+      "Know where Microsoft reports incidents",
+      "A channel outside Microsoft 365",
+      "Resubmit failed Power Automate runs",
+      "Find the gaps, not just the errors",
+      "A one-page outage runbook"
+    ],
+    "foot": "kaizenai.systems/blog"
   }
 ]
