@@ -309,5 +309,21 @@
       "Changes quoted at a fixed price"
     ],
     "tagline": "Fixed price · Your tenant · Managed plan"
+  },
+  {
+    "id": "m365-outage-linkedin",
+    "kind": "linkedin",
+    "out": "docs/brand/linkedin/posts/2026-11-13-m365-outage-lessons.png",
+    "eyebrow": "After the Microsoft 365 outage",
+    "title": "Outlook went down. Here's what to <em>check today</em>.",
+    "items": [
+      "Know where Microsoft reports incidents",
+      "Have a channel outside Microsoft 365",
+      "Resubmit failed Power Automate runs",
+      "Check agents and integrations that missed events",
+      "List what stopped, and plan a fallback"
+    ],
+    "tagline": "Microsoft 365 · Power Platform · Resilience",
+    "foot": "kaizenai.systems"
   }
 ]
