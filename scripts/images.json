@@ -340,5 +340,21 @@
       "A one-page outage runbook"
     ],
     "foot": "kaizenai.systems/blog"
+  },
+  {
+    "id": "intro-linkedin",
+    "kind": "linkedin",
+    "out": "docs/brand/linkedin/posts/2026-11-14-intro-pinned.png",
+    "eyebrow": "Hello, we're KaizenAI",
+    "title": "Microsoft and AI, sold as <em>results</em>, not hours.",
+    "items": [
+      "AI agents, Copilot and Cowork",
+      "Dynamics 365 and Power Platform",
+      "Power BI, integration and Azure",
+      "Kaizen PPM, in your own tenant",
+      "Fixed price, agreed result, then managed support"
+    ],
+    "tagline": "PL-600 certified · Remote-first, worldwide",
+    "foot": "kaizenai.systems"
   }
 ]
