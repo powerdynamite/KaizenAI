@@ -201,9 +201,9 @@ export const packagesPageText = {
     note: ['Not sure which package fits?', 'Book a free 30-minute call', 'and we will recommend one, or tell you honestly if you don’t need us.'],
     faqTitle: 'Before you book', from: 'From', perMonth: '/ month', priceOnCall: 'Quoted after a call',
     groups: {
-      entry: { label: 'Start here', title: 'Entry packages', intro: 'Small, clearly scoped first steps. Each one ends with findings you can act on and, if you want it, a fixed-price quote for the next stage.' },
-      project: { label: 'Build', title: 'Projects', intro: 'Fixed-scope delivery. Prices are typical starting points. After a short call we confirm the scope and a fixed price before any work starts.' },
-      monthly: { label: 'Run', title: 'Monthly plans', intro: 'Managed support after go-live for anything we deploy, Kaizen PPM included: fixes, updates, admin help and small changes. Bigger changes are planned with you and quoted at a fixed price. Month to month: cancel with 30 days’ notice. Support hours: Monday to Friday, 9:00–18:00 Pakistan time (UTC+5).' },
+      entry: { label: 'Start here', menu: 'Entry packages', title: 'Where should you start?', intro: 'Small, clearly scoped first steps. Each one ends with findings you can act on and, if you want it, a fixed-price quote for the next stage.' },
+      project: { label: 'Build', menu: 'Projects', title: 'What do you want to build?', intro: 'Fixed-scope delivery. Prices are typical starting points. After a short call we confirm the scope and a fixed price before any work starts.' },
+      monthly: { label: 'Run', menu: 'Monthly plans', title: 'How much help do you need after go-live?', intro: 'Managed support after go-live for anything we deploy, Kaizen PPM included: fixes, updates, admin help and small changes. Bigger changes are planned with you and quoted at a fixed price. Month to month: cancel with 30 days’ notice. Support hours: Monday to Friday, 9:00–18:00 Pakistan time (UTC+5).' },
     },
   },
   de: {
@@ -217,9 +217,9 @@ export const packagesPageText = {
     note: ['Unsicher, welches Paket passt?', 'Buchen Sie ein kostenloses 30-Minuten-Gespräch', 'und wir empfehlen Ihnen eines oder sagen Ihnen ehrlich, wenn Sie uns nicht brauchen.'],
     faqTitle: 'Bevor Sie buchen', from: 'Ab', perMonth: '/ Monat', priceOnCall: 'Angebot nach Gespräch',
     groups: {
-      entry: { label: 'Einstieg', title: 'Einstiegspakete', intro: 'Kleine, klar abgegrenzte erste Schritte. Jedes Paket endet mit umsetzbaren Ergebnissen und auf Wunsch mit einem Festpreis-Angebot für die nächste Phase.' },
-      project: { label: 'Umsetzen', title: 'Projekte', intro: 'Umsetzung mit festem Umfang. Die Preise sind typische Startwerte. Nach einem kurzen Gespräch bestätigen wir Umfang und Festpreis, bevor die Arbeit beginnt.' },
-      monthly: { label: 'Betreiben', title: 'Monatliche Pläne', intro: 'Managed Support nach dem Go-live für alles, was wir bereitstellen, auch Kaizen PPM: Fehlerbehebungen, Updates, Admin-Hilfe und kleine Änderungen. Größere Änderungen planen wir gemeinsam und bieten sie zum Festpreis an. Monatlich mit 30 Tagen Frist kündbar. Supportzeiten: Montag bis Freitag, 9:00–18:00 Uhr pakistanischer Zeit (UTC+5).' },
+      entry: { label: 'Einstieg', menu: 'Einstiegspakete', title: 'Wo sollten Sie anfangen?', intro: 'Kleine, klar abgegrenzte erste Schritte. Jedes Paket endet mit umsetzbaren Ergebnissen und auf Wunsch mit einem Festpreis-Angebot für die nächste Phase.' },
+      project: { label: 'Umsetzen', menu: 'Projekte', title: 'Was möchten Sie umsetzen?', intro: 'Umsetzung mit festem Umfang. Die Preise sind typische Startwerte. Nach einem kurzen Gespräch bestätigen wir Umfang und Festpreis, bevor die Arbeit beginnt.' },
+      monthly: { label: 'Betreiben', menu: 'Monatliche Pläne', title: 'Wie viel Unterstützung brauchen Sie nach dem Go-live?', intro: 'Managed Support nach dem Go-live für alles, was wir bereitstellen, auch Kaizen PPM: Fehlerbehebungen, Updates, Admin-Hilfe und kleine Änderungen. Größere Änderungen planen wir gemeinsam und bieten sie zum Festpreis an. Monatlich mit 30 Tagen Frist kündbar. Supportzeiten: Montag bis Freitag, 9:00–18:00 Uhr pakistanischer Zeit (UTC+5).' },
     },
   },
   ar: {
@@ -233,9 +233,9 @@ export const packagesPageText = {
     note: ['لستم متأكدين من الباقة المناسبة؟', 'احجزوا مكالمة مجانية مدتها 30 دقيقة', 'وسنقترح عليكم باقة، أو نخبركم بصراحة إن لم تكونوا بحاجة إلينا.'],
     faqTitle: 'قبل الحجز', from: 'ابتداءً من', perMonth: 'شهريًا', priceOnCall: 'السعر بعد المكالمة',
     groups: {
-      entry: { label: 'ابدأوا هنا', title: 'باقات البداية', intro: 'خطوات أولى صغيرة وواضحة النطاق. تنتهي كل باقة بنتائج قابلة للتنفيذ، وبعرض سعر ثابت للمرحلة التالية إن رغبتم.' },
-      project: { label: 'التنفيذ', title: 'المشاريع', intro: 'تنفيذ بنطاق ثابت. الأسعار نقاط بداية معتادة، وبعد مكالمة قصيرة نؤكد النطاق والسعر الثابت قبل بدء أي عمل.' },
-      monthly: { label: 'التشغيل', title: 'الخطط الشهرية', intro: 'دعم مُدار بعد الإطلاق لكل ما ننشره، بما في ذلك Kaizen PPM: إصلاحات وتحديثات ومساعدة إدارية وتعديلات صغيرة. التعديلات الأكبر نخطط لها معكم ونقدّمها بسعر ثابت. خطة شهرية يمكن إلغاؤها بإشعار قبل 30 يومًا. ساعات الدعم: من الاثنين إلى الجمعة، من 9:00 إلى 18:00 بتوقيت باكستان (UTC+5).' },
+      entry: { label: 'ابدأوا هنا', menu: 'باقات البداية', title: 'من أين تبدأون؟', intro: 'خطوات أولى صغيرة وواضحة النطاق. تنتهي كل باقة بنتائج قابلة للتنفيذ، وبعرض سعر ثابت للمرحلة التالية إن رغبتم.' },
+      project: { label: 'التنفيذ', menu: 'المشاريع', title: 'ماذا تريدون أن تبنوا؟', intro: 'تنفيذ بنطاق ثابت. الأسعار نقاط بداية معتادة، وبعد مكالمة قصيرة نؤكد النطاق والسعر الثابت قبل بدء أي عمل.' },
+      monthly: { label: 'التشغيل', menu: 'الخطط الشهرية', title: 'ما مقدار الدعم الذي تحتاجونه بعد الإطلاق؟', intro: 'دعم مُدار بعد الإطلاق لكل ما ننشره، بما في ذلك Kaizen PPM: إصلاحات وتحديثات ومساعدة إدارية وتعديلات صغيرة. التعديلات الأكبر نخطط لها معكم ونقدّمها بسعر ثابت. خطة شهرية يمكن إلغاؤها بإشعار قبل 30 يومًا. ساعات الدعم: من الاثنين إلى الجمعة، من 9:00 إلى 18:00 بتوقيت باكستان (UTC+5).' },
     },
   },
 } as const;

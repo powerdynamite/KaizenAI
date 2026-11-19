@@ -7,6 +7,7 @@ import Faqs from './Faqs.astro';
 import Logo from './Logo.astro';
 import Kanji from './Kanji.astro';
 import Certifications from './Certifications.astro';
+import AskBand from './AskBand.astro';
 import { Image } from 'astro:assets';
 import gantt from '../assets/ppm/the-interactive-gantt.png';
 import { HOME } from '../i18n/home';
@@ -69,6 +70,8 @@ const go = '→'; // mirrored by CSS in right-to-left
       </ol>
     </div>
   </section>
+
+  <AskBand lang={lang} />
 
   <section class="section section--tint" id="ppm">
     <div class="container">

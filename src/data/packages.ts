@@ -27,19 +27,19 @@ export const packageGroups: { id: PackageGroup; label: string; title: string; in
   {
     id: 'entry',
     label: 'Start here',
-    title: 'Entry packages',
+    title: 'Where should you start?',
     intro: 'Small, clearly scoped first steps. Each one ends with findings you can act on and, if you want it, a fixed-price quote for the next stage.',
   },
   {
     id: 'project',
     label: 'Build',
-    title: 'Projects',
+    title: 'What do you want to build?',
     intro: 'Fixed-scope delivery. Prices are typical starting points. After a short call we confirm the scope and a fixed price before any work starts.',
   },
   {
     id: 'monthly',
     label: 'Run',
-    title: 'Monthly plans',
+    title: 'How much help do you need after go-live?',
     intro: 'Managed support after go-live for anything we deploy, Kaizen PPM included: fixes, updates, admin help and small changes. Bigger changes are planned with you and quoted at a fixed price. Month to month: cancel with 30 days’ notice. Support hours: Monday to Friday, 9:00–18:00 Pakistan time (UTC+5).',
   },
 ];

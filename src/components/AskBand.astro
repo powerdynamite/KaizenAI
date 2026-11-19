@@ -1,0 +1,37 @@
+---
+// Mid-page "Ask an architect" band: one clear next step for visitors who are
+// not ready to pick a service or package.
+import { SITE } from '../config';
+import { langInfo, type Lang } from '../i18n/strings';
+interface Props { lang?: Lang }
+const { lang = 'en' } = Astro.props;
+const L = langInfo(lang);
+const T = {
+  en: { label: 'Free 30-minute call', title: 'Not sure where to start? Ask an architect.', body: 'Describe the problem in plain words. You talk to a certified solution architect, not a salesperson, and get an honest answer on what will work, what it costs and what you don’t need.', button: 'Ask an architect', second: 'See fixed-price packages' },
+  de: { label: 'Kostenloses 30-Minuten-Gespräch', title: 'Unsicher, wo Sie anfangen sollen? Fragen Sie einen Architekten.', body: 'Beschreiben Sie das Problem in einfachen Worten. Sie sprechen mit einem zertifizierten Lösungsarchitekten, nicht mit dem Vertrieb, und erhalten eine ehrliche Antwort: was funktioniert, was es kostet und was Sie nicht brauchen.', button: 'Architekten fragen', second: 'Festpreis-Pakete ansehen' },
+  ar: { label: 'مكالمة مجانية مدتها 30 دقيقة', title: 'لستم متأكدين من أين تبدأون؟ اسألوا مهندس حلول.', body: 'صفوا المشكلة بكلمات بسيطة. تتحدثون مع مهندس حلول معتمد، لا مع مندوب مبيعات، وتحصلون على إجابة صريحة: ما الذي سينجح، وكم يكلّف، وما الذي لا تحتاجونه.', button: 'اسألوا مهندس حلول', second: 'شاهدوا الباقات بسعر ثابت' },
+}[lang];
+const book = SITE.bookingUrl ? { href: SITE.bookingUrl, target: '_blank', rel: 'noopener', 'data-booking': SITE.bookingUrl } : { href: L.contact };
+---
+<section class="ask" aria-labelledby="ask-title">
+  <div class="container ask-in">
+    <div>
+      <span class="label"><b>?</b>{T.label}</span>
+      <h2 id="ask-title">{T.title}</h2>
+      <p>{T.body}</p>
+    </div>
+    <div class="actions">
+      <a class="btn" {...book}>{T.button} <span class="arr">→</span></a>
+      <a class="link-arrow" href={L.packages}>{T.second}</a>
+    </div>
+  </div>
+</section>
+<style>
+  .ask { background: var(--rule); border-block: 1px solid var(--rule-strong); }
+  .ask-in { display: grid; grid-template-columns: 1.6fr auto; gap: 24px 56px; align-items: center; padding-block: clamp(40px, 6vw, 64px); }
+  .ask .label { margin: 0 0 10px; }
+  .ask h2 { margin: 0 0 12px; font-size: clamp(1.6rem, 3.2vw, 2.4rem); max-width: 22ch; }
+  .ask p { margin: 0; color: var(--muted); max-width: 62ch; }
+  .ask .actions { justify-content: flex-end; }
+  @media (max-width: 860px) { .ask-in { grid-template-columns: 1fr; } .ask .actions { justify-content: flex-start; } }
+</style>

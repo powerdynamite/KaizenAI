@@ -1,6 +1,7 @@
 ---
 import { SITE } from '../config';
 import Certifications from '../components/Certifications.astro';
+import AskBand from '../components/AskBand.astro';
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
 import Faqs from '../components/Faqs.astro';
@@ -80,6 +81,8 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 
       </ol>
     </div>
   </section>
+
+  <AskBand />
 
   <section class="section section--tint">
     <div class="container">

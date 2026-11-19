@@ -10,6 +10,8 @@ import AgentTools from '../components/AgentTools.astro';
 import { SITE } from '../config';
 import { graph } from '../lib/schema';
 import ArabicFont from '../components/ArabicFont.astro';
+import AnnouncementBar from '../components/AnnouncementBar.astro';
+import { announcement } from '../data/announcement';
 import BookingPopup from '../components/BookingPopup.astro';
 import ar400 from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-400-normal.woff2?url';
 import ar600 from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-600-normal.woff2?url';
@@ -81,6 +83,7 @@ const isContact = /\/(contact|kontakt)\//.test(Astro.url.pathname);
     {alternates && !noindex && <link rel="alternate" hreflang="x-default" href={new URL(LANGS[0][alternates], Astro.site)} />}
     <meta name="theme-color" content="#0E1726" />
     <script is:inline>try{var t=localStorage.getItem('kz-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+    <script is:inline define:vars={{ annId: announcement.id }}>try{if(localStorage.getItem('kz-announce')===annId)document.documentElement.classList.add('an-off');}catch(e){}</script>
 
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content={SITE.name} />
@@ -104,6 +107,7 @@ const isContact = /\/(contact|kontakt)\//.test(Astro.url.pathname);
   <body class:list={{ 'has-cta-bar': !isContact }}>
     {lang === 'ar' && <ArabicFont />}
     <a class="skip-link" href="#main">{{ en: 'Skip to content', de: 'Zum Inhalt springen', ar: 'انتقل إلى المحتوى' }[lang]}</a>
+    <AnnouncementBar lang={lang} />
     <Header lang={lang} alternates={alternates} />
     <main id="main">
       <slot />

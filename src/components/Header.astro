@@ -29,7 +29,7 @@ const pkPrice = (p: Package) => {
   const m = `$${p.price.toLocaleString('en-US')}`;
   return p.group === 'monthly' ? `${m} ${PT.perMonth}` : p.from ? `${PT.from} ${m}` : m;
 };
-const pkGroups = packageGroups.map((g) => ({ id: g.id, label: PT.groups[g.id].label, title: PT.groups[g.id].title, items: packages.filter((p) => p.group === g.id) }));
+const pkGroups = packageGroups.map((g) => ({ id: g.id, label: PT.groups[g.id].label, title: PT.groups[g.id].menu ?? PT.groups[g.id].title, items: packages.filter((p) => p.group === g.id) }));
 const P = {
   en: { steps: ['Plan together', 'Deploy once, fixed price', 'Managed support plan', 'Changes quoted at a fixed price'], all: 'All packages', raas: 'Results as a Service' },
   de: { steps: ['Gemeinsam planen', 'Einmal bereitstellen, Festpreis', 'Managed-Support-Plan', 'Änderungen zum Festpreis'], all: 'Alle Pakete', raas: 'Results as a Service' },

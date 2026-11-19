@@ -1,0 +1,43 @@
+---
+// Dismissible announcement above the header. A closed bar stays closed for that
+// visitor (localStorage) until the announcement id changes.
+import { announcement as A } from '../data/announcement';
+import { langInfo, type Lang } from '../i18n/strings';
+interface Props { lang?: Lang }
+const { lang = 'en' } = Astro.props;
+const t = A.text[lang];
+const href = `${langInfo(lang).packages}${A.hash}`;
+---
+{A.active && (
+  <div class="announce" data-id={A.id} role="region" aria-label={t.badge}>
+    <div class="container an-in">
+      <p>
+        <span class="an-badge">{t.badge}</span>
+        <span class="an-text">{t.text}</span>
+        <a href={href}>{t.link} <span class="arr">→</span></a>
+      </p>
+      <button type="button" class="an-close" aria-label={A.close[lang]} title={A.close[lang]}>
+        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+)}
+<style>
+  .announce { background: var(--ink-2, #1c2638); color: #e8ecf3; font-size: 0.86rem; }
+  :global(html.an-off) .announce { display: none; }
+  .an-in { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 40px; position: relative; padding-inline-end: 44px; }
+  .an-in p { margin: 0; padding: 8px 0; text-align: center; line-height: 1.4; }
+  .an-badge { display: inline-block; margin-inline-end: 8px; padding: 1px 8px; border-radius: 999px; background: var(--vermilion); color: #fff; font: 700 0.68rem var(--display); letter-spacing: 0.08em; text-transform: uppercase; vertical-align: 1px; }
+  .an-in a { margin-inline-start: 8px; color: #fff; font-family: var(--display); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+  .an-in a:hover { color: #f2a493; }
+  .an-close { position: absolute; inset-inline-end: var(--gutter, 16px); top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 28px; height: 28px; border: 0; border-radius: 6px; background: transparent; color: #c9d1de; cursor: pointer; }
+  .an-close:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+  @media (max-width: 560px) { .an-text { display: block; } .an-in a { margin-inline-start: 0; } }
+</style>
+<script>
+  const bar = document.querySelector<HTMLElement>('.announce');
+  bar?.querySelector('.an-close')?.addEventListener('click', () => {
+    document.documentElement.classList.add('an-off');
+    try { localStorage.setItem('kz-announce', bar.dataset.id || ''); } catch (e) {}
+  });
+</script>
