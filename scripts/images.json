@@ -356,5 +356,19 @@
     ],
     "tagline": "PL-600 certified · Remote-first, worldwide",
     "foot": "kaizenai.systems"
+  },
+  {
+    "id": "flow-resilience-linkedin",
+    "kind": "linkedin",
+    "out": "docs/brand/linkedin/posts/2026-11-23-power-automate-resilience.png",
+    "eyebrow": "Power Automate tips",
+    "title": "3 settings that make flows <em>survive an outage</em>.",
+    "items": [
+      "Retry policy on every Microsoft 365 action",
+      "Configure run after: catch the failure, send an alert",
+      "Idempotent steps, so a resubmit is safe"
+    ],
+    "tagline": "Power Automate · Microsoft 365 · Resilience",
+    "foot": "kaizenai.systems/blog"
   }
 ]

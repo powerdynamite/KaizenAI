@@ -11,6 +11,8 @@ Each post goes up on the KaizenAI page on the day its blog article publishes (th
 | Thu 12 Nov | Power BI or Microsoft Fabric? | `2026-11-12-power-bi-or-microsoft-fabric.png` | `2026-11-12-power-bi-or-microsoft-fabric.md` |
 | Fri 13 Nov | Microsoft 365 outage: fallback plan | `2026-11-13-m365-outage-lessons.png` | `2026-11-13-m365-outage-lessons.md` |
 | Tue 17 Nov | Why managed solution imports fail | `2026-11-17-dataverse-solution-import-failures.png` | `2026-11-17-dataverse-solution-import-failures.md` |
+| Fri 20 Nov | Poll: do you have a Microsoft 365 fallback plan? | (poll, no image) | `2026-11-20-poll-fallback-plan.md` |
+| Mon 23 Nov | 3 settings that make flows survive an outage | `2026-11-23-power-automate-resilience.png` | `2026-11-23-power-automate-resilience.md` |
 | Tue 24 Nov | Configuration-driven form engine | `2026-11-24-configuration-driven-form-engine-dataverse.png` | `2026-11-24-configuration-driven-form-engine-dataverse.md` |
 | Tue 1 Dec | Power Platform Pipelines: platform or custom host | `2026-12-01-power-platform-pipelines-platform-vs-custom-host.png` | `2026-12-01-power-platform-pipelines-platform-vs-custom-host.md` |
 | Tue 8 Dec | Debugging Dataverse security | `2026-12-08-debugging-dataverse-security.png` | `2026-12-08-debugging-dataverse-security.md` |
